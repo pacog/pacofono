@@ -1,12 +1,14 @@
 import * as React from "react";
 
-interface SongSelectorProps {
+// import * as styles from "./Hello.css";
+
+interface ISongSelectorProps {
   songNames: string[];
 }
 
-const SongSelector: React.SFC<SongSelectorProps> = (props: SongSelectorProps) => (
+const SongSelector: React.SFC<ISongSelectorProps> = (props: ISongSelectorProps) => (
   <ul>
-    {props.songNames.map( songName => (
+    {props.songNames.map( (songName) => (
       <li key={songName}>{songName}</li>
     ))}
   </ul>

@@ -1,14 +1,14 @@
-import { RootAction } from '../actions';
+import { RootAction } from "../actions";
 
-export type SongsState = {
-  readonly songs: string[],
+export interface ISongsState {
+  readonly songs: string[];
+}
+
+const initialState: ISongsState = {
+  songs: ["flacido", "stairway"],
 };
 
-const initialState: SongsState = {
-  songs: ['flacido', 'stairway']
-};
-
-export const songsReducer = (state: SongsState = initialState, action : RootAction) => {
+export const songsReducer = (state: ISongsState = initialState, action: RootAction) => {
   switch (action.type) {
     default:
       return state;

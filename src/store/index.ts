@@ -1,10 +1,10 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import { rootReducer, RootState } from './reducers/root';
+import { applyMiddleware, compose, createStore  } from "redux";
+import { rootReducer, RootState } from "./reducers/root";
 
 function configureStore() {
   // create store
   return createStore<RootState>(
-    rootReducer
+    rootReducer,
   );
 }
 

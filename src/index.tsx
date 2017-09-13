@@ -10,5 +10,5 @@ ReactDOM.render(
     <Provider store={store}>
       <SongSelectorContainer />
     </Provider>,
-    document.getElementById("pacofono-root")
+    document.getElementById("pacofono-root"),
 );

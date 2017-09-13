@@ -1,11 +1,11 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import { SongsState, songsReducer } from './songs';
+import { ISongsState, songsReducer } from "./songs";
 
-export type RootState = {
-  readonly songs: SongsState,
-};
+export interface IRootState {
+  readonly songs: ISongsState;
+}
 
-export const rootReducer = combineReducers<RootState>({
-  songs: songsReducer
+export const rootReducer = combineReducers<IRootState>({
+  songs: songsReducer,
 });
