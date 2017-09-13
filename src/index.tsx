@@ -1,9 +1,14 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 
-import { Hello } from "./components/Hello";
+import store from "./store";
+
+import SongSelectorContainer from "./containers/SongSelectorContainer";
 
 ReactDOM.render(
-    <Hello compiler="TypeScript" framework="React" />,
+    <Provider store={store}>
+      <SongSelectorContainer />
+    </Provider>,
     document.getElementById("pacofono-root")
 );
