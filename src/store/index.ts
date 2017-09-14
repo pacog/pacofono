@@ -1,9 +1,9 @@
 import { applyMiddleware, compose, createStore  } from "redux";
-import { rootReducer, RootState } from "./reducers/root";
+import { IRootState, rootReducer } from "./reducers/root";
 
 function configureStore() {
   // create store
-  return createStore<RootState>(
+  return createStore<IRootState>(
     rootReducer,
   );
 }

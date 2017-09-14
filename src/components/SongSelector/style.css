@@ -1,0 +1,13 @@
+@value colors: "../../style-common/colors.css";
+@value mainColor from colors;
+
+.button {
+  color: blue;
+  display: inline-block;
+}
+
+.container {
+  padding: 10px;
+  border: 2px solid black;
+  background: mainColor;
+}

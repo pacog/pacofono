@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 
 import SongSelector from "../../components/SongSelector";
-import { RootState } from "../../store/reducers/root";
+import { IRootState } from "../../store/reducers/root";
 
-const mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: IRootState) => {
   return {
     songNames: state.songs.songs,
   };
