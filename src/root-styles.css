@@ -55,3 +55,12 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
+html, body {
+	height: 100%;
+	width: 100%;
+}
+:global(#pacofono-root) {
+	height: 100%;
+	width: 100%;
+}
