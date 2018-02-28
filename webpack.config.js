@@ -21,8 +21,6 @@ module.exports = {
             title: 'Pacofono',
             template: './src/index.html',
         }),
-        new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin()
     ],
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
