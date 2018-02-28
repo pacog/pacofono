@@ -1,5 +1,7 @@
 const path = require('path');
 const TsConfigPathsPlugin = require('awesome-typescript-loader').TsConfigPathsPlugin;
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: "./src/index.tsx",
@@ -10,7 +12,18 @@ module.exports = {
 
     // Enable sourcemaps for debugging webpack's output.
     devtool: "source-map",
-
+    devServer: {
+        contentBase: './dist'
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            hash: true,
+            title: 'Pacofono',
+            template: './src/index.html',
+        }),
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin()
+    ],
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
         extensions: [".ts", ".tsx", ".js", ".json"],

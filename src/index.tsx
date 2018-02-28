@@ -5,11 +5,15 @@ import { Provider } from "react-redux";
 import "./root-styles.css";
 import store from "./store";
 
-import MainScreenContainer from "./containers/MainScreenContainer";
+import MainScreenContainer from "containers/MainScreenContainer";
 
-ReactDOM.render(
-    <Provider store={store}>
-      <MainScreenContainer />
-    </Provider>,
-    document.getElementById("pacofono-root"),
-);
+const render = () => {
+    ReactDOM.render(
+        <Provider store={store}>
+          <MainScreenContainer />
+        </Provider>,
+        document.getElementById("pacofono-root"),
+    );
+};
+
+render();
