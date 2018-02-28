@@ -1,4 +1,4 @@
-import { RootAction } from "../actions";
+import { RootAction } from "store/actions";
 
 export interface ISongsState {
   readonly songs: string[];

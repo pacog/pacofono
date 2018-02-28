@@ -1,4 +1,4 @@
-@value colors: "../../style-common/colors.css";
+@value colors: "style-common/colors.css";
 @value mainColor from colors;
 
 .button {
