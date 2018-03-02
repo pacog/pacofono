@@ -1,11 +1,14 @@
 import * as React from "react";
 import * as styles from "./style.css";
 
-import FaBeer from "react-icons/fa/beer";
+interface IToggleWithIconProps {
+  children?: any;
+  selected: boolean;
+}
 
-const ToggleWithIcon: React.SFC<{}> = (props: {}) => (
-    <div className={styles.container}>
-        <FaBeer />
+const ToggleWithIcon: React.SFC<IToggleWithIconProps> = (props: IToggleWithIconProps) => (
+    <div className={props.selected ? styles.selected : styles.unselected}>
+        { props.children }
     </div>
 );
 

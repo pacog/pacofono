@@ -5,9 +5,9 @@ import { IRootState } from "store/reducers/root";
 import { getSongNames } from "store/selectors/songs";
 
 const mapStateToProps = (state: IRootState) => {
-  return {
-    songNames: getSongNames(state),
-  };
+    return {
+        songNames: getSongNames(state),
+    };
 };
 
 export default connect(mapStateToProps, {})(SongSelector);

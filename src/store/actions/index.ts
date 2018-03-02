@@ -1,4 +1,6 @@
-import { IActions as SongsActions } from "./songs";
+import { IMusicModeActions } from "./musicMode";
+import { ISongsActions } from "./songs";
 
 export type RootAction =
-  | SongsActions[keyof SongsActions];
+    | IMusicModeActions[keyof IMusicModeActions]
+    | ISongsActions[keyof ISongsActions];
