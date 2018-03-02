@@ -6,7 +6,8 @@
     "jsRules": {},
     "rules": {
         "no-consecutive-blank-lines": false,
-        "no-console": ["void"]
+        "no-console": ["void"],
+        "indent": [true, "spaces", 4]
     },
     "rulesDirectory": []
 }
