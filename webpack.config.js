@@ -59,7 +59,7 @@ module.exports = {
             {
                 test: /(\.js|\.jsx)$/,
                 loader: 'babel-loader',
-                include: [path.resolve(__dirname, './node_modules/react-icons/fa'), path.resolve(__dirname, './node_modules/react-icons/go')],
+                include: [path.resolve(__dirname, './node_modules/react-icons/fa'), path.resolve(__dirname, './node_modules/react-icons/go'), path.resolve(__dirname, './node_modules/react-icons/md')],
                 query: {
                     presets: ['es2015', 'react']
                 }

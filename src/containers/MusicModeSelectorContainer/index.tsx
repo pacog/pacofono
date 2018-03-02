@@ -1,22 +1,44 @@
 import * as React from "react";
-import { connect } from "react-redux";
+import { connect, Dispatch } from "react-redux";
 
+import { SONG, SCALE } from "constants/musicModes";
 import ToggleWithIcon from "components/ToggleWithIcon";
-import FaBeer from "react-icons/fa/beer";
+import FaMusic from "react-icons/fa/music";
+import MdLinearScale from "react-icons/md/linear-scale";
 import { IRootState } from "store/reducers/root";
 import * as styles from "./style.css";
-// import { getSongNames } from "store/selectors/songs";
+import { getMusicMode } from "store/selectors/musicMode";
+import { actionCreators, IMusicModeActions } from "store/actions/musicMode";
 
-const MusicModeSelector: React.SFC<{}> = (props: {}) => (
+interface IMusicModeSelector {
+    currentMusicMode: string;
+    changeMusicMode: (newMode: string) => any; // TODO find a better return type
+}
+
+const MusicModeSelector: React.SFC<IMusicModeSelector> = ({currentMusicMode, changeMusicMode}) => (
     <div className={styles.container}>
-        <ToggleWithIcon selected={false}>
-            <FaBeer />
+        <ToggleWithIcon selected={currentMusicMode === SONG}
+                        onSelect={() => changeMusicMode(SONG)}>
+            <FaMusic />
+        </ToggleWithIcon>
+        <ToggleWithIcon selected={currentMusicMode === SCALE}
+                        onSelect={() => changeMusicMode(SCALE)}
+        >
+            <MdLinearScale />
         </ToggleWithIcon>
     </div>
 );
 
 const mapStateToProps = (state: IRootState) => {
-    return {};
+    return {
+        currentMusicMode: getMusicMode(state),
+    };
 };
 
-export default connect(mapStateToProps, {})(MusicModeSelector);
+const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
+    return {
+        changeMusicMode: (newMode: string) => dispatch(actionCreators.changeMusicMode(newMode)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MusicModeSelector);
