@@ -56,6 +56,15 @@ module.exports = {
                 },
             },
 
+            {
+                test: /(\.js|\.jsx)$/,
+                loader: 'babel-loader',
+                include: [path.resolve(__dirname, './node_modules/react-icons/fa'), path.resolve(__dirname, './node_modules/react-icons/go')],
+                query: {
+                    presets: ['es2015', 'react']
+                }
+            },
+
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
         ],

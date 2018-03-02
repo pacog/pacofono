@@ -1,0 +1,11 @@
+@value gxl from "style-common/grid.css";
+@value palette4 from "style-common/colors.css";
+
+.container {
+    width: gxl;
+    height: gxl;
+    background-color: palette4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
