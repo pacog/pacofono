@@ -17,15 +17,31 @@ interface IMusicModeSelector {
 
 const MusicModeSelector: React.SFC<IMusicModeSelector> = ({currentMusicMode, changeMusicMode}) => (
     <div className={styles.container}>
-        <ToggleWithIcon selected={currentMusicMode === SONG}
-                        onSelect={() => changeMusicMode(SONG)}>
-            <FaMusic />
-        </ToggleWithIcon>
-        <ToggleWithIcon selected={currentMusicMode === SCALE}
-                        onSelect={() => changeMusicMode(SCALE)}
-        >
-            <MdLinearScale />
-        </ToggleWithIcon>
+        <div className={styles.musicModeContainer}>
+            <ToggleWithIcon selected={currentMusicMode === SONG}
+                            onSelect={() => changeMusicMode(SONG)}>
+                <FaMusic />
+            </ToggleWithIcon>
+            {
+                (currentMusicMode === SONG) &&
+                <div className={styles.musicModeInnerSelector}>
+                    Select song
+                </div>
+            }
+        </div>
+        <div className={styles.musicModeContainer}>
+            <ToggleWithIcon selected={currentMusicMode === SCALE}
+                            onSelect={() => changeMusicMode(SCALE)}
+            >
+                <MdLinearScale />
+            </ToggleWithIcon>
+            {
+                (currentMusicMode === SCALE) &&
+                <div className={styles.musicModeInnerSelector}>
+                    Select scale
+                </div>
+            }
+        </div>
     </div>
 );
 

@@ -1,3 +1,17 @@
-.container {
+@value gxxl, gxl, gs, gsm from "style-common/grid.css";
 
+.container {
+    margin-top: gxxl;
 }
+    .musicModeContainer {
+        position: relative;
+        overflow: visible;
+    }
+        .musicModeInnerSelector {
+            position: absolute;
+            top: 0;
+            left: gxl;
+            min-height: gxl;
+            padding: gs gsm;
+            background: green;
+        }
