@@ -7,6 +7,7 @@
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
     "pretest": "npm run lint",
     "test": "jest",
+    "testcont": "jest --watchAll",
     "serve": "webpack-dev-server"
   },
   "repository": {
@@ -20,7 +21,6 @@
   },
   "homepage": "https://github.com/pacog/pacofono#readme",
   "dependencies": {
-    "@types/react": "^16.0.5",
     "@types/react-dom": "^16.0.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
