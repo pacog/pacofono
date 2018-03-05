@@ -30,4 +30,7 @@ describe("Song store", () => {
         });
     });
 
+    // TODO Do reducers
+    // TODO Do selectors
+
 });
