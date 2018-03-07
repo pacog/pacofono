@@ -14,16 +14,16 @@ describe("musicMode store", () => {
     });
 
     // TODO: finish this test once relative route module resolving is done
-    // describe("reducer", () => {
-    //     it("should process changing values", () => {
-    //         expect(musicModeReducer({
-    //             mode: "song",
-    //         }, actionCreators.changeMusicMode("newMusicMode")))
-    //             .toEqual({
-    //                 mode: "newMusicMode",
-    //             });
-    //     });
-    // });
+    describe("reducer", () => {
+        it("should process changing values", () => {
+            expect(musicModeReducer({
+                mode: "song",
+            }, actionCreators.changeMusicMode("newMusicMode")))
+                .toEqual({
+                    mode: "newMusicMode",
+                });
+        });
+    });
 
     // TODO test selectors
 

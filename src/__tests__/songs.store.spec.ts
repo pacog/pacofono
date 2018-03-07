@@ -1,4 +1,4 @@
-import { ADD_SONG, DELETE_SONG, EDIT_SONG, actionCreators } from "../store/actions/songs";
+import { ADD_SONG, DELETE_SONG, EDIT_SONG, actionCreators } from "store/actions/songs";
 
 const TEST_SONG = {
     id: "blach",
