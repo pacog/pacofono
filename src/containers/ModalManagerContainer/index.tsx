@@ -4,6 +4,7 @@ import { connect, Dispatch } from "react-redux";
 import { IRootState } from "store/reducers/root";
 import { isAnyModalOpen, isSongEditorModalOpen } from "store/selectors/modals";
 import { actionCreators, IModalsActions } from "store/actions/modals";
+import Modal from "components/Modal";
 
 import * as styles from "./style.css";
 
@@ -18,8 +19,14 @@ const ModalManager: React.SFC<IModalManagerProps> = (props: IModalManagerProps) 
         {   props.isAnyModalOpen &&
             <div className={styles.modalsContainer}>
                 <div className={styles.backdrop}
-                     onClick={props.closeAllModals}></div>
+                     onClick={props.closeAllModals}>
                 </div>
+                <div className={styles.modalsContent}>
+                    <Modal>
+                        Paco
+                    </Modal>
+                </div>
+            </div>
         }
     </div>
 );
