@@ -13,12 +13,12 @@ import SongSelectorContainer from "containers/SongSelectorContainer";
 import ToggleWithIcon from "components/ToggleWithIcon";
 
 import * as styles from "./style.css";
-interface IMusicModeSelector {
+interface IMusicModeSelectorProps {
     currentMusicMode: string;
     changeMusicMode: (newMode: string) => any; // TODO find a better return type
 }
 
-const MusicModeSelector: React.SFC<IMusicModeSelector> = ({currentMusicMode, changeMusicMode}) => (
+const MusicModeSelector: React.SFC<IMusicModeSelectorProps> = ({currentMusicMode, changeMusicMode}) => (
     <div className={styles.container}>
         <div className={styles.musicModeContainer}>
             <ToggleWithIcon selected={currentMusicMode === SONG}

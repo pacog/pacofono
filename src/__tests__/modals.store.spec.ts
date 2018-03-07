@@ -1,7 +1,7 @@
 import { OPEN_SONG_EDITOR, CLOSE_SONG_EDITOR, actionCreators } from "store/actions/modals";
 import { modalsReducer } from "store/reducers/modals";
 import { rootReducer } from "store/reducers/root";
-import { isSongSelectorModalOpen, isAnyModalOpen } from "store/selectors/modals";
+import { isSongEditorModalOpen, isAnyModalOpen } from "store/selectors/modals";
 
 describe("modals store", () => {
 
@@ -47,9 +47,9 @@ describe("modals store", () => {
     describe("selectors", () => {
         it("should be able to get info about song editor modal", () => {
             const state = rootReducer({}, { type: null });
-            expect(isSongSelectorModalOpen(state)).toBe(false);
+            expect(isSongEditorModalOpen(state)).toBe(false);
             const newState = rootReducer(state, actionCreators.openSongEditor());
-            expect(isSongSelectorModalOpen(newState)).toBe(true);
+            expect(isSongEditorModalOpen(newState)).toBe(true);
         });
 
         it("should be able to get info about any open modal", () => {
