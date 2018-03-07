@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { connect, Dispatch } from "react-redux";
 
 import SongSelector from "components/SongSelector";
 import { IRootState } from "store/reducers/root";
@@ -10,4 +10,13 @@ const mapStateToProps = (state: IRootState) => {
     };
 };
 
-export default connect(mapStateToProps, {})(SongSelector);
+const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
+    return {
+        onAddSongClick: () => {
+            // TODO: add empty song to edit
+            // TODO: open popup
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SongSelector);

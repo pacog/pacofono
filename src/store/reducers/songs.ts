@@ -5,7 +5,7 @@ export interface ISongsState {
 }
 
 const initialState: ISongsState = {
-    songs: ["flacido", "stairway"],
+    songs: [],
 };
 
 export const songsReducer = (state: ISongsState = initialState, action: RootAction) => {
