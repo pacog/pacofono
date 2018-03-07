@@ -11,21 +11,21 @@ import * as styles from "./style.css";
 interface IModalManagerProps {
     isAnyModalOpen: boolean;
     isSongEditorModalOpen: boolean;
-    closeAllModals: () => void;
+    closeSongEditor: () => void;
 }
 
 const ModalManager: React.SFC<IModalManagerProps> = (props: IModalManagerProps) => (
     <div>
         {   props.isAnyModalOpen &&
             <div className={styles.modalsContainer}>
-                <div className={styles.backdrop}
-                     onClick={props.closeAllModals}>
-                </div>
-                <div className={styles.modalsContent}>
-                    <Modal>
-                        Paco
+                <div className={styles.backdrop}></div>
+                {
+                    props.isSongEditorModalOpen &&
+                    <Modal
+                        onClose={props.closeSongEditor}>
+                        SONG EDITOR WILL BE HERE
                     </Modal>
-                </div>
+                }
             </div>
         }
     </div>
@@ -40,8 +40,7 @@ const mapStateToProps = (state: IRootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
     return {
-        // TODO: create closeAllModals action, or make a smart heap of modals
-        closeAllModals: () => {dispatch(actionCreators.closeSongEditor()); },
+        closeSongEditor: () => { dispatch(actionCreators.closeSongEditor()); },
     };
 };
 
