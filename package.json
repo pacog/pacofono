@@ -62,11 +62,11 @@
     },
     "testRegex": "/__tests__/.*\\.(ts|tsx|js)$",
     "moduleNameMapper": {
-        "^components/(.*)": "<rootDir>/src/components/$1",
-        "^constants/(.*)": "<rootDir>/src/constants/$1",
-        "^containers/(.*)": "<rootDir>/src/containers/$1",
-        "^store/(.*)": "<rootDir>/src/store/$1",
-        "^types/(.*)": "<rootDir>/src/types/$1"
+      "^components/(.*)": "<rootDir>/src/components/$1",
+      "^constants/(.*)": "<rootDir>/src/constants/$1",
+      "^containers/(.*)": "<rootDir>/src/containers/$1",
+      "^store/(.*)": "<rootDir>/src/store/$1",
+      "^types/(.*)": "<rootDir>/src/types/$1"
     }
   }
 }
