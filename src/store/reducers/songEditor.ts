@@ -6,8 +6,8 @@ import { ISong } from "types";
 
 export interface ISongEditorState {
     readonly isNewSong: boolean;
-    readonly song: boolean;
-    readonly originalSong: boolean;
+    readonly song: ISong;
+    readonly originalSong: ISong;
 }
 
 const initialState: ISongEditorState = {

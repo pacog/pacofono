@@ -1,9 +1,11 @@
 import { connect, Dispatch } from "react-redux";
 
+import { getDefaultNewSong } from "constants/defaultNewSong";
 import SongSelector from "components/SongSelector";
 import { IRootState } from "store/reducers/root";
 import { getSongNames } from "store/selectors/songs";
-import { actionCreators } from "store/actions/modals";
+import { actionCreators as modalsActions } from "store/actions/modals";
+import { actionCreators as songEditorActions } from "store/actions/songEditor";
 
 const mapStateToProps = (state: IRootState) => {
     return {
@@ -14,8 +16,8 @@ const mapStateToProps = (state: IRootState) => {
 const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
     return {
         onAddSongClick: () => {
-            dispatch(actionCreators.openSongEditor());
-            // TODO: add empty song to edit
+            dispatch(modalsActions.openSongEditor());
+            dispatch(songEditorActions.startEditingNewSong(getDefaultNewSong()));
         },
     };
 };

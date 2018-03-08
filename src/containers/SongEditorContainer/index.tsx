@@ -3,10 +3,11 @@ import { connect, Dispatch } from "react-redux";
 
 import { IRootState } from "store/reducers/root";
 import SongEditor from "components/SongEditor";
+import { getSong } from "store/selectors/songEditor";
 
 const mapStateToProps = (state: IRootState) => {
     return {
-        song: { name: "My way" },
+        song: getSong(state),
     };
 };
 
