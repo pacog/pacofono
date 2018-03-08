@@ -5,6 +5,7 @@ import { IRootState } from "store/reducers/root";
 import { isAnyModalOpen, isSongEditorModalOpen } from "store/selectors/modals";
 import { actionCreators, IModalsActions } from "store/actions/modals";
 import Modal from "components/Modal";
+import SongEditorContainer from "containers/SongEditorContainer";
 
 import * as styles from "./style.css";
 
@@ -23,7 +24,7 @@ const ModalManager: React.SFC<IModalManagerProps> = (props: IModalManagerProps) 
                     props.isSongEditorModalOpen &&
                     <Modal
                         onClose={props.closeSongEditor}>
-                        SONG EDITOR WILL BE HERE
+                        <SongEditorContainer />
                     </Modal>
                 }
             </div>
