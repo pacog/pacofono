@@ -8,8 +8,22 @@ interface ISongEditorProps {
 }
 
 const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
-    <div>
-        Song: {props.song.name}
+    <div className={styles.songEditor}>
+        <div className={styles.songEditorNameAndTools}>
+            <input
+                value={props.song.name}
+                className={styles.songEditorName}
+                onChange={() => { console.log("eyeye"); }} />
+            <button>New</button>
+            <button>Delete</button>
+        </div>
+
+        <div className={styles.songEditorFooter}>
+            <button>Restore defaults</button>
+            <div className={styles.songEditorFooterFiller}></div>
+            <button>Close</button>
+            <button>Save</button>
+        </div>
     </div>
 );
 

@@ -1,0 +1,16 @@
+.songEditor {
+    min-width: 400px;
+}
+    .songEditorNameAndTools {
+        width: 100%;
+        display: flex;
+    }
+        .songEditorName {
+            flex: 1;
+        }
+    .songEditorFooter {
+        display: flex;
+    }
+        .songEditorFooterFiller {
+            flex: 1;
+        }
