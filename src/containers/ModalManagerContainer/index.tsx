@@ -41,7 +41,10 @@ const mapStateToProps = (state: IRootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
     return {
-        closeSongEditor: () => { dispatch(actionCreators.closeSongEditor()); },
+        closeSongEditor: () => {
+            // TODO do the thunk action for this
+            // dispatch(actionCreators.closeSongEditor());
+        },
     };
 };
 
