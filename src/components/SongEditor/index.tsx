@@ -6,7 +6,7 @@ import { ISong } from "types";
 interface ISongEditorProps {
     song: ISong;
     onSaveSong: () => void;
-    onClose: () => void;
+    onClose: (song: ISong) => void;
     onSongNameChanged: (song: ISong, newValue: string) => void;
 }
 
@@ -24,7 +24,7 @@ const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
         <div className={styles.songEditorFooter}>
             <button>Restore defaults</button>
             <div className={styles.songEditorFooterFiller}></div>
-            <button onClick={props.onClose}>Close</button>
+            <button onClick={() => { props.onClose(props.song); }}>Close</button>
             <button onClick={props.onSaveSong}>Save</button>
         </div>
     </div>

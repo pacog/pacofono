@@ -20,8 +20,9 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
         onSaveSong: () => {
             console.log("onSaveSong");
         },
-        onClose: () => {
+        onClose: (song: ISong) => {
             dispatch(modalsActions.closeSongEditor());
+            dispatch(songsActions.deleteSong(song));
             dispatch(songEditorActions.stopEditing());
         },
         onSongNameChanged: (song: ISong, newName: string) => {
