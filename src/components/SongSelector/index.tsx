@@ -5,7 +5,9 @@ import * as styles from "./style.css";
 
 interface ISongSelectorProps {
     songs: ISong[];
+    selectedSong: ISong;
     onAddSongClick: () => void;
+    onSelectSong: (song: ISong) => void;
 }
 
 const SongSelector: React.SFC<ISongSelectorProps> = (props: ISongSelectorProps) => (
@@ -14,7 +16,15 @@ const SongSelector: React.SFC<ISongSelectorProps> = (props: ISongSelectorProps) 
             (props.songs.length > 0) &&
             <ul className={styles.container}>
                 {props.songs.map( (song) => (
-                    <li key={song.id}>{song.name}</li>
+                    <li key={song.id}
+                        className={
+                            (props.selectedSong === song) ? styles.selected : styles.notSelected
+                        }
+                        onClick={
+                            () => { props.onSelectSong(song); }
+                        }>
+                        {song.name}
+                    </li>
                 ))}
             </ul>
         }

@@ -8,6 +8,7 @@ import { getSong } from "store/selectors/songEditor";
 import { actionCreators as modalsActions } from "store/actions/modals";
 import { actionCreators as songsActions } from "store/actions/songs";
 import { actionCreators as songEditorActions } from "store/actions/songEditor";
+import { actionCreators as currentSongActions } from "store/actions/currentSong";
 
 const mapStateToProps = (state: IRootState) => {
     return {
@@ -17,9 +18,10 @@ const mapStateToProps = (state: IRootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
     return {
-        onSaveSong: () => {
+        onSaveSong: (song: ISong) => {
             dispatch(modalsActions.closeSongEditor());
             dispatch(songEditorActions.stopEditing());
+            dispatch(currentSongActions.setCurrentSong(song));
         },
         onClose: (song: ISong) => {
             dispatch(modalsActions.closeSongEditor());
