@@ -1,4 +1,4 @@
-import { START_EDITING_NEW_SONG, actionCreators } from "store/actions/songEditor";
+import { START_EDITING_NEW_SONG, STOP_EDITING, actionCreators } from "store/actions/songEditor";
 import { actionCreators as songsActionCreators } from "store/actions/songs";
 import { songEditorReducer } from "store/reducers/songEditor";
 import { rootReducer } from "store/reducers/root";
@@ -9,13 +9,20 @@ describe("songEditor store", () => {
     describe("actions", () => {
         it("should have a start editing new song action", () => {
             const songToEdit = {
-                id: "",
+                id: "111",
                 name: "myNewSong",
             };
             expect(actionCreators.startEditingNewSong(songToEdit))
                 .toEqual({
                     type: START_EDITING_NEW_SONG,
                     song: songToEdit,
+                });
+        });
+
+        it("should have a stop editing action", () => {
+            expect(actionCreators.stopEditing())
+                .toEqual({
+                    type: STOP_EDITING,
                 });
         });
     });
@@ -30,7 +37,7 @@ describe("songEditor store", () => {
             });
         });
 
-        it("should be able to start editing a song", () => {
+        it("should be able to start editing a song, then stop", () => {
             const songToStartEditing = {
                 id: "id_edit",
                 name: "myNewSong",
@@ -43,6 +50,14 @@ describe("songEditor store", () => {
             expect(stateAfter.isNewSong).toBe(true);
             expect(stateAfter.songId).toEqual(songToStartEditing.id);
             expect(stateAfter.originalSongId).toEqual(null);
+
+            const stateAfter2 = songEditorReducer(
+                stateAfter,
+                actionCreators.stopEditing(),
+            );
+            expect(stateAfter2.isNewSong).toBe(false);
+            expect(stateAfter2.songId).toEqual(null);
+            expect(stateAfter2.originalSongId).toEqual(null);
         });
     });
 

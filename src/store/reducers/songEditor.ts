@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
 import { RootAction } from "store/actions";
-import { START_EDITING_NEW_SONG } from "store/actions/songEditor";
+import { START_EDITING_NEW_SONG, STOP_EDITING } from "store/actions/songEditor";
 import { ISong } from "types";
 
 export interface ISongEditorState {
@@ -25,6 +25,8 @@ export const songEditorReducer = combineReducers<ISongEditorState>({
 
 function isNewSong(state: boolean = false, action: RootAction) {
     switch (action.type) {
+        case STOP_EDITING:
+            return false;
         case START_EDITING_NEW_SONG:
             return true;
         default:
@@ -34,6 +36,8 @@ function isNewSong(state: boolean = false, action: RootAction) {
 
 function songId(state: string = null, action: RootAction) {
     switch (action.type) {
+        case STOP_EDITING:
+            return null;
         case START_EDITING_NEW_SONG:
             return action.song.id;
         default:
@@ -43,6 +47,8 @@ function songId(state: string = null, action: RootAction) {
 
 function originalSongId(state: string = null, action: RootAction) {
     switch (action.type) {
+        case STOP_EDITING:
+            return null;
         case START_EDITING_NEW_SONG:
             return null;
         default:
