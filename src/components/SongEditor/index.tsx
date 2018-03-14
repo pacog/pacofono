@@ -7,7 +7,7 @@ interface ISongEditorProps {
     song: ISong;
     onSaveSong: () => void;
     onClose: () => void;
-    onSongNameChanged: (newValue: string) => void;
+    onSongNameChanged: (song: ISong, newValue: string) => void;
 }
 
 const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
@@ -16,7 +16,7 @@ const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
             <input
                 value={props.song.name}
                 className={styles.songEditorName}
-                onChange={(e) => { props.onSongNameChanged(e.target.value); }} />
+                onChange={(e) => { props.onSongNameChanged(props.song, e.target.value); }} />
             <button>New</button>
             <button>Delete</button>
         </div>
