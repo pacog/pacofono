@@ -1,7 +1,7 @@
 import { IRootState } from "store/reducers/root";
 import { ISong } from "types";
 
-export const getSongNames = (state: IRootState): [string] => {
+export const getSongNames = (state: IRootState): string[] => {
     // TODO
     return null;
 };

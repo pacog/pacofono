@@ -6,20 +6,20 @@ import { ISong } from "types";
 
 export interface ISongEditorState {
     readonly isNewSong: boolean;
-    readonly song: ISong;
-    readonly originalSong: ISong;
+    readonly songId: string;
+    readonly originalSongId: string;
 }
 
 const initialState: ISongEditorState = {
     isNewSong: false,
-    song: null,
-    originalSong: null,
+    songId: null,
+    originalSongId: null,
 };
 
 export const songEditorReducer = combineReducers<ISongEditorState>({
     isNewSong,
-    song,
-    originalSong,
+    songId,
+    originalSongId,
 });
 
 
@@ -32,19 +32,19 @@ function isNewSong(state: boolean = false, action: RootAction) {
     }
 }
 
-function song(state: ISong = null, action: RootAction) {
+function songId(state: string = null, action: RootAction) {
     switch (action.type) {
         case START_EDITING_NEW_SONG:
-            return { ...action.song }; // TODO: at some point make deep copy
+            return action.song.id;
         default:
             return state;
     }
 }
 
-function originalSong(state: ISong = null, action: RootAction) {
+function originalSongId(state: string = null, action: RootAction) {
     switch (action.type) {
         case START_EDITING_NEW_SONG:
-            return { ...action.song }; // TODO: at some point make deep copy
+            return null;
         default:
             return state;
     }
