@@ -22,11 +22,13 @@
   "homepage": "https://github.com/pacog/pacofono#readme",
   "dependencies": {
     "@types/react-dom": "^16.0.4",
+    "@types/uuid": "^3.4.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-icons": "^2.2.7",
     "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "@types/jest": "^22.1.3",

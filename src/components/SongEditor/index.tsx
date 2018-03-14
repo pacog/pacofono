@@ -5,6 +5,9 @@ import { ISong } from "types";
 
 interface ISongEditorProps {
     song: ISong;
+    onSaveSong: () => void;
+    onClose: () => void;
+    onSongNameChanged: (newValue: string) => void;
 }
 
 const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
@@ -13,7 +16,7 @@ const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
             <input
                 value={props.song.name}
                 className={styles.songEditorName}
-                onChange={() => { console.log("eyeye"); }} />
+                onChange={(e) => { props.onSongNameChanged(e.target.value); }} />
             <button>New</button>
             <button>Delete</button>
         </div>
@@ -21,8 +24,8 @@ const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
         <div className={styles.songEditorFooter}>
             <button>Restore defaults</button>
             <div className={styles.songEditorFooterFiller}></div>
-            <button>Close</button>
-            <button>Save</button>
+            <button onClick={props.onClose}>Close</button>
+            <button onClick={props.onSaveSong}>Save</button>
         </div>
     </div>
 );
