@@ -1,4 +1,4 @@
-import { ADD_SONG, DELETE_SONG, EDIT_SONG, actionCreators } from "store/actions/songs";
+import { ADD_SONG, DELETE_SONG, CHANGE_SONG_NAME, actionCreators } from "store/actions/songs";
 import { rootReducer } from "store/reducers/root";
 import { songsReducer } from "store/reducers/songs";
 import { getSong } from "store/selectors/songs";
@@ -25,12 +25,15 @@ describe("Song store", () => {
             });
         });
 
-        it("should have an edit song action", () => {
-            expect(actionCreators.editSong(TEST_SONG)).toEqual({
-                type: EDIT_SONG,
+        it("should have a change song name action", () => {
+            const newName = "new name";
+            expect(actionCreators.changeSongName(TEST_SONG, newName)).toEqual({
+                type: CHANGE_SONG_NAME,
                 song: TEST_SONG,
+                newName,
             });
         });
+
     });
 
     describe("reducer", () => {
@@ -51,6 +54,24 @@ describe("Song store", () => {
             );
             const id = songToAdd.id;
             expect(stateAfter[id]).toEqual(songToAdd);
+        });
+
+        it("should be able to change the name of a song", () => {
+            const songToAdd = {
+                id: "newId",
+                name: "myNewSong",
+            };
+            const initialState = rootReducer({}, { type: null });
+            const stateAfter = songsReducer(
+                initialState.songs,
+                actionCreators.addSong(songToAdd),
+            );
+            const stateAfterRename = songsReducer(
+                stateAfter,
+                actionCreators.changeSongName(songToAdd, "stairway"),
+            );
+            const id = songToAdd.id;
+            expect(stateAfterRename[id].name).toEqual("stairway");
         });
     });
 

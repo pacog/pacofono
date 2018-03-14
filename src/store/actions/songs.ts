@@ -1,21 +1,22 @@
 import { ISong } from "types";
 
 export const ADD_SONG = "ADD_SONG";
-export const EDIT_SONG = "EDIT_SONG";
 export const DELETE_SONG = "DELETE_SONG";
+export const CHANGE_SONG_NAME = "CHANGE_SONG_NAME";
 
 export interface ISongsActions {
     ADD_SONG: {
         type: typeof ADD_SONG,
         song: ISong,
     };
-    EDIT_SONG: {
-        type: typeof EDIT_SONG,
-        song: ISong,
-    };
     DELETE_SONG: {
         type: typeof DELETE_SONG,
         song: ISong,
+    };
+    CHANGE_SONG_NAME: {
+        type: typeof CHANGE_SONG_NAME,
+        song: ISong,
+        newName: string,
     };
 }
 
@@ -28,8 +29,9 @@ export const actionCreators = {
         type: DELETE_SONG,
         song,
     }),
-    editSong: (song: ISong): ISongsActions[typeof EDIT_SONG] => ({
-        type: EDIT_SONG,
+    changeSongName: (song: ISong, newName: string): ISongsActions[typeof CHANGE_SONG_NAME] => ({
+        type: CHANGE_SONG_NAME,
         song,
+        newName,
     }),
 };
