@@ -3,14 +3,14 @@ import { connect, Dispatch } from "react-redux";
 import { getDefaultNewSong } from "constants/defaultNewSong";
 import SongSelector from "components/SongSelector";
 import { IRootState } from "store/reducers/root";
-import { getSongNames } from "store/selectors/songs";
+import { getSavedSongs } from "store/selectors/songs";
 import { actionCreators as modalsActions } from "store/actions/modals";
 import { actionCreators as songEditorActions } from "store/actions/songEditor";
 import { actionCreators as songsActions } from "store/actions/songs";
 
 const mapStateToProps = (state: IRootState) => {
     return {
-        songNames: getSongNames(state),
+        songs: getSavedSongs(state),
     };
 };
 
