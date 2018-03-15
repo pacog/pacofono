@@ -1,0 +1,17 @@
+@value palette1, palette2, palette3, palette4, palette5 from "style-common/colors.css";
+@value gxs, gsm, gm from "style-common/grid.css";
+
+.button {
+    border: 0;
+    padding: gsm gm;
+    margin: 0;
+    background: palette2;
+    display: inline-block;
+    white-space: nowrap;
+    color: white;
+    cursor: pointer;
+    border-radius: gxs;
+}
+    .button:hover {
+        background: palette1;
+    }

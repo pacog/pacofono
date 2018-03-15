@@ -1,4 +1,5 @@
 @value gxxl, gxl, gs, gsm from "style-common/grid.css";
+@value palette3 from "style-common/colors.css";
 
 .container {
     margin-top: gxxl;
@@ -13,5 +14,5 @@
             left: gxl;
             min-height: gxl;
             padding: gs gsm;
-            background: green;
+            background-color: palette3;
         }

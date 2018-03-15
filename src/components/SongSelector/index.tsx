@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ISong } from "types";
-
+import * as buttonStyles from "style-common/buttons.css";
 import * as styles from "./style.css";
 
 interface ISongSelectorProps {
@@ -28,7 +28,7 @@ const SongSelector: React.SFC<ISongSelectorProps> = (props: ISongSelectorProps) 
                 ))}
             </ul>
         }
-        <button onClick={props.onAddSongClick}>Add a song</button>
+        <button className={buttonStyles.button}onClick={props.onAddSongClick}>Add a song</button>
     </div>
 );
 

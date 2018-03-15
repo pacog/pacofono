@@ -8,9 +8,16 @@
         .songEditorName {
             flex: 1;
         }
+
+    .songEditorContent {
+        padding: 20px 0;
+    }
     .songEditorFooter {
         display: flex;
     }
         .songEditorFooterFiller {
             flex: 1;
         }
+.songEditorButtonRight {
+    margin-left: 8px;
+}
