@@ -6,6 +6,7 @@ import * as buttonStyles from "style-common/buttons.css";
 import { ISong } from "types";
 
 interface ISongEditorProps {
+    isNewSong: boolean;
     song: ISong;
     onSaveSong: (song: ISong) => void;
     onClose: (song: ISong) => void;
@@ -19,14 +20,23 @@ const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
                 value={props.song.name}
                 className={[inputStyles.input, styles.songEditorName].join(" ") }
                 onChange={(e) => { props.onSongNameChanged(props.song, e.target.value); }} />
-            <button className={[buttonStyles.button, styles.songEditorButtonRight].join(" ")}>New</button>
-            <button className={[buttonStyles.button, styles.songEditorButtonRight].join(" ")}>Delete</button>
+            {
+                !props.isNewSong &&
+                <button className={[buttonStyles.button, styles.songEditorButtonRight].join(" ")}>New</button>
+            }
+            {
+                !props.isNewSong &&
+                <button className={[buttonStyles.button, styles.songEditorButtonRight].join(" ")}>Delete</button>
+            }
         </div>
 
         <div className={styles.songEditorContent}></div>
 
         <div className={styles.songEditorFooter}>
-            <button className={buttonStyles.button}>Restore defaults</button>
+            {
+                !props.isNewSong &&
+                <button className={buttonStyles.button}>Restore defaults</button>
+            }
 
             <div className={styles.songEditorFooterFiller}></div>
 
