@@ -1,16 +1,30 @@
 @value colors: "style-common/colors.css";
-@value mainColor from colors;
+@value mainColor, palette1, palette2 from colors;
 
 .container {
-    padding: 10px;
-    border: 2px solid black;
-    background: mainColor;
+
 }
 
 .selected {
-    color: green;
+    padding: 10px;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    background: palette2;
+    cursor: pointer;
+    border-left: 2px solid mainColor;
+}
+.selected:hover {
+    background: palette1;
 }
 
 .notSelected {
-    color: black;
+    padding: 10px;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    background: palette2;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+}
+.notSelected:hover {
+    background: palette1;
 }
