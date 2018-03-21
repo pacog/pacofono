@@ -8,8 +8,10 @@ interface ISongSelectorProps {
     selectedSong: ISong;
     onAddSongClick: () => void;
     onSelectSong: (song: ISong) => void;
+    onEditSong: (song: ISong) => void;
 }
 
+// TODO create song selector item component
 const SongSelector: React.SFC<ISongSelectorProps> = (props: ISongSelectorProps) => (
     <div>
         {
@@ -24,6 +26,17 @@ const SongSelector: React.SFC<ISongSelectorProps> = (props: ISongSelectorProps) 
                             () => { props.onSelectSong(song); }
                         }>
                         {song.name}
+                        {
+                            (props.selectedSong === song) &&
+                            <button
+                                className={buttonStyles.button}
+                                onClick={
+                                    (event) => {
+                                        event.stopPropagation();
+                                        props.onEditSong(song);
+                                    }
+                                }>Edit</button>
+                        }
                     </li>
                 ))}
             </ul>

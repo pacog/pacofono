@@ -1,4 +1,6 @@
-import { applyMiddleware, compose, createStore  } from "redux";
+import { applyMiddleware, createStore  } from "redux";
+import thunk from "redux-thunk";
+
 import { IRootState, rootReducer } from "./reducers/root";
 
 function configureStore() {
@@ -6,6 +8,7 @@ function configureStore() {
   return createStore<IRootState>(
     rootReducer,
     (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
+    applyMiddleware(thunk),
   );
 }
 

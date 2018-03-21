@@ -8,7 +8,7 @@ import { getSavedSongs } from "store/selectors/songs";
 import { getCurrentSong } from "store/selectors/currentSong";
 import { actionCreators as modalsActions } from "store/actions/modals";
 import { actionCreators as songEditorActions } from "store/actions/songEditor";
-import { actionCreators as songsActions } from "store/actions/songs";
+import { actionCreators as songsActions, duplicateSong } from "store/actions/songs";
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
 
 const mapStateToProps = (state: IRootState) => {
@@ -28,6 +28,11 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
         },
         onSelectSong: (song: ISong) => {
             dispatch(currentSongActions.setCurrentSong(song));
+        },
+        onEditSong: (song: ISong) => {
+            const duplicatedSong = dispatch(duplicateSong(song));
+            dispatch(modalsActions.openSongEditor());
+            dispatch(songEditorActions.startEditingExistingSong(duplicatedSong, song));
         },
     };
 };

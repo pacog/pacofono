@@ -1,4 +1,8 @@
 import { ISong } from "types";
+import {Action, ActionCreator, Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
+import { IRootState } from "store/reducers/root";
+import * as uuid from "uuid/v1";
 
 export const ADD_SONG = "ADD_SONG";
 export const DELETE_SONG = "DELETE_SONG";
@@ -35,3 +39,16 @@ export const actionCreators = {
         newName,
     }),
 };
+
+export const duplicateSong = (song: ISong): ThunkAction<ISong, IRootState, {}> => {
+    return (dispatch: Dispatch<IRootState>): ISong => {
+        const newSong = {...song, id: uuid()};
+        dispatch(actionCreators.addSong(newSong));
+        return newSong;
+    };
+};
+
+// export const duplicateSong = (amount: number, userAddress: string): ThunkAction<{}, IRootState, {}> => async (
+//  dispatch,
+//  getState
+// ) => { … }
