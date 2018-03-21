@@ -8,9 +8,10 @@ import { ISong } from "types";
 interface ISongEditorProps {
     isNewSong: boolean;
     song: ISong;
-    onSaveSong: (song: ISong) => void;
+    onSaveSong: () => void;
     onClose: (song: ISong) => void;
     onSongNameChanged: (song: ISong, newValue: string) => void;
+    onRestoreDefaults: () => void;
 }
 
 const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
@@ -35,7 +36,9 @@ const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
         <div className={styles.songEditorFooter}>
             {
                 !props.isNewSong &&
-                <button className={buttonStyles.button}>Restore defaults</button>
+                <button className={buttonStyles.button}
+                    onClick={() => { props.onRestoreDefaults(); }}
+                >Restore defaults</button>
             }
 
             <div className={styles.songEditorFooterFiller}></div>
@@ -46,7 +49,7 @@ const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
                 Close
             </button>
             <button
-                onClick={() => { props.onSaveSong(props.song); }}
+                onClick={() => { props.onSaveSong(); }}
                 className={[buttonStyles.button, styles.songEditorButtonRight].join(" ")}>
                 Save
             </button>

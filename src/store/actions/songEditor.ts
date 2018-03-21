@@ -3,7 +3,7 @@ import {ThunkAction} from "redux-thunk";
 import { IRootState } from "store/reducers/root";
 import { ISong } from "types";
 import { getSong, getOriginalSong, isNewSong, isEditingSong } from "store/selectors/songEditor";
-import { actionCreators as songsActions } from "store/actions/songs";
+import { actionCreators as songsActions, duplicateSong } from "store/actions/songs";
 
 export const START_EDITING_NEW_SONG = "START_EDITING_NEW_SONG";
 export const STOP_EDITING = "STOP_EDITING";
@@ -49,5 +49,17 @@ export const saveSongBeingEdited = (): ThunkAction<ISong, IRootState, {}> => {
         }
         dispatch(actionCreators.stopEditing());
         return song;
+    };
+};
+
+export const restoreDefaults = (): ThunkAction<void, IRootState, {}> => {
+    return (dispatch: Dispatch<IRootState>, getState: () => IRootState): void => {
+        if (isEditingSong(getState())) {
+            const song = getSong(getState());
+            dispatch(songsActions.deleteSong(song));
+            const originalSong = getOriginalSong(getState());
+            const duplicatedSong = dispatch(duplicateSong(originalSong));
+            dispatch(actionCreators.startEditingExistingSong(duplicatedSong, originalSong));
+        }
     };
 };
