@@ -6,16 +6,44 @@ import * as buttonStyles from "style-common/buttons.css";
 import { ISong } from "types";
 
 interface ISongEditorProps {
-    isNewSong: boolean;
     song: ISong;
+    isNewSong: boolean;
+    isShowingConfirmRestoreDefaults: boolean;
+    isShowingConfirmDeleteSong: boolean;
     onSaveSong: () => void;
     onClose: (song: ISong) => void;
     onSongNameChanged: (song: ISong, newValue: string) => void;
     onRestoreDefaults: () => void;
+    onRestoreDefaultsConfirm: () => void;
+    onCancelRestoreDefaults: () => void;
 }
 
 const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
     <div className={styles.songEditor}>
+        {
+            (!props.isShowingConfirmRestoreDefaults && !props.isShowingConfirmDeleteSong) &&
+            showContentPart(props)
+        }
+        {
+            props.isShowingConfirmRestoreDefaults &&
+            showConfirmRestoreDefaultsPart(props)
+        }
+
+    </div>
+);
+
+function showContentPart(props: ISongEditorProps) {
+    return (
+        <div>
+            { showHeaderPart(props) }
+            <div className={styles.songEditorContent}></div>
+            { showFooterPart(props) }
+        </div>
+    );
+}
+
+function showHeaderPart(props: ISongEditorProps) {
+    return (
         <div className={styles.songEditorNameAndTools}>
             <input
                 value={props.song.name}
@@ -27,12 +55,16 @@ const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
             }
             {
                 !props.isNewSong &&
-                <button className={[buttonStyles.button, styles.songEditorButtonRight].join(" ")}>Delete</button>
+                <button className={[buttonStyles.button, styles.songEditorButtonRight].join(" ")}>
+                    Delete
+                </button>
             }
         </div>
+    );
+}
 
-        <div className={styles.songEditorContent}></div>
-
+function showFooterPart(props: ISongEditorProps) {
+    return (
         <div className={styles.songEditorFooter}>
             {
                 !props.isNewSong &&
@@ -54,7 +86,25 @@ const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
                 Save
             </button>
         </div>
-    </div>
-);
+    );
+}
+
+function showConfirmRestoreDefaultsPart(props: ISongEditorProps) {
+    return (
+        <div>
+            <div>Are you sure you want to restore the defaults for this song?</div>
+            <button
+                onClick={ props.onCancelRestoreDefaults }
+                className={[buttonStyles.button].join(" ")}>
+                Cancel
+            </button>
+            <button
+                onClick={ props.onRestoreDefaultsConfirm }
+                className={[buttonStyles.button, styles.songEditorButtonRight].join(" ")}>
+                Restore defaults
+            </button>
+        </div>
+    );
+}
 
 export default SongEditor;
