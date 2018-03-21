@@ -1,4 +1,9 @@
+import {Action, Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
+import { IRootState } from "store/reducers/root";
 import { ISong } from "types";
+import { getSong, getOriginalSong, isNewSong, isEditingSong } from "store/selectors/songEditor";
+import { actionCreators as songsActions } from "store/actions/songs";
 
 export const START_EDITING_NEW_SONG = "START_EDITING_NEW_SONG";
 export const STOP_EDITING = "STOP_EDITING";
@@ -33,4 +38,16 @@ export const actionCreators = {
         song,
         originalSong,
     }),
+};
+
+export const saveSongBeingEdited = (): ThunkAction<ISong, IRootState, {}> => {
+    return (dispatch: Dispatch<IRootState>, getState: () => IRootState): ISong => {
+        const song = getSong(getState());
+        if (isEditingSong(getState())) {
+            const oldSong = getOriginalSong(getState());
+            dispatch(songsActions.deleteSong(oldSong));
+        }
+        dispatch(actionCreators.stopEditing());
+        return song;
+    };
 };

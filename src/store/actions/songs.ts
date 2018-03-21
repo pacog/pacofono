@@ -1,5 +1,5 @@
 import { ISong } from "types";
-import {Action, ActionCreator, Dispatch} from "redux";
+import {Action, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import { IRootState } from "store/reducers/root";
 import * as uuid from "uuid/v1";
