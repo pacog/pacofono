@@ -1,8 +1,8 @@
-import {Action, Dispatch} from "redux";
-import {ThunkAction} from "redux-thunk";
+import { Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
 import { IRootState } from "store/reducers/root";
 import { ISong } from "types";
-import { getSong, getOriginalSong, isNewSong, isEditingSong } from "store/selectors/songEditor";
+import { getSong, getOriginalSong, isEditingSong } from "store/selectors/songEditor";
 import { getSavedSongs } from "store/selectors/songs";
 import { actionCreators as songsActions, duplicateSong } from "store/actions/songs";
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
