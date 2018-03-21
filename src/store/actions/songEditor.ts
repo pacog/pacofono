@@ -8,6 +8,8 @@ import { actionCreators as songsActions, duplicateSong } from "store/actions/son
 export const START_EDITING_NEW_SONG = "START_EDITING_NEW_SONG";
 export const STOP_EDITING = "STOP_EDITING";
 export const START_EDITING_EXISTING_SONG = "START_EDITING_EXISTING_SONG";
+export const SHOW_CONFIRM_RESTORE_DEFAULTS = "SHOW_CONFIRM_RESTORE_DEFAULTS";
+export const SHOW_CONFIRM_DELETE_SONG = "SHOW_CONFIRM_DELETE_SONG";
 
 export interface ISongEditorActions {
     START_EDITING_NEW_SONG: {
@@ -21,6 +23,14 @@ export interface ISongEditorActions {
         type: typeof START_EDITING_EXISTING_SONG,
         song: ISong,
         originalSong: ISong,
+    };
+    SHOW_CONFIRM_RESTORE_DEFAULTS: {
+        type: typeof SHOW_CONFIRM_RESTORE_DEFAULTS,
+        shouldShow: boolean,
+    };
+    SHOW_CONFIRM_DELETE_SONG: {
+        type: typeof SHOW_CONFIRM_DELETE_SONG,
+        shouldShow: boolean,
     };
 }
 
@@ -37,6 +47,14 @@ export const actionCreators = {
         type: START_EDITING_EXISTING_SONG,
         song,
         originalSong,
+    }),
+    showConfirmRestoreDefaults: (shouldShow: boolean): ISongEditorActions[typeof SHOW_CONFIRM_RESTORE_DEFAULTS] => ({
+        type: SHOW_CONFIRM_RESTORE_DEFAULTS,
+        shouldShow,
+    }),
+    showConfirmDeleteSong: (shouldShow: boolean): ISongEditorActions[typeof SHOW_CONFIRM_DELETE_SONG] => ({
+        type: SHOW_CONFIRM_DELETE_SONG,
+        shouldShow,
     }),
 };
 

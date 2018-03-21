@@ -23,3 +23,11 @@ export const isNewSong = (state: IRootState): boolean => {
 export const isEditingSong = (state: IRootState): boolean => {
     return !isNewSong(state);
 };
+
+export const isShowingConfirmRestoreDefaults = (state: IRootState): boolean => {
+    return state.songEditor.isShowingConfirmRestoreDefaults;
+};
+
+export const isShowingConfirmDeleteSong = (state: IRootState): boolean => {
+    return state.songEditor.isShowingConfirmDeleteSong;
+};

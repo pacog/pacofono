@@ -33,6 +33,9 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
             dispatch(songsActions.changeSongName(song, newName));
         },
         onRestoreDefaults: () => {
+            dispatch(songEditorActions.showConfirmRestoreDefaults(true));
+        },
+        onRestoreDefaultsConfirm: () => {
             dispatch(restoreDefaults());
         },
     };
