@@ -4,14 +4,20 @@ import { connect, Dispatch } from "react-redux";
 import { ISong } from "types";
 import { IRootState } from "store/reducers/root";
 import SongEditor from "components/SongEditor";
-import { getSong,
+import {
+    getSong,
     isNewSong,
     isShowingConfirmRestoreDefaults,
     isShowingConfirmDeleteSong,
 } from "store/selectors/songEditor";
 import { actionCreators as modalsActions } from "store/actions/modals";
 import { actionCreators as songsActions } from "store/actions/songs";
-import { actionCreators as songEditorActions, saveSongBeingEdited, restoreDefaults } from "store/actions/songEditor";
+import {
+    actionCreators as songEditorActions,
+    saveSongBeingEdited,
+    restoreDefaults,
+    deleteSongBeingEdited,
+} from "store/actions/songEditor";
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
 
 const mapStateToProps = (state: IRootState) => {
@@ -47,6 +53,18 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
         onRestoreDefaultsConfirm: () => {
             dispatch(restoreDefaults());
             dispatch(songEditorActions.showConfirmRestoreDefaults(false));
+        },
+        onDeleteSong: () => {
+            dispatch(songEditorActions.showConfirmDeleteSong(true));
+        },
+        onCancelDeleteSong: () => {
+            dispatch(songEditorActions.showConfirmDeleteSong(false));
+        },
+        onDeleteSongConfirm: () => {
+            dispatch(deleteSongBeingEdited());
+            dispatch(songEditorActions.showConfirmDeleteSong(false));
+            dispatch(modalsActions.closeSongEditor());
+            dispatch(songEditorActions.stopEditing());
         },
     };
 };

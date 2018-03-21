@@ -16,6 +16,9 @@ interface ISongEditorProps {
     onRestoreDefaults: () => void;
     onRestoreDefaultsConfirm: () => void;
     onCancelRestoreDefaults: () => void;
+    onDeleteSong: () => void;
+    onCancelDeleteSong: () => void;
+    onDeleteSongConfirm: () => void;
 }
 
 const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
@@ -28,7 +31,10 @@ const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
             props.isShowingConfirmRestoreDefaults &&
             showConfirmRestoreDefaultsPart(props)
         }
-
+        {
+            props.isShowingConfirmDeleteSong &&
+            showConfirmDeleteSongPart(props)
+        }
     </div>
 );
 
@@ -51,11 +57,9 @@ function showHeaderPart(props: ISongEditorProps) {
                 onChange={(e) => { props.onSongNameChanged(props.song, e.target.value); }} />
             {
                 !props.isNewSong &&
-                <button className={[buttonStyles.button, styles.songEditorButtonRight].join(" ")}>New</button>
-            }
-            {
-                !props.isNewSong &&
-                <button className={[buttonStyles.button, styles.songEditorButtonRight].join(" ")}>
+                <button
+                    onClick={ props.onDeleteSong }
+                    className={[buttonStyles.button, styles.songEditorButtonRight].join(" ")}>
                     Delete
                 </button>
             }
@@ -102,6 +106,24 @@ function showConfirmRestoreDefaultsPart(props: ISongEditorProps) {
                 onClick={ props.onRestoreDefaultsConfirm }
                 className={[buttonStyles.button, styles.songEditorButtonRight].join(" ")}>
                 Restore defaults
+            </button>
+        </div>
+    );
+}
+
+function showConfirmDeleteSongPart(props: ISongEditorProps) {
+    return (
+        <div>
+            <div>Do you really want to delete this song?</div>
+            <button
+                onClick={ props.onCancelDeleteSong }
+                className={[buttonStyles.button].join(" ")}>
+                Cancel
+            </button>
+            <button
+                onClick={ props.onDeleteSongConfirm }
+                className={[buttonStyles.button, styles.songEditorButtonRight].join(" ")}>
+                Delete song
             </button>
         </div>
     );
