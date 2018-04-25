@@ -12,27 +12,26 @@ import { actionCreators } from "store/actions/musicMode";
 import SongSelectorContainer from "containers/SongSelectorContainer";
 import ToggleWithIcon from "components/ToggleWithIcon";
 
-import * as styles from "./style.css";
 interface IMusicModeSelectorProps {
     currentMusicMode: string;
     changeMusicMode: (newMode: string) => any; // TODO find a better return type
 }
 
 const MusicModeSelector: React.SFC<IMusicModeSelectorProps> = ({currentMusicMode, changeMusicMode}) => (
-    <div className={styles.container}>
-        <div className={styles.musicModeContainer}>
+    <div className="{styles.container}">
+        <div className="{styles.musicModeContainer}">
             <ToggleWithIcon selected={currentMusicMode === SONG}
                             onSelect={() => changeMusicMode(SONG)}>
                 <FaMusic />
             </ToggleWithIcon>
             {
                 (currentMusicMode === SONG) &&
-                <div className={styles.musicModeInnerSelector}>
+                <div className="{styles.musicModeInnerSelector}">
                     <SongSelectorContainer />
                 </div>
             }
         </div>
-        <div className={styles.musicModeContainer}>
+        <div className="{styles.musicModeContainer}">
             <ToggleWithIcon selected={currentMusicMode === SCALE}
                             onSelect={() => changeMusicMode(SCALE)}
             >
@@ -40,7 +39,7 @@ const MusicModeSelector: React.SFC<IMusicModeSelectorProps> = ({currentMusicMode
             </ToggleWithIcon>
             {
                 (currentMusicMode === SCALE) &&
-                <div className={styles.musicModeInnerSelector}>
+                <div className="{styles.musicModeInnerSelector}">
                     Select scale
                 </div>
             }

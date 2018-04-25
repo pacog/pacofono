@@ -1,0 +1,13 @@
+@import "src/root-style/common";
+
+.app-logo {
+    background: $transparent-bg;
+    color: white;
+    font-size: 30px;
+    padding: $g-s $g-m;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 0 0 $g-sm $g-sm;
+}

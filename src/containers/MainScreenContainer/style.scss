@@ -1,0 +1,10 @@
+@import "src/root-style/common";
+
+.main-screen-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #5A5372, #1C1C2A);
+}

@@ -1,7 +1,5 @@
 import * as React from "react";
 import { ISong } from "types";
-import * as buttonStyles from "style-common/buttons.css";
-import * as styles from "./style.css";
 
 interface ISongSelectorProps {
     songs: ISong[];
@@ -16,11 +14,11 @@ const SongSelector: React.SFC<ISongSelectorProps> = (props: ISongSelectorProps) 
     <div>
         {
             (props.songs.length > 0) &&
-            <ul className={styles.container}>
+            <ul className="{styles.container}">
                 {props.songs.map( (song) => (
                     <li key={song.id}
                         className={
-                            (props.selectedSong === song) ? styles.selected : styles.notSelected
+                            (props.selectedSong === song) ? "styles.selected" : "styles.notSelected"
                         }
                         onClick={
                             () => { props.onSelectSong(song); }
@@ -29,7 +27,7 @@ const SongSelector: React.SFC<ISongSelectorProps> = (props: ISongSelectorProps) 
                         {
                             (props.selectedSong === song) &&
                             <button
-                                className={buttonStyles.button}
+                                className="{buttonStyles.button}"
                                 onClick={
                                     (event) => {
                                         event.stopPropagation();
@@ -41,7 +39,7 @@ const SongSelector: React.SFC<ISongSelectorProps> = (props: ISongSelectorProps) 
                 ))}
             </ul>
         }
-        <button className={buttonStyles.button}onClick={props.onAddSongClick}>Add a song</button>
+        <button className="{buttonStyles.button}" onClick={props.onAddSongClick}>Add a song</button>
     </div>
 );
 

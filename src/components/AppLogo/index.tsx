@@ -1,8 +1,9 @@
 import * as React from "react";
-import * as styles from "./style.css";
+
+import "./style.scss";
 
 const AppLogo: React.SFC<{}> = (props: {}) => (
-  <div className={styles.logo}>Chesire</div>
+  <div className="app-logo">Chesire</div>
 );
 
 export default AppLogo;

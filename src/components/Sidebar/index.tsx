@@ -1,8 +1,9 @@
 import * as React from "react";
-import * as styles from "./style.css";
+
+import "./style.scss";
 
 const Sidebar: React.SFC<{}> = (props: {children?: any}) => (
-  <div className={styles.sidebar}>
+  <div className="sidebar sidebar-left">
     { props.children }
   </div>
 );

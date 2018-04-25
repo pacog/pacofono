@@ -1,5 +1,6 @@
 import * as React from "react";
-import * as styles from "./style.css";
+
+import "./style.scss";
 
 interface IToggleWithIconProps {
   children?: any;
@@ -8,7 +9,7 @@ interface IToggleWithIconProps {
 }
 
 const ToggleWithIcon: React.SFC<IToggleWithIconProps> = (props: IToggleWithIconProps) => (
-    <div className={props.selected ? styles.selected : styles.unselected}
+    <div className={props.selected ? "styles.selected" : "styles.unselected"}
          onClick={props.onSelect}>
         { props.children }
     </div>

@@ -1,0 +1,78 @@
+$g-xs: 4px;
+$g-s: 8px;
+$g-sm: 12px;
+$g-m: 16px;
+$g-ml: 24px;
+$g-l: 32px;
+$g-xl: 48px;
+$g-xxl: 64px;
+
+.mv-a {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.mh-a {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ml-a {
+    margin-left: auto;
+}
+
+.mr-a {
+    margin-right: auto;
+}
+
+.mt-a {
+    margin-top: auto;
+}
+
+.mb-a {
+    margin-bottom: auto;
+}
+
+//Margins and paddings:
+$sizes: (
+    xs: 4px,
+    s: 8px,
+    sm: 12px,
+    m: 16px,
+    ml: 24px,
+    l: 32px,
+    // xl: 48px,
+    xxl: 64px
+);
+
+@each $sizeName, $size in $sizes {
+    .m-#{$sizeName} {
+        margin: $size;
+    }
+
+    .mv-#{$sizeName} {
+        margin-top: $size;
+        margin-bottom: $size;
+    }
+
+    .mh-#{$sizeName} {
+        margin-left: $size;
+        margin-right: $size;
+    }
+
+    .ml-#{$sizeName} {
+        margin-left: $size;
+    }
+
+    .mr-#{$sizeName} {
+        margin-right: $size;
+    }
+
+    .mt-#{$sizeName} {
+        margin-top: $size;
+    }
+
+    .mb-#{$sizeName} {
+        margin-bottom: $size;
+    }
+}

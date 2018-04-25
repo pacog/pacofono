@@ -1,0 +1,13 @@
+@import "src/root-style/common";
+
+.sidebar {
+    background-color: $transparent-bg;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+.sidebar-left {
+    left: 0;
+    width: $g-xl;
+}
