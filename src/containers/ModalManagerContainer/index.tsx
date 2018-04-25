@@ -6,8 +6,6 @@ import { isAnyModalOpen, isSongEditorModalOpen } from "store/selectors/modals";
 import Modal from "components/Modal";
 import SongEditorContainer from "containers/SongEditorContainer";
 
-import * as styles from "./style.css";
-
 interface IModalManagerProps {
     isAnyModalOpen: boolean;
     isSongEditorModalOpen: boolean;
@@ -17,8 +15,8 @@ interface IModalManagerProps {
 const ModalManager: React.SFC<IModalManagerProps> = (props: IModalManagerProps) => (
     <div>
         {   props.isAnyModalOpen &&
-            <div className={styles.modalsContainer}>
-                <div className={styles.backdrop}></div>
+            <div className="styles.modalsContainer">
+                <div className="styles.backdrop"></div>
                 {
                     props.isSongEditorModalOpen &&
                     <Modal
@@ -46,5 +44,6 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
         },
     };
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalManager);

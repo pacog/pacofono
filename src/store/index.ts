@@ -2,10 +2,11 @@ import { applyMiddleware, createStore  } from "redux";
 import thunk from "redux-thunk";
 
 import { IRootState, rootReducer } from "./reducers/root";
+import { RootAction } from "store/actions";
 
 function configureStore() {
   // create store
-  return createStore<IRootState>(
+  return createStore<IRootState, RootAction, {}, {}>(
     rootReducer,
     (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
     applyMiddleware(thunk),

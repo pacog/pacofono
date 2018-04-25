@@ -1,6 +1,7 @@
 import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { IRootState } from "store/reducers/root";
+import { RootAction } from "store/actions";
 import { ISong } from "types";
 import { getSong, getOriginalSong, isEditingSong } from "store/selectors/songEditor";
 import { getSavedSongs } from "store/selectors/songs";
@@ -61,7 +62,7 @@ export const actionCreators = {
 };
 
 export const saveSongBeingEdited = (): ThunkAction<ISong, IRootState, {}> => {
-    return (dispatch: Dispatch<IRootState>, getState: () => IRootState): ISong => {
+    return (dispatch: Dispatch<RootAction, IRootState>, getState: () => IRootState): ISong => {
         const song = getSong(getState());
         if (isEditingSong(getState())) {
             const oldSong = getOriginalSong(getState());
@@ -73,7 +74,7 @@ export const saveSongBeingEdited = (): ThunkAction<ISong, IRootState, {}> => {
 };
 
 export const restoreDefaults = (): ThunkAction<void, IRootState, {}> => {
-    return (dispatch: Dispatch<IRootState>, getState: () => IRootState): void => {
+    return (dispatch: Dispatch<RootAction, IRootState>, getState: () => IRootState): void => {
         if (isEditingSong(getState())) {
             const song = getSong(getState());
             dispatch(songsActions.deleteSong(song));
@@ -85,7 +86,7 @@ export const restoreDefaults = (): ThunkAction<void, IRootState, {}> => {
 };
 
 export const deleteSongBeingEdited = (): ThunkAction<void, IRootState, {}> => {
-    return (dispatch: Dispatch<IRootState>, getState: () => IRootState): void => {
+    return (dispatch: Dispatch<RootAction, IRootState>, getState: () => IRootState): void => {
         if (isEditingSong(getState())) {
             const song = getSong(getState());
             dispatch(songsActions.deleteSong(song));

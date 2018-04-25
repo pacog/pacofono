@@ -1,9 +1,0 @@
-@value colors: "style-common/colors.css";
-@value palette1 from colors;
-
-.background {
-  background-color: palette1;
-  position: relative;
-  height: 100%;
-  width: 100%;
-}
