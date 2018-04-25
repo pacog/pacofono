@@ -2,6 +2,8 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
+import "./root-style/index.scss";
+
 // import "./root-styles.css";
 import store from "./store";
 
