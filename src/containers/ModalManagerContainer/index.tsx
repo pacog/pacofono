@@ -3,7 +3,6 @@ import { connect, Dispatch } from "react-redux";
 
 import { IRootState } from "store/reducers/root";
 import { isAnyModalOpen, isSongEditorModalOpen } from "store/selectors/modals";
-import { actionCreators, IModalsActions } from "store/actions/modals";
 import Modal from "components/Modal";
 import SongEditorContainer from "containers/SongEditorContainer";
 

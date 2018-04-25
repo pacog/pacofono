@@ -7,7 +7,6 @@ import { START_EDITING_NEW_SONG,
     SHOW_CONFIRM_RESTORE_DEFAULTS,
     SHOW_CONFIRM_DELETE_SONG,
 } from "store/actions/songEditor";
-import { ISong } from "types";
 
 export interface ISongEditorState {
     readonly isNewSong: boolean;

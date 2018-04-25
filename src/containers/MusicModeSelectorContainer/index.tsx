@@ -7,7 +7,7 @@ import { SONG, SCALE } from "constants/musicModes";
 
 import { IRootState } from "store/reducers/root";
 import { getMusicMode } from "store/selectors/musicMode";
-import { actionCreators, IMusicModeActions } from "store/actions/musicMode";
+import { actionCreators } from "store/actions/musicMode";
 
 import SongSelectorContainer from "containers/SongSelectorContainer";
 import ToggleWithIcon from "components/ToggleWithIcon";
