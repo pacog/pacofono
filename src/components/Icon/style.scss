@@ -1,6 +1,22 @@
 @import "src/root-style/common";
 
-// .icon {}
+
+@mixin icon-color($color: white) {
+    use.icon-use {
+        fill: $color;
+    }
+}
+
+// Colors
+.icon-color-white {
+    @include icon-color(white);
+}
+
+.icon-color-black {
+    @include icon-color(black);
+}
+
+// Sizes
 .icon-size-xs {
     height: $g-xs;
     width: $g-xs;

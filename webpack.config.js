@@ -65,7 +65,20 @@ module.exports = {
 
             {
                 test: /\.svg$/,
-                loader: 'svg-sprite-loader'
+                use: [
+                    {
+                        loader: 'svg-sprite-loader',
+                        options: {}
+                    },
+                    {
+                        loader: 'svgo-loader',
+                        options: {
+                            plugins: [
+                                {removeAttrs: {attrs: '(stroke|fill)'}}
+                            ]
+                        }
+                    }
+                ]
             },
 
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
