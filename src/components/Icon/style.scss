@@ -1,0 +1,42 @@
+@import "src/root-style/common";
+
+// .icon {}
+.icon-size-xs {
+    height: $g-xs;
+    width: $g-xs;
+}
+
+.icon-size-s {
+    height: $g-s;
+    width: $g-s;
+}
+
+.icon-size-sm {
+    height: $g-sm;
+    width: $g-sm;
+}
+
+.icon-size-m {
+    height: $g-m;
+    width: $g-m;
+}
+
+.icon-size-ml {
+    height: $g-ml;
+    width: $g-ml;
+}
+
+.icon-size-l {
+    height: $g-l;
+    width: $g-l;
+}
+
+.icon-size-xl {
+    height: $g-xl;
+    width: $g-xl;
+}
+
+.icon-size-xxl {
+    height: $g-xxl;
+    width: $g-xxl;
+}

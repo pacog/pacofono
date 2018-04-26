@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
-import FaMusic from "react-icons/fa/music";
+import songIcon from "icons/song.svg";
 import MdLinearScale from "react-icons/md/linear-scale";
 
 import { SONG, SCALE } from "constants/musicModes";
@@ -11,18 +11,21 @@ import { actionCreators } from "store/actions/musicMode";
 
 import SongSelectorContainer from "containers/SongSelectorContainer";
 import ToggleWithIcon from "components/ToggleWithIcon";
+import Icon from "components/Icon";
 
 interface IMusicModeSelectorProps {
     currentMusicMode: string;
     changeMusicMode: (newMode: string) => any; // TODO find a better return type
 }
 
+
+
 const MusicModeSelector: React.SFC<IMusicModeSelectorProps> = ({currentMusicMode, changeMusicMode}) => (
     <div className="{styles.container}">
         <div className="{styles.musicModeContainer}">
             <ToggleWithIcon selected={currentMusicMode === SONG}
                             onSelect={() => changeMusicMode(SONG)}>
-                <FaMusic />
+                <Icon icon={songIcon} size="ml" />
             </ToggleWithIcon>
             {
                 (currentMusicMode === SONG) &&
