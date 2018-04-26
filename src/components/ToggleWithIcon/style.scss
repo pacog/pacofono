@@ -1,1 +1,17 @@
 @import "src/root-style/common";
+
+.toggle {
+    width: $g-xl;
+    height: $g-xl;
+    @include line-center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $dark-transparent-2;
+    }
+
+    &.toggle-selected {
+        background-color: $dark-transparent;
+        cursor: default;
+    }
+}

@@ -1,13 +1,15 @@
 import * as React from "react";
 
+import "./style.scss";
+
 interface IModalProps {
     children?: any;
     onClose: () => void;
 }
 
 const Modal: React.SFC<IModalProps> = (props: IModalProps) => (
-    <div className="{styles.backdrop}" onClick={props.onClose}>
-        <div className="{styles.modal}"
+    <div className="modal-backdrop" onClick={props.onClose}>
+        <div className="modal"
              onClick={(e) => { e.stopPropagation(); }}>
             { props.children }
         </div>

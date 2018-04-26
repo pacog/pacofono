@@ -1,0 +1,8 @@
+@import "src/root-style/common";
+
+.song-selector {
+    min-height: $g-xl;
+    background-color: $transparent-bg;
+    @include line-center;
+    padding: $g-s;
+}

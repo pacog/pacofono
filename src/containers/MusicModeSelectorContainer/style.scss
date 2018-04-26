@@ -1,0 +1,15 @@
+@import "src/root-style/common";
+
+.music-mode-selector {
+    margin-top: 2 * $g-xxl;
+}
+
+    .music-mode-container {
+        position: relative;
+    }
+
+        .music-mode-popover {
+            position: absolute;
+            top: 0;
+            left: $g-xl;
+        }

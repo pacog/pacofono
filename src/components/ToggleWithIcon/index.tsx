@@ -9,7 +9,7 @@ interface IToggleWithIconProps {
 }
 
 const ToggleWithIcon: React.SFC<IToggleWithIconProps> = (props: IToggleWithIconProps) => (
-    <div className={props.selected ? "styles.selected" : "styles.unselected"}
+    <div className={props.selected ? "toggle toggle-selected" : "toggle"}
          onClick={props.onSelect}>
         { props.children }
     </div>

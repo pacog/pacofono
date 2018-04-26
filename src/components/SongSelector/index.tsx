@@ -1,6 +1,9 @@
 import * as React from "react";
 import { ISong } from "types";
 
+import PButton from "components/PButton";
+import "./style.scss";
+
 interface ISongSelectorProps {
     songs: ISong[];
     selectedSong: ISong;
@@ -11,10 +14,10 @@ interface ISongSelectorProps {
 
 // TODO create song selector item component
 const SongSelector: React.SFC<ISongSelectorProps> = (props: ISongSelectorProps) => (
-    <div>
+    <div className="song-selector">
         {
             (props.songs.length > 0) &&
-            <ul className="{styles.container}">
+            <ul className="song-selector-song-list">
                 {props.songs.map( (song) => (
                     <li key={song.id}
                         className={
@@ -26,20 +29,23 @@ const SongSelector: React.SFC<ISongSelectorProps> = (props: ISongSelectorProps) 
                         {song.name}
                         {
                             (props.selectedSong === song) &&
-                            <button
-                                className="{buttonStyles.button}"
+                            <PButton
+                                primary={true}
                                 onClick={
                                     (event) => {
                                         event.stopPropagation();
                                         props.onEditSong(song);
                                     }
-                                }>Edit</button>
+                                }>Edit</PButton>
                         }
                     </li>
                 ))}
             </ul>
         }
-        <button className="{buttonStyles.button}" onClick={props.onAddSongClick}>Add a song</button>
+        <PButton
+            primary={true}
+            onClick={props.onAddSongClick}
+            >Add a song</PButton>
     </div>
 );
 
