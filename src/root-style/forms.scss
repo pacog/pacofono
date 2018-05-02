@@ -1,0 +1,18 @@
+$p-input-height: $g-l;
+$p-input-font-size: 16px;
+$p-input-line-height: 16px;
+$p-input-border-width: 1px;
+
+$p-input-v-padding: ($p-input-height - (2 * $p-input-border-width) - $p-input-line-height) / 2;
+
+.p-input {
+    height: $g-l;
+    border: $p-input-border-width solid $blue-1;
+    font-size: $p-input-font-size;
+    line-height: $p-input-line-height;
+    padding: $p-input-v-padding $g-sm;
+    background: $transparent-bg;
+    color: $white;
+    @include regular;
+    border-radius: $g-xs;
+}
