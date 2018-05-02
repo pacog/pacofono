@@ -48,8 +48,3 @@ export const duplicateSong = (song: ISong): ThunkAction<ISong, IRootState, {}> =
         return newSong;
     };
 };
-
-// export const duplicateSong = (amount: number, userAddress: string): ThunkAction<{}, IRootState, {}> => async (
-//  dispatch,
-//  getState
-// ) => { … }
