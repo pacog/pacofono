@@ -21,7 +21,8 @@ const SongSelector: React.SFC<ISongSelectorProps> = (props: ISongSelectorProps) 
                 {props.songs.map( (song) => (
                     <li key={song.id}
                         className={
-                            (props.selectedSong === song) ? "styles.selected" : "styles.notSelected"
+                            "song-selector-song " +
+                            ((props.selectedSong === song) ? "song-selector-song-selected" : "")
                         }
                         onClick={
                             () => { props.onSelectSong(song); }
@@ -42,10 +43,12 @@ const SongSelector: React.SFC<ISongSelectorProps> = (props: ISongSelectorProps) 
                 ))}
             </ul>
         }
-        <PButton
-            primary={true}
-            onClick={props.onAddSongClick}
-            >Add a song</PButton>
+        <div className="song-selector-add-song">
+            <PButton
+                primary={true}
+                onClick={props.onAddSongClick}
+                >Add a song</PButton>
+        </div>
     </div>
 );
 

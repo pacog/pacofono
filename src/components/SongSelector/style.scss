@@ -3,6 +3,33 @@
 .song-selector {
     min-height: $g-xl;
     background-color: $transparent-bg;
-    @include line-center;
-    padding: $g-s;
 }
+
+    .song-selector-song-list {
+    }
+
+        .song-selector-song {
+            color: $white;
+            font-size: 18px;
+            padding: $g-sm $g-m;
+            background-color: transparent;
+            cursor: pointer;
+            white-space: nowrap;
+
+            &:hover {
+                background-color: $purple-2;
+            }
+        }
+
+            .song-selector-song-selected {
+                background-color: $purple-3;
+
+                &:hover {
+                    background-color: $purple-3;
+                }
+            }
+
+    .song-selector-add-song {
+        padding: $g-s;
+        @include line-center;
+    }

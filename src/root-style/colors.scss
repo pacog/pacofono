@@ -1,11 +1,15 @@
-$transparent-bg: rgba(#8C8D91, 0.38);
-$dark-transparent: rgba(#383851, 0.63);
-$dark-transparent-2: rgba(#383851, 0.33);
-
 $white: #FAFAFA;
+
+$purple-1: #DADAE3;
+$purple-2: #665F7D;
+$purple-3: #383851;
 
 $blue-1: #1A9183;
 $blue-2: #0E9E8D;
 $blue-3: #22C2AF;
 $blue-4: #41D4C3;
 $blue-5: #53DCCC;
+
+$transparent-bg: rgba(#8C8D91, 0.38);
+$dark-transparent: rgba($purple-3, 0.63);
+$dark-transparent-2: rgba($purple-3, 0.33);
