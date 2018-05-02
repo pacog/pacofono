@@ -30,7 +30,8 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
             dispatch(currentSongActions.setCurrentSong(song));
         },
         onEditSong: (song: ISong) => {
-            const duplicatedSong = dispatch(duplicateSong(song));
+            // TODO ugly fix for dispatch thunk actions type error (<any>)
+            const duplicatedSong = dispatch<any>(duplicateSong(song));
             dispatch(modalsActions.openSongEditor());
             dispatch(songEditorActions.startEditingExistingSong(duplicatedSong, song));
         },
