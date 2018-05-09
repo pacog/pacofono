@@ -7,9 +7,38 @@
     .music-mode-container {
         position: relative;
     }
+        $music-mode-popover-decorator-width: $g-sm;
 
         .music-mode-popover {
             position: absolute;
             top: 0;
-            left: $g-xl;
+            left: $g-xl + $music-mode-popover-decorator-width;
+
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0;
+                left: -$music-mode-popover-decorator-width;
+                z-index: 1;
+                width: $music-mode-popover-decorator-width;
+                background-color: $transparent-bg;
+                height: $g-xl;
+            }
+
+            &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                left: -$music-mode-popover-decorator-width;
+                top: 0;
+                z-index: 2;
+                width: 0;
+                height: 0;
+                border-top: $g-xl / 2 solid transparent;
+                border-bottom: $g-xl / 2 solid transparent;
+                border-left: $g-xl / 2 solid $purple-3;
+                transform: scaleX(0.5);
+                transform-origin: left center;
+            }
         }
