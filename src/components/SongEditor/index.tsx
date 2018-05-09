@@ -8,7 +8,7 @@ import PButton from "components/PButton";
 import "./style.scss";
 
 const SongEditor: React.SFC<ISongEditorProps> = (props: ISongEditorProps) => (
-    <div className="{styles.songEditor}">
+    <div className="song-editor">
         {
             (!props.isShowingConfirmRestoreDefaults && !props.isShowingConfirmDeleteSong) &&
             showContentPart(props)
@@ -36,14 +36,16 @@ function showContentPart(props: ISongEditorProps) {
 
 function showHeaderPart(props: ISongEditorProps) {
     return (
-        <div className="{styles.songEditorNameAndTools}">
+        <div className="line-center">
             <input
                 value={props.song.name}
-                className="p-input song-editor-name-input"
+                className="p-input song-editor-name-input grow-full-width"
                 onChange={(e) => { props.onSongNameChanged(props.song, e.target.value); }} />
             {
                 !props.isNewSong &&
                 <PButton
+                    className="ml-sm"
+                    secondary={true}
                     onClick={ props.onDeleteSong }>
                     Delete
                 </PButton>
@@ -54,21 +56,25 @@ function showHeaderPart(props: ISongEditorProps) {
 
 function showFooterPart(props: ISongEditorProps) {
     return (
-        <div className="{styles.songEditorFooter}">
+        <div className="line-center mt-m">
             {
                 !props.isNewSong &&
                 <PButton
+                    secondary={true}
                     onClick={() => { props.onRestoreDefaults(); }}
                 >Restore defaults</PButton>
             }
 
-            <div className="{styles.songEditorFooterFiller}"></div>
+            <div className="grow-full-width"></div>
 
             <PButton
+                secondary={true}
                 onClick={() => { props.onClose(props.song); }}>
                 Close
             </PButton>
             <PButton
+                primary={true}
+                className="ml-sm"
                 onClick={() => { props.onSaveSong(); }}>
                 Save
             </PButton>

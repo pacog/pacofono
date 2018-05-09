@@ -1,16 +1,24 @@
 @import "src/root-style/common";
 
+$p-button-height: $g-l;
+$p-button-line-height: $g-m;
+$p-button-border: 1px;
+
 .p-button {
     @include reset-button;
     @include regular;
-    padding: $g-s $g-sm;
-
-    background-color: $blue-3;
+    padding: ($p-button-height - $p-button-line-height - ($p-button-border * 2)) / 2 $g-sm;
     border-radius: $g-xs;
     font-size: 14px;
     line-height: 16px;
     color: $white;
     cursor: pointer;
+    border: $p-button-border solid;
+}
+
+.p-button-primary {
+    background-color: $blue-3;
+    border-color: transparent;
 
     &:hover {
         background-color: $blue-2;
@@ -18,5 +26,18 @@
 
     &:active {
         background-color: $blue-1;
+    }
+}
+
+.p-button-secondary {
+    background-color: $dark-transparent-2;
+    border-color: $blue-3;
+
+    &:hover {
+        background-color: $transparent-bg;
+    }
+
+    &:active {
+        background-color: $dark-transparent;
     }
 }

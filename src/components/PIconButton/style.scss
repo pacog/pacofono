@@ -6,6 +6,7 @@
     width: $g-xl;
     background: $blue-3;
     cursor: pointer;
+    @include line-center;
 
     &:hover {
         background: $blue-2;
