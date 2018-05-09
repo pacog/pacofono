@@ -7,9 +7,11 @@ import { SONG, SCALE } from "constants/musicModes";
 
 import { IRootState } from "store/reducers/root";
 import { getMusicMode } from "store/selectors/musicMode";
+import { isOpen as isSongSelectorOpenSelector } from "store/selectors/songSelector";
 import { actionCreators } from "store/actions/musicMode";
 
 import SongSelectorContainer from "containers/SongSelectorContainer";
+import SongDetailsContainer from "containers/SongDetailsContainer";
 import ToggleWithIcon from "components/ToggleWithIcon";
 import Icon from "components/Icon";
 
@@ -18,9 +20,16 @@ import "./style.scss";
 interface IMusicModeSelectorProps {
     currentMusicMode: string;
     changeMusicMode: (newMode: string) => any; // TODO find a better return type
+    isSongSelectorOpen: boolean;
+    isSongDetailsOpen: boolean;
 }
 
-const MusicModeSelector: React.SFC<IMusicModeSelectorProps> = ({currentMusicMode, changeMusicMode}) => (
+const MusicModeSelector: React.SFC<IMusicModeSelectorProps> = ({
+    currentMusicMode,
+    changeMusicMode,
+    isSongSelectorOpen,
+    isSongDetailsOpen,
+}) => (
     <div className="music-mode-selector">
         <div className="music-mode-container">
             <ToggleWithIcon selected={currentMusicMode === SONG}
@@ -30,7 +39,14 @@ const MusicModeSelector: React.SFC<IMusicModeSelectorProps> = ({currentMusicMode
             {
                 (currentMusicMode === SONG) &&
                 <div className="music-mode-popover">
-                    <SongSelectorContainer />
+                    {
+                        isSongSelectorOpen &&
+                        <SongSelectorContainer />
+                    }
+                    {
+                        isSongDetailsOpen &&
+                        <SongDetailsContainer />
+                    }
                 </div>
             }
         </div>
@@ -53,6 +69,8 @@ const MusicModeSelector: React.SFC<IMusicModeSelectorProps> = ({currentMusicMode
 const mapStateToProps = (state: IRootState) => {
     return {
         currentMusicMode: getMusicMode(state),
+        isSongSelectorOpen: isSongSelectorOpenSelector(state) && (getMusicMode(state) === SONG),
+        isSongDetailsOpen: !isSongSelectorOpenSelector(state) && (getMusicMode(state) === SONG),
     };
 };
 

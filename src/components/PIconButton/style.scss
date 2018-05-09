@@ -1,0 +1,17 @@
+@import "src/root-style/common";
+
+.p-icon-button {
+    @include reset-button;
+    height: $g-xl;
+    width: $g-xl;
+    background: $blue-3;
+    cursor: pointer;
+
+    &:hover {
+        background: $blue-2;
+    }
+
+    &:active {
+        background: $blue-1;
+    }
+}

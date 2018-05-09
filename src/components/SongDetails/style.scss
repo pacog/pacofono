@@ -1,0 +1,20 @@
+@import "src/root-style/common";
+
+.song-details {
+    min-width: 200px;
+    max-width: 200px;
+    padding: $g-m;
+    background-color: $transparent-bg;
+    position: relative;
+}
+
+    .song-details-title {
+        color: white;
+        font-size: 24px;
+    }
+
+    .song-details-show-all-songs {
+        position: absolute;
+        left: 100%;
+        top: 0;
+    }

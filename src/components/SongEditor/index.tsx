@@ -3,6 +3,7 @@ import * as React from "react";
 import ISongEditorProps from "./props";
 import showConfirmRestoreDefaultsPart from "./confirmRestoreDefaults";
 import showConfirmDeleteSongPart from "./confirmDeleteSong";
+import PButton from "components/PButton";
 
 import "./style.scss";
 
@@ -42,11 +43,10 @@ function showHeaderPart(props: ISongEditorProps) {
                 onChange={(e) => { props.onSongNameChanged(props.song, e.target.value); }} />
             {
                 !props.isNewSong &&
-                <button
-                    onClick={ props.onDeleteSong }
-                    className="{[buttonStyles.button, styles.songEditorButtonRight]}">
+                <PButton
+                    onClick={ props.onDeleteSong }>
                     Delete
-                </button>
+                </PButton>
             }
         </div>
     );
@@ -57,23 +57,21 @@ function showFooterPart(props: ISongEditorProps) {
         <div className="{styles.songEditorFooter}">
             {
                 !props.isNewSong &&
-                <button className="{buttonStyles.button}"
+                <PButton
                     onClick={() => { props.onRestoreDefaults(); }}
-                >Restore defaults</button>
+                >Restore defaults</PButton>
             }
 
             <div className="{styles.songEditorFooterFiller}"></div>
 
-            <button
-                onClick={() => { props.onClose(props.song); }}
-                className="{[buttonStyles.button, styles.songEditorButtonRight]}">
+            <PButton
+                onClick={() => { props.onClose(props.song); }}>
                 Close
-            </button>
-            <button
-                onClick={() => { props.onSaveSong(); }}
-                className="{[buttonStyles.button, styles.songEditorButtonRight]}">
+            </PButton>
+            <PButton
+                onClick={() => { props.onSaveSong(); }}>
                 Save
-            </button>
+            </PButton>
         </div>
     );
 }
