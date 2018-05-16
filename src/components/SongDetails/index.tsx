@@ -23,6 +23,7 @@ const SongDetails: React.SFC<ISongDetailsProps> = (props: ISongDetailsProps) => 
         <div className="mv-l">Parts (TODO)</div>
         <PButton
             primary={true}
+            fullWidth={true}
             onClick={
                 (event) => {
                     props.onEditSong(props.song);

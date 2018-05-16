@@ -3,18 +3,35 @@
 .song-selector {
     min-height: $g-xl;
     background-color: $transparent-bg;
+    width: 200px;
 }
+
+    .song-selector-with-songs {
+        position: relative;
+        top: -$g-ml;
+        width: 200px;
+        max-width: 400px;
+    }
+
+    .song-selector-title {
+        background-color: $blue-1;
+        line-height: $g-ml;
+        font-size: 12px;
+        padding: 0 $g-sm;
+        color: white;
+    }
 
         .song-selector-song {
             color: $white;
             font-size: 18px;
-            padding: $g-sm $g-m;
+            line-height: $g-xl;
+            padding: 0 $g-sm;
             background-color: transparent;
             cursor: pointer;
             white-space: nowrap;
 
             &:hover {
-                background-color: $purple-2;
+                background-color: lighten($purple-3, 10);
             }
         }
 
@@ -27,6 +44,7 @@
             }
 
     .song-selector-add-song {
-        padding: $g-s;
+        padding: $g-sm;
         @include line-center;
+        background-color: $purple-3;
     }

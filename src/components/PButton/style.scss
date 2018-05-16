@@ -16,6 +16,11 @@ $p-button-border: 1px;
     border: $p-button-border solid;
 }
 
+.p-button-full-width {
+    display: block;
+    width: 100%;
+}
+
 .p-button-primary {
     background-color: $blue-3;
     border-color: transparent;

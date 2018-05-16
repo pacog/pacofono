@@ -6,6 +6,7 @@ interface IButtonProps {
     children?: any;
     primary?: boolean;
     secondary?: boolean;
+    fullWidth?: boolean;
     onClick?: (event: any) => void;
     className?: string;
 }
@@ -22,7 +23,8 @@ function getClassNameFromProps(props: IButtonProps): string {
     const DEFAULT_CLASS = "p-button";
     const extraClassName = props.className || "";
     const importanceClass = getImportanceClassFromProps(props);
-    return `${DEFAULT_CLASS} ${importanceClass} ${extraClassName}`;
+    const fullWidthClass = getFullWidthClassFromProps(props);
+    return `${DEFAULT_CLASS} ${importanceClass} ${fullWidthClass} ${extraClassName}`;
 }
 
 function getImportanceClassFromProps(props: IButtonProps): string {
@@ -32,6 +34,13 @@ function getImportanceClassFromProps(props: IButtonProps): string {
         return "p-button-secondary";
     }
     return "p-button-secondary";
+}
+
+function getFullWidthClassFromProps(props: IButtonProps): string {
+    if (props.fullWidth) {
+        return "p-button-full-width";
+    }
+    return "";
 }
 
 export default Button;

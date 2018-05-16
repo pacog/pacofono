@@ -12,27 +12,33 @@ interface ISongSelectorProps {
 }
 
 const SongSelector: React.SFC<ISongSelectorProps> = (props: ISongSelectorProps) => (
-    <div className="song-selector">
+    <div className={"song-selector " + (props.songs.length ? "song-selector-with-songs" : "")}>
         {
             (props.songs.length > 0) &&
-            <ul className="song-selector-song-list">
-                {props.songs.map( (song) => (
-                    <li key={song.id}
-                        className={
-                            "song-selector-song " +
-                            ((props.selectedSong === song) ? "song-selector-song-selected" : "")
-                        }
-                        onClick={
-                            () => { props.onSelectSong(song); }
-                        }>
-                        {song.name}
-                    </li>
-                ))}
-            </ul>
+            <div>
+                <div className="song-selector-title">
+                    Select a song
+                </div>
+                <ul className="song-selector-song-list">
+                    {props.songs.map( (song) => (
+                        <li key={song.id}
+                            className={
+                                "song-selector-song " +
+                                ((props.selectedSong === song) ? "song-selector-song-selected" : "")
+                            }
+                            onClick={
+                                () => { props.onSelectSong(song); }
+                            }>
+                            {song.name}
+                        </li>
+                    ))}
+                </ul>
+            </div>
         }
         <div className="song-selector-add-song">
             <PButton
                 primary={true}
+                fullWidth={true}
                 onClick={props.onAddSongClick}
                 >Add a song</PButton>
         </div>
