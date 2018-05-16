@@ -44,7 +44,12 @@
             }
 
     .song-selector-add-song {
-        padding: $g-sm;
+        padding: $g-s $g-sm;
         @include line-center;
         background-color: $purple-3;
+
+        .song-selector-with-songs & {
+            padding: $g-sm;
+        }
+
     }

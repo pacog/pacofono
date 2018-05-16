@@ -39,8 +39,11 @@ const SongSelector: React.SFC<ISongSelectorProps> = (props: ISongSelectorProps) 
             <PButton
                 primary={true}
                 fullWidth={true}
-                onClick={props.onAddSongClick}
-                >Add a song</PButton>
+                onClick={props.onAddSongClick}>
+                {
+                    props.songs.length ? "Add a song" : "Add your first song"
+                }
+            </PButton>
         </div>
     </div>
 );
