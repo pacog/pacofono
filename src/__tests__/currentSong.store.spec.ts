@@ -11,6 +11,7 @@ describe("currentSong store", () => {
             const song = {
                 id: "42",
                 name: "Tu fiesta",
+                parts: ["partId"],
             };
             expect(actionCreators.setCurrentSong(song))
                 .toEqual({
@@ -32,6 +33,7 @@ describe("currentSong store", () => {
             const song = {
                 id: "67",
                 name: "Música rancia",
+                parts: ["partId"],
             };
             const state = rootReducer({}, { type: null });
             const stateAfter = currentSongReducer(state.currentSong, actionCreators.setCurrentSong(song));
@@ -52,6 +54,7 @@ describe("currentSong store", () => {
             const song = {
                 id: "69",
                 name: "Medusas",
+                parts: ["partId"],
             };
             const state = rootReducer({}, { type: null });
             expect(getCurrentSong(state)).toBe(null);

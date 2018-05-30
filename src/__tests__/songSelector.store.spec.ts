@@ -48,13 +48,13 @@ describe("songSelector store", () => {
     describe("selectors", () => {
         it("should be able to get isOpen value", () => {
             const state = rootReducer({}, { type: null });
-            expect(isOpen(state)).toBe(false);
+            expect(isOpen(state)).toBe(true); // shown since there is no selected song
 
             const newState = rootReducer(state, actionCreators.open());
             expect(isOpen(newState)).toBe(true);
 
             const newState2 = rootReducer(newState, actionCreators.close());
-            expect(isOpen(newState2)).toBe(false);
+            expect(isOpen(newState2)).toBe(true); // shown since there is no selected song
         });
     });
 });

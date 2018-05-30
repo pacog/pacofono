@@ -6,6 +6,7 @@ import { getSong } from "store/selectors/songs";
 const TEST_SONG = {
     id: "blach",
     name: "bloch",
+    parts: ["partId"],
 };
 
 describe("Song store", () => {
@@ -46,6 +47,7 @@ describe("Song store", () => {
             const songToAdd = {
                 id: "newId",
                 name: "myNewSong",
+                parts: ["partId"],
             };
             const initialState = rootReducer({}, { type: null });
             const stateAfter = songsReducer(
@@ -60,6 +62,7 @@ describe("Song store", () => {
             const songToAdd = {
                 id: "newId",
                 name: "myNewSong",
+                parts: ["partId"],
             };
             const initialState = rootReducer({}, { type: null });
             const stateAfter = songsReducer(
@@ -78,10 +81,12 @@ describe("Song store", () => {
             const songToAdd = {
                 id: "newId",
                 name: "myNewSong",
+                parts: ["partId"],
             };
             const otherSongToAdd = {
                 id: "newId2",
                 name: "myNewSong2",
+                parts: ["partId"],
             };
             const initialState = rootReducer({}, { type: null });
             const stateAfter = songsReducer(
@@ -115,6 +120,7 @@ describe("Song store", () => {
                 const songToAdd = {
                     id: "id1",
                     name: "myNewSong",
+                    parts: ["partId"],
                 };
                 const state = rootReducer({}, { type: null });
                 expect(getSong(state, "id1")).toBe(undefined);

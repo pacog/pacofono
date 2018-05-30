@@ -24,6 +24,7 @@ describe("songEditor store", () => {
             const songToEdit = {
                 id: "111",
                 name: "myNewSong",
+                parts: ["partId"],
             };
             expect(actionCreators.startEditingNewSong(songToEdit))
                 .toEqual({
@@ -43,10 +44,12 @@ describe("songEditor store", () => {
             const originalSong = {
                 id: "111",
                 name: "myNewSong",
+                parts: ["partId"],
             };
             const songToEdit = {
                 id: "112",
                 name: "myNewCopiedSong",
+                parts: ["partId"],
             };
             expect(actionCreators.startEditingExistingSong(songToEdit, originalSong))
                 .toEqual({
@@ -99,6 +102,7 @@ describe("songEditor store", () => {
             const songToStartEditing = {
                 id: "id_edit",
                 name: "myNewSong",
+                parts: ["partId"],
             };
             const initialState = rootReducer({}, { type: null });
             const stateAfter = songEditorReducer(
@@ -122,10 +126,12 @@ describe("songEditor store", () => {
             const originalSong = {
                 id: "111",
                 name: "myNewCopiedSong",
+                parts: ["partId"],
             };
             const songToStartEditing = {
                 id: "112",
                 name: "myNewCopiedSong",
+                parts: ["partId"],
             };
             const initialState = rootReducer({}, { type: null });
             const stateAfter = songEditorReducer(
@@ -179,6 +185,7 @@ describe("songEditor store", () => {
             const songToStartEditing = {
                 id: "id_edit_2",
                 name: "myNewSong",
+                parts: ["partId"],
             };
             const state = rootReducer({}, { type: null });
             const newState = rootReducer(state, actionCreators.startEditingNewSong(songToStartEditing));
