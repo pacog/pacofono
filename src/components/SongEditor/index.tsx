@@ -30,7 +30,7 @@ function showContentPart(props: ISongEditorProps) {
         <div>
             { showHeaderPart(props) }
             <div className="">
-                <SongPartsSelector active={true}></SongPartsSelector>
+                <SongPartsSelector parts={props.parts}></SongPartsSelector>
             </div>
             { showFooterPart(props) }
         </div>

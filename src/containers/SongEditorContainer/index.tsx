@@ -9,6 +9,7 @@ import {
     isShowingConfirmRestoreDefaults,
     isShowingConfirmDeleteSong,
 } from "store/selectors/songEditor";
+import { getSongParts } from "store/selectors/parts";
 import { actionCreators as modalsActions } from "store/actions/modals";
 import { actionCreators as songsActions } from "store/actions/songs";
 import {
@@ -20,8 +21,10 @@ import {
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
 
 const mapStateToProps = (state: IRootState) => {
+    const song = getSong(state);
     return {
-        song: getSong(state),
+        song,
+        parts: getSongParts(state, song.id),
         isNewSong: isNewSong(state),
         isShowingConfirmRestoreDefaults: isShowingConfirmRestoreDefaults(state),
         isShowingConfirmDeleteSong: isShowingConfirmDeleteSong(state),

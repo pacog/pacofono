@@ -1,7 +1,8 @@
-import { ISong } from "types";
+import { ISong, ISongPart } from "types";
 
 export default interface ISongEditorProps {
     song: ISong;
+    parts: ISongPart[];
     isNewSong: boolean;
     isShowingConfirmRestoreDefaults: boolean;
     isShowingConfirmDeleteSong: boolean;

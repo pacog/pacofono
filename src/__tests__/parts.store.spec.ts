@@ -1,12 +1,18 @@
 import { ADD_PART, DELETE_PART, CHANGE_PART_NAME, actionCreators } from "store/actions/parts";
 import { rootReducer } from "store/reducers/root";
 import { partsReducer } from "store/reducers/parts";
-// import { getSong } from "store/selectors/songs";
+import { getSongParts } from "store/selectors/parts";
 
 const TEST_PART = {
     id: "blach",
     name: "bloch",
     chords: ["chordId"],
+};
+
+const exampleSong = {
+    name: "Song 12",
+    id: "song_12",
+    parts: ["other_part"],
 };
 
 describe("Parts store", () => {
@@ -42,11 +48,6 @@ describe("Parts store", () => {
     });
 
     describe("reducer", () => {
-        const exampleSong = {
-            name: "Song 12",
-            id: "song_12",
-            parts: ["other_part"],
-        };
 
         it("should have an initial value", () => {
             const state = rootReducer({}, { type: null });
@@ -119,22 +120,53 @@ describe("Parts store", () => {
             expect(stateAfter2.songs.song_12.parts).toEqual(["other_part"]);
         });
     });
-    //
-    // describe("selectors", () => {
-    //     describe("getSong selector", () => {
-    //         it("should work after starting to edit a song", () => {
-    //             const songToAdd = {
-    //                 id: "id1",
-    //                 name: "myNewSong",
-    //                 parts: ["partId"],
-    //             };
-    //             const state = rootReducer({}, { type: null });
-    //             expect(getSong(state, "id1")).toBe(undefined);
-    //
-    //             const newState = rootReducer(state, actionCreators.addSong(songToAdd));
-    //             expect(getSong(newState, "id1")).toEqual(songToAdd);
-    //         });
-    //     });
-    // });
+
+    describe("selectors", () => {
+        describe("getParts selector", () => {
+            it("should work with no parts", () => {
+                const initialState = rootReducer({
+                    songs: {
+                        song_12: {...exampleSong, parts: []},
+                    },
+                }, { type: null });
+                expect(getSongParts(initialState, "song_12")).toEqual([]);
+            });
+
+            it("should throw if song does not exist", () => {
+                const initialState = rootReducer({
+                    songs: {
+                        song_12: {...exampleSong},
+                    },
+                }, { type: null });
+                const willGetSongParts = () => {
+                    getSongParts(initialState, "song_does_not_existe_12");
+                };
+                expect(willGetSongParts).toThrow();
+            });
+
+            it("should work with parts", () => {
+                const partToGet = {
+                    id: "part_14",
+                    name: "myNewPart",
+                    chords: ["chord_27"],
+                };
+                const partToGet2 = {
+                    id: "part_1",
+                    name: "myNewPart1",
+                    chords: ["chord_22"],
+                };
+                const initialState = rootReducer({
+                    songs: {
+                        song_12: {...exampleSong, parts: ["part_1", "part_14"]},
+                    },
+                    parts: {
+                        part_14: partToGet,
+                        part_1: partToGet2,
+                    },
+                }, { type: null });
+                expect(getSongParts(initialState, "song_12")).toEqual([partToGet2, partToGet]);
+            });
+        });
+    });
 
 });
