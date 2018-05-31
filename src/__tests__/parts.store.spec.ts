@@ -122,7 +122,7 @@ describe("Parts store", () => {
     });
 
     describe("selectors", () => {
-        describe("getParts selector", () => {
+        describe("getSongParts selector", () => {
             it("should work with no parts", () => {
                 const initialState = rootReducer({
                     songs: {

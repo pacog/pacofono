@@ -8,10 +8,17 @@ import { actionCreators as modalsActions } from "store/actions/modals";
 import { actionCreators as songEditorActions } from "store/actions/songEditor";
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
 import { duplicateSong } from "store/actions/songs";
+import { getSongParts } from "store/selectors/parts";
 
 const mapStateToProps = (state: IRootState) => {
+    const song = getCurrentSong(state);
+    let songParts = null;
+    if (song) {
+        songParts = getSongParts(state, song.id);
+    }
     return {
-        song: getCurrentSong(state),
+        song,
+        songParts,
     };
 };
 

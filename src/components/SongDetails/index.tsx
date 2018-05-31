@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ISong } from "types";
+import { ISong, ISongPart } from "types";
 
 import PButton from "components/PButton";
 import PIconButton from "components/PIconButton";
@@ -11,6 +11,7 @@ import "./style.scss";
 
 interface ISongDetailsProps {
     song: ISong;
+    songParts: ISongPart[];
     onEditSong: (song: ISong) => void;
     onShowSongsSelector: () => void;
 }
@@ -20,15 +21,26 @@ const SongDetails: React.SFC<ISongDetailsProps> = (props: ISongDetailsProps) => 
         <div className="song-details-title">
             { props.song.name }
         </div>
-        <div className="mv-l">Parts (TODO)</div>
-        <PButton
-            primary={true}
-            fullWidth={true}
-            onClick={
-                (event) => {
-                    props.onEditSong(props.song);
-                }
-            }>Edit song</PButton>
+        <ul>
+            {props.songParts.map( (part, index) => (
+                <li key={part.id}
+                    className="song-details-part">
+
+                    <span className="song-details-part-number">{index + 1}</span>
+                    <span>{part.name}</span>
+                </li>
+            ))}
+        </ul>
+        <div className="song-details-edit-button-container">
+            <PButton
+                primary={true}
+                fullWidth={true}
+                onClick={
+                    (event) => {
+                        props.onEditSong(props.song);
+                    }
+                }>Edit song</PButton>
+        </div>
         <div className="song-details-show-all-songs">
             <PIconButton
                 onClick={props.onShowSongsSelector}>
