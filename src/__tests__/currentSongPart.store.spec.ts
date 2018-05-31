@@ -49,6 +49,135 @@ describe("currentSongPart store", () => {
                     id: null,
                 });
         });
+
+        it("should change part when changing song if there is no current part", () => {
+            const song = {
+                id: "song_111",
+                name: "My way",
+                parts: ["part_629"],
+            };
+            const part = {
+                id: "part_629",
+                name: "Chorus_13",
+                chords: ["chord_55"],
+            };
+            const state = rootReducer({
+                songs: {
+                    [song.id]: song,
+                },
+                parts: {
+                    [part.id]: part,
+                },
+            }, { type: null });
+            expect(state.currentSongPart)
+                .toEqual({
+                    id: null,
+                });
+            const stateAfter = rootReducer(state, currentSongActions.setCurrentSong(song));
+            expect(stateAfter.currentSongPart)
+                .toEqual({
+                    id: "part_629",
+                });
+        });
+
+        it("should change part when changing song if the current part is not in song", () => {
+            const song = {
+                id: "song_111",
+                name: "My way",
+                parts: ["part_629"],
+            };
+            const part = {
+                id: "part_629",
+                name: "Chorus_13",
+                chords: ["chord_55"],
+            };
+            const state = rootReducer({
+                songs: {
+                    [song.id]: song,
+                },
+                parts: {
+                    [part.id]: part,
+                },
+                currentSongPart: {
+                    id: "other_part",
+                },
+            }, { type: null });
+            const stateAfter = rootReducer(state, currentSongActions.setCurrentSong(song));
+            expect(stateAfter.currentSongPart)
+                .toEqual({
+                    id: "part_629",
+                });
+        });
+
+        it("should not change part when changing song if there current part is in song", () => {
+            const song = {
+                id: "song_111",
+                name: "My way",
+                parts: ["part_629", "part_6asdasd"],
+            };
+            const part = {
+                id: "part_629",
+                name: "Chorus_13",
+                chords: ["chord_55"],
+            };
+            const part2 = {
+                id: "part_6asdasd",
+                name: "Chorus_134",
+                chords: ["chord_55"],
+            };
+            const state = rootReducer({
+                songs: {
+                    [song.id]: song,
+                },
+                parts: {
+                    [part.id]: part,
+                    [part2.id]: part2,
+                },
+                currentSongPart: {
+                    id: "part_6asdasd",
+                },
+            }, { type: null });
+            const stateAfter = rootReducer(state, currentSongActions.setCurrentSong(song));
+            expect(stateAfter.currentSongPart)
+                .toEqual({
+                    id: "part_6asdasd",
+                });
+        });
+
+        it("should be set to null if we set no current song", () => {
+            const song = {
+                id: "song_111",
+                name: "My way",
+                parts: ["part_629"],
+            };
+            const part = {
+                id: "part_629",
+                name: "Chorus_13",
+                chords: ["chord_55"],
+            };
+            const part2 = {
+                id: "part_6asdasd",
+                name: "Chorus_134",
+                chords: ["chord_55"],
+            };
+            const state = rootReducer({
+                songs: {
+                    [song.id]: song,
+                },
+                parts: {
+                    [part.id]: part,
+                    [part2.id]: part2,
+                },
+                currentSongPart: {
+                    id: "part_6asdasd",
+                },
+            }, { type: null });
+            const stateAfter = rootReducer(state, currentSongActions.setCurrentSong(null));
+            expect(stateAfter.currentSongPart)
+                .toEqual({
+                    id: null,
+                });
+        });
     });
 
     describe("selectors", () => {
