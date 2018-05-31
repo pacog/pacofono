@@ -7,6 +7,7 @@ export default interface ISongEditorProps {
     isShowingConfirmRestoreDefaults: boolean;
     isShowingConfirmDeleteSong: boolean;
     onSaveSong: () => void;
+    onAddPart: (song: ISong) => void;
     onClose: (song: ISong) => void;
     onSongNameChanged: (song: ISong, newValue: string) => void;
     onRestoreDefaults: () => void;

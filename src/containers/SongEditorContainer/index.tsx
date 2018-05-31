@@ -12,6 +12,7 @@ import {
 import { getSongParts } from "store/selectors/parts";
 import { actionCreators as modalsActions } from "store/actions/modals";
 import { actionCreators as songsActions } from "store/actions/songs";
+import { actionCreators as partsActions } from "store/actions/parts";
 import {
     actionCreators as songEditorActions,
     saveSongBeingEdited,
@@ -19,6 +20,7 @@ import {
     deleteSongBeingEdited,
 } from "store/actions/songEditor";
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
+import { getDefaultNewSongPart } from "constants/defaultNewSongPart";
 
 const mapStateToProps = (state: IRootState) => {
     const song = getSong(state);
@@ -57,6 +59,9 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
             // TODO ugly fix for dispatch thunk actions type error (<any>)
             dispatch<any>(restoreDefaults());
             dispatch(songEditorActions.showConfirmRestoreDefaults(false));
+        },
+        onAddPart: (toSong: ISong) => {
+            dispatch(partsActions.addPart(getDefaultNewSongPart(), toSong.id));
         },
         onDeleteSong: () => {
             dispatch(songEditorActions.showConfirmDeleteSong(true));

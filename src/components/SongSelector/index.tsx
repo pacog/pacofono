@@ -16,7 +16,7 @@ const SongSelector: React.SFC<ISongSelectorProps> = (props: ISongSelectorProps) 
         {
             (props.songs.length > 0) &&
             <div>
-                <div className="song-selector-title">
+                <div className="song-selector-title selector-title">
                     Select a song
                 </div>
                 <ul className="song-selector-song-list">

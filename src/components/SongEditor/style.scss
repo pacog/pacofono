@@ -1,4 +1,24 @@
+@import "src/root-style/common";
+
 .song-editor {
-    min-width: 400px;
+    min-width: 820px;
     max-width: 90vw;
 }
+
+.song-editor-content {
+    display: flex;
+    align-items: flex-start;
+    margin-top: $g-m;
+}
+
+    .song-editor-content-part-list {
+        width: 170px;
+        max-width: 170px;
+    }
+
+    .song-editor-content-part-editor {
+        margin-left: $g-m;
+        background: $dark-transparent;
+        border-radius: $g-xs;
+        flex: 1;
+    }

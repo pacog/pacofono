@@ -5,3 +5,11 @@
 .grow-full-width {
     flex: 1;
 }
+
+.selector-title {
+    background-color: $blue-1;
+    line-height: $g-ml;
+    font-size: 12px;
+    padding: 0 $g-sm;
+    color: white;
+}

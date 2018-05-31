@@ -29,8 +29,16 @@ function showContentPart(props: ISongEditorProps) {
     return (
         <div>
             { showHeaderPart(props) }
-            <div className="">
-                <SongPartsSelector parts={props.parts}></SongPartsSelector>
+            <div className="song-editor-content">
+                <div className="song-editor-content-part-list">
+                    <SongPartsSelector
+                        parts={props.parts}
+                        onAddPart={() => { props.onAddPart(props.song); }}
+                        ></SongPartsSelector>
+                </div>
+                <div className="song-editor-content-part-editor">
+                    This is the song editor
+                </div>
             </div>
             { showFooterPart(props) }
         </div>
