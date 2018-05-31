@@ -11,8 +11,8 @@ interface ISongPartsSelectorProps {
 
 const SongPartsSelector: React.SFC<ISongPartsSelectorProps> = (props: ISongPartsSelectorProps) => (
     <React.Fragment>
-        <div className="selector-title">Song parts</div>
-        <ul>
+        <div className="selector-title song-parts-selector-title">Song parts</div>
+        <ul className="mb-m">
             {props.parts.map( (part) => (
                 <li key={part.id}
                     className="song-parts-selector-part ">
