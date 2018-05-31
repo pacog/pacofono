@@ -30,6 +30,15 @@
         &:hover {
             background-color: $dark-transparent;
         }
+
+        &.song-details-part-selected {
+            background-color: $purple-3;
+            cursor: default;
+
+            .song-details-part-number {
+                background-color: $blue-3;
+            }
+        }
     }
 
         .song-details-part-number {

@@ -12,8 +12,10 @@ import "./style.scss";
 interface ISongDetailsProps {
     song: ISong;
     songParts: ISongPart[];
+    selectedPart: ISongPart;
     onEditSong: (song: ISong) => void;
     onShowSongsSelector: () => void;
+    onPartSelected: (part: ISongPart) => void;
 }
 
 const SongDetails: React.SFC<ISongDetailsProps> = (props: ISongDetailsProps) => (
@@ -24,7 +26,13 @@ const SongDetails: React.SFC<ISongDetailsProps> = (props: ISongDetailsProps) => 
         <ul>
             {props.songParts.map( (part, index) => (
                 <li key={part.id}
-                    className="song-details-part">
+                    className={
+                        "song-details-part " +
+                        ((props.selectedPart === part) ? "song-details-part-selected" : "")
+                    }
+                    onClick={
+                        () => { props.onPartSelected(part); }
+                    }>
 
                     <span className="song-details-part-number">{index + 1}</span>
                     <span>{part.name}</span>
