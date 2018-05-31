@@ -1,15 +1,15 @@
 import { RootAction } from "store/actions";
 import { SET_CURRENT_SONG } from "store/actions/currentSong";
 
-export interface ICurrentSongsState {
+export interface ICurrentSongState {
     readonly id: string;
 }
 
-const initialState: ICurrentSongsState = {
+const initialState: ICurrentSongState = {
     id: null,
 };
 
-export const currentSongReducer = (state: ICurrentSongsState = initialState, action: RootAction) => {
+export const currentSongReducer = (state: ICurrentSongState = initialState, action: RootAction) => {
     switch (action.type) {
         case SET_CURRENT_SONG:
             if (action.song === null) {

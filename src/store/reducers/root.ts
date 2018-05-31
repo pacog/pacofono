@@ -5,7 +5,8 @@ import { ISongsState, songsReducer } from "./songs";
 import { IPartsState, partsReducer } from "./parts";
 import { IModalsState, modalsReducer } from "./modals";
 import { ISongEditorState, songEditorReducer } from "./songEditor";
-import { ICurrentSongsState, currentSongReducer } from "./currentSong";
+import { ICurrentSongState, currentSongReducer } from "./currentSong";
+import { ICurrentSongPartState, currentSongPartReducer } from "./currentSongPart";
 import { ISongSelectorState, songSelectorReducer } from "./songSelector";
 
 export interface IRootState {
@@ -14,7 +15,8 @@ export interface IRootState {
     readonly musicMode?: IMusicModeState;
     readonly modals?: IModalsState;
     readonly songEditor?: ISongEditorState;
-    readonly currentSong?: ICurrentSongsState;
+    readonly currentSong?: ICurrentSongState;
+    readonly currentSongPart?: ICurrentSongPartState;
     readonly songSelector?: ISongSelectorState;
 }
 
@@ -25,5 +27,6 @@ export const rootReducer = combineReducers<IRootState>({
     modals: modalsReducer,
     songEditor: songEditorReducer,
     currentSong: currentSongReducer,
+    currentSongPart: currentSongPartReducer,
     songSelector: songSelectorReducer,
 });

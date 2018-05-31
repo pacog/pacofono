@@ -3,7 +3,8 @@ import { ISongsActions } from "./songs";
 import { IPartsActions } from "./parts";
 import { IModalsActions } from "./modals";
 import { ISongEditorActions } from "./songEditor";
-import { ICurrentSongsActions } from "./currentSong";
+import { ICurrentSongActions } from "./currentSong";
+import { ICurrentSongPartActions } from "./currentSongPart";
 import { ISongSelectorActions } from "./songSelector";
 
 export type RootAction =
@@ -12,5 +13,6 @@ export type RootAction =
     | IPartsActions[keyof IPartsActions]
     | IModalsActions[keyof IModalsActions]
     | ISongEditorActions[keyof ISongEditorActions]
-    | ICurrentSongsActions[keyof ICurrentSongsActions]
+    | ICurrentSongActions[keyof ICurrentSongActions]
+    | ICurrentSongPartActions[keyof ICurrentSongPartActions]
     | ISongSelectorActions[keyof ISongSelectorActions];
