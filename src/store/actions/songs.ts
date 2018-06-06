@@ -41,8 +41,8 @@ export const actionCreators = {
     }),
 };
 
-export const duplicateSong = (song: ISong): ThunkAction<ISong, IRootState, {}> => {
-    return (dispatch: Dispatch<RootAction, IRootState>): ISong => {
+export const duplicateSong = (song: ISong): ThunkAction<ISong, IRootState, {}, RootAction> => {
+    return (dispatch: Dispatch<RootAction>): ISong => {
         const newSong = {...song, id: uuid()};
         dispatch(actionCreators.addSong(newSong));
         return newSong;

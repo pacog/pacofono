@@ -61,8 +61,8 @@ export const actionCreators = {
     }),
 };
 
-export const saveSongBeingEdited = (): ThunkAction<ISong, IRootState, {}> => {
-    return (dispatch: Dispatch<RootAction, IRootState>, getState: () => IRootState): ISong => {
+export const saveSongBeingEdited = (): ThunkAction<ISong, IRootState, {}, RootAction> => {
+    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): ISong => {
         const song = getSong(getState());
         if (isEditingSong(getState())) {
             const oldSong = getOriginalSong(getState());
@@ -73,20 +73,21 @@ export const saveSongBeingEdited = (): ThunkAction<ISong, IRootState, {}> => {
     };
 };
 
-export const restoreDefaults = (): ThunkAction<void, IRootState, {}> => {
-    return (dispatch: Dispatch<RootAction, IRootState>, getState: () => IRootState): void => {
+export const restoreDefaults = (): ThunkAction<void, IRootState, {}, RootAction> => {
+    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {
         if (isEditingSong(getState())) {
             const song = getSong(getState());
             dispatch(songsActions.deleteSong(song));
             const originalSong = getOriginalSong(getState());
-            const duplicatedSong = dispatch(duplicateSong(originalSong));
+            // TODO: ugly hack because of newer versions of redux-thunk
+            const duplicatedSong = dispatch(duplicateSong(originalSong) as any);
             dispatch(actionCreators.startEditingExistingSong(duplicatedSong, originalSong));
         }
     };
 };
 
-export const deleteSongBeingEdited = (): ThunkAction<void, IRootState, {}> => {
-    return (dispatch: Dispatch<RootAction, IRootState>, getState: () => IRootState): void => {
+export const deleteSongBeingEdited = (): ThunkAction<void, IRootState, {}, RootAction> => {
+    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {
         if (isEditingSong(getState())) {
             const song = getSong(getState());
             dispatch(songsActions.deleteSong(song));
