@@ -1,9 +1,13 @@
+import { Promise } from "es6-promise";
 import { ISong } from "types";
 import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { IRootState } from "store/reducers/root";
 import { RootAction } from "store/actions";
 import * as uuid from "uuid/v1";
+import { cascadeDeletePart, duplicatePart } from "./parts";
+import { getPartById } from "store/selectors/parts";
+import { getSong } from "store/selectors/songs";
 
 export const ADD_SONG = "ADD_SONG";
 export const DELETE_SONG = "DELETE_SONG";
@@ -41,10 +45,30 @@ export const actionCreators = {
     }),
 };
 
-export const duplicateSong = (song: ISong): ThunkAction<ISong, IRootState, {}, RootAction> => {
-    return (dispatch: Dispatch<RootAction>): ISong => {
-        const newSong = {...song, id: uuid()};
+export const duplicateSong = (song: ISong): ThunkAction<Promise<ISong>, IRootState, {}, RootAction> => {
+    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): Promise<ISong> => {
+        const newSongId = uuid();
+        const newSong = {...song, id: newSongId, parts: ([] as string[])};
         dispatch(actionCreators.addSong(newSong));
-        return newSong;
+        const addPartsPromises = song.parts
+            .map((partId) => getPartById(getState(), partId))
+            .map((part) => duplicatePart(part, newSongId));
+
+        return Promise.all(addPartsPromises)
+            .then(() => getSong(getState(), newSongId));
+    };
+};
+
+export const cascadeDeleteSong = (song: ISong): ThunkAction<Promise<ISong>, IRootState, {}, RootAction> => {
+    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): Promise<ISong> => {
+        const deleteAllPartsPromises = song.parts
+            .map((partId) => getPartById(getState(), partId))
+            .map((part) => cascadeDeletePart(part, song.id));
+
+        return Promise.all(deleteAllPartsPromises)
+            .then(() => {
+                dispatch(actionCreators.deleteSong(song));
+                return song;
+            });
     };
 };

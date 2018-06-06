@@ -5,7 +5,7 @@ import { RootAction } from "store/actions";
 import { ISong } from "types";
 import { getSong, getOriginalSong, isEditingSong } from "store/selectors/songEditor";
 import { getSavedSongs } from "store/selectors/songs";
-import { actionCreators as songsActions, duplicateSong } from "store/actions/songs";
+import { duplicateSong, cascadeDeleteSong } from "store/actions/songs";
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
 
 export const START_EDITING_NEW_SONG = "START_EDITING_NEW_SONG";
@@ -66,7 +66,7 @@ export const saveSongBeingEdited = (): ThunkAction<ISong, IRootState, {}, RootAc
         const song = getSong(getState());
         if (isEditingSong(getState())) {
             const oldSong = getOriginalSong(getState());
-            dispatch(songsActions.deleteSong(oldSong));
+            dispatch(cascadeDeleteSong(oldSong) as any);
         }
         dispatch(actionCreators.stopEditing());
         return song;
@@ -77,11 +77,12 @@ export const restoreDefaults = (): ThunkAction<void, IRootState, {}, RootAction>
     return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {
         if (isEditingSong(getState())) {
             const song = getSong(getState());
-            dispatch(songsActions.deleteSong(song));
+            dispatch(cascadeDeleteSong(song) as any);
             const originalSong = getOriginalSong(getState());
-            // TODO: ugly hack because of newer versions of redux-thunk
-            const duplicatedSong = dispatch(duplicateSong(originalSong) as any);
-            dispatch(actionCreators.startEditingExistingSong(duplicatedSong, originalSong));
+            dispatch(duplicateSong(originalSong) as any)
+                .then((duplicatedSong: ISong) => {
+                    dispatch(actionCreators.startEditingExistingSong(duplicatedSong, originalSong));
+                });
         }
     };
 };
@@ -90,9 +91,9 @@ export const deleteSongBeingEdited = (): ThunkAction<void, IRootState, {}, RootA
     return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {
         if (isEditingSong(getState())) {
             const song = getSong(getState());
-            dispatch(songsActions.deleteSong(song));
+            dispatch(cascadeDeleteSong(song) as any);
             const originalSong = getOriginalSong(getState());
-            dispatch(songsActions.deleteSong(originalSong));
+            dispatch(cascadeDeleteSong(originalSong) as any);
             const allSongs = getSavedSongs(getState());
             if (allSongs.length) {
                 dispatch(currentSongActions.setCurrentSong(allSongs[0]));
