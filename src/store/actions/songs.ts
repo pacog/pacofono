@@ -4,7 +4,7 @@ import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { IRootState } from "store/reducers/root";
 import { RootAction } from "store/actions";
-import * as uuid from "uuid/v1";
+import { v1 as uuid } from "uuid";
 import { cascadeDeletePart, duplicatePart } from "./parts";
 import { getPartById } from "store/selectors/parts";
 import { getSong } from "store/selectors/songs";
@@ -52,10 +52,12 @@ export const duplicateSong = (song: ISong): ThunkAction<Promise<ISong>, IRootSta
         dispatch(actionCreators.addSong(newSong));
         const addPartsPromises = song.parts
             .map((partId) => getPartById(getState(), partId))
-            .map((part) => duplicatePart(part, newSongId));
+            .map((part) => dispatch(duplicatePart(part, newSongId) as any));
 
         return Promise.all(addPartsPromises)
-            .then(() => getSong(getState(), newSongId));
+            .then((result) => {
+                return getSong(getState(), newSongId);
+            });
     };
 };
 
@@ -63,7 +65,7 @@ export const cascadeDeleteSong = (song: ISong): ThunkAction<Promise<ISong>, IRoo
     return (dispatch: Dispatch<RootAction>, getState: () => IRootState): Promise<ISong> => {
         const deleteAllPartsPromises = song.parts
             .map((partId) => getPartById(getState(), partId))
-            .map((part) => cascadeDeletePart(part, song.id));
+            .map((part) => dispatch(cascadeDeletePart(part, song.id) as any));
 
         return Promise.all(deleteAllPartsPromises)
             .then(() => {
