@@ -9,7 +9,7 @@
         "jsx": "react",
         "skipLibCheck": true,
         "noUnusedLocals": true,
-        "lib": ["ES2015"]
+        "lib": ["ES2015", "DOM", "ES5", "ScriptHost"]
     },
     "include": [
         "./src/**/*"
