@@ -26,7 +26,7 @@ const mapStateToProps = (state: IRootState) => {
     const song = getSong(state);
     return {
         song,
-        parts: getSongParts(state, song.id),
+        parts: getSongParts(state, song ? song.id : null),
         isNewSong: isNewSong(state),
         isShowingConfirmRestoreDefaults: isShowingConfirmRestoreDefaults(state),
         isShowingConfirmDeleteSong: isShowingConfirmDeleteSong(state),

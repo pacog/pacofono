@@ -9,7 +9,9 @@ export const getPartById = (state: IRootState, partId: string): ISongPart => {
 export const getSongParts = (state: IRootState, songId: string): ISongPart[] => {
     const song = getSong(state, songId);
     if (!song) {
-        throw new Error("Trying to get parts of a non existing song");
+        // throw new Error("Trying to get parts of a non existing song");
+        console.warn("Trying to get parts of a non existing song");
+        return [];
     }
     return song.parts.map((partId) => getPartById(state, partId));
 };

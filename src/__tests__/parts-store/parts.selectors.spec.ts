@@ -18,18 +18,6 @@ describe("Parts store selectors", () => {
             expect(getSongParts(initialState, "song_12")).toEqual([]);
         });
 
-        it("should throw if song does not exist", () => {
-            const initialState = rootReducer({
-                songs: {
-                    song_12: {...exampleSong},
-                },
-            }, { type: null });
-            const willGetSongParts = () => {
-                getSongParts(initialState, "song_does_not_existe_12");
-            };
-            expect(willGetSongParts).toThrow();
-        });
-
         it("should work with parts", () => {
             const partToGet = {
                 id: "part_14",
