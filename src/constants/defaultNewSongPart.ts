@@ -8,3 +8,7 @@ export const getDefaultNewSongPart: (() => ISongPart) = () => {
         chords: [],
     };
 };
+
+export const getNameForPartWithoutName: (() => string) = () => {
+    return "Unnamed Part";
+};

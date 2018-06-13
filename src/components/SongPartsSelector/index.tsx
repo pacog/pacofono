@@ -1,6 +1,7 @@
 import * as React from "react";
 import { ISongPart } from "types";
 import PButton from "components/PButton";
+import { getNameForPartWithoutName } from "constants/defaultNewSongPart";
 
 import "./style.scss";
 
@@ -22,7 +23,7 @@ const SongPartsSelector: React.SFC<ISongPartsSelectorProps> = (props: ISongParts
                         ((props.selectedPart === part) ? "song-parts-selector-part-selected" : "")
                     }
                     onClick={() => { props.onSelectPart(part); }}>
-                    {part.name}
+                    { part.name || getNameForPartWithoutName() }
                 </li>
             ))}
         </ul>

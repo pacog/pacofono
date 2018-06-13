@@ -5,6 +5,7 @@ import showConfirmRestoreDefaultsPart from "./confirmRestoreDefaults";
 import showConfirmDeleteSongPart from "./confirmDeleteSong";
 import PButton from "components/PButton";
 import SongPartsSelector from "components/SongPartsSelector";
+import SongPartEditorContainer from "containers/SongPartEditorContainer";
 
 import "./style.scss";
 
@@ -39,7 +40,7 @@ function showContentPart(props: ISongEditorProps) {
                         ></SongPartsSelector>
                 </div>
                 <div className="song-editor-content-part-editor">
-                    This is the song editor
+                    <SongPartEditorContainer />
                 </div>
             </div>
             { showFooterPart(props) }

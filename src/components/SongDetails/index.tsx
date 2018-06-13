@@ -6,6 +6,7 @@ import PButton from "components/PButton";
 import PIconButton from "components/PIconButton";
 import Icon from "components/Icon";
 import menuIcon from "icons/menu.svg";
+import { getNameForPartWithoutName } from "constants/defaultNewSongPart";
 
 import "./style.scss";
 
@@ -35,7 +36,7 @@ const SongDetails: React.SFC<ISongDetailsProps> = (props: ISongDetailsProps) => 
                     }>
 
                     <span className="song-details-part-number">{index + 1}</span>
-                    <span>{part.name}</span>
+                    <span>{ part.name || getNameForPartWithoutName() }</span>
                 </li>
             ))}
         </ul>
