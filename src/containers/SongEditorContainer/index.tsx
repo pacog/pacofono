@@ -12,7 +12,7 @@ import {
 } from "store/selectors/songEditor";
 import { getSongParts } from "store/selectors/parts";
 import { actionCreators as modalsActions } from "store/actions/modals";
-import { actionCreators as songsActions } from "store/actions/songs";
+import { actionCreators as songsActions, cascadeDeleteSong } from "store/actions/songs";
 import { actionCreators as partsActions } from "store/actions/parts";
 import {
     actionCreators as songEditorActions,
@@ -45,7 +45,7 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
         },
         onClose: (song: ISong) => {
             dispatch(modalsActions.closeSongEditor());
-            dispatch(songsActions.deleteSong(song));
+            dispatch(cascadeDeleteSong(song) as any);
             dispatch(songEditorActions.stopEditing());
         },
         onSongNameChanged: (song: ISong, newName: string) => {
