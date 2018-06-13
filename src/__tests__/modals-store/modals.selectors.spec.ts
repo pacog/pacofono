@@ -8,7 +8,7 @@ describe("modals store selectors", () => {
     const newSong = {
         id: "id1",
         name: "Wind cries Marvin",
-        parts: ([] as string[]),
+        parts: (["Chorus"]),
     };
 
     it("should be able to get info about song editor modal", () => {

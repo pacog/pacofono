@@ -6,6 +6,7 @@ import { START_EDITING_NEW_SONG,
     START_EDITING_EXISTING_SONG,
     SHOW_CONFIRM_RESTORE_DEFAULTS,
     SHOW_CONFIRM_DELETE_SONG,
+    SELECT_SONG_PART_TO_EDIT,
 } from "store/actions/songEditor";
 
 export interface ISongEditorState {
@@ -14,6 +15,7 @@ export interface ISongEditorState {
     readonly originalSongId: string;
     readonly isShowingConfirmRestoreDefaults: boolean;
     readonly isShowingConfirmDeleteSong: boolean;
+    readonly selectedPartId: string;
 }
 
 export const songEditorReducer = combineReducers<ISongEditorState>({
@@ -22,6 +24,7 @@ export const songEditorReducer = combineReducers<ISongEditorState>({
     originalSongId,
     isShowingConfirmRestoreDefaults,
     isShowingConfirmDeleteSong,
+    selectedPartId,
 });
 
 
@@ -77,6 +80,21 @@ function isShowingConfirmDeleteSong(state: boolean = false, action: RootAction) 
     switch (action.type) {
         case SHOW_CONFIRM_DELETE_SONG:
             return action.shouldShow;
+        default:
+            return state;
+    }
+}
+
+function selectedPartId(state: string = null, action: RootAction) {
+    switch (action.type) {
+        case STOP_EDITING:
+            return null;
+        case START_EDITING_NEW_SONG:
+            return action.song.parts[0];
+        case START_EDITING_EXISTING_SONG:
+            return action.song.parts[0];
+        case SELECT_SONG_PART_TO_EDIT:
+            return action.partId;
         default:
             return state;
     }

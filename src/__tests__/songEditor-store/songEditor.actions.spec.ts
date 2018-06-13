@@ -4,6 +4,7 @@ import {
     START_EDITING_EXISTING_SONG,
     SHOW_CONFIRM_RESTORE_DEFAULTS,
     SHOW_CONFIRM_DELETE_SONG,
+    SELECT_SONG_PART_TO_EDIT,
     actionCreators,
 } from "store/actions/songEditor";
 
@@ -71,6 +72,19 @@ describe("songEditor store actions", () => {
             .toEqual({
                 type: SHOW_CONFIRM_DELETE_SONG,
                 shouldShow: false,
+            });
+    });
+
+    it("should have a select song part to edit action", () => {
+        expect(actionCreators.selectSongPartToEdit("part_id_12"))
+            .toEqual({
+                type: SELECT_SONG_PART_TO_EDIT,
+                partId: "part_id_12",
+            });
+        expect(actionCreators.selectSongPartToEdit(null))
+            .toEqual({
+                type: SELECT_SONG_PART_TO_EDIT,
+                partId: null,
             });
     });
 });

@@ -1,5 +1,6 @@
 import { actionCreators } from "store/actions/songEditor";
 import { actionCreators as songsActionCreators } from "store/actions/songs";
+import { actionCreators as partsActionCreators } from "store/actions/parts";
 import { rootReducer } from "store/reducers/root";
 import { getSong,
     getOriginalSong,
@@ -7,6 +8,8 @@ import { getSong,
     isEditingSong,
     isShowingConfirmRestoreDefaults,
     isShowingConfirmDeleteSong,
+    getPartBeingEdited,
+    isPartBeingEdited,
 } from "store/selectors/songEditor";
 
 describe("songEditor store selectors", () => {
@@ -53,6 +56,46 @@ describe("songEditor store selectors", () => {
             actionCreators.showConfirmDeleteSong(false),
         );
         expect(isShowingConfirmDeleteSong(newState2)).toBe(false);
+    });
+
+    describe("edited part selectors", () => {
+        it("should resturn correctly when editing", () => {
+            const songToStartEditing = {
+                id: "id_edit_2",
+                name: "myNewSong",
+                parts: ["partId", "partId2"],
+            };
+            const part1 = {
+                id: "partId",
+                name: "Chorus",
+                chords: ["chord_1"],
+            };
+            const part2 = {
+                id: "partId2",
+                name: "Chorus 2",
+                chords: ["chord_2"],
+            };
+            const state = rootReducer({}, { type: null });
+            const newState = rootReducer(state, actionCreators.startEditingNewSong(songToStartEditing));
+            const newState2 = rootReducer(newState, songsActionCreators.addSong(songToStartEditing));
+            const newState3 = rootReducer(newState2, partsActionCreators.addPart(part1, songToStartEditing.id));
+            const newState4 = rootReducer(newState3, partsActionCreators.addPart(part2, songToStartEditing.id));
+
+            expect(getPartBeingEdited(newState4)).toEqual(part1);
+            expect(isPartBeingEdited(newState4, part1)).toBe(true);
+            expect(isPartBeingEdited(newState4, part2)).toBe(false);
+
+            const newState5 = rootReducer(newState4, actionCreators.selectSongPartToEdit(part2.id));
+            expect(getPartBeingEdited(newState5)).toEqual(part2);
+            expect(isPartBeingEdited(newState5, part1)).toBe(false);
+            expect(isPartBeingEdited(newState5, part2)).toBe(true);
+
+            const errorSelector = () => {
+                return isPartBeingEdited(newState5, null);
+            };
+
+            expect(errorSelector).toThrow();
+        });
     });
 
 });

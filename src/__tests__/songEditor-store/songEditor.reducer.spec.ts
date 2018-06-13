@@ -11,6 +11,7 @@ describe("songEditor store reducer", () => {
             originalSongId: null,
             isShowingConfirmRestoreDefaults: false,
             isShowingConfirmDeleteSong: false,
+            selectedPartId: null,
         });
     });
 
@@ -27,6 +28,7 @@ describe("songEditor store reducer", () => {
         );
         expect(stateAfter.isNewSong).toBe(true);
         expect(stateAfter.songId).toEqual(songToStartEditing.id);
+        expect(stateAfter.selectedPartId).toEqual("partId");
         expect(stateAfter.originalSongId).toEqual(null);
 
         const stateAfter2 = songEditorReducer(
@@ -35,6 +37,7 @@ describe("songEditor store reducer", () => {
         );
         expect(stateAfter2.isNewSong).toBe(false);
         expect(stateAfter2.songId).toEqual(null);
+        expect(stateAfter2.selectedPartId).toEqual(null);
         expect(stateAfter2.originalSongId).toEqual(null);
     });
 
@@ -47,7 +50,7 @@ describe("songEditor store reducer", () => {
         const songToStartEditing = {
             id: "112",
             name: "myNewCopiedSong",
-            parts: ["partId"],
+            parts: ["partIdCopy"],
         };
         const initialState = rootReducer({}, { type: null });
         const stateAfter = songEditorReducer(
@@ -56,6 +59,7 @@ describe("songEditor store reducer", () => {
         );
         expect(stateAfter.isNewSong).toBe(false);
         expect(stateAfter.songId).toEqual(songToStartEditing.id);
+        expect(stateAfter.selectedPartId).toEqual("partIdCopy");
         expect(stateAfter.originalSongId).toEqual("111");
 
         const stateAfter2 = songEditorReducer(
@@ -64,6 +68,7 @@ describe("songEditor store reducer", () => {
         );
         expect(stateAfter2.isNewSong).toBe(false);
         expect(stateAfter2.songId).toEqual(null);
+        expect(stateAfter2.selectedPartId).toEqual(null);
         expect(stateAfter2.originalSongId).toEqual(null);
     });
 
@@ -93,5 +98,36 @@ describe("songEditor store reducer", () => {
             actionCreators.showConfirmDeleteSong(false),
         );
         expect(stateAfter2.isShowingConfirmDeleteSong).toBe(false);
+    });
+
+    it("should be able to select a different part to edit", () => {
+        const originalSong = {
+            id: "111",
+            name: "myNewCopiedSong",
+            parts: ["partId", "partId2"],
+        };
+        const songToStartEditing = {
+            id: "112",
+            name: "myNewCopiedSong",
+            parts: ["partIdCopy", "partIdCopy2"],
+        };
+        const initialState = rootReducer({}, { type: null });
+        const stateAfter = songEditorReducer(
+            initialState.songEditor,
+            actionCreators.startEditingExistingSong(songToStartEditing, originalSong),
+        );
+        expect(stateAfter.selectedPartId).toEqual("partIdCopy");
+
+        const stateAfter2 = songEditorReducer(
+            stateAfter,
+            actionCreators.selectSongPartToEdit("partIdCopy2"),
+        );
+        expect(stateAfter2.selectedPartId).toEqual("partIdCopy2");
+
+        const stateAfter3 = songEditorReducer(
+            stateAfter2,
+            actionCreators.selectSongPartToEdit("partIdCopy"),
+        );
+        expect(stateAfter3.selectedPartId).toEqual("partIdCopy");
     });
 });

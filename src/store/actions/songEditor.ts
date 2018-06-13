@@ -13,6 +13,7 @@ export const STOP_EDITING = "STOP_EDITING";
 export const START_EDITING_EXISTING_SONG = "START_EDITING_EXISTING_SONG";
 export const SHOW_CONFIRM_RESTORE_DEFAULTS = "SHOW_CONFIRM_RESTORE_DEFAULTS";
 export const SHOW_CONFIRM_DELETE_SONG = "SHOW_CONFIRM_DELETE_SONG";
+export const SELECT_SONG_PART_TO_EDIT = "SELECT_SONG_PART_TO_EDIT";
 
 export interface ISongEditorActions {
     START_EDITING_NEW_SONG: {
@@ -34,6 +35,10 @@ export interface ISongEditorActions {
     SHOW_CONFIRM_DELETE_SONG: {
         type: typeof SHOW_CONFIRM_DELETE_SONG,
         shouldShow: boolean,
+    };
+    SELECT_SONG_PART_TO_EDIT: {
+        type: typeof SELECT_SONG_PART_TO_EDIT,
+        partId: string,
     };
 }
 
@@ -58,6 +63,10 @@ export const actionCreators = {
     showConfirmDeleteSong: (shouldShow: boolean): ISongEditorActions[typeof SHOW_CONFIRM_DELETE_SONG] => ({
         type: SHOW_CONFIRM_DELETE_SONG,
         shouldShow,
+    }),
+    selectSongPartToEdit: (partId: string): ISongEditorActions[typeof SELECT_SONG_PART_TO_EDIT] => ({
+        type: SELECT_SONG_PART_TO_EDIT,
+        partId,
     }),
 };
 
