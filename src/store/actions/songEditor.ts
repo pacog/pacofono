@@ -4,9 +4,14 @@ import { IRootState } from "store/reducers/root";
 import { RootAction } from "store/actions";
 import { ISong } from "types";
 import { getSong, getOriginalSong, isEditingSong } from "store/selectors/songEditor";
-import { getSavedSongs } from "store/selectors/songs";
+import { getSavedSongs, getSong as getSongFromStore } from "store/selectors/songs";
 import { duplicateSong, cascadeDeleteSong } from "store/actions/songs";
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
+import { getDefaultNewSong } from "constants/defaultNewSong";
+import { getDefaultNewSongPart } from "constants/defaultNewSongPart";
+import { actionCreators as modalsActions } from "store/actions/modals";
+import { actionCreators as songsActions } from "store/actions/songs";
+import { actionCreators as partsActions } from "store/actions/parts";
 
 export const START_EDITING_NEW_SONG = "START_EDITING_NEW_SONG";
 export const STOP_EDITING = "STOP_EDITING";
@@ -110,5 +115,17 @@ export const deleteSongBeingEdited = (): ThunkAction<void, IRootState, {}, RootA
                 dispatch(currentSongActions.setCurrentSong(null));
             }
         }
+    };
+};
+
+export const openForNewSong = (): ThunkAction<void, IRootState, {}, RootAction> => {
+    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {
+        dispatch(modalsActions.openSongEditor());
+        const newSong = getDefaultNewSong();
+        dispatch(songsActions.addSong(newSong));
+        const newPart = getDefaultNewSongPart();
+        dispatch(partsActions.addPart(newPart, newSong.id));
+        const songWithParts = getSongFromStore(getState(), newSong.id);
+        dispatch(actionCreators.startEditingNewSong(songWithParts));
     };
 };

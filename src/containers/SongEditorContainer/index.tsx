@@ -1,6 +1,6 @@
 import { connect, Dispatch } from "react-redux";
 
-import { ISong } from "types";
+import { ISong, ISongPart } from "types";
 import { IRootState } from "store/reducers/root";
 import SongEditor from "components/SongEditor";
 import {
@@ -8,6 +8,7 @@ import {
     isNewSong,
     isShowingConfirmRestoreDefaults,
     isShowingConfirmDeleteSong,
+    getPartBeingEdited,
 } from "store/selectors/songEditor";
 import { getSongParts } from "store/selectors/parts";
 import { actionCreators as modalsActions } from "store/actions/modals";
@@ -27,6 +28,7 @@ const mapStateToProps = (state: IRootState) => {
     return {
         song,
         parts: getSongParts(state, song ? song.id : null),
+        selectedPart: getPartBeingEdited(state),
         isNewSong: isNewSong(state),
         isShowingConfirmRestoreDefaults: isShowingConfirmRestoreDefaults(state),
         isShowingConfirmDeleteSong: isShowingConfirmDeleteSong(state),
@@ -74,6 +76,9 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
             dispatch(songEditorActions.showConfirmDeleteSong(false));
             dispatch(modalsActions.closeSongEditor());
             dispatch(songEditorActions.stopEditing());
+        },
+        onSelectPart: (part: ISongPart) => {
+            dispatch(songEditorActions.selectSongPartToEdit(part.id));
         },
     };
 };

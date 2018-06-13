@@ -6,7 +6,9 @@ import "./style.scss";
 
 interface ISongPartsSelectorProps {
     parts: ISongPart[];
+    selectedPart: ISongPart;
     onAddPart: () => void;
+    onSelectPart: (part: ISongPart) => void;
 }
 
 const SongPartsSelector: React.SFC<ISongPartsSelectorProps> = (props: ISongPartsSelectorProps) => (
@@ -15,7 +17,11 @@ const SongPartsSelector: React.SFC<ISongPartsSelectorProps> = (props: ISongParts
         <ul className="mb-m">
             {props.parts.map( (part) => (
                 <li key={part.id}
-                    className="song-parts-selector-part ">
+                    className={
+                        "song-parts-selector-part " +
+                        ((props.selectedPart === part) ? "song-parts-selector-part-selected" : "")
+                    }
+                    onClick={() => { props.onSelectPart(part); }}>
                     {part.name}
                 </li>
             ))}

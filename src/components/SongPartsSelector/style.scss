@@ -14,4 +14,8 @@
     &:hover {
         background-color: $dark-transparent-2;
     }
+
+    &.song-parts-selector-part-selected {
+        background: red;
+    }
 }
