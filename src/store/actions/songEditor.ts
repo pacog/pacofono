@@ -93,10 +93,13 @@ export const saveSongBeingEdited = (): ThunkAction<ISong, IRootState, {}, RootAc
 export const restoreDefaults = (): ThunkAction<void, IRootState, {}, RootAction> => {
     return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {
         if (isEditingSong(getState())) {
+            let originalSong: ISong;
             const song = getSong(getState());
-            dispatch(cascadeDeleteSong(song) as any);
-            const originalSong = getOriginalSong(getState());
-            dispatch(duplicateSong(originalSong) as any)
+            return dispatch(cascadeDeleteSong(song) as any)
+                .then(() => {
+                    originalSong = getOriginalSong(getState());
+                    return dispatch(duplicateSong(originalSong) as any);
+                })
                 .then((duplicatedSong: ISong) => {
                     dispatch(actionCreators.startEditingExistingSong(duplicatedSong, originalSong));
                 });
