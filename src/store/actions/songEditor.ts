@@ -111,15 +111,16 @@ export const deleteSongBeingEdited = (): ThunkAction<void, IRootState, {}, RootA
     return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {
         if (isEditingSong(getState())) {
             const song = getSong(getState());
-            dispatch(cascadeDeleteSong(song) as any);
-            const originalSong = getOriginalSong(getState());
-            dispatch(cascadeDeleteSong(originalSong) as any);
-            const allSongs = getSavedSongs(getState());
-            if (allSongs.length) {
-                dispatch(currentSongActions.setCurrentSong(allSongs[0]));
-            } else {
-                dispatch(currentSongActions.setCurrentSong(null));
-            }
+            return dispatch(cascadeDeleteSong(song) as any)
+                .then(() => {
+                    const originalSong = getOriginalSong(getState());
+                    return dispatch(cascadeDeleteSong(originalSong) as any);
+                })
+                .then(() => {
+                    const allSongs = getSavedSongs(getState());
+                    const songToSetAsCurrent = allSongs.length ? allSongs[0] : null;
+                    dispatch(currentSongActions.setCurrentSong(songToSetAsCurrent));
+                });
         }
     };
 };

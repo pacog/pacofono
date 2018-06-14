@@ -4,7 +4,8 @@ import thunk from "redux-thunk";
 import { actionCreators as songEditorActions } from "store/actions/songEditor";
 import { actionCreators as partsActions } from "store/actions/parts";
 import { actionCreators as songsActions } from "store/actions/songs";
-import { saveSongBeingEdited, restoreDefaults } from "store/actions/songEditor";
+import { actionCreators as currentSongActions } from "store/actions/currentSong";
+import { saveSongBeingEdited, restoreDefaults, deleteSongBeingEdited } from "store/actions/songEditor";
 
 jest.mock("uuid", () => {
     let num = 1;
@@ -17,6 +18,12 @@ const originalSong1 = {
     id: "originalSong1",
     name: "Song 1",
     parts: ["originalPart1"],
+};
+
+const otherSong = {
+    id: "otherSong",
+    name: "otherSong",
+    parts: ["otherPart"],
 };
 
 const song1 = {
@@ -120,5 +127,24 @@ describe("songEditor store async actions", () => {
         });
     });
 
-    // TODO: test other async actions
+    describe("deleteSongBeingEdited", () => {
+        it("should work when editing song", async () => {
+            expect.assertions(1);
+            const store = mockStore(stateWhenEditing);
+            await store.dispatch(deleteSongBeingEdited() as any);
+
+            expect(store.getActions()).toEqual([
+                partsActions.deletePart(part1, song1.id),
+                songsActions.deleteSong(song1),
+                partsActions.deletePart(originalPart1, originalSong1.id),
+                songsActions.deleteSong(originalSong1),
+                currentSongActions.setCurrentSong(originalSong1),
+                // Previous line should be the next line, but mockStore doesn't execute reducers
+                // currentSongActions.setCurrentSong(otherSong),
+            ]);
+        });
+    });
+
+
+    // TODO: test other async actions: openForNewSong
 });
