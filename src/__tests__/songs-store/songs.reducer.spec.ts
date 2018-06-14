@@ -78,4 +78,42 @@ describe("Song store ", () => {
         expect(stateAfter4[songToAdd.id]).toEqual(undefined);
         expect(stateAfter4[otherSongToAdd.id]).toEqual(undefined);
     });
+
+    it("should be able to change the index of a part", () => {
+        const song = {
+            id: "song12",
+            name: "myNewSong",
+            parts: ["part_1", "part_2", "part_3"],
+        };
+
+        const initialState = rootReducer({}, { type: null });
+        const stateAfter = songsReducer(
+            initialState.songs,
+            actionCreators.addSong(song),
+        );
+
+        const stateAfter2 = songsReducer(
+            stateAfter,
+            actionCreators.changePartIndex("song12", "part_2", 0),
+        );
+        expect(stateAfter2[song.id].parts).toEqual(["part_2", "part_1", "part_3"]);
+
+        const stateAfter3 = songsReducer(
+            stateAfter2,
+            actionCreators.changePartIndex("song12", "part_2", 2),
+        );
+        expect(stateAfter3[song.id].parts).toEqual(["part_1", "part_3", "part_2"]);
+
+        const stateAfter4 = songsReducer(
+            stateAfter3,
+            actionCreators.changePartIndex("song12", "part_2", 2),
+        );
+        expect(stateAfter4[song.id].parts).toEqual(["part_1", "part_3", "part_2"]);
+
+        const stateAfter5 = songsReducer(
+            stateAfter4,
+            actionCreators.changePartIndex("song12", "part_2", 1),
+        );
+        expect(stateAfter5[song.id].parts).toEqual(["part_1", "part_2", "part_3"]);
+    });
 });

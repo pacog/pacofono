@@ -12,6 +12,7 @@ import { getSong } from "store/selectors/songs";
 export const ADD_SONG = "ADD_SONG";
 export const DELETE_SONG = "DELETE_SONG";
 export const CHANGE_SONG_NAME = "CHANGE_SONG_NAME";
+export const CHANGE_PART_INDEX = "CHANGE_PART_INDEX";
 
 export interface ISongsActions {
     ADD_SONG: {
@@ -26,6 +27,12 @@ export interface ISongsActions {
         type: typeof CHANGE_SONG_NAME,
         song: ISong,
         newName: string,
+    };
+    CHANGE_PART_INDEX: {
+        type: typeof CHANGE_PART_INDEX,
+        songId: string,
+        partId: string,
+        desiredIndex: number,
     };
 }
 
@@ -42,6 +49,13 @@ export const actionCreators = {
         type: CHANGE_SONG_NAME,
         song,
         newName,
+    }),
+    changePartIndex: (songId: string, partId: string, desiredIndex: number):
+    ISongsActions[typeof CHANGE_PART_INDEX] => ({
+        type: CHANGE_PART_INDEX,
+        songId,
+        partId,
+        desiredIndex,
     }),
 };
 

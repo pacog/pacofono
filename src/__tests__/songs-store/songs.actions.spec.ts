@@ -1,4 +1,9 @@
-import { ADD_SONG, DELETE_SONG, CHANGE_SONG_NAME, actionCreators } from "store/actions/songs";
+import { ADD_SONG,
+    DELETE_SONG,
+    CHANGE_SONG_NAME,
+    CHANGE_PART_INDEX,
+    actionCreators,
+} from "store/actions/songs";
 
 const TEST_SONG = {
     id: "blach",
@@ -28,6 +33,18 @@ describe("Song store actions", () => {
             type: CHANGE_SONG_NAME,
             song: TEST_SONG,
             newName,
+        });
+    });
+
+    it("should have a change part index action", () => {
+        const songId = "song_2";
+        const partId = "part_34";
+        const desiredIndex = 3;
+        expect(actionCreators.changePartIndex(songId, partId, desiredIndex)).toEqual({
+            type: CHANGE_PART_INDEX,
+            songId,
+            partId,
+            desiredIndex,
         });
     });
 

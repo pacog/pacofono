@@ -80,9 +80,8 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
         onSelectPart: (part: ISongPart) => {
             dispatch(songEditorActions.selectSongPartToEdit(part.id));
         },
-        onMovePart: (partId: string, desiredIndex: number) => {
-            console.log("partId", partId);
-            console.log("desiredIndex", desiredIndex);
+        onMovePart: (songId: string, partId: string, desiredIndex: number) => {
+            dispatch(songsActions.changePartIndex(songId, partId, desiredIndex));
         },
     };
 };

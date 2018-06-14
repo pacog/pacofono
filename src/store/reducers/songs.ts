@@ -1,5 +1,5 @@
 import { RootAction } from "store/actions";
-import { ADD_SONG, CHANGE_SONG_NAME, DELETE_SONG } from "store/actions/songs";
+import { ADD_SONG, CHANGE_SONG_NAME, DELETE_SONG, CHANGE_PART_INDEX } from "store/actions/songs";
 import { ADD_PART, DELETE_PART } from "store/actions/parts";
 
 import { ISong } from "types";
@@ -48,6 +48,22 @@ export const songsReducer = (state: ISongsState = initialState, action: RootActi
             return {
                 ...state,
                 [song2.id]: {...song2, parts: partsWithoutPart},
+            };
+
+        case CHANGE_PART_INDEX:
+            const song3 = state[action.songId];
+            if (!song3) {
+                return state;
+            }
+            const partIndex = song3.parts.indexOf(action.partId);
+            if ((partIndex === -1) || partIndex === action.desiredIndex) {
+                return state;
+            }
+            const newParts = song3.parts.slice();
+            newParts.splice(action.desiredIndex, 0, newParts.splice(partIndex, 1)[0]);
+            return {
+                ...state,
+                [song3.id]: {...song3, parts: newParts},
             };
         default:
             return state;
