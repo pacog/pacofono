@@ -10,12 +10,45 @@
     background-color: $dark-transparent;
     padding: $g-s;
     cursor: pointer;
+    position: relative;
 
     &:hover {
         background-color: $dark-transparent-2;
     }
 
+    &:before {
+        content: '';
+        display: none;
+        top: 0;
+        bottom: 0;
+        right: -$g-m;
+        width: $g-m;
+        background-color: $blue-3;
+        position: absolute;
+        z-index: 1;
+    }
+
+    &:after {
+        content: '';
+        display: none;
+        top: 0;
+        bottom: 0;
+        right: - $g-m - $g-m;
+        width: $g-m;
+        position: absolute;
+        border-top: $g-l / 2 solid transparent;
+        border-bottom: $g-l / 2 solid transparent;
+        border-left: $g-l / 2 solid $blue-3;
+        transform: scaleX(0.5);
+        transform-origin: left center;
+        z-index: 1;
+    }
+
     &.song-parts-selector-part-selected {
-        background: red;
+        background: $blue-3;
+
+        &:before, &:after {
+            display: block;
+        }
     }
 }
