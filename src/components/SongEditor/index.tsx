@@ -37,6 +37,7 @@ function showContentPart(props: ISongEditorProps) {
                         selectedPart={props.selectedPart}
                         onSelectPart={props.onSelectPart}
                         onAddPart={() => { props.onAddPart(props.song); }}
+                        onMovePart={props.onMovePart}
                         ></SongPartsSelector>
                 </div>
                 <div className="song-editor-content-part-editor">
