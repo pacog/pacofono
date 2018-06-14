@@ -38,8 +38,7 @@ const mapStateToProps = (state: IRootState) => {
 const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
     return {
         onSaveSong: () => {
-            // TODO ugly fix for dispatch thunk actions type error (<any>)
-            const savedSong = dispatch<any>(saveSongBeingEdited());
+            const savedSong = dispatch(saveSongBeingEdited() as any);
             dispatch(modalsActions.closeSongEditor());
             dispatch(currentSongActions.setCurrentSong(savedSong));
         },
@@ -58,8 +57,7 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
             dispatch(songEditorActions.showConfirmRestoreDefaults(false));
         },
         onRestoreDefaultsConfirm: () => {
-            // TODO ugly fix for dispatch thunk actions type error (<any>)
-            dispatch<any>(restoreDefaults());
+            dispatch(restoreDefaults() as any);
             dispatch(songEditorActions.showConfirmRestoreDefaults(false));
         },
         onAddPart: (toSong: ISong) => {
@@ -72,7 +70,7 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
             dispatch(songEditorActions.showConfirmDeleteSong(false));
         },
         onDeleteSongConfirm: () => {
-            dispatch<any>(deleteSongBeingEdited());
+            dispatch(deleteSongBeingEdited() as any);
             dispatch(songEditorActions.showConfirmDeleteSong(false));
             dispatch(modalsActions.closeSongEditor());
             dispatch(songEditorActions.stopEditing());

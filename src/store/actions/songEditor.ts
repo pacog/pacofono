@@ -80,7 +80,10 @@ export const saveSongBeingEdited = (): ThunkAction<ISong, IRootState, {}, RootAc
         const song = getSong(getState());
         if (isEditingSong(getState())) {
             const oldSong = getOriginalSong(getState());
-            dispatch(cascadeDeleteSong(oldSong) as any);
+            return dispatch(cascadeDeleteSong(oldSong) as any).then(() => {
+                dispatch(actionCreators.stopEditing());
+                return song;
+            });
         }
         dispatch(actionCreators.stopEditing());
         return song;

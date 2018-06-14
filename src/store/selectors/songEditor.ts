@@ -47,3 +47,12 @@ export const isPartBeingEdited = (state: IRootState, part: ISongPart): boolean =
     const partBeingEdited = getPartBeingEdited(state);
     return partBeingEdited.id === part.id;
 };
+
+export const canPartBeDeleted = (state: IRootState, part: ISongPart): boolean => {
+    const song = getSong(state);
+    const isPartInSong = song.parts.indexOf(part.id) !== -1;
+    if (!isPartInSong) {
+        return false;
+    }
+    return song.parts.length && song.parts.length > 1;
+};

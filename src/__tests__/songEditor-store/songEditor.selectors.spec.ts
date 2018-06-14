@@ -10,6 +10,7 @@ import { getSong,
     isShowingConfirmDeleteSong,
     getPartBeingEdited,
     isPartBeingEdited,
+    canPartBeDeleted,
 } from "store/selectors/songEditor";
 
 describe("songEditor store selectors", () => {
@@ -96,6 +97,40 @@ describe("songEditor store selectors", () => {
 
             expect(errorSelector).toThrow();
         });
+    });
+
+    it("should handle canPartBeDeleted correctly", () => {
+        const song1 = {
+            id: "id_edit_2",
+            name: "myNewSong",
+            parts: ["partId", "partId2"],
+        };
+        const song2 = {
+            id: "id_edit_3",
+            name: "myNewSong",
+            parts: ["onlyOnePartId"],
+        };
+        const partCanBeDeleted = {
+            id: "partId",
+            name: "name",
+            chords: ["chord1"],
+        };
+        const partCannotBeDeleted = {
+            id: "onlyOnePartId",
+            name: "name",
+            chords: ["chord2"],
+        };
+        const state = rootReducer({}, { type: null });
+        const newState = rootReducer(state, songsActionCreators.addSong(song1));
+        const newState2 = rootReducer(newState, songsActionCreators.addSong(song2));
+
+        const newState3 = rootReducer(newState2, actionCreators.startEditingNewSong(song1));
+        expect(canPartBeDeleted(newState3, partCanBeDeleted)).toBe(true);
+        expect(canPartBeDeleted(newState3, partCannotBeDeleted)).toBe(false);
+
+        const newState4 = rootReducer(newState3, actionCreators.startEditingNewSong(song2));
+        expect(canPartBeDeleted(newState4, partCannotBeDeleted)).toBe(false);
+        expect(canPartBeDeleted(newState4, partCanBeDeleted)).toBe(false);
     });
 
 });
