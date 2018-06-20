@@ -2,7 +2,7 @@ import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { IRootState } from "store/reducers/root";
 import { RootAction } from "store/actions";
-import { ISong } from "types";
+import { ISong, ISongPart } from "types";
 import { getSong, getOriginalSong, isEditingSong } from "store/selectors/songEditor";
 import { getSavedSongs, getSong as getSongFromStore } from "store/selectors/songs";
 import { duplicateSong, cascadeDeleteSong } from "store/actions/songs";
@@ -11,7 +11,7 @@ import { getDefaultNewSong } from "constants/defaultNewSong";
 import { getDefaultNewSongPart } from "constants/defaultNewSongPart";
 import { actionCreators as modalsActions } from "store/actions/modals";
 import { actionCreators as songsActions } from "store/actions/songs";
-import { actionCreators as partsActions } from "store/actions/parts";
+import { actionCreators as partsActions, cascadeDeletePart } from "store/actions/parts";
 
 export const START_EDITING_NEW_SONG = "START_EDITING_NEW_SONG";
 export const STOP_EDITING = "STOP_EDITING";
@@ -135,5 +135,16 @@ export const openForNewSong = (): ThunkAction<ISong, IRootState, {}, RootAction>
         const songWithParts = getSongFromStore(getState(), newSong.id);
         dispatch(actionCreators.startEditingNewSong(songWithParts));
         return songWithParts;
+    };
+};
+
+export const deletePartAndSelectOther =
+(part: ISongPart, song: ISong): ThunkAction<void, IRootState, {}, RootAction> => {
+    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {
+        return dispatch(cascadeDeletePart(part, song.id) as any)
+            .then(() => {
+                const songWithoutPart = getSongFromStore(getState(), song.id);
+                return dispatch(actionCreators.selectSongPartToEdit(songWithoutPart.parts[0]));
+            });
     };
 };

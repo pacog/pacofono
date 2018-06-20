@@ -1,25 +1,23 @@
 import configureMockStore from "redux-mock-store";
-import { applyMiddleware, createStore  } from "redux";
 import thunk from "redux-thunk";
-
-import { IRootState, rootReducer } from "store/reducers/root";
-import { RootAction } from "store/actions";
+import createEmptyStore from "test-helpers/createEmptyStore";
 
 import { actionCreators as songEditorActions } from "store/actions/songEditor";
 import { actionCreators as partsActions } from "store/actions/parts";
 import { actionCreators as songsActions } from "store/actions/songs";
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
-import { saveSongBeingEdited, restoreDefaults, deleteSongBeingEdited, openForNewSong } from "store/actions/songEditor";
-import { getSong, getOriginalSong } from "store/selectors/songEditor";
+import {
+    saveSongBeingEdited,
+    restoreDefaults,
+    deleteSongBeingEdited,
+    openForNewSong,
+    deletePartAndSelectOther,
+} from "store/actions/songEditor";
+import { getSong, getOriginalSong, getPartBeingEdited } from "store/selectors/songEditor";
 import { isSongEditorModalOpen } from "store/selectors/modals";
+import { getPartById } from "store/selectors/parts";
 
-function createEmptyStore() {
-  return createStore<IRootState, RootAction, {}, {}>(
-    rootReducer,
-    {},
-    applyMiddleware(thunk),
-  );
-}
+
 
 jest.mock("uuid", () => {
     let num = 1;
@@ -51,6 +49,13 @@ const part1 = {
     name: "Part 1",
     chords: ["chord1"],
 };
+
+const part2 = {
+    id: "part2",
+    name: "Part 2",
+    chords: ["chord2"],
+};
+
 const originalPart1 = {
     id: "originalPart1",
     name: "Part 1",
@@ -173,6 +178,22 @@ describe("songEditor store async actions", () => {
             expect(getSong(state)).toEqual(expectedSong);
             expect(newSong).toEqual(expectedSong);
             expect(getOriginalSong(state)).toBe(null);
+        });
+    });
+
+    describe("deletePartAndSelectOther", () => {
+        it("should work", async () => {
+            expect.assertions(4);
+            const store = createEmptyStore();
+            await store.dispatch(songsActions.addSong({...song1, parts: []}));
+            await store.dispatch(partsActions.addPart(part1, song1.id));
+            await store.dispatch(partsActions.addPart(part2, song1.id));
+            await store.dispatch(songEditorActions.startEditingExistingSong(song1, {...song1, id: "other_id"}));
+            expect(getPartBeingEdited(store.getState())).toEqual(part1);
+            expect(getPartById(store.getState(), part1.id)).toEqual(part1);
+            await store.dispatch(deletePartAndSelectOther(part1, song1) as any);
+            expect(getPartBeingEdited(store.getState())).toEqual(part2);
+            expect(getPartById(store.getState(), part1.id)).toBe(undefined);
         });
     });
 

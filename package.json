@@ -84,7 +84,8 @@
       "^constants/(.*)": "<rootDir>/src/constants/$1",
       "^containers/(.*)": "<rootDir>/src/containers/$1",
       "^store/(.*)": "<rootDir>/src/store/$1",
-      "^types/(.*)": "<rootDir>/src/types/$1"
+      "^types/(.*)": "<rootDir>/src/types/$1",
+      "^test-helpers/(.*)": "<rootDir>/src/test-helpers/$1"
     }
   }
 }

@@ -1,14 +1,15 @@
 import * as React from "react";
 
-import { ISongPart } from "types";
+import { ISong, ISongPart } from "types";
 import PButton from "components/PButton";
 import "./style.scss";
 
 interface ISongPartEditorProps {
     part: ISongPart;
+    song: ISong;
     canBeDeleted: boolean;
     onPartNameChanged: (part: ISongPart, newValue: string) => void;
-    onDeletePart: (part: ISongPart) => void;
+    onDeletePart: (part: ISongPart, song: ISong) => void;
 }
 
 const SongPartEditor: React.SFC<ISongPartEditorProps> = (props: ISongPartEditorProps) => (
@@ -24,7 +25,7 @@ const SongPartEditor: React.SFC<ISongPartEditorProps> = (props: ISongPartEditorP
                 <PButton
                     className="ml-m"
                     secondary={true}
-                    onClick={() => props.onDeletePart(props.part) }>
+                    onClick={() => props.onDeletePart(props.part, props.song) }>
                         Delete part
                     </PButton>
             }
