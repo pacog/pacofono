@@ -125,8 +125,8 @@ export const deleteSongBeingEdited = (): ThunkAction<void, IRootState, {}, RootA
     };
 };
 
-export const openForNewSong = (): ThunkAction<void, IRootState, {}, RootAction> => {
-    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {
+export const openForNewSong = (): ThunkAction<ISong, IRootState, {}, RootAction> => {
+    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): ISong => {
         dispatch(modalsActions.openSongEditor());
         const newSong = getDefaultNewSong();
         dispatch(songsActions.addSong(newSong));
@@ -134,5 +134,6 @@ export const openForNewSong = (): ThunkAction<void, IRootState, {}, RootAction> 
         dispatch(partsActions.addPart(newPart, newSong.id));
         const songWithParts = getSongFromStore(getState(), newSong.id);
         dispatch(actionCreators.startEditingNewSong(songWithParts));
+        return songWithParts;
     };
 };

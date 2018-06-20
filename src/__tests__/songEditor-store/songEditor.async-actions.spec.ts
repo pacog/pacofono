@@ -1,11 +1,25 @@
 import configureMockStore from "redux-mock-store";
+import { applyMiddleware, createStore  } from "redux";
 import thunk from "redux-thunk";
+
+import { IRootState, rootReducer } from "store/reducers/root";
+import { RootAction } from "store/actions";
 
 import { actionCreators as songEditorActions } from "store/actions/songEditor";
 import { actionCreators as partsActions } from "store/actions/parts";
 import { actionCreators as songsActions } from "store/actions/songs";
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
-import { saveSongBeingEdited, restoreDefaults, deleteSongBeingEdited } from "store/actions/songEditor";
+import { saveSongBeingEdited, restoreDefaults, deleteSongBeingEdited, openForNewSong } from "store/actions/songEditor";
+import { getSong, getOriginalSong } from "store/selectors/songEditor";
+import { isSongEditorModalOpen } from "store/selectors/modals";
+
+function createEmptyStore() {
+  return createStore<IRootState, RootAction, {}, {}>(
+    rootReducer,
+    {},
+    applyMiddleware(thunk),
+  );
+}
 
 jest.mock("uuid", () => {
     let num = 1;
@@ -45,6 +59,7 @@ const originalPart1 = {
 
 const stateWhenEditing = {
     songs: {
+        otherSong,
         song1,
         originalSong1,
     },
@@ -138,13 +153,27 @@ describe("songEditor store async actions", () => {
                 songsActions.deleteSong(song1),
                 partsActions.deletePart(originalPart1, originalSong1.id),
                 songsActions.deleteSong(originalSong1),
-                currentSongActions.setCurrentSong(originalSong1),
-                // Previous line should be the next line, but mockStore doesn't execute reducers
-                // currentSongActions.setCurrentSong(otherSong),
+                currentSongActions.setCurrentSong(otherSong),
             ]);
         });
     });
 
+    describe("openForNewSong", () => {
+        it("should work when editing song", async () => {
+            expect.assertions(4);
+            const store = createEmptyStore();
+            const newSong = await store.dispatch(openForNewSong() as any);
+            const state = store.getState();
+            expect(isSongEditorModalOpen(state)).toBe(true);
+            const expectedSong = {
+                id: "uuid_3",
+                name: "La cucaracha",
+                parts: ["uuid_4"],
+            };
+            expect(getSong(state)).toEqual(expectedSong);
+            expect(newSong).toEqual(expectedSong);
+            expect(getOriginalSong(state)).toBe(null);
+        });
+    });
 
-    // TODO: test other async actions: openForNewSong
 });
