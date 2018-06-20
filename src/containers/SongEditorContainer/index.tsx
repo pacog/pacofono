@@ -38,9 +38,11 @@ const mapStateToProps = (state: IRootState) => {
 const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
     return {
         onSaveSong: () => {
-            const savedSong = dispatch(saveSongBeingEdited() as any);
-            dispatch(modalsActions.closeSongEditor());
-            dispatch(currentSongActions.setCurrentSong(savedSong));
+            dispatch(saveSongBeingEdited() as any)
+                .then((savedSong: ISong) => {
+                    dispatch(modalsActions.closeSongEditor());
+                    dispatch(currentSongActions.setCurrentSong(savedSong));
+                });
         },
         onClose: (song: ISong) => {
             dispatch(modalsActions.closeSongEditor());

@@ -50,6 +50,9 @@ export const isPartBeingEdited = (state: IRootState, part: ISongPart): boolean =
 
 export const canPartBeDeleted = (state: IRootState, part: ISongPart): boolean => {
     const song = getSong(state);
+    if (!part || !song || !song.parts) {
+        return false;
+    }
     const isPartInSong = song.parts.indexOf(part.id) !== -1;
     if (!isPartInSong) {
         return false;

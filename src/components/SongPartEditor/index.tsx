@@ -14,22 +14,25 @@ interface ISongPartEditorProps {
 
 const SongPartEditor: React.SFC<ISongPartEditorProps> = (props: ISongPartEditorProps) => (
     <div className="song-part-editor">
-        <div className="line-center">
-            <input
-                value={props.part.name}
-                className="p-input song-editor-name-input grow-full-width"
-                onChange={(e) => { props.onPartNameChanged(props.part, e.target.value); }} />
+        {
+            props.part &&
+            <div className="line-center">
+                <input
+                    value={props.part.name}
+                    className="p-input song-editor-name-input grow-full-width"
+                    onChange={(e) => { props.onPartNameChanged(props.part, e.target.value); }} />
 
-            {
-                props.canBeDeleted &&
-                <PButton
-                    className="ml-m"
-                    secondary={true}
-                    onClick={() => props.onDeletePart(props.part, props.song) }>
-                        Delete part
-                    </PButton>
-            }
-        </div>
+                {
+                    props.canBeDeleted &&
+                    <PButton
+                        className="ml-m"
+                        secondary={true}
+                        onClick={() => props.onDeletePart(props.part, props.song) }>
+                            Delete part
+                        </PButton>
+                }
+            </div>
+        }
     </div>
 );
 

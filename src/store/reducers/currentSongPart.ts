@@ -25,6 +25,9 @@ export const currentSongPartReducer = (state: ICurrentSongPartState = initialSta
             if (state.id === null) { // No part was selected before
                 return { ...state, id: action.song.parts[0] || null };
             }
+            if (!action.song.parts) {
+                debugger;
+            }
             const isCurrentPartInSong = action.song.parts.filter((part) => part === state.id).length > 0;
             if (!isCurrentPartInSong) {
                 return { ...state, id: action.song.parts[0] || null };

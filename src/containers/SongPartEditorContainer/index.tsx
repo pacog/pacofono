@@ -12,7 +12,7 @@ const mapStateToProps = (state: IRootState) => {
     return {
         song: getSong(state),
         part,
-        canBeDeleted: canPartBeDeleted(state, part),
+        canBeDeleted: part && canPartBeDeleted(state, part),
     };
 };
 
