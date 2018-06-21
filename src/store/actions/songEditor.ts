@@ -9,9 +9,11 @@ import { duplicateSong, cascadeDeleteSong } from "store/actions/songs";
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
 import { getDefaultNewSong } from "constants/defaultNewSong";
 import { getDefaultNewSongPart } from "constants/defaultNewSongPart";
+import { getDefaultNewChord } from "constants/defaultNewChord";
 import { actionCreators as modalsActions } from "store/actions/modals";
 import { actionCreators as songsActions } from "store/actions/songs";
 import { actionCreators as partsActions, cascadeDeletePart } from "store/actions/parts";
+import { actionCreators as chordsActions } from "store/actions/chords";
 
 export const START_EDITING_NEW_SONG = "START_EDITING_NEW_SONG";
 export const STOP_EDITING = "STOP_EDITING";
@@ -141,9 +143,11 @@ export const openForNewSong = (): ThunkAction<ISong, IRootState, {}, RootAction>
         dispatch(songsActions.addSong(newSong));
         const newPart = getDefaultNewSongPart();
         dispatch(partsActions.addPart(newPart, newSong.id));
-        const songWithParts = getSongFromStore(getState(), newSong.id);
-        dispatch(actionCreators.startEditingNewSong(songWithParts));
-        return songWithParts;
+        const newChord = getDefaultNewChord();
+        dispatch(chordsActions.addChord(newChord, newPart.id));
+        const fullSong = getSongFromStore(getState(), newSong.id);
+        dispatch(actionCreators.startEditingNewSong(fullSong));
+        return fullSong;
     };
 };
 
