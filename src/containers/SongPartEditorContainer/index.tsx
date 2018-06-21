@@ -4,8 +4,8 @@ import { ISongPart, ISong } from "types";
 import SongPartEditor from "components/SongPartEditor";
 import { IRootState } from "store/reducers/root";
 import { actionCreators as partsActions } from "store/actions/parts";
-import { deletePartAndSelectOther } from "store/actions/songEditor";
-import { getPartBeingEdited, canPartBeDeleted, getSong } from "store/selectors/songEditor";
+import { actionCreators as songEditorActions, deletePartAndSelectOther } from "store/actions/songEditor";
+import { getPartBeingEdited, canPartBeDeleted, getSong, isShowingConfirmDeletePart } from "store/selectors/songEditor";
 
 const mapStateToProps = (state: IRootState) => {
     const part = getPartBeingEdited(state);
@@ -13,6 +13,7 @@ const mapStateToProps = (state: IRootState) => {
         song: getSong(state),
         part,
         canBeDeleted: part && canPartBeDeleted(state, part),
+        isShowingConfirmDeletePart: isShowingConfirmDeletePart(state),
     };
 };
 
@@ -21,7 +22,13 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
         onPartNameChanged: (part: ISongPart, newName: string) => {
             dispatch(partsActions.changePartName(part, newName));
         },
-        onDeletePart: (part: ISongPart, song: ISong) => {
+        onDeletePart: () => {
+            dispatch(songEditorActions.showConfirmDeletePart(true));
+        },
+        onCancelDeletePart: () => {
+            dispatch(songEditorActions.showConfirmDeletePart(false));
+        },
+        onConfirmDeletePart: (part: ISongPart, song: ISong) => {
             dispatch(deletePartAndSelectOther(part, song) as any);
         },
     };

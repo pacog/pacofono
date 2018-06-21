@@ -5,6 +5,7 @@ import {
     SHOW_CONFIRM_RESTORE_DEFAULTS,
     SHOW_CONFIRM_DELETE_SONG,
     SELECT_SONG_PART_TO_EDIT,
+    SHOW_CONFIRM_DELETE_PART,
     actionCreators,
 } from "store/actions/songEditor";
 
@@ -85,6 +86,19 @@ describe("songEditor store actions", () => {
             .toEqual({
                 type: SELECT_SONG_PART_TO_EDIT,
                 partId: null,
+            });
+    });
+
+    it("should have a show confirm delete part action", () => {
+        expect(actionCreators.showConfirmDeletePart(true))
+            .toEqual({
+                type: SHOW_CONFIRM_DELETE_PART,
+                shouldShow: true,
+            });
+        expect(actionCreators.showConfirmDeletePart(false))
+            .toEqual({
+                type: SHOW_CONFIRM_DELETE_PART,
+                shouldShow: false,
             });
     });
 });

@@ -3,13 +3,17 @@ import * as React from "react";
 import { ISong, ISongPart } from "types";
 import PButton from "components/PButton";
 import "./style.scss";
+import ConfirmDeletePart from "./confirmDeletePart";
 
 interface ISongPartEditorProps {
     part: ISongPart;
     song: ISong;
     canBeDeleted: boolean;
+    isShowingConfirmDeletePart: boolean;
     onPartNameChanged: (part: ISongPart, newValue: string) => void;
-    onDeletePart: (part: ISongPart, song: ISong) => void;
+    onDeletePart: () => void;
+    onCancelDeletePart: () => void;
+    onConfirmDeletePart: (part: ISongPart, song: ISong) => void;
 }
 
 const SongPartEditor: React.SFC<ISongPartEditorProps> = (props: ISongPartEditorProps) => (
@@ -27,11 +31,18 @@ const SongPartEditor: React.SFC<ISongPartEditorProps> = (props: ISongPartEditorP
                     <PButton
                         className="ml-m"
                         secondary={true}
-                        onClick={() => props.onDeletePart(props.part, props.song) }>
+                        onClick={props.onDeletePart }>
                             Delete part
                         </PButton>
                 }
             </div>
+        }
+        {
+            props.isShowingConfirmDeletePart &&
+            <ConfirmDeletePart
+                onCancelDeletePart={props.onCancelDeletePart}
+                onConfirmDeletePart={ () => props.onConfirmDeletePart(props.part, props.song) }
+                ></ConfirmDeletePart>
         }
     </div>
 );

@@ -2,4 +2,35 @@
 
 .song-part-editor {
     padding: $g-m;
+    position: relative;
+    min-height: 300px;
 }
+
+    .song-part-editor-confirm-delete-part {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .song-part-editor-confirm-delete-part-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: $dark-transparent-1;
+            border-radius: $g-xs;
+        }
+
+        .song-part-editor-confirm-delete-part-content {
+            position: relative;
+            z-index: 1;
+            padding: $g-m;
+            background: $transparent-bg;
+            border-radius: $g-xs;
+        }

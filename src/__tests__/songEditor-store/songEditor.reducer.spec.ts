@@ -12,6 +12,7 @@ describe("songEditor store reducer", () => {
             isShowingConfirmRestoreDefaults: false,
             isShowingConfirmDeleteSong: false,
             selectedPartId: null,
+            isShowingConfirmDeletePart: false,
         });
     });
 
@@ -129,5 +130,60 @@ describe("songEditor store reducer", () => {
             actionCreators.selectSongPartToEdit("partIdCopy"),
         );
         expect(stateAfter3.selectedPartId).toEqual("partIdCopy");
+    });
+
+    it("should be able to show and hide the confirm delete part", () => {
+        const initialState = rootReducer({}, { type: null });
+        const stateAfter = songEditorReducer(
+            initialState.songEditor,
+            actionCreators.showConfirmDeletePart(true),
+        );
+        expect(stateAfter.isShowingConfirmDeletePart).toBe(true);
+        const stateAfter2 = songEditorReducer(
+            stateAfter,
+            actionCreators.showConfirmDeletePart(false),
+        );
+        expect(stateAfter2.isShowingConfirmDeletePart).toBe(false);
+
+        // Check that any other action will also close the confirmation
+        const stateAfter3 = songEditorReducer(
+            stateAfter2,
+            actionCreators.showConfirmDeletePart(true),
+        );
+        const stateAfter4 = songEditorReducer(
+            stateAfter3,
+            actionCreators.selectSongPartToEdit("partIdCopy"),
+        );
+        expect(stateAfter4.isShowingConfirmDeletePart).toBe(false);
+
+        const stateAfter5 = songEditorReducer(
+            stateAfter4,
+            actionCreators.showConfirmDeletePart(true),
+        );
+        const stateAfter6 = songEditorReducer(
+            stateAfter5,
+            actionCreators.showConfirmDeleteSong(true),
+        );
+        expect(stateAfter6.isShowingConfirmDeletePart).toBe(false);
+
+        const stateAfter7 = songEditorReducer(
+            stateAfter6,
+            actionCreators.showConfirmDeletePart(true),
+        );
+        const stateAfter8 = songEditorReducer(
+            stateAfter7,
+            actionCreators.showConfirmRestoreDefaults(true),
+        );
+        expect(stateAfter8.isShowingConfirmDeletePart).toBe(false);
+
+        const stateAfter9 = songEditorReducer(
+            stateAfter8,
+            actionCreators.showConfirmDeletePart(true),
+        );
+        const stateAfter10 = songEditorReducer(
+            stateAfter9,
+            actionCreators.stopEditing(),
+        );
+        expect(stateAfter10.isShowingConfirmDeletePart).toBe(false);
     });
 });

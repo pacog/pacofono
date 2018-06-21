@@ -11,6 +11,7 @@ import { getSong,
     getPartBeingEdited,
     isPartBeingEdited,
     canPartBeDeleted,
+    isShowingConfirmDeletePart,
 } from "store/selectors/songEditor";
 
 describe("songEditor store selectors", () => {
@@ -131,6 +132,21 @@ describe("songEditor store selectors", () => {
         const newState4 = rootReducer(newState3, actionCreators.startEditingNewSong(song2));
         expect(canPartBeDeleted(newState4, partCannotBeDeleted)).toBe(false);
         expect(canPartBeDeleted(newState4, partCanBeDeleted)).toBe(false);
+    });
+
+    it("should have correct confirm delete part selectors", () => {
+        const state = rootReducer({}, { type: null });
+        expect(isShowingConfirmDeletePart(state)).toBe(false);
+        const newState = rootReducer(
+            state,
+            actionCreators.showConfirmDeletePart(true),
+        );
+        expect(isShowingConfirmDeletePart(newState)).toBe(true);
+        const newState2 = rootReducer(
+            newState,
+            actionCreators.showConfirmDeletePart(false),
+        );
+        expect(isShowingConfirmDeletePart(newState2)).toBe(false);
     });
 
 });
