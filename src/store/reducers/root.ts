@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import { IMusicModeState, musicModeReducer } from "./musicMode";
 import { ISongsState, songsReducer } from "./songs";
 import { IPartsState, partsReducer } from "./parts";
+import { IChordsState, chordsReducer } from "./chords";
 import { IModalsState, modalsReducer } from "./modals";
 import { ISongEditorState, songEditorReducer } from "./songEditor";
 import { ICurrentSongState, currentSongReducer } from "./currentSong";
@@ -12,6 +13,7 @@ import { ISongSelectorState, songSelectorReducer } from "./songSelector";
 export interface IRootState {
     readonly songs?: ISongsState;
     readonly parts?: IPartsState;
+    readonly chords?: IChordsState;
     readonly musicMode?: IMusicModeState;
     readonly modals?: IModalsState;
     readonly songEditor?: ISongEditorState;
@@ -24,6 +26,7 @@ export const rootReducer = combineReducers<IRootState>({
     musicMode: musicModeReducer,
     songs: songsReducer,
     parts: partsReducer,
+    chords: chordsReducer,
     modals: modalsReducer,
     songEditor: songEditorReducer,
     currentSong: currentSongReducer,

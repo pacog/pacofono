@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { ISong, ISongPart } from "types";
 import PButton from "components/PButton";
+import PartEditorChordsSelector from "components/PartEditorChordsSelector";
 import "./style.scss";
 import ConfirmDeletePart from "./confirmDeletePart";
 
@@ -44,6 +45,9 @@ const SongPartEditor: React.SFC<ISongPartEditorProps> = (props: ISongPartEditorP
                 onConfirmDeletePart={ () => props.onConfirmDeletePart(props.part, props.song) }
                 ></ConfirmDeletePart>
         }
+        <PartEditorChordsSelector
+            onAddChord={() => console.log("Adding chord")}
+            ></PartEditorChordsSelector>
     </div>
 );
 
