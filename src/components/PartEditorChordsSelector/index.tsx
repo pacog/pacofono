@@ -1,21 +1,21 @@
 import * as React from "react";
-// import { IChord } from "types";
+import { IChord } from "types";
 import PButton from "components/PButton";
 
 import "./style.scss";
 
 interface IPartEditorChordsSelectorProps {
-    // chords: IChord[];
+    chords: IChord[];
     // selectedChord: IChord;
     onAddChord: () => void;
     // onSelectChord: (chord: IChord) => void;
     // onMoveChord: (chordId: string, desiredIndex: number) => void;
 }
 
-const SongPartsSelector: React.SFC<IPartEditorChordsSelectorProps> = (props: IPartEditorChordsSelectorProps) => (
+const PartEditorChordsSelector: React.SFC<IPartEditorChordsSelectorProps> = (props: IPartEditorChordsSelectorProps) => (
     <React.Fragment>
         <div className="selector-title mt-l">Chords</div>
-        <div>Here be the chords</div>
+        <div>Here be the chords ({props.chords.length})</div>
 
         <PButton
             className="mt-m"
@@ -27,4 +27,4 @@ const SongPartsSelector: React.SFC<IPartEditorChordsSelectorProps> = (props: IPa
     </React.Fragment>
 );
 
-export default SongPartsSelector;
+export default PartEditorChordsSelector;

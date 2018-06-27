@@ -5,11 +5,18 @@ import SongPartEditor from "components/SongPartEditor";
 import { IRootState } from "store/reducers/root";
 import { actionCreators as partsActions } from "store/actions/parts";
 import { actionCreators as songEditorActions, deletePartAndSelectOther } from "store/actions/songEditor";
-import { getPartBeingEdited, canPartBeDeleted, getSong, isShowingConfirmDeletePart } from "store/selectors/songEditor";
+import {
+    getPartBeingEdited,
+    canPartBeDeleted,
+    getSong,
+    isShowingConfirmDeletePart,
+    getChordsFromPartBeingEdited,
+} from "store/selectors/songEditor";
 
 const mapStateToProps = (state: IRootState) => {
     const part = getPartBeingEdited(state);
     return {
+        chords: getChordsFromPartBeingEdited(state),
         song: getSong(state),
         part,
         canBeDeleted: part && canPartBeDeleted(state, part),
