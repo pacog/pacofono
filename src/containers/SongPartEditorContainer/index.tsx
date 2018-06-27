@@ -4,7 +4,12 @@ import { ISongPart, ISong } from "types";
 import SongPartEditor from "components/SongPartEditor";
 import { IRootState } from "store/reducers/root";
 import { actionCreators as partsActions } from "store/actions/parts";
-import { actionCreators as songEditorActions, deletePartAndSelectOther } from "store/actions/songEditor";
+import {
+    actionCreators as songEditorActions,
+    deletePartAndSelectOther,
+    addChordToPartBeingEdited,
+} from "store/actions/songEditor";
+
 import {
     getPartBeingEdited,
     canPartBeDeleted,
@@ -37,6 +42,9 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
         },
         onConfirmDeletePart: (part: ISongPart, song: ISong) => {
             dispatch(deletePartAndSelectOther(part, song) as any);
+        },
+        onAddChord: () => {
+            dispatch(addChordToPartBeingEdited() as any);
         },
     };
 };

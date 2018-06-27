@@ -3,8 +3,8 @@ import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { IRootState } from "store/reducers/root";
 import { RootAction } from "store/actions";
-import { ISong, ISongPart } from "types";
-import { getSong, getOriginalSong, isEditingSong } from "store/selectors/songEditor";
+import { ISong, ISongPart, IChord } from "types";
+import { getSong, getOriginalSong, isEditingSong, getPartBeingEdited } from "store/selectors/songEditor";
 import { getSavedSongs, getSong as getSongFromStore } from "store/selectors/songs";
 import { duplicateSong, cascadeDeleteSong } from "store/actions/songs";
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
@@ -163,5 +163,14 @@ export const deletePartAndSelectOther =
                 const songWithoutPart = getSongFromStore(getState(), song.id);
                 return dispatch(actionCreators.selectSongPartToEdit(songWithoutPart.parts[0]));
             });
+    };
+};
+
+export const addChordToPartBeingEdited = (): ThunkAction<IChord, IRootState, {}, RootAction> => {
+    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): IChord => {
+        const part = getPartBeingEdited(getState());
+        const newChord = getDefaultNewChord();
+        dispatch(chordsActions.addChord(newChord, part.id));
+        return newChord;
     };
 };
