@@ -1,3 +1,4 @@
+import { Promise } from "es6-promise";
 import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { IRootState } from "store/reducers/root";
@@ -86,8 +87,8 @@ export const actionCreators = {
     }),
 };
 
-export const saveSongBeingEdited = (): ThunkAction<ISong, IRootState, {}, RootAction> => {
-    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): ISong => {
+export const saveSongBeingEdited = (): ThunkAction<Promise<ISong>, IRootState, {}, RootAction> => {
+    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): Promise<ISong> => {
         const song = getSong(getState());
         if (isEditingSong(getState())) {
             const oldSong = getOriginalSong(getState());
@@ -97,10 +98,13 @@ export const saveSongBeingEdited = (): ThunkAction<ISong, IRootState, {}, RootAc
             });
         }
         dispatch(actionCreators.stopEditing());
-        return song;
+        return new Promise((resolve) => {
+            resolve(song);
+        });
     };
 };
 
+// TODO add Promise
 export const restoreDefaults = (): ThunkAction<void, IRootState, {}, RootAction> => {
     return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {
         if (isEditingSong(getState())) {
