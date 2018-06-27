@@ -1,1 +1,47 @@
 @import "src/root-style/common";
+
+.chords-selector-title {
+    display: inline-block;
+}
+
+.chords-selector-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: $purple-3;
+}
+
+    .chords-selector-chord {
+        height: 200px;
+        min-width: 40px;
+        max-width: 200px;
+        position: relative;
+        background-color: $purple-3;
+
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            z-index: 1;
+            width: $g-s;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: $blue-4;
+        }
+    }
+
+    .chords-selector-chord-name {
+        position: absolute;
+        padding: $g-s $g-sm;
+        border-radius: $g-s;
+        background-color: $dark-transparent-1;
+        border: 1px solid $purple-2;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: $g-m;
+        z-index: 2;
+        white-space: nowrap;
+    }
