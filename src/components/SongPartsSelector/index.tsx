@@ -20,7 +20,9 @@ const SongPartsSelector: React.SFC<ISongPartsSelectorProps> = (props: ISongParts
 
         <DragDropContext
             onDragEnd={(dragResult) => {
-                props.onMovePart(dragResult.draggableId, dragResult.destination.index);
+                if (dragResult.destination) {
+                    props.onMovePart(dragResult.draggableId, dragResult.destination.index);
+                }
             }}
         >
             <Droppable droppableId="droppable">
