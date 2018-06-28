@@ -18,6 +18,7 @@ import {
     getChordsFromPartBeingEdited,
     getChordBeingEdited,
 } from "store/selectors/songEditor";
+import { actionCreators as chordsActions } from "store/actions/chords";
 
 const mapStateToProps = (state: IRootState) => {
     const part = getPartBeingEdited(state);
@@ -50,6 +51,9 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
         },
         onSelectChord: (chord: IChord) => {
             dispatch(songEditorActions.selectChordToEdit(chord.id));
+        },
+        onChordNameChanged: (chord: IChord, newName: string) => {
+            dispatch(chordsActions.changeChordName(chord, newName));
         },
     };
 };

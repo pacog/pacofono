@@ -3,6 +3,7 @@ import * as React from "react";
 import { ISong, ISongPart, IChord } from "types";
 import PButton from "components/PButton";
 import PartEditorChordsSelector from "components/PartEditorChordsSelector";
+import ChordEditor from "components/ChordEditor";
 import "./style.scss";
 import ConfirmDeletePart from "./confirmDeletePart";
 
@@ -19,6 +20,7 @@ interface ISongPartEditorProps {
     onAddChord: () => void;
     selectedChord: IChord;
     onSelectChord: (chord: IChord) => void;
+    onChordNameChanged: (chord: IChord, newValue: string) => void;
 }
 
 const SongPartEditor: React.SFC<ISongPartEditorProps> = (props: ISongPartEditorProps) => (
@@ -55,6 +57,13 @@ const SongPartEditor: React.SFC<ISongPartEditorProps> = (props: ISongPartEditorP
             onSelectChord={ props.onSelectChord }
             selectedChord={ props.selectedChord }
             ></PartEditorChordsSelector>
+        {
+            props.selectedChord &&
+            <ChordEditor
+                chord={ props.selectedChord }
+                onChordNameChanged={ props.onChordNameChanged }
+                ></ChordEditor>
+        }
     </div>
 );
 
