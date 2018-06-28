@@ -22,7 +22,7 @@ const PartEditorChordsSelector: React.SFC<IPartEditorChordsSelectorProps> = (pro
             Add chord</PButton>
         <div className="selector-title chords-selector-title mt-l">Chords</div>
         <ul className="chords-selector-list">
-            {props.chords.map( (chord, index) => (
+            {props.chords && props.chords.map( (chord, index) => (
                 <li key={chord.id}
                     className={
                         "chords-selector-chord " +
