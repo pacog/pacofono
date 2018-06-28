@@ -1,48 +1,75 @@
 @import "src/root-style/common";
 
-.chords-selector-title {
-    display: inline-block;
+.chords-selector {
+    position: relative;
 }
 
-.chords-selector-list {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: stretch;
-    background-color: $purple-3;
-}
+    .chords-selector-add-chord-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
 
-    .chords-selector-chord {
-        height: 200px;
-        min-width: 40px;
-        max-width: 200px;
-        position: relative;
+    .chords-selector-title {
+        display: inline-block;
+    }
+
+    .chords-selector-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: stretch;
         background-color: $purple-3;
-        flex: 1;
+    }
 
-        &:before {
-            content: '';
-            display: block;
+        .chords-selector-chord {
+            height: 200px;
+            min-width: 40px;
+            max-width: 200px;
+            position: relative;
+            background-color: $purple-3;
+            flex: 1;
+            transition: background-color 0.1s ease-in-out;
+
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                z-index: 1;
+                width: $g-s;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: $blue-4;
+            }
+
+            &:hover {
+                background-color: lighten($purple-3, 5);
+            }
+        }
+
+        .chords-selector-chord-selected {
+            background-color: lighten($purple-3, 10);
+
+            &:hover {
+                background-color: lighten($purple-3, 10);
+            }
+
+            &:before {
+                background-color: $blue-5;
+            }
+        }
+
+        .chords-selector-chord-name {
             position: absolute;
-            top: 0;
-            bottom: 0;
-            z-index: 1;
-            width: $g-s;
+            padding: $g-s $g-sm;
+            border-radius: $g-s;
+            background-color: $dark-transparent-1;
+            border: 1px solid $purple-2;
             left: 50%;
             transform: translateX(-50%);
-            background-color: $blue-4;
+            bottom: $g-m;
+            z-index: 2;
+            white-space: nowrap;
         }
-    }
-
-    .chords-selector-chord-name {
-        position: absolute;
-        padding: $g-s $g-sm;
-        border-radius: $g-s;
-        background-color: $dark-transparent-1;
-        border: 1px solid $purple-2;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: $g-m;
-        z-index: 2;
-        white-space: nowrap;
-    }

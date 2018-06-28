@@ -14,13 +14,19 @@ interface IPartEditorChordsSelectorProps {
 // +
 // ((props.selectedChord === chord) ? "chords-selector-chord-selected" : "")
 const PartEditorChordsSelector: React.SFC<IPartEditorChordsSelectorProps> = (props: IPartEditorChordsSelectorProps) => (
-    <React.Fragment>
+    <div className="chords-selector">
+        <PButton
+            className="mt-m chords-selector-add-chord-button"
+            secondary={true}
+            onClick={props.onAddChord}>
+            Add chord</PButton>
         <div className="selector-title chords-selector-title mt-l">Chords</div>
         <ul className="chords-selector-list">
             {props.chords.map( (chord, index) => (
                 <li key={chord.id}
                     className={
-                        "chords-selector-chord "
+                        "chords-selector-chord " +
+                        ((props.selectedChord === chord) ? "chords-selector-chord-selected" : "")
                     }
                     onClick={
                        () => { props.onSelectChord(chord); }
@@ -33,14 +39,7 @@ const PartEditorChordsSelector: React.SFC<IPartEditorChordsSelectorProps> = (pro
             ))}
         </ul>
 
-        <PButton
-            className="mt-m"
-            secondary={true}
-            fullWidth={true}
-            onClick={props.onAddChord}>
-            Add chord</PButton>
-
-    </React.Fragment>
+    </div>
 );
 
 function getNameForChordWithoutName(chordIndex: number) {

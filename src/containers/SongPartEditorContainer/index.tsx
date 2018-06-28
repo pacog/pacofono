@@ -16,6 +16,7 @@ import {
     getSong,
     isShowingConfirmDeletePart,
     getChordsFromPartBeingEdited,
+    getChordBeingEdited,
 } from "store/selectors/songEditor";
 
 const mapStateToProps = (state: IRootState) => {
@@ -26,7 +27,7 @@ const mapStateToProps = (state: IRootState) => {
         part,
         canBeDeleted: part && canPartBeDeleted(state, part),
         isShowingConfirmDeletePart: isShowingConfirmDeletePart(state),
-        selectedChord: null as IChord,
+        selectedChord: getChordBeingEdited(state),
     };
 };
 
@@ -48,7 +49,7 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
             dispatch(addChordToPartBeingEdited() as any);
         },
         onSelectChord: (chord: IChord) => {
-            console.log("onSelectChord", chord);
+            dispatch(songEditorActions.selectChordToEdit(chord.id));
         },
     };
 };
