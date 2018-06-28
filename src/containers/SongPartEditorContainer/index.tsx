@@ -8,6 +8,7 @@ import {
     actionCreators as songEditorActions,
     deletePartAndSelectOther,
     addChordToPartBeingEdited,
+    deleteChordAndSelectOther,
 } from "store/actions/songEditor";
 
 import {
@@ -58,7 +59,7 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
             dispatch(chordsActions.changeChordName(chord, newName));
         },
         onDeleteChord: (chord: IChord, partId: string) => {
-            dispatch(chordsActions.deleteChord(chord, partId));
+            dispatch(deleteChordAndSelectOther(chord, partId) as any);
         },
     };
 };

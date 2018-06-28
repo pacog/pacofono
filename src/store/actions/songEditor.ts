@@ -11,6 +11,7 @@ import {
     getPartBeingEdited,
     getChordsFromPartBeingEdited,
 } from "store/selectors/songEditor";
+import { getPartById } from "store/selectors/parts";
 import { getSavedSongs, getSong as getSongFromStore } from "store/selectors/songs";
 import { duplicateSong, cascadeDeleteSong } from "store/actions/songs";
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
@@ -190,6 +191,7 @@ export const openForExistingSong = (song: ISong): ThunkAction<Promise<ISong>, IR
     };
 };
 
+// TODO: test
 export const deletePartAndSelectOther =
 (part: ISongPart, song: ISong): ThunkAction<void, IRootState, {}, RootAction> => {
     return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {
@@ -198,6 +200,16 @@ export const deletePartAndSelectOther =
                 const songWithoutPart = getSongFromStore(getState(), song.id);
                 return dispatch(actionCreators.selectSongPartToEdit(songWithoutPart.parts[0]));
             });
+    };
+};
+
+// TODO: test
+export const deleteChordAndSelectOther =
+(chord: IChord, partId: string): ThunkAction<void, IRootState, {}, RootAction> => {
+    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {
+        dispatch(chordsActions.deleteChord(chord, partId));
+        const partWithoutChord = getPartById(getState(), partId);
+        dispatch(actionCreators.selectChordToEdit(partWithoutChord.chords[0]));
     };
 };
 
