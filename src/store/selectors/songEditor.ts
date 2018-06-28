@@ -2,7 +2,7 @@ import { IRootState } from "store/reducers/root";
 import { ISong, ISongPart, IChord } from "types";
 import { getSong as getSongFromSongStore } from "store/selectors/songs";
 import { getPartById } from "store/selectors/parts";
-import { getPartChords } from "store/selectors/chords";
+import { getPartChords, getChordById } from "store/selectors/chords";
 
 export const getSong = (state: IRootState): ISong => {
     if (!state.songEditor.songId) {
@@ -41,13 +41,19 @@ export const getPartBeingEdited = (state: IRootState): ISongPart => {
     return getPartById(state, state.songEditor.selectedPartId);
 };
 
-// TODO: test
-export const getChordsFromPartBeingEdited =  (state: IRootState): IChord[] => {
+export const getChordsFromPartBeingEdited = (state: IRootState): IChord[] => {
     const part = getPartBeingEdited(state);
     if (!part) {
         return null;
     }
     return getPartChords(state, part);
+};
+
+export const getChordBeingEdited = (state: IRootState): IChord => {
+    if (!state.songEditor.selectedChordId) {
+        return null;
+    }
+    return getChordById(state, state.songEditor.selectedChordId);
 };
 
 export const isPartBeingEdited = (state: IRootState, part: ISongPart): boolean => {

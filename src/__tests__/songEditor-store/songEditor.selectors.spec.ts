@@ -12,7 +12,10 @@ import { getSong,
     isPartBeingEdited,
     canPartBeDeleted,
     isShowingConfirmDeletePart,
+    getChordsFromPartBeingEdited,
+    getChordBeingEdited,
 } from "store/selectors/songEditor";
+import { getMockStore, data as mockData } from "test-helpers/mockStoreData";
 
 describe("songEditor store selectors", () => {
     it("should work after starting to edit a song", () => {
@@ -148,6 +151,22 @@ describe("songEditor store selectors", () => {
             actionCreators.showConfirmDeletePart(false),
         );
         expect(isShowingConfirmDeletePart(newState2)).toBe(false);
+    });
+
+    it("should return getChordsFromPartBeingEdited correctly", () => {
+        const state = rootReducer(getMockStore(), { type: null });
+        const newState = rootReducer(state, actionCreators.startEditingNewSong(mockData.SONG_1));
+        const newState2 = rootReducer(newState, actionCreators.selectSongPartToEdit(mockData.PART_1.id));
+        const newState3 = rootReducer(newState2, actionCreators.selectChordToEdit(mockData.CHORD_1.id));
+        expect(getChordsFromPartBeingEdited(newState3)).toEqual([mockData.CHORD_1]);
+    });
+
+    it("should return getChordBeingEdited correctly", () => {
+        const state = rootReducer(getMockStore(), { type: null });
+        const newState = rootReducer(state, actionCreators.startEditingNewSong(mockData.SONG_1));
+        const newState2 = rootReducer(newState, actionCreators.selectSongPartToEdit(mockData.PART_1.id));
+        const newState3 = rootReducer(newState2, actionCreators.selectChordToEdit(mockData.CHORD_1.id));
+        expect(getChordBeingEdited(newState3)).toEqual(mockData.CHORD_1);
     });
 
 });

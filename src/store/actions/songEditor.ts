@@ -4,7 +4,13 @@ import { ThunkAction } from "redux-thunk";
 import { IRootState } from "store/reducers/root";
 import { RootAction } from "store/actions";
 import { ISong, ISongPart, IChord } from "types";
-import { getSong, getOriginalSong, isEditingSong, getPartBeingEdited } from "store/selectors/songEditor";
+import {
+    getSong,
+    getOriginalSong,
+    isEditingSong,
+    getPartBeingEdited,
+    getChordsFromPartBeingEdited,
+} from "store/selectors/songEditor";
 import { getSavedSongs, getSong as getSongFromStore } from "store/selectors/songs";
 import { duplicateSong, cascadeDeleteSong } from "store/actions/songs";
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
@@ -161,6 +167,7 @@ export const openForNewSong = (): ThunkAction<ISong, IRootState, {}, RootAction>
         const fullSong = getSongFromStore(getState(), newSong.id);
         dispatch(actionCreators.startEditingNewSong(fullSong));
         dispatch(actionCreators.selectSongPartToEdit(newPart.id));
+        dispatch(actionCreators.selectChordToEdit(newChord.id));
         return fullSong;
     };
 };
@@ -172,6 +179,12 @@ export const openForExistingSong = (song: ISong): ThunkAction<Promise<ISong>, IR
                 dispatch(modalsActions.openSongEditor());
                 dispatch(actionCreators.startEditingExistingSong(duplicatedSong, song));
                 dispatch(actionCreators.selectSongPartToEdit(duplicatedSong.parts[0]));
+                const chordsInEditedPart = getChordsFromPartBeingEdited(getState());
+                if (chordsInEditedPart[0]) {
+                    dispatch(actionCreators.selectChordToEdit(chordsInEditedPart[0].id));
+                } else {
+                    dispatch(actionCreators.selectChordToEdit(null));
+                }
                 return duplicatedSong;
             });
     };

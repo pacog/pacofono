@@ -4,7 +4,13 @@ import {
     openForNewSong,
     openForExistingSong,
 } from "store/actions/songEditor";
-import { getSong, getOriginalSong, getPartBeingEdited } from "store/selectors/songEditor";
+import {
+    getSong,
+    getOriginalSong,
+    getPartBeingEdited,
+    getChordBeingEdited,
+    getChordsFromPartBeingEdited,
+} from "store/selectors/songEditor";
 import { isSongEditorModalOpen } from "store/selectors/modals";
 import { getPartById } from "store/selectors/parts";
 import { getChordById } from "store/selectors/chords";
@@ -28,7 +34,7 @@ describe("songEditor store async actions", () => {
 
     describe("openForNewSong", () => {
         it("should work when opening", async () => {
-            expect.assertions(7);
+            expect.assertions(9);
             const store = createEmptyStore();
             const newSong = await store.dispatch(openForNewSong() as any);
             const state = store.getState();
@@ -52,6 +58,8 @@ describe("songEditor store async actions", () => {
             expect(getPartById(state, "uuid_2")).toEqual(expectedNewPart);
             expect(getChordById(state, "uuid_3")).toEqual(expectedNewChord);
             expect(getPartBeingEdited(state)).toEqual(expectedNewPart);
+            expect(getChordBeingEdited(state)).toEqual(expectedNewChord);
+            expect(getChordsFromPartBeingEdited(state)).toEqual([expectedNewChord]);
             expect(newSong).toEqual(expectedSong);
             expect(getOriginalSong(state)).toBe(null);
         });
@@ -59,7 +67,7 @@ describe("songEditor store async actions", () => {
 
     describe("openForExistingSong", () => {
         it("should work when editing song", async () => {
-            expect.assertions(9);
+            expect.assertions(11);
             const store = createEmptyStore(getMockStore());
             const newSong = await store.dispatch(openForExistingSong(mockData.SONG_1) as any);
             const state = store.getState();
@@ -95,7 +103,8 @@ describe("songEditor store async actions", () => {
             expect(getChordById(state, "uuid_6")).toEqual(expectedNewChord1);
             expect(getChordById(state, "uuid_8")).toEqual(expectedNewChord2);
             expect(getPartBeingEdited(state)).toEqual(expectedNewPart1);
-            // expect(getChordBeingEdited(state)).toEqual(expectedNewChord1);
+            expect(getChordBeingEdited(state)).toEqual(expectedNewChord1);
+            expect(getChordsFromPartBeingEdited(state)).toEqual([expectedNewChord1]);
             expect(newSong).toEqual(expectedSong);
             expect(getOriginalSong(state)).toEqual(mockData.SONG_1);
         });

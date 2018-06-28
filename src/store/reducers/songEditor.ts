@@ -7,6 +7,7 @@ import { START_EDITING_NEW_SONG,
     SHOW_CONFIRM_RESTORE_DEFAULTS,
     SHOW_CONFIRM_DELETE_SONG,
     SELECT_SONG_PART_TO_EDIT,
+    SELECT_CHORD_TO_EDIT,
     SHOW_CONFIRM_DELETE_PART,
 } from "store/actions/songEditor";
 
@@ -103,14 +104,10 @@ function selectedPartId(state: string = null, action: RootAction) {
 
 function selectedChordId(state: string = null, action: RootAction) {
     switch (action.type) {
-        // case STOP_EDITING:
-        //     return null;
-        // case START_EDITING_NEW_SONG:
-        //     return action.song.parts[0];
-        // case START_EDITING_EXISTING_SONG:
-        //     return action.song.parts[0];
-        // case SELECT_SONG_PART_TO_EDIT:
-        //     return action.partId;
+        case STOP_EDITING:
+            return null;
+        case SELECT_CHORD_TO_EDIT:
+            return action.chordId;
         default:
             return state;
     }

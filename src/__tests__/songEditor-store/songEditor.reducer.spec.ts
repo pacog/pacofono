@@ -182,4 +182,29 @@ describe("songEditor store reducer", () => {
         );
         expect(stateAfter10.isShowingConfirmDeletePart).toBe(false);
     });
+
+    it("should be able to select a different chord to edit", () => {
+
+        const initialState = rootReducer({}, { type: null });
+        const stateAfter = songEditorReducer(
+            initialState.songEditor,
+            actionCreators.selectChordToEdit("chord_id_1"),
+        );
+        expect(stateAfter.selectedChordId).toEqual("chord_id_1");
+        const stateAfter2 = songEditorReducer(
+            stateAfter,
+            actionCreators.selectChordToEdit(null),
+        );
+        expect(stateAfter2.selectedChordId).toEqual(null);
+        const stateAfter3 = songEditorReducer(
+            stateAfter2,
+            actionCreators.selectChordToEdit("chord_id_2"),
+        );
+        expect(stateAfter3.selectedChordId).toEqual("chord_id_2");
+        const stateAfter4 = songEditorReducer(
+            stateAfter3,
+            actionCreators.stopEditing(),
+        );
+        expect(stateAfter4.selectedChordId).toEqual(null);
+    });
 });
