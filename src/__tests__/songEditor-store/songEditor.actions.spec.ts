@@ -6,6 +6,7 @@ import {
     SHOW_CONFIRM_DELETE_SONG,
     SELECT_SONG_PART_TO_EDIT,
     SHOW_CONFIRM_DELETE_PART,
+    SELECT_CHORD_TO_EDIT,
     actionCreators,
 } from "store/actions/songEditor";
 
@@ -99,6 +100,19 @@ describe("songEditor store actions", () => {
             .toEqual({
                 type: SHOW_CONFIRM_DELETE_PART,
                 shouldShow: false,
+            });
+    });
+
+    it("should have a select chord to edit action", () => {
+        expect(actionCreators.selectChordToEdit("chord_id_12"))
+            .toEqual({
+                type: SELECT_CHORD_TO_EDIT,
+                chordId: "chord_id_12",
+            });
+        expect(actionCreators.selectChordToEdit(null))
+            .toEqual({
+                type: SELECT_CHORD_TO_EDIT,
+                chordId: null,
             });
     });
 });

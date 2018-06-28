@@ -17,6 +17,7 @@ export interface ISongEditorState {
     readonly isShowingConfirmRestoreDefaults: boolean;
     readonly isShowingConfirmDeleteSong: boolean;
     readonly selectedPartId: string;
+    readonly selectedChordId: string;
     readonly isShowingConfirmDeletePart: boolean;
 }
 
@@ -27,6 +28,7 @@ export const songEditorReducer = combineReducers<ISongEditorState>({
     isShowingConfirmRestoreDefaults,
     isShowingConfirmDeleteSong,
     selectedPartId,
+    selectedChordId,
     isShowingConfirmDeletePart,
 });
 
@@ -92,12 +94,23 @@ function selectedPartId(state: string = null, action: RootAction) {
     switch (action.type) {
         case STOP_EDITING:
             return null;
-        case START_EDITING_NEW_SONG:
-            return action.song.parts[0];
-        case START_EDITING_EXISTING_SONG:
-            return action.song.parts[0];
         case SELECT_SONG_PART_TO_EDIT:
             return action.partId;
+        default:
+            return state;
+    }
+}
+
+function selectedChordId(state: string = null, action: RootAction) {
+    switch (action.type) {
+        // case STOP_EDITING:
+        //     return null;
+        // case START_EDITING_NEW_SONG:
+        //     return action.song.parts[0];
+        // case START_EDITING_EXISTING_SONG:
+        //     return action.song.parts[0];
+        // case SELECT_SONG_PART_TO_EDIT:
+        //     return action.partId;
         default:
             return state;
     }

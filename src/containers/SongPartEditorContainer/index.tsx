@@ -1,6 +1,6 @@
 import { connect, Dispatch } from "react-redux";
 
-import { ISongPart, ISong } from "types";
+import { ISongPart, ISong, IChord } from "types";
 import SongPartEditor from "components/SongPartEditor";
 import { IRootState } from "store/reducers/root";
 import { actionCreators as partsActions } from "store/actions/parts";
@@ -26,6 +26,7 @@ const mapStateToProps = (state: IRootState) => {
         part,
         canBeDeleted: part && canPartBeDeleted(state, part),
         isShowingConfirmDeletePart: isShowingConfirmDeletePart(state),
+        selectedChord: null as IChord,
     };
 };
 
@@ -45,6 +46,9 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
         },
         onAddChord: () => {
             dispatch(addChordToPartBeingEdited() as any);
+        },
+        onSelectChord: (chord: IChord) => {
+            console.log("onSelectChord", chord);
         },
     };
 };

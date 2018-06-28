@@ -6,9 +6,9 @@ import "./style.scss";
 
 interface IPartEditorChordsSelectorProps {
     chords: IChord[];
-    // selectedChord: IChord;
+    selectedChord: IChord;
     onAddChord: () => void;
-    // onSelectChord: (chord: IChord) => void;
+    onSelectChord: (chord: IChord) => void;
     // onMoveChord: (chordId: string, desiredIndex: number) => void;
 }
 // +
@@ -22,9 +22,9 @@ const PartEditorChordsSelector: React.SFC<IPartEditorChordsSelectorProps> = (pro
                     className={
                         "chords-selector-chord "
                     }
-                    // onClick={
-                    //    () => { props.onPartSelected(part); }
-                    // }
+                    onClick={
+                       () => { props.onSelectChord(chord); }
+                    }
                     >
                     <div className="chords-selector-chord-name">
                         { chord.name || getNameForChordWithoutName(index) }

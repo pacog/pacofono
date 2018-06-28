@@ -12,6 +12,7 @@ describe("songEditor store reducer", () => {
             isShowingConfirmRestoreDefaults: false,
             isShowingConfirmDeleteSong: false,
             selectedPartId: null,
+            selectedChordId: null,
             isShowingConfirmDeletePart: false,
         });
     });
@@ -29,7 +30,6 @@ describe("songEditor store reducer", () => {
         );
         expect(stateAfter.isNewSong).toBe(true);
         expect(stateAfter.songId).toEqual(songToStartEditing.id);
-        expect(stateAfter.selectedPartId).toEqual("partId");
         expect(stateAfter.originalSongId).toEqual(null);
 
         const stateAfter2 = songEditorReducer(
@@ -38,7 +38,6 @@ describe("songEditor store reducer", () => {
         );
         expect(stateAfter2.isNewSong).toBe(false);
         expect(stateAfter2.songId).toEqual(null);
-        expect(stateAfter2.selectedPartId).toEqual(null);
         expect(stateAfter2.originalSongId).toEqual(null);
     });
 
@@ -60,7 +59,6 @@ describe("songEditor store reducer", () => {
         );
         expect(stateAfter.isNewSong).toBe(false);
         expect(stateAfter.songId).toEqual(songToStartEditing.id);
-        expect(stateAfter.selectedPartId).toEqual("partIdCopy");
         expect(stateAfter.originalSongId).toEqual("111");
 
         const stateAfter2 = songEditorReducer(
@@ -69,7 +67,6 @@ describe("songEditor store reducer", () => {
         );
         expect(stateAfter2.isNewSong).toBe(false);
         expect(stateAfter2.songId).toEqual(null);
-        expect(stateAfter2.selectedPartId).toEqual(null);
         expect(stateAfter2.originalSongId).toEqual(null);
     });
 
@@ -117,7 +114,6 @@ describe("songEditor store reducer", () => {
             initialState.songEditor,
             actionCreators.startEditingExistingSong(songToStartEditing, originalSong),
         );
-        expect(stateAfter.selectedPartId).toEqual("partIdCopy");
 
         const stateAfter2 = songEditorReducer(
             stateAfter,

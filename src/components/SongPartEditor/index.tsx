@@ -17,6 +17,8 @@ interface ISongPartEditorProps {
     onCancelDeletePart: () => void;
     onConfirmDeletePart: (part: ISongPart, song: ISong) => void;
     onAddChord: () => void;
+    selectedChord: IChord;
+    onSelectChord: (chord: IChord) => void;
 }
 
 const SongPartEditor: React.SFC<ISongPartEditorProps> = (props: ISongPartEditorProps) => (
@@ -49,7 +51,9 @@ const SongPartEditor: React.SFC<ISongPartEditorProps> = (props: ISongPartEditorP
         }
         <PartEditorChordsSelector
             onAddChord={ props.onAddChord }
-            chords={props.chords}
+            chords={ props.chords }
+            onSelectChord={ props.onSelectChord }
+            selectedChord={ props.selectedChord }
             ></PartEditorChordsSelector>
     </div>
 );

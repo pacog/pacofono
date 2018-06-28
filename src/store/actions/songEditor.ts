@@ -23,6 +23,7 @@ export const SHOW_CONFIRM_RESTORE_DEFAULTS = "SHOW_CONFIRM_RESTORE_DEFAULTS";
 export const SHOW_CONFIRM_DELETE_SONG = "SHOW_CONFIRM_DELETE_SONG";
 export const SELECT_SONG_PART_TO_EDIT = "SELECT_SONG_PART_TO_EDIT";
 export const SHOW_CONFIRM_DELETE_PART = "SHOW_CONFIRM_DELETE_PART";
+export const SELECT_CHORD_TO_EDIT = "SELECT_CHORD_TO_EDIT";
 
 export interface ISongEditorActions {
     START_EDITING_NEW_SONG: {
@@ -52,6 +53,10 @@ export interface ISongEditorActions {
     SHOW_CONFIRM_DELETE_PART: {
         type: typeof SHOW_CONFIRM_DELETE_PART,
         shouldShow: boolean,
+    };
+    SELECT_CHORD_TO_EDIT: {
+        type: typeof SELECT_CHORD_TO_EDIT,
+        chordId: string,
     };
 }
 
@@ -84,6 +89,10 @@ export const actionCreators = {
     showConfirmDeletePart: (shouldShow: boolean): ISongEditorActions[typeof SHOW_CONFIRM_DELETE_PART] => ({
         type: SHOW_CONFIRM_DELETE_PART,
         shouldShow,
+    }),
+    selectChordToEdit: (chordId: string): ISongEditorActions[typeof SELECT_CHORD_TO_EDIT] => ({
+        type: SELECT_CHORD_TO_EDIT,
+        chordId,
     }),
 };
 
@@ -151,7 +160,20 @@ export const openForNewSong = (): ThunkAction<ISong, IRootState, {}, RootAction>
         dispatch(chordsActions.addChord(newChord, newPart.id));
         const fullSong = getSongFromStore(getState(), newSong.id);
         dispatch(actionCreators.startEditingNewSong(fullSong));
+        dispatch(actionCreators.selectSongPartToEdit(newPart.id));
         return fullSong;
+    };
+};
+
+export const openForExistingSong = (song: ISong): ThunkAction<Promise<ISong>, IRootState, {}, RootAction> => {
+    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): Promise<ISong> => {
+        return dispatch(duplicateSong(song) as any)
+            .then((duplicatedSong: ISong) => {
+                dispatch(modalsActions.openSongEditor());
+                dispatch(actionCreators.startEditingExistingSong(duplicatedSong, song));
+                dispatch(actionCreators.selectSongPartToEdit(duplicatedSong.parts[0]));
+                return duplicatedSong;
+            });
     };
 };
 
