@@ -1,23 +1,28 @@
 import * as React from "react";
 
-import { IChord } from "types";
-// import PButton from "components/PButton";
-// import PartEditorChordsSelector from "components/PartEditorChordsSelector";
-// import ChordEditor from "components/ChordEditor";
+import { IChord, ISongPart } from "types";
+import PButton from "components/PButton";
 import "./style.scss";
-// import ConfirmDeletePart from "./confirmDeletePart";
 
 interface IChordEditorProps {
+    part: ISongPart;
     chord: IChord;
     onChordNameChanged: (chord: IChord, newValue: string) => void;
+    onDeleteChord: (chord: IChord, partId: string) => void;
 }
 
 const ChordEditor: React.SFC<IChordEditorProps> = (props: IChordEditorProps) => (
     <div className="chord-editor mt-l">
-        <input
-            value={props.chord.name}
-            className="p-input song-editor-name-input grow-full-width"
-            onChange={(e) => { props.onChordNameChanged(props.chord, e.target.value); } } />
+        <div className="line-center">
+            <input
+                value={props.chord.name}
+                className="p-input song-editor-name-input grow-full-width"
+                onChange={(e) => { props.onChordNameChanged(props.chord, e.target.value); } } />
+            <PButton
+                onClick={() => { props.onDeleteChord(props.chord, props.part.id); }}
+                secondary={true}
+                >Delete chord</PButton>
+        </div>
     </div>
 );
 

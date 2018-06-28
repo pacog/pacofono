@@ -11,8 +11,7 @@ interface IPartEditorChordsSelectorProps {
     onSelectChord: (chord: IChord) => void;
     // onMoveChord: (chordId: string, desiredIndex: number) => void;
 }
-// +
-// ((props.selectedChord === chord) ? "chords-selector-chord-selected" : "")
+
 const PartEditorChordsSelector: React.SFC<IPartEditorChordsSelectorProps> = (props: IPartEditorChordsSelectorProps) => (
     <div className="chords-selector">
         <PButton

@@ -55,6 +55,9 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
         onChordNameChanged: (chord: IChord, newName: string) => {
             dispatch(chordsActions.changeChordName(chord, newName));
         },
+        onDeleteChord: (chord: IChord, partId: string) => {
+            dispatch(chordsActions.deleteChord(chord, partId));
+        },
     };
 };
 
