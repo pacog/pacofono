@@ -17,6 +17,7 @@ import {
     isShowingConfirmDeletePart,
     getChordsFromPartBeingEdited,
     getChordBeingEdited,
+    canSelectedChordBeDeleted,
 } from "store/selectors/songEditor";
 import { actionCreators as chordsActions } from "store/actions/chords";
 
@@ -29,6 +30,7 @@ const mapStateToProps = (state: IRootState) => {
         canBeDeleted: part && canPartBeDeleted(state, part),
         isShowingConfirmDeletePart: isShowingConfirmDeletePart(state),
         selectedChord: getChordBeingEdited(state),
+        canSelectedChordBeDeleted: canSelectedChordBeDeleted(state),
     };
 };
 

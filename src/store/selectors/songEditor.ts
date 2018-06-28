@@ -79,3 +79,8 @@ export const canPartBeDeleted = (state: IRootState, part: ISongPart): boolean =>
 export const isShowingConfirmDeletePart = (state: IRootState): boolean => {
     return state.songEditor.isShowingConfirmDeletePart;
 };
+
+export const canSelectedChordBeDeleted = (state: IRootState): boolean => {
+    const chords = getChordsFromPartBeingEdited(state);
+    return chords && chords.length > 1;
+};
