@@ -1,4 +1,4 @@
-import { ADD_PART, DELETE_PART, CHANGE_PART_NAME, actionCreators } from "store/actions/parts";
+import { ADD_PART, DELETE_PART, CHANGE_PART_NAME, CHANGE_CHORD_INDEX, actionCreators } from "store/actions/parts";
 
 const TEST_PART = {
     id: "blach",
@@ -31,6 +31,18 @@ describe("Parts store actions", () => {
             type: CHANGE_PART_NAME,
             part: TEST_PART,
             newName,
+        });
+    });
+
+    it("should have a change chord index action", () => {
+        const partId = "part_34";
+        const chordId = "chord_1";
+        const desiredIndex = 3;
+        expect(actionCreators.changeChordIndex(partId, chordId, desiredIndex)).toEqual({
+            type: CHANGE_CHORD_INDEX,
+            partId,
+            chordId,
+            desiredIndex,
         });
     });
 });

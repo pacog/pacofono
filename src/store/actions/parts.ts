@@ -8,9 +8,11 @@ import { v1 as uuid } from "uuid";
 import { getChordById } from "store/selectors/chords";
 import { getPartById } from "store/selectors/parts";
 import { actionCreators as chordsActions } from "store/actions/chords";
+
 export const ADD_PART = "ADD_PART";
 export const DELETE_PART = "DELETE_PART";
 export const CHANGE_PART_NAME = "CHANGE_PART_NAME";
+export const CHANGE_CHORD_INDEX = "CHANGE_CHORD_INDEX";
 
 export interface IPartsActions {
     ADD_PART: {
@@ -27,6 +29,12 @@ export interface IPartsActions {
         type: typeof CHANGE_PART_NAME,
         part: ISongPart,
         newName: string,
+    };
+    CHANGE_CHORD_INDEX: {
+        type: typeof CHANGE_CHORD_INDEX,
+        partId: string,
+        chordId: string,
+        desiredIndex: number,
     };
 }
 
@@ -45,6 +53,13 @@ export const actionCreators = {
         type: CHANGE_PART_NAME,
         part,
         newName,
+    }),
+    changeChordIndex: (partId: string, chordId: string, desiredIndex: number):
+    IPartsActions[typeof CHANGE_CHORD_INDEX] => ({
+        type: CHANGE_CHORD_INDEX,
+        partId,
+        chordId,
+        desiredIndex,
     }),
 };
 

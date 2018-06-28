@@ -82,4 +82,47 @@ describe("Parts store reducer", () => {
         expect(stateAfter2.parts[id]).toEqual(undefined);
         expect(stateAfter2.songs.song_12.parts).toEqual(["other_part"]);
     });
+
+    it("should be able to change the index of a chord", () => {
+        const song = {
+            id: "song34",
+            name: "mySong",
+            parts: ["part12"],
+        };
+        const part = {
+            id: "part12",
+            name: "myNewPart",
+            chords: ["chord_1", "chord_2", "chord_3"],
+        };
+
+        const initialState = rootReducer({}, { type: null });
+        const stateAfter = partsReducer(
+            initialState.parts,
+            actionCreators.addPart(part, song.id),
+        );
+
+        const stateAfter2 = partsReducer(
+            stateAfter,
+            actionCreators.changeChordIndex("part12", "chord_2", 0),
+        );
+        expect(stateAfter2[part.id].chords).toEqual(["chord_2", "chord_1", "chord_3"]);
+
+        const stateAfter3 = partsReducer(
+            stateAfter2,
+            actionCreators.changeChordIndex("part12", "chord_2", 2),
+        );
+        expect(stateAfter3[part.id].chords).toEqual(["chord_1", "chord_3", "chord_2"]);
+
+        const stateAfter4 = partsReducer(
+            stateAfter3,
+            actionCreators.changeChordIndex("part12", "chord_2", 2),
+        );
+        expect(stateAfter4[part.id].chords).toEqual(["chord_1", "chord_3", "chord_2"]);
+
+        const stateAfter5 = partsReducer(
+            stateAfter4,
+            actionCreators.changeChordIndex("part12", "chord_2", 1),
+        );
+        expect(stateAfter5[part.id].chords).toEqual(["chord_1", "chord_2", "chord_3"]);
+    });
 });
