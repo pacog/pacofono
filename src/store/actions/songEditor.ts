@@ -191,7 +191,6 @@ export const openForExistingSong = (song: ISong): ThunkAction<Promise<ISong>, IR
     };
 };
 
-// TODO: test
 export const deletePartAndSelectOther =
 (part: ISongPart, song: ISong): ThunkAction<void, IRootState, {}, RootAction> => {
     return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {

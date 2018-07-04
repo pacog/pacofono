@@ -88,6 +88,7 @@
       "^test-helpers/(.*)": "<rootDir>/src/test-helpers/$1"
     },
     "collectCoverage": true,
-    "coverageReporters": ["json", "lcov", "text"]
+    "coverageReporters": ["json", "lcov", "text"],
+    "coveragePathIgnorePatterns": ["/constants/", "/test-helpers/"]
   }
 }
