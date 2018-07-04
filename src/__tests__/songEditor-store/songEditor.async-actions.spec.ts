@@ -8,6 +8,7 @@ import {
     deleteSongBeingEdited,
     deletePartAndSelectOther,
     deleteChordAndSelectOther,
+    addChordToPartBeingEdited,
     actionCreators as songEditorActions,
 } from "store/actions/songEditor";
 import { actionCreators as songActions} from "store/actions/songs";
@@ -216,6 +217,27 @@ describe("songEditor store async actions", () => {
             expect(newPartBeingEdited.chords.length).toBe(1);
             expect(getChordBeingEdited(store.getState()))
                 .toEqual(getChordById(store.getState(), newPartBeingEdited.chords[0]));
+        });
+    });
+
+    describe("addChordToPartBeingEdited", () => {
+        it("should be able to add a chord", async () => {
+            expect.assertions(3);
+            const store = createEmptyStore(getMockStore());
+            await store.dispatch(openForExistingSong(mockData.SONG_2) as any);
+            const partBeingEdited = getPartBeingEdited(store.getState());
+            expect(partBeingEdited.chords.length).toBe(2);
+
+            await store.dispatch(addChordToPartBeingEdited() as any);
+
+            const newPartBeingEdited = getPartBeingEdited(store.getState());
+            expect(newPartBeingEdited.chords).toEqual(["uuid_46", "uuid_47", "uuid_48"]);
+            const expectedNewChord = {
+                id: "uuid_48",
+                name: "New chord",
+                notes: ([] as string[]),
+            };
+            expect(getChordById(store.getState(), "uuid_48")).toEqual(expectedNewChord);
         });
     });
 

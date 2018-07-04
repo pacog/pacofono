@@ -181,11 +181,8 @@ export const openForExistingSong = (song: ISong): ThunkAction<Promise<ISong>, IR
                 dispatch(actionCreators.startEditingExistingSong(duplicatedSong, song));
                 dispatch(actionCreators.selectSongPartToEdit(duplicatedSong.parts[0]));
                 const chordsInEditedPart = getChordsFromPartBeingEdited(getState());
-                if (chordsInEditedPart[0]) {
-                    dispatch(actionCreators.selectChordToEdit(chordsInEditedPart[0].id));
-                } else {
-                    dispatch(actionCreators.selectChordToEdit(null));
-                }
+                // We assume we always have a part in the song to edit
+                dispatch(actionCreators.selectChordToEdit(chordsInEditedPart[0].id));
                 return duplicatedSong;
             });
     };

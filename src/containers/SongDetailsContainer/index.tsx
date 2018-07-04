@@ -1,5 +1,6 @@
-import { connect, Dispatch } from "react-redux";
-
+import { connect } from "react-redux";
+import { RootAction } from "store/actions";
+import { Dispatch } from "redux";
 import { ISong, ISongPart } from "types";
 import SongDetails from "components/SongDetails";
 import { IRootState } from "store/reducers/root";
@@ -23,7 +24,7 @@ const mapStateToProps = (state: IRootState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
+const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => {
     return {
         onEditSong: (song: ISong) => {
             dispatch(openForExistingSong(song) as any);

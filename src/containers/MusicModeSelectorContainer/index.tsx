@@ -1,5 +1,7 @@
 import * as React from "react";
-import { connect, Dispatch } from "react-redux";
+import { connect } from "react-redux";
+import { RootAction } from "store/actions";
+import { Dispatch } from "redux";
 import songIcon from "icons/song.svg";
 import MdLinearScale from "react-icons/md/linear-scale";
 
@@ -74,7 +76,7 @@ const mapStateToProps = (state: IRootState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
+const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => {
     return {
         changeMusicMode: (newMode: string) => dispatch(actionCreators.changeMusicMode(newMode)),
     };

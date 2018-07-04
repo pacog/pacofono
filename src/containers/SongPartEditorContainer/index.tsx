@@ -1,5 +1,6 @@
-import { connect, Dispatch } from "react-redux";
-
+import { connect } from "react-redux";
+import { RootAction } from "store/actions";
+import { Dispatch } from "redux";
 import { ISongPart, ISong, IChord } from "types";
 import SongPartEditor from "components/SongPartEditor";
 import { IRootState } from "store/reducers/root";
@@ -35,7 +36,7 @@ const mapStateToProps = (state: IRootState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<IRootState>) => {
+const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => {
     return {
         onPartNameChanged: (part: ISongPart, newName: string) => {
             dispatch(partsActions.changePartName(part, newName));
