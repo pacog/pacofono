@@ -86,6 +86,8 @@
       "^store/(.*)": "<rootDir>/src/store/$1",
       "^types/(.*)": "<rootDir>/src/types/$1",
       "^test-helpers/(.*)": "<rootDir>/src/test-helpers/$1"
-    }
+    },
+    "collectCoverage": true,
+    "coverageReporters": ["json", "lcov", "text"]
   }
 }
