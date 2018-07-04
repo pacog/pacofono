@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { RootAction } from "store/actions";
-import { Dispatch } from "redux";
+import { ThunkDispatch } from "redux-thunk";
 import { ISongPart, ISong, IChord } from "types";
 import SongPartEditor from "components/SongPartEditor";
 import { IRootState } from "store/reducers/root";
@@ -36,7 +36,7 @@ const mapStateToProps = (state: IRootState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<IRootState, {}, RootAction>) => {
     return {
         onPartNameChanged: (part: ISongPart, newName: string) => {
             dispatch(partsActions.changePartName(part, newName));
@@ -48,10 +48,10 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => {
             dispatch(songEditorActions.showConfirmDeletePart(false));
         },
         onConfirmDeletePart: (part: ISongPart, song: ISong) => {
-            dispatch(deletePartAndSelectOther(part, song) as any);
+            dispatch(deletePartAndSelectOther(part, song));
         },
         onAddChord: () => {
-            dispatch(addChordToPartBeingEdited() as any);
+            dispatch(addChordToPartBeingEdited());
         },
         onSelectChord: (chord: IChord) => {
             dispatch(songEditorActions.selectChordToEdit(chord.id));
@@ -60,7 +60,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => {
             dispatch(chordsActions.changeChordName(chord, newName));
         },
         onDeleteChord: (chord: IChord, partId: string) => {
-            dispatch(deleteChordAndSelectOther(chord, partId) as any);
+            dispatch(deleteChordAndSelectOther(chord, partId));
         },
         onMoveChord: (chordId: string, partId: string, desiredIndex: number) => {
             dispatch(partsActions.changeChordIndex(partId, chordId, desiredIndex));

@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { RootAction } from "store/actions";
-import { Dispatch } from "redux";
+
+import { ThunkDispatch } from "redux-thunk";
 import { ISong, ISongPart } from "types";
 import SongDetails from "components/SongDetails";
 import { IRootState } from "store/reducers/root";
@@ -24,10 +25,10 @@ const mapStateToProps = (state: IRootState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<IRootState, {}, RootAction>) => {
     return {
         onEditSong: (song: ISong) => {
-            dispatch(openForExistingSong(song) as any);
+            dispatch(openForExistingSong(song));
         },
         onShowSongsSelector: () => {
             dispatch(currentSongActions.setCurrentSong(null));

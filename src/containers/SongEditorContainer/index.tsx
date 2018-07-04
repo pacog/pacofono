@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 import { RootAction } from "store/actions";
-import { Dispatch } from "redux";
+import { ThunkDispatch } from "redux-thunk";
 import { ISong, ISongPart } from "types";
 import { IRootState } from "store/reducers/root";
 import SongEditor from "components/SongEditor";
@@ -37,10 +37,10 @@ const mapStateToProps = (state: IRootState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<IRootState, {}, RootAction>) => {
     return {
         onSaveSong: () => {
-            dispatch(saveSongBeingEdited() as any)
+            dispatch(saveSongBeingEdited())
                 .then((savedSong: ISong) => {
                     dispatch(modalsActions.closeSongEditor());
                     dispatch(currentSongActions.setCurrentSong(savedSong));
@@ -48,7 +48,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => {
         },
         onClose: (song: ISong) => {
             dispatch(modalsActions.closeSongEditor());
-            dispatch(cascadeDeleteSong(song) as any);
+            dispatch(cascadeDeleteSong(song));
             dispatch(songEditorActions.stopEditing());
         },
         onSongNameChanged: (song: ISong, newName: string) => {
@@ -61,7 +61,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => {
             dispatch(songEditorActions.showConfirmRestoreDefaults(false));
         },
         onRestoreDefaultsConfirm: () => {
-            dispatch(restoreDefaults() as any);
+            dispatch(restoreDefaults());
             dispatch(songEditorActions.showConfirmRestoreDefaults(false));
         },
         onAddPart: (toSong: ISong) => {
@@ -74,7 +74,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => {
             dispatch(songEditorActions.showConfirmDeleteSong(false));
         },
         onDeleteSongConfirm: () => {
-            dispatch(deleteSongBeingEdited() as any);
+            dispatch(deleteSongBeingEdited());
             dispatch(songEditorActions.showConfirmDeleteSong(false));
             dispatch(modalsActions.closeSongEditor());
             dispatch(songEditorActions.stopEditing());

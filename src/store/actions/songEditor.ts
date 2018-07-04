@@ -1,6 +1,5 @@
 import { Promise } from "es6-promise";
-import { Dispatch } from "redux";
-import { ThunkAction } from "redux-thunk";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { IRootState } from "store/reducers/root";
 import { RootAction } from "store/actions";
 import { ISong, ISongPart, IChord } from "types";
@@ -104,11 +103,11 @@ export const actionCreators = {
 };
 
 export const saveSongBeingEdited = (): ThunkAction<Promise<ISong>, IRootState, {}, RootAction> => {
-    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): Promise<ISong> => {
+    return (dispatch: ThunkDispatch<IRootState, {}, RootAction>, getState: () => IRootState): Promise<ISong> => {
         const song = getSong(getState());
         if (isEditingSong(getState())) {
             const oldSong = getOriginalSong(getState());
-            return dispatch(cascadeDeleteSong(oldSong) as any).then(() => {
+            return dispatch(cascadeDeleteSong(oldSong)).then(() => {
                 dispatch(actionCreators.stopEditing());
                 return song;
             });
@@ -120,16 +119,15 @@ export const saveSongBeingEdited = (): ThunkAction<Promise<ISong>, IRootState, {
     };
 };
 
-// TODO add Promise
-export const restoreDefaults = (): ThunkAction<void, IRootState, {}, RootAction> => {
-    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {
+export const restoreDefaults = (): ThunkAction<Promise<void>, IRootState, {}, RootAction> => {
+    return (dispatch: ThunkDispatch<IRootState, {}, RootAction>, getState: () => IRootState): Promise<void> => {
         if (isEditingSong(getState())) {
             let originalSong: ISong;
             const song = getSong(getState());
-            return dispatch(cascadeDeleteSong(song) as any)
+            return dispatch(cascadeDeleteSong(song))
                 .then(() => {
                     originalSong = getOriginalSong(getState());
-                    return dispatch(duplicateSong(originalSong) as any);
+                    return dispatch(duplicateSong(originalSong));
                 })
                 .then((duplicatedSong: ISong) => {
                     dispatch(actionCreators.startEditingExistingSong(duplicatedSong, originalSong));
@@ -138,14 +136,14 @@ export const restoreDefaults = (): ThunkAction<void, IRootState, {}, RootAction>
     };
 };
 
-export const deleteSongBeingEdited = (): ThunkAction<void, IRootState, {}, RootAction> => {
-    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {
+export const deleteSongBeingEdited = (): ThunkAction<Promise<void>, IRootState, {}, RootAction> => {
+    return (dispatch: ThunkDispatch<IRootState, {}, RootAction>, getState: () => IRootState): Promise<void> => {
         if (isEditingSong(getState())) {
             const song = getSong(getState());
-            return dispatch(cascadeDeleteSong(song) as any)
+            return dispatch(cascadeDeleteSong(song))
                 .then(() => {
                     const originalSong = getOriginalSong(getState());
-                    return dispatch(cascadeDeleteSong(originalSong) as any);
+                    return dispatch(cascadeDeleteSong(originalSong));
                 })
                 .then(() => {
                     const allSongs = getSavedSongs(getState());
@@ -157,7 +155,7 @@ export const deleteSongBeingEdited = (): ThunkAction<void, IRootState, {}, RootA
 };
 
 export const openForNewSong = (): ThunkAction<ISong, IRootState, {}, RootAction> => {
-    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): ISong => {
+    return (dispatch: ThunkDispatch<IRootState, {}, RootAction>, getState: () => IRootState): ISong => {
         dispatch(modalsActions.openSongEditor());
         const newSong = getDefaultNewSong();
         dispatch(songsActions.addSong(newSong));
@@ -174,8 +172,8 @@ export const openForNewSong = (): ThunkAction<ISong, IRootState, {}, RootAction>
 };
 
 export const openForExistingSong = (song: ISong): ThunkAction<Promise<ISong>, IRootState, {}, RootAction> => {
-    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): Promise<ISong> => {
-        return dispatch(duplicateSong(song) as any)
+    return (dispatch: ThunkDispatch<IRootState, {}, RootAction>, getState: () => IRootState): Promise<ISong> => {
+        return dispatch(duplicateSong(song))
             .then((duplicatedSong: ISong) => {
                 dispatch(modalsActions.openSongEditor());
                 dispatch(actionCreators.startEditingExistingSong(duplicatedSong, song));
@@ -189,20 +187,19 @@ export const openForExistingSong = (song: ISong): ThunkAction<Promise<ISong>, IR
 };
 
 export const deletePartAndSelectOther =
-(part: ISongPart, song: ISong): ThunkAction<void, IRootState, {}, RootAction> => {
-    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {
-        return dispatch(cascadeDeletePart(part, song.id) as any)
+(part: ISongPart, song: ISong): ThunkAction<Promise<void>, IRootState, {}, RootAction> => {
+    return (dispatch: ThunkDispatch<IRootState, {}, RootAction>, getState: () => IRootState): Promise<void> => {
+        return dispatch(cascadeDeletePart(part, song.id))
             .then(() => {
                 const songWithoutPart = getSongFromStore(getState(), song.id);
-                return dispatch(actionCreators.selectSongPartToEdit(songWithoutPart.parts[0]));
+                dispatch(actionCreators.selectSongPartToEdit(songWithoutPart.parts[0]));
             });
     };
 };
 
-// TODO: test
 export const deleteChordAndSelectOther =
 (chord: IChord, partId: string): ThunkAction<void, IRootState, {}, RootAction> => {
-    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): void => {
+    return (dispatch: ThunkDispatch<IRootState, {}, RootAction>, getState: () => IRootState): void => {
         dispatch(chordsActions.deleteChord(chord, partId));
         const partWithoutChord = getPartById(getState(), partId);
         dispatch(actionCreators.selectChordToEdit(partWithoutChord.chords[0]));
@@ -210,7 +207,7 @@ export const deleteChordAndSelectOther =
 };
 
 export const addChordToPartBeingEdited = (): ThunkAction<IChord, IRootState, {}, RootAction> => {
-    return (dispatch: Dispatch<RootAction>, getState: () => IRootState): IChord => {
+    return (dispatch: ThunkDispatch<IRootState, {}, RootAction>, getState: () => IRootState): IChord => {
         const part = getPartBeingEdited(getState());
         const newChord = getDefaultNewChord();
         dispatch(chordsActions.addChord(newChord, part.id));
