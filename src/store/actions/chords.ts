@@ -1,9 +1,4 @@
-// import { Promise } from "es6-promise";
 import { IChord } from "types";
-// import { Dispatch } from "redux";
-// import { IRootState } from "store/reducers/root";
-// import { RootAction } from "store/actions";
-
 export const ADD_CHORD = "ADD_CHORD";
 export const DELETE_CHORD = "DELETE_CHORD";
 export const CHANGE_CHORD_NAME = "CHANGE_CHORD_NAME";

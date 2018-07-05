@@ -2,7 +2,8 @@ import { actionCreators } from "store/actions/songEditor";
 import { actionCreators as songsActionCreators } from "store/actions/songs";
 import { actionCreators as partsActionCreators } from "store/actions/parts";
 import { rootReducer } from "store/reducers/root";
-import { getSong,
+import {
+    getSong,
     getOriginalSong,
     isNewSong,
     isEditingSong,

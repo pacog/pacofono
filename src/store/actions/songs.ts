@@ -68,7 +68,7 @@ export const duplicateSong = (song: ISong): ThunkAction<Promise<ISong>, IRootSta
             .map((part) => dispatch(duplicatePart(part, newSongId)));
 
         return Promise.all(addPartsPromises)
-            .then((result) => {
+            .then(() => {
                 return getSong(getState(), newSongId);
             });
     };

@@ -1,8 +1,11 @@
 import { actionCreators } from "store/actions/songs";
 import { rootReducer } from "store/reducers/root";
-import { getSong } from "store/selectors/songs";
+import { getSong, getSavedSongs } from "store/selectors/songs";
+import createEmptyStore from "test-helpers/createEmptyStore";
+import { getMockStore, data as mockData } from "test-helpers/mockStoreData";
 
 describe("Song store selectors", () => {
+
     describe("getSong selector", () => {
         it("should work after starting to edit a song", () => {
             const songToAdd = {
@@ -17,6 +20,22 @@ describe("Song store selectors", () => {
             expect(getSong(newState, "id1")).toEqual(songToAdd);
         });
     });
-});
 
-// TODO test getSavedSongs
+    describe("getSavedSongs selector", () => {
+        it("should return [] when no songs", () => {
+            const store = createEmptyStore();
+            const state = store.getState();
+            expect(getSavedSongs(state)).toEqual([]);
+        });
+
+        it("should return songs when there are songs", () => {
+            const store = createEmptyStore(getMockStore());
+            const state = store.getState();
+            expect(getSavedSongs(state)).toEqual([
+                mockData.SONG_1,
+                mockData.SONG_2,
+            ]);
+        });
+    });
+
+});

@@ -24,5 +24,5 @@ const saveStateThrottled = throttle(() => {
 }, THROTTLE_TIME);
 
 store.subscribe(saveStateThrottled);
-// export store singleton instance
+
 export default store;

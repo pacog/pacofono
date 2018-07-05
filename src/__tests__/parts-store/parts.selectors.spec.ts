@@ -1,5 +1,7 @@
 import { rootReducer } from "store/reducers/root";
-import { getSongParts } from "store/selectors/parts";
+import { getSongParts, getPartById } from "store/selectors/parts";
+import createEmptyStore from "test-helpers/createEmptyStore";
+import { getMockStore, data as mockData } from "test-helpers/mockStoreData";
 
 const exampleSong = {
     name: "Song 12",
@@ -8,6 +10,16 @@ const exampleSong = {
 };
 
 describe("Parts store selectors", () => {
+
+    describe("getPartById selector", () => {
+        it("should work", () => {
+            const store = createEmptyStore(getMockStore());
+            const state = store.getState();
+            expect(getPartById(state, "not_here_part")).toBe(undefined);
+            expect(getPartById(state, mockData.PART_1.id)).toEqual(mockData.PART_1);
+        });
+    });
+
     describe("getSongParts selector", () => {
         it("should work with no parts", () => {
             const initialState = rootReducer({
