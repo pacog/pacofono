@@ -21,7 +21,7 @@ import "./style.scss";
 
 interface IMusicModeSelectorProps {
     currentMusicMode: string;
-    changeMusicMode: (newMode: string) => any; // TODO find a better return type
+    changeMusicMode: (newMode: string) => void;
     isSongSelectorOpen: boolean;
     isSongDetailsOpen: boolean;
 }
@@ -78,7 +78,9 @@ const mapStateToProps = (state: IRootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => {
     return {
-        changeMusicMode: (newMode: string) => dispatch(actionCreators.changeMusicMode(newMode)),
+        changeMusicMode: (newMode: string) => {
+            dispatch(actionCreators.changeMusicMode(newMode));
+        },
     };
 };
 

@@ -20,7 +20,7 @@ function configureStore() {
 const THROTTLE_TIME = 1000;
 const store = configureStore();
 const saveStateThrottled = throttle(() => {
-    saveState(store.getState()); // TODO we can decide if we want the whole state
+    saveState(store.getState());
 }, THROTTLE_TIME);
 
 store.subscribe(saveStateThrottled);

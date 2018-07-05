@@ -1,8 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { RootAction } from "store/actions";
-import { Dispatch } from "redux";
+// import { RootAction } from "store/actions";
+// import { Dispatch } from "redux";
 import { IRootState } from "store/reducers/root";
 import { isAnyModalOpen, isSongEditorModalOpen } from "store/selectors/modals";
 import Modal from "components/Modal";
@@ -38,11 +38,10 @@ const mapStateToProps = (state: IRootState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => {
+const mapDispatchToProps = (/*dispatch: Dispatch<RootAction>*/) => {
     return {
         closeSongEditor: () => {
-            // TODO do the thunk action for this
-            // dispatch(actionCreators.closeSongEditor());
+            // Nothing to do, it is handled in SongEditorContainer
         },
     };
 };
