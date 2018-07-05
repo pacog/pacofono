@@ -1,5 +1,5 @@
 import { RootAction } from "store/actions";
-import { ADD_CHORD, DELETE_CHORD, CHANGE_CHORD_NAME } from "store/actions/chords";
+import { ADD_CHORD, DELETE_CHORD, CHANGE_CHORD_NAME, TOGGLE_NOTE } from "store/actions/chords";
 
 import { IChord } from "types";
 
@@ -26,7 +26,22 @@ export const chordsReducer = (state: IChordsState = initialState, action: RootAc
                 ...state,
                 [action.chord.id]: undefined,
             };
+        case TOGGLE_NOTE:
+            return {
+                ...state,
+                [action.chord.id]: {...action.chord, notes: toggleNote(action.noteId, action.chord.notes) },
+            };
         default:
             return state;
     }
 };
+
+function toggleNote(noteId: string, notes: string[]) {
+    const noteIndex = notes.indexOf(noteId);
+    if (noteIndex === -1) {
+        return notes.concat([noteId]);
+    }
+    const notesRemovingNote = notes.slice();
+    notesRemovingNote.splice(noteIndex, 1);
+    return notesRemovingNote;
+}

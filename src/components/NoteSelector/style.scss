@@ -1,0 +1,65 @@
+@import "src/root-style/common";
+
+.note-selector {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+$note-selector-note-height: 64px;
+$note-selector-note-width: 16px;
+$note-selector-sharp-note-height: 48px;
+$note-selector-sharp-note-width: 14px;
+
+    .note-selector-note {
+        height: $note-selector-note-height;
+        width: $note-selector-note-width;
+        background-color: $white;
+        border-radius: 0 0 4px 4px;
+        border: 1px solid $purple-3;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $purple-1;
+        }
+
+        &.note-selector-note-selected {
+            background-color: $blue-4;
+
+            &:hover {
+                background-color: $blue-2;
+            }
+        }
+    }
+
+    .note-selector-note-sharp {
+        width: 0;
+        position: relative;
+        border: 0;
+
+        &:before {
+            content: "";
+            display: block;
+            background: black;
+            position: absolute;
+            top: 0;
+            left: -($note-selector-sharp-note-width / 2);
+            width: $note-selector-sharp-note-width;
+            height: $note-selector-sharp-note-height;
+            border-radius: 0 0 4px 4px;
+            border: 1px solid $purple-3;
+        }
+
+        &:hover:before {
+            background-color: $purple-2;
+        }
+
+        &.note-selector-note-selected:before {
+            background-color: $blue-3;
+        }
+
+        &:hover.note-selector-note-selected:before {
+            background-color: $blue-2;
+        }
+
+    }

@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { RootAction } from "store/actions";
 import { ThunkDispatch } from "redux-thunk";
-import { ISongPart, ISong, IChord } from "types";
+import { ISongPart, ISong, IChord, INote } from "types";
 import SongPartEditor from "components/SongPartEditor";
 import { IRootState } from "store/reducers/root";
 import { actionCreators as partsActions } from "store/actions/parts";
@@ -64,6 +64,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IRootState, {}, RootAction>)
         },
         onMoveChord: (chordId: string, partId: string, desiredIndex: number) => {
             dispatch(partsActions.changeChordIndex(partId, chordId, desiredIndex));
+        },
+        onToggleNote: (chord: IChord, note: INote) => {
+            dispatch(chordsActions.toggleNote(chord, note.name));
         },
     };
 };

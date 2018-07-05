@@ -1,6 +1,7 @@
 export interface INote {
     name: string;
     frequency: number;
+    sharp?: boolean;
 }
 
 export interface IChord {

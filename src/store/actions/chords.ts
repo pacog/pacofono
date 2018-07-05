@@ -2,6 +2,7 @@ import { IChord } from "types";
 export const ADD_CHORD = "ADD_CHORD";
 export const DELETE_CHORD = "DELETE_CHORD";
 export const CHANGE_CHORD_NAME = "CHANGE_CHORD_NAME";
+export const TOGGLE_NOTE = "TOGGLE_NOTE";
 
 export interface IChordsActions {
     ADD_CHORD: {
@@ -18,6 +19,11 @@ export interface IChordsActions {
         type: typeof CHANGE_CHORD_NAME,
         chord: IChord,
         newName: string,
+    };
+    TOGGLE_NOTE: {
+        type: typeof TOGGLE_NOTE,
+        chord: IChord,
+        noteId: string,
     };
 }
 
@@ -36,5 +42,10 @@ export const actionCreators = {
         type: CHANGE_CHORD_NAME,
         chord,
         newName,
+    }),
+    toggleNote: (chord: IChord, noteId: string): IChordsActions[typeof TOGGLE_NOTE] => ({
+        type: TOGGLE_NOTE,
+        chord,
+        noteId,
     }),
 };

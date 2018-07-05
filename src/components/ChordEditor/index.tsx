@@ -1,8 +1,10 @@
 import * as React from "react";
 
-import { IChord, ISongPart } from "types";
+import { IChord, ISongPart, INote } from "types";
 import PButton from "components/PButton";
+import NoteSelector from "components/NoteSelector";
 import "./style.scss";
+import { allNotesArray } from "constants/notes";
 
 interface IChordEditorProps {
     part: ISongPart;
@@ -10,11 +12,12 @@ interface IChordEditorProps {
     onChordNameChanged: (chord: IChord, newValue: string) => void;
     onDeleteChord: (chord: IChord, partId: string) => void;
     canBeDeleted: boolean;
+    onToggleNote: (chord: IChord, note: INote) => void;
 }
 
 const ChordEditor: React.SFC<IChordEditorProps> = (props: IChordEditorProps) => (
     <div className="chord-editor mt-l">
-        <div className="line-center">
+        <div className="line-center mb-ml">
             <input
                 value={props.chord.name}
                 className="p-input song-editor-name-input grow-full-width"
@@ -28,6 +31,11 @@ const ChordEditor: React.SFC<IChordEditorProps> = (props: IChordEditorProps) => 
                     >Delete chord</PButton>
             }
         </div>
+        <NoteSelector
+            allNotes={allNotesArray}
+            selectedNotes={props.chord.notes}
+            onToggleNote={ (note) => { props.onToggleNote(props.chord, note); }}
+            ></NoteSelector>
     </div>
 );
 

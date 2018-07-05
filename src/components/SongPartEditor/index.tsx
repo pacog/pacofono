@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ISong, ISongPart, IChord } from "types";
+import { ISong, ISongPart, IChord, INote } from "types";
 import PButton from "components/PButton";
 import PartEditorChordsSelector from "components/PartEditorChordsSelector";
 import ChordEditor from "components/ChordEditor";
@@ -22,6 +22,7 @@ interface ISongPartEditorProps {
     onSelectChord: (chord: IChord) => void;
     onMoveChord: (chordId: string, partId: string, desiredIndex: number) => void;
     onChordNameChanged: (chord: IChord, newValue: string) => void;
+    onToggleNote: (chord: IChord, note: INote) => void;
     onDeleteChord: (chord: IChord) => void;
     canSelectedChordBeDeleted: boolean;
 }
@@ -68,6 +69,7 @@ const SongPartEditor: React.SFC<ISongPartEditorProps> = (props: ISongPartEditorP
                 part={ props.part }
                 chord={ props.selectedChord }
                 onChordNameChanged={ props.onChordNameChanged }
+                onToggleNote={ props.onToggleNote }
                 onDeleteChord={ props.onDeleteChord }
                 canBeDeleted={ props.canSelectedChordBeDeleted }
                 ></ChordEditor>

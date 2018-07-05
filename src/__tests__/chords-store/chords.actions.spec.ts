@@ -1,4 +1,4 @@
-import { ADD_CHORD, DELETE_CHORD, CHANGE_CHORD_NAME, actionCreators } from "store/actions/chords";
+import { ADD_CHORD, DELETE_CHORD, CHANGE_CHORD_NAME, TOGGLE_NOTE, actionCreators } from "store/actions/chords";
 
 describe("chords store actions", () => {
     const TEST_CHORD = {
@@ -30,6 +30,15 @@ describe("chords store actions", () => {
             type: CHANGE_CHORD_NAME,
             chord: TEST_CHORD,
             newName,
+        });
+    });
+
+    it("should have a toggle note action", () => {
+        const noteId = "A#4";
+        expect(actionCreators.toggleNote(TEST_CHORD, noteId)).toEqual({
+            type: TOGGLE_NOTE,
+            chord: TEST_CHORD,
+            noteId,
         });
     });
 });
