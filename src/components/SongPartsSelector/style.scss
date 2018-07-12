@@ -1,31 +1,15 @@
 @import "src/root-style/common";
 
-.song-parts-selector-title {
-    display: inline-block;
-}
-
 .song-parts-selector-part {
     font-size: 16px;
     color: $white;
-    background-color: $transparent-dark-2;
+    background-color: transparent;
     padding: $g-s;
     cursor: pointer;
     position: relative;
 
     &:hover {
-        background-color: $transparent-dark-1;
-    }
-
-    &:before {
-        content: '';
-        display: none;
-        top: 0;
-        bottom: 0;
-        right: -$g-m;
-        width: $g-m;
-        background-color: $blue-3;
-        position: absolute;
-        z-index: 1;
+        background-color: $purple-4;
     }
 
     &:after {
@@ -33,7 +17,7 @@
         display: none;
         top: 0;
         bottom: 0;
-        right: - $g-m - $g-m;
+        right: - $g-m;
         width: $g-m;
         position: absolute;
         border-top: $g-l / 2 solid transparent;

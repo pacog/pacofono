@@ -16,8 +16,7 @@ interface ISongPartsSelectorProps {
 
 const SongPartsSelector: React.SFC<ISongPartsSelectorProps> = (props: ISongPartsSelectorProps) => (
     <React.Fragment>
-        <div className="selector-title song-parts-selector-title">Song parts</div>
-
+        <div className="mt-m"></div>
         <DragDropContext
             onDragEnd={(dragResult) => {
                 if (dragResult.destination) {
@@ -51,13 +50,13 @@ const SongPartsSelector: React.SFC<ISongPartsSelectorProps> = (props: ISongParts
                 )}
             </Droppable>
         </DragDropContext>
-
-        <PButton
-            className="mt-m"
-            secondary={true}
-            fullWidth={true}
-            onClick={props.onAddPart}>
-            Add part</PButton>
+        <div className="line-center">
+            <PButton
+                className="mt-m"
+                secondary={true}
+                onClick={props.onAddPart}>
+                Add part</PButton>
+        </div>
     </React.Fragment>
 );
 
