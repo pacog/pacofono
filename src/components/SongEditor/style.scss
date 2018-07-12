@@ -3,10 +3,12 @@
 .song-editor {
     min-width: 820px;
     max-width: 90vw;
+    box-shadow: 0 4px 16px $purple-4;
+    border-radius: $g-sm;
 }
 
 .song-editor-header {
-    background-color: $transparent-white-1;
+    background-color: #504F61;
     padding: $g-sm;
     padding-right: $g-m;
     border-radius: $g-sm $g-sm 0 0;
@@ -15,6 +17,7 @@
 .song-editor-content {
     position: relative;
     border-radius: 0 0 $g-sm $g-sm;
+    overflow: hidden;
 }
 $song-editor-content-part-list-width: 140px;
 
