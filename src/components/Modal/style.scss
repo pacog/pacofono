@@ -7,7 +7,7 @@
     right: 0;
     bottom: 0;
     z-index: 10;
-    background-color: $transparent-dark-3;
+    background-color: rgba($grey-5, 0.75);
     @include line-center;
 }
 

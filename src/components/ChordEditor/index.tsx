@@ -16,7 +16,7 @@ interface IChordEditorProps {
 }
 
 const ChordEditor: React.SFC<IChordEditorProps> = (props: IChordEditorProps) => (
-    <div className="chord-editor mt-l">
+    <div className="chord-editor mt-sm">
         <div className="line-center mb-ml">
             <input
                 value={props.chord.name}

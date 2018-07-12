@@ -2,6 +2,11 @@
     @include line-center;
 }
 
+.line-bottom {
+    @include line-center;
+    align-items: flex-end;
+}
+
 .grow-full-width {
     flex: 1;
 }

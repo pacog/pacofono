@@ -1,6 +1,5 @@
 import * as React from "react";
 import { IChord, ISongPart } from "types";
-import PButton from "components/PButton";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import "./style.scss";
@@ -9,19 +8,13 @@ interface IPartEditorChordsSelectorProps {
     part: ISongPart;
     chords: IChord[];
     selectedChord: IChord;
-    onAddChord: () => void;
     onSelectChord: (chord: IChord) => void;
     onMoveChord: (chordId: string, partId: string, desiredIndex: number) => void;
 }
 
 const PartEditorChordsSelector: React.SFC<IPartEditorChordsSelectorProps> = (props: IPartEditorChordsSelectorProps) => (
     <div className="chords-selector">
-        <PButton
-            className="mt-m chords-selector-add-chord-button"
-            secondary={true}
-            onClick={props.onAddChord}>
-            Add chord</PButton>
-        <div className="selector-title chords-selector-title mt-l">Chords</div>
+        <div className="p-label mt-m">Chords</div>
         <DragDropContext
             onDragEnd={(dragResult) => {
                 if (dragResult.destination) {
@@ -52,6 +45,8 @@ const PartEditorChordsSelector: React.SFC<IPartEditorChordsSelectorProps> = (pro
                                            () => { props.onSelectChord(chord); }
                                         }
                                         >
+                                        <div className="chords-selector-chord-bg"></div>
+                                        <div className="chords-selector-chord-bar"></div>
                                         <div className="chords-selector-chord-name">
                                             { chord.name || getNameForChordWithoutName(index) }
                                         </div>

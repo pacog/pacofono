@@ -31,11 +31,22 @@ const SongPartEditor: React.SFC<ISongPartEditorProps> = (props: ISongPartEditorP
     <div className="song-part-editor">
         {
             props.part &&
-            <div className="line-center">
-                <input
-                    value={props.part.name}
-                    className="p-input grow-full-width"
-                    onChange={(e) => { props.onPartNameChanged(props.part, e.target.value); }} />
+            <div className="line-bottom">
+                <div>
+                    <div className="p-label">Part name</div>
+                    <input
+                        value={props.part.name}
+                        className="p-input"
+                        onChange={(e) => { props.onPartNameChanged(props.part, e.target.value); }} />
+                </div>
+                <div className="grow-full-width"></div>
+
+                <PButton
+                    className="ml-m"
+                    secondary={true}
+                    onClick={props.onAddChord }>
+                        Add chord
+                    </PButton>
                 {
                     props.canBeDeleted &&
                     <PButton
@@ -56,7 +67,6 @@ const SongPartEditor: React.SFC<ISongPartEditorProps> = (props: ISongPartEditorP
         }
         <PartEditorChordsSelector
             part={ props.part }
-            onAddChord={ props.onAddChord }
             chords={ props.chords }
             onSelectChord={ props.onSelectChord }
             selectedChord={ props.selectedChord }

@@ -12,6 +12,8 @@
     padding: $g-sm;
     padding-right: $g-m;
     border-radius: $g-sm $g-sm 0 0;
+    position: relative;
+    z-index: 2;
 }
 
 .song-editor-content {
@@ -31,6 +33,7 @@ $song-editor-content-part-list-width: 140px;
         bottom: 0;
         z-index: 1;
         background: $purple-3;
+        box-shadow: 0 2px 6px rgba(black, 0.3);
     }
 
     .song-editor-content-part-editor {

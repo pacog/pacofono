@@ -4,72 +4,65 @@
     position: relative;
 }
 
-    .chords-selector-add-chord-button {
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
-
-    .chords-selector-title {
-        display: inline-block;
-    }
-
     .chords-selector-list {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: stretch;
-        background-color: $purple-3;
+        background-color: $purple-2;
+        border-radius: $g-s;
     }
 
         .chords-selector-chord {
-            height: 200px;
-            min-width: 40px;
-            max-width: 200px;
+            height: 100px;
+            min-width: 120px;
+            max-width: 120px;
+            padding: 0 20px;
             position: relative;
-            background-color: $purple-3;
             flex: 1;
-            transition: background-color 0.1s ease-in-out;
+        }
 
-            &:before {
-                content: '';
+            .chords-selector-chord-bg {
+                transition: background-color 0.1s ease-in-out;
+                height: 100px;
+
+                .chords-selector-chord:hover & {
+                    background-color: rgba($transparent-dark-1, 0.2);
+                }
+
+                .chords-selector-chord-selected & {
+                    background-color: $transparent-dark-1;
+                }
+
+                .chords-selector-chord-selected:hover & {
+                    background-color: $transparent-dark-1;
+                }
+            }
+
+            .chords-selector-chord-bar {
                 display: block;
                 position: absolute;
                 top: 0;
                 bottom: 0;
                 z-index: 1;
-                width: $g-s;
+                width: $g-xs;
                 left: 50%;
                 transform: translateX(-50%);
-                background-color: $blue-2;
+                background-color: $highlight-4;
             }
-
-            &:hover {
-                background-color: lighten($purple-3, 5);
-            }
-        }
-
-        .chords-selector-chord-selected {
-            background-color: lighten($purple-3, 10);
-
-            &:hover {
-                background-color: lighten($purple-3, 10);
-            }
-
-            &:before {
-                background-color: $blue-1;
-            }
-        }
 
         .chords-selector-chord-name {
             position: absolute;
-            padding: $g-s $g-sm;
-            border-radius: $g-s;
-            background-color: $transparent-dark-3;
-            border: 1px solid $purple-2;
+            height: 20px;
+            line-height: 20px;
+            font-size: 10px;
+            color: white;
+            border-radius: 10px;
+            background-color: $purple-4;
             left: 50%;
             transform: translateX(-50%);
-            bottom: $g-m;
+            bottom: $g-xs;
             z-index: 2;
             white-space: nowrap;
+            padding: 0 $g-sm;
         }

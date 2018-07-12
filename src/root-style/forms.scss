@@ -15,6 +15,7 @@ $p-input-v-padding: ($p-input-height - (2 * $p-input-border-width) - $p-input-li
     color: $white;
     @include regular;
     border-radius: $g-xs;
+    width: 320px;
 }
 
 $p-input-big-height: 40px;
@@ -34,4 +35,12 @@ $p-input-big-height: 40px;
     &:hover {
         border-color: $purple-1;
     }
+}
+
+.p-label {
+    color: $blue-3;
+    font-size: 12px;
+    line-height: 16px;
+    padding-left: $g-s;
+    padding-bottom: 2px;
 }

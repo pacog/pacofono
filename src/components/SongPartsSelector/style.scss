@@ -22,14 +22,14 @@
         position: absolute;
         border-top: $g-l / 2 solid transparent;
         border-bottom: $g-l / 2 solid transparent;
-        border-left: $g-l / 2 solid $blue-3;
+        border-left: $g-l / 2 solid $blue-4;
         transform: scaleX(0.5);
         transform-origin: left center;
         z-index: 1;
     }
 
     &.song-parts-selector-part-selected {
-        background: $blue-3;
+        background: $blue-4;
 
         &:before, &:after {
             display: block;
