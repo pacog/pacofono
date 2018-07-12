@@ -41,7 +41,7 @@
                 width: $g-s;
                 left: 50%;
                 transform: translateX(-50%);
-                background-color: $blue-4;
+                background-color: $blue-2;
             }
 
             &:hover {
@@ -57,7 +57,7 @@
             }
 
             &:before {
-                background-color: $blue-5;
+                background-color: $blue-1;
             }
         }
 
@@ -65,7 +65,7 @@
             position: absolute;
             padding: $g-s $g-sm;
             border-radius: $g-s;
-            background-color: $dark-transparent-1;
+            background-color: $transparent-dark-3;
             border: 1px solid $purple-2;
             left: 50%;
             transform: translateX(-50%);

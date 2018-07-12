@@ -20,7 +20,7 @@ const ChordEditor: React.SFC<IChordEditorProps> = (props: IChordEditorProps) => 
         <div className="line-center mb-ml">
             <input
                 value={props.chord.name}
-                className="p-input song-editor-name-input grow-full-width"
+                className="p-input grow-full-width"
                 onChange={(e) => { props.onChordNameChanged(props.chord, e.target.value); } } />
             <div className="grow-full-width"></div>
             {

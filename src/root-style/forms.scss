@@ -7,12 +7,27 @@ $p-input-v-padding: ($p-input-height - (2 * $p-input-border-width) - $p-input-li
 
 .p-input {
     height: $g-l;
-    border: $p-input-border-width solid $blue-1;
+    border: $p-input-border-width solid $blue-5;
     font-size: $p-input-font-size;
     line-height: $p-input-line-height;
     padding: $p-input-v-padding $g-sm;
-    background: $transparent-bg;
+    background: $transparent-white-1;
     color: $white;
     @include regular;
     border-radius: $g-xs;
+}
+
+.p-input-big {
+    border: 1px solid transparent;
+    font-size: $g-ml;
+    height: $g-l;
+    padding: ($g-l - $g-ml - 1px) / 2;
+    color: $white;
+    @include regular;
+    outline: 0;
+    background: transparent;
+
+    &:hover {
+        border-color: red;
+    }
 }

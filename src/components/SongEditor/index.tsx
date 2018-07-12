@@ -56,8 +56,10 @@ function showHeaderPart(props: ISongEditorProps) {
         <div className="line-center">
             <input
                 value={props.song.name}
-                className="p-input song-editor-name-input grow-full-width"
+                className="p-input-big"
                 onChange={(e) => { props.onSongNameChanged(props.song, e.target.value); }} />
+
+            <div className="grow-full-width"></div>
             {
                 !props.isNewSong &&
                 <PButton

@@ -9,10 +9,10 @@
     @include line-center;
 
     &:hover {
-        background: $blue-2;
+        background: $blue-4;
     }
 
     &:active {
-        background: $blue-1;
+        background: $blue-5;
     }
 }

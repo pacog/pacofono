@@ -34,9 +34,8 @@ const SongPartEditor: React.SFC<ISongPartEditorProps> = (props: ISongPartEditorP
             <div className="line-center">
                 <input
                     value={props.part.name}
-                    className="p-input song-editor-name-input grow-full-width"
+                    className="p-input grow-full-width"
                     onChange={(e) => { props.onPartNameChanged(props.part, e.target.value); }} />
-
                 {
                     props.canBeDeleted &&
                     <PButton

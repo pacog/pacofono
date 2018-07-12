@@ -3,7 +3,7 @@
 .song-details {
     min-width: 200px;
     max-width: 200px;
-    background-color: $transparent-bg;
+    background-color: $transparent-white-1;
     position: relative;
 }
 
@@ -28,7 +28,7 @@
         cursor: pointer;
 
         &:hover {
-            background-color: $dark-transparent;
+            background-color: $transparent-dark-2;
         }
 
         &.song-details-part-selected {
@@ -44,7 +44,7 @@
         .song-details-part-number {
             font-size: 10px;
             border-radius: $g-xs;
-            background-color: $dark-transparent;
+            background-color: $transparent-dark-2;
             text-align: center;
             height: 18px;
             line-height: 18px;

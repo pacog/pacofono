@@ -24,10 +24,10 @@ $note-selector-sharp-note-width: 14px;
         }
 
         &.note-selector-note-selected {
-            background-color: $blue-4;
+            background-color: $blue-2;
 
             &:hover {
-                background-color: $blue-2;
+                background-color: $blue-4;
             }
         }
     }
@@ -59,7 +59,7 @@ $note-selector-sharp-note-width: 14px;
         }
 
         &:hover.note-selector-note-selected:before {
-            background-color: $blue-2;
+            background-color: $blue-4;
         }
 
     }
