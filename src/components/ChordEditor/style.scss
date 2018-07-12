@@ -5,3 +5,8 @@
     border-radius: $g-xs;
     padding: $g-sm;
 }
+
+.chord-editor-note-selector-container {
+    max-width: 100%;
+    overflow: auto;
+}

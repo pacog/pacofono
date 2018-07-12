@@ -5,21 +5,32 @@
     max-width: 90vw;
 }
 
-.song-editor-content {
-    display: flex;
-    align-items: flex-start;
-    margin-top: $g-m;
+.song-editor-header {
+    background-color: $transparent-white-1;
+    padding: $g-sm;
+    padding-right: $g-m;
+    border-radius: $g-sm $g-sm 0 0;
 }
 
+.song-editor-content {
+    position: relative;
+    border-radius: 0 0 $g-sm $g-sm;
+}
+$song-editor-content-part-list-width: 140px;
+
     .song-editor-content-part-list {
-        width: 170px;
-        max-width: 170px;
+        min-width: $song-editor-content-part-list-width;
+        width: $song-editor-content-part-list-width;
+        max-width: $song-editor-content-part-list-width;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 1;
+        background: $purple-3;
     }
 
     .song-editor-content-part-editor {
-        margin-left: $g-m;
-        background: $transparent-dark-2;
-        border-radius: $g-xs;
-        flex: 1;
-        min-height: 300px;
+        background: $purple-4;
+        padding-left: $song-editor-content-part-list-width;
     }

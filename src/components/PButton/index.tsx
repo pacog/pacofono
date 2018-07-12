@@ -6,6 +6,7 @@ interface IButtonProps {
     children?: any;
     primary?: boolean;
     secondary?: boolean;
+    danger?: boolean;
     fullWidth?: boolean;
     onClick?: (event: any) => void;
     className?: string;
@@ -32,6 +33,8 @@ function getImportanceClassFromProps(props: IButtonProps): string {
         return "p-button-primary";
     } else if (props.secondary) {
         return "p-button-secondary";
+    } else if (props.danger) {
+        return "p-button-danger";
     }
     return "p-button-secondary";
 }

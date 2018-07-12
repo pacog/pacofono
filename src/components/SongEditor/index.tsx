@@ -46,14 +46,13 @@ function showContentPart(props: ISongEditorProps) {
                     <SongPartEditorContainer />
                 </div>
             </div>
-            { showFooterPart(props) }
         </div>
     );
 }
 
 function showHeaderPart(props: ISongEditorProps) {
     return (
-        <div className="line-center">
+        <div className="song-editor-header line-center">
             <input
                 value={props.song.name}
                 className="p-input-big"
@@ -64,30 +63,22 @@ function showHeaderPart(props: ISongEditorProps) {
                 !props.isNewSong &&
                 <PButton
                     className="ml-sm"
-                    secondary={true}
+                    danger={true}
                     onClick={ props.onDeleteSong }>
                     Delete
                 </PButton>
             }
-        </div>
-    );
-}
-
-function showFooterPart(props: ISongEditorProps) {
-    return (
-        <div className="line-center mt-m">
             {
                 !props.isNewSong &&
                 <PButton
                     secondary={true}
+                    className="ml-sm"
                     onClick={() => { props.onRestoreDefaults(); }}
                 >Restore defaults</PButton>
             }
-
-            <div className="grow-full-width"></div>
-
             <PButton
                 secondary={true}
+                className="ml-sm"
                 onClick={() => { props.onClose(props.song); }}>
                 Close
             </PButton>
@@ -95,7 +86,7 @@ function showFooterPart(props: ISongEditorProps) {
                 primary={true}
                 className="ml-sm"
                 onClick={() => { props.onSaveSong(); }}>
-                Save
+                Save and close
             </PButton>
         </div>
     );

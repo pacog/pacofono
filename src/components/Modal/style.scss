@@ -7,13 +7,12 @@
     right: 0;
     bottom: 0;
     z-index: 10;
-    background-color: $transparent-dark-3;
+    background-color: $transparent-dark-2;
     @include line-center;
 }
 
 .modal {
     padding: $g-sm;
-    background: $transparent-white-1;
     border-radius: $g-s;
     color: $white;
 }

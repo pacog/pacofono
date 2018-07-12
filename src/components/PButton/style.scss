@@ -2,18 +2,18 @@
 
 $p-button-height: $g-l;
 $p-button-line-height: $g-m;
-$p-button-border: 1px;
+$p-button-border: 0;
 
 .p-button {
     @include reset-button;
     @include regular;
-    padding: ($p-button-height - $p-button-line-height - ($p-button-border * 2)) / 2 $g-sm;
-    border-radius: $g-xs;
+    padding: ($p-button-height - $p-button-line-height - ($p-button-border * 2)) / 2 $g-m;
+    border-radius: $p-button-height / 2;
     font-size: 14px;
     line-height: 16px;
     color: $white;
     cursor: pointer;
-    border: $p-button-border solid;
+    border: 0;
 }
 
 .p-button-full-width {
@@ -22,27 +22,37 @@ $p-button-border: 1px;
 }
 
 .p-button-primary {
-    background-color: $blue-3;
-    border-color: transparent;
+    background-color: $blue-4;
 
     &:hover {
-        background-color: $blue-4;
+        background-color: $blue-5;
     }
 
     &:active {
-        background-color: $blue-5;
+        background-color: $blue-3;
     }
 }
 
 .p-button-secondary {
-    background-color: $transparent-dark-1;
-    border-color: $blue-3;
+    background-color: $purple-2;
 
     &:hover {
-        background-color: $transparent-white-1;
+        background-color: darken($purple-2, 10);
     }
 
     &:active {
-        background-color: $transparent-dark-2;
+        background-color: darken($purple-2, 20);
+    }
+}
+
+.p-button-danger {
+    background-color: $danger-3;
+
+    &:hover {
+        background-color: $danger-4;
+    }
+
+    &:active {
+        background-color: $danger-5;
     }
 }

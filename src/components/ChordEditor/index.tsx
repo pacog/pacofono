@@ -31,11 +31,13 @@ const ChordEditor: React.SFC<IChordEditorProps> = (props: IChordEditorProps) => 
                     >Delete chord</PButton>
             }
         </div>
-        <NoteSelector
-            allNotes={allNotesArray}
-            selectedNotes={props.chord.notes}
-            onToggleNote={ (note) => { props.onToggleNote(props.chord, note); }}
-            ></NoteSelector>
+        <div className="chord-editor-note-selector-container">
+            <NoteSelector
+                allNotes={allNotesArray}
+                selectedNotes={props.chord.notes}
+                onToggleNote={ (note) => { props.onToggleNote(props.chord, note); }}
+                ></NoteSelector>
+        </div>
     </div>
 );
 

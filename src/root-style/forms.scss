@@ -17,17 +17,21 @@ $p-input-v-padding: ($p-input-height - (2 * $p-input-border-width) - $p-input-li
     border-radius: $g-xs;
 }
 
+$p-input-big-height: 40px;
+
 .p-input-big {
     border: 1px solid transparent;
     font-size: $g-ml;
-    height: $g-l;
-    padding: ($g-l - $g-ml - 1px) / 2;
+    height: $p-input-big-height;
+    padding: ($p-input-big-height - $g-ml - 1px) / 2;
     color: $white;
     @include regular;
     outline: 0;
     background: transparent;
+    border-radius: $g-s;
+    transition: border-color 0.3s ease-in-out;
 
     &:hover {
-        border-color: red;
+        border-color: $purple-1;
     }
 }
