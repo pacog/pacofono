@@ -4,6 +4,7 @@ import ISongEditorProps from "./props";
 import showConfirmRestoreDefaultsPart from "./confirmRestoreDefaults";
 import showConfirmDeleteSongPart from "./confirmDeleteSong";
 import PButton from "components/PButton";
+import { ActionSelector, ActionItem } from "components/ActionSelector";
 import SongPartsSelector from "components/SongPartsSelector";
 import SongPartEditorContainer from "containers/SongPartEditorContainer";
 
@@ -59,6 +60,12 @@ function showHeaderPart(props: ISongEditorProps) {
                 onChange={(e) => { props.onSongNameChanged(props.song, e.target.value); }} />
 
             <div className="grow-full-width"></div>
+            <ActionSelector
+                label="Song actions"
+                >
+                <ActionItem label="action1" onClick={ () => { console.log(1); } }></ActionItem>
+                <ActionItem label="action2" onClick={ () => { console.log(2); } }></ActionItem>
+            </ActionSelector>
             {
                 !props.isNewSong &&
                 <PButton

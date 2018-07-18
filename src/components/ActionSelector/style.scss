@@ -1,0 +1,73 @@
+@import "src/root-style/common";
+
+$action-selector-height: $g-l;
+$action-selector-line-height: $g-m;
+
+
+.action-item {
+    @include reset-button;
+    padding: 0 $g-m;
+    border-radius: $action-selector-height / 2;
+    font-size: 14px;
+    line-height: 16px;
+    height: $action-selector-height;
+    color: $white;
+    cursor: pointer;
+    border: 0;
+    background-color: $purple-2;
+    display: block;
+    width: 100%;
+
+    &:hover {
+        background-color: darken($purple-2, 10);
+    }
+
+    &:active {
+        background-color: darken($purple-2, 20);
+    }
+}
+
+.action-selector {
+    position: relative;
+}
+
+    .action-selector-button {
+        @include reset-button;
+        padding: 0 $g-m;
+        border-radius: $action-selector-height / 2;
+        font-size: 14px;
+        line-height: 16px;
+        height: $action-selector-height;
+        color: $white;
+        cursor: pointer;
+        border: 0;
+        background-color: $purple-2;
+        @include line-center;
+
+        &:hover {
+            background-color: darken($purple-2, 10);
+        }
+
+        &:active {
+            background-color: darken($purple-2, 20);
+        }
+
+        .icon {
+            margin-left: $g-s;
+        }
+    }
+
+    .action-selector-menu {
+        position: absolute;
+        right: 0;
+        top: $action-selector-height + $g-xs;
+        background-color: $purple-2;
+        border-radius: $action-selector-height / 2;
+        padding: $g-xs;
+        display: none;
+        min-width: 100%;
+
+        &.action-selector-menu-open {
+            display: block;
+        }
+    }
