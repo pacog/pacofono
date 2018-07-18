@@ -21,6 +21,7 @@ import {
     saveSongBeingEdited,
     restoreDefaults,
     deleteSongBeingEdited,
+    saveEditedSongAsCopy,
 } from "store/actions/songEditor";
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
 import { getDefaultNewSongPart } from "constants/defaultNewSongPart";
@@ -45,6 +46,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IRootState, {}, RootAction>)
                     dispatch(modalsActions.closeSongEditor());
                     dispatch(currentSongActions.setCurrentSong(savedSong));
                 });
+        },
+        onSaveSongAsCopy: () => {
+            dispatch(saveEditedSongAsCopy());
         },
         onClose: (song: ISong) => {
             dispatch(modalsActions.closeSongEditor());

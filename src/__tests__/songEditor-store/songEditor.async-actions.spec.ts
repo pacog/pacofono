@@ -9,6 +9,7 @@ import {
     deletePartAndSelectOther,
     deleteChordAndSelectOther,
     addChordToPartBeingEdited,
+    saveEditedSongAsCopy,
     actionCreators as songEditorActions,
 } from "store/actions/songEditor";
 import { actionCreators as songActions} from "store/actions/songs";
@@ -238,6 +239,28 @@ describe("songEditor store async actions", () => {
                 notes: ([] as string[]),
             };
             expect(getChordById(store.getState(), "uuid_48")).toEqual(expectedNewChord);
+        });
+    });
+
+    describe("saveEditedSongAsCopy", () => {
+        it("should be able to save the edited song as a copy and start editing it", async () => {
+            expect.assertions(5);
+            const store = createEmptyStore(getMockStore());
+            await store.dispatch(openForExistingSong(mockData.SONG_1) as any);
+            const firstSongBeingEdited = getSong(store.getState());
+            const songCopy = await store.dispatch(saveEditedSongAsCopy() as any);
+            const newSongBeingEdited = getSong(store.getState());
+            const expectedSong = {
+                id: "uuid_59",
+                name: mockData.SONG_1.name,
+                parts: ["uuid_60", "uuid_62"],
+            };
+            expect(songCopy).toEqual(expectedSong);
+            expect(songCopy).toEqual(newSongBeingEdited);
+            const state = store.getState();
+            expect(getSongById(state, firstSongBeingEdited.id)).toBe(undefined);
+            expect(getPartBeingEdited(state)).toEqual(getPartById(state, "uuid_60"));
+            expect(getChordBeingEdited(state)).toEqual(getChordById(state, "uuid_61"));
         });
     });
 

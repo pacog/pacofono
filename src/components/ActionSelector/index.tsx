@@ -68,6 +68,8 @@ export class ActionSelector extends React.Component<IActionSelectorProps, IActio
 
     private onBlur(event: React.FocusEvent): void {
         this.cancelCurrentTimeout();
+
+        // TODO not the most robust way to do this. We should make sure events have gone up before closing
         this.currentTimeout = window.setTimeout(() => {
             this.setState({ isOpen: false });
         }, 300);

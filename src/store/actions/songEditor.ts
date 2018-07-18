@@ -214,3 +214,25 @@ export const addChordToPartBeingEdited = (): ThunkAction<IChord, IRootState, {},
         return newChord;
     };
 };
+
+export const saveEditedSongAsCopy = (): ThunkAction<Promise<ISong>, IRootState, {}, RootAction> => {
+    return (dispatch: ThunkDispatch<IRootState, {}, RootAction>, getState: () => IRootState): Promise<ISong> => {
+        const songToCopy = getSong(getState());
+        let copiedSongInstance: ISong;
+        let newOriginalSongInstance: ISong;
+        return dispatch(duplicateSong(songToCopy))
+            .then((newOriginalSong) => {
+                newOriginalSongInstance = newOriginalSong;
+                return dispatch(duplicateSong(newOriginalSong));
+            }).then((copiedSong) => {
+                copiedSongInstance = copiedSong;
+                dispatch(actionCreators.startEditingExistingSong(copiedSong, newOriginalSongInstance));
+                dispatch(actionCreators.selectSongPartToEdit(copiedSong.parts[0]));
+                const partBeingEdited = getPartBeingEdited(getState());
+                dispatch(actionCreators.selectChordToEdit(partBeingEdited.chords[0]));
+                return dispatch(cascadeDeleteSong(songToCopy));
+            }).then(() => {
+                return copiedSongInstance;
+            });
+    };
+};

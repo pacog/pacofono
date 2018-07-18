@@ -18,5 +18,6 @@ export default interface ISongEditorProps {
     onDeleteSong: () => void;
     onCancelDeleteSong: () => void;
     onDeleteSongConfirm: () => void;
+    onSaveSongAsCopy: () => void;
     onMovePart: (songId: string, partId: string, desiredIndex: number) => void;
 }

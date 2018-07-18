@@ -63,31 +63,33 @@ function showHeaderPart(props: ISongEditorProps) {
             <ActionSelector
                 label="Song actions"
                 >
-                <ActionItem label="action1" onClick={ () => { console.log(1); } }></ActionItem>
-                <ActionItem label="action2" onClick={ () => { console.log(2); } }></ActionItem>
+                {
+                    !props.isNewSong &&
+                    <ActionItem
+                        label="Save as copy"
+                        onClick={ props.onSaveSongAsCopy }
+                        ></ActionItem>
+                }
+                {
+                    !props.isNewSong &&
+                    <ActionItem
+                        label="Restore defaults"
+                        onClick={ props.onRestoreDefaults }
+                        ></ActionItem>
+                }
+                {
+                    !props.isNewSong &&
+                    <ActionItem
+                        label="Delete song"
+                        onClick={ props.onDeleteSong }
+                        ></ActionItem>
+                }
             </ActionSelector>
-            {
-                !props.isNewSong &&
-                <PButton
-                    className="ml-sm"
-                    danger={true}
-                    onClick={ props.onDeleteSong }>
-                    Delete
-                </PButton>
-            }
-            {
-                !props.isNewSong &&
-                <PButton
-                    secondary={true}
-                    className="ml-sm"
-                    onClick={() => { props.onRestoreDefaults(); }}
-                >Restore defaults</PButton>
-            }
             <PButton
                 secondary={true}
                 className="ml-sm"
                 onClick={() => { props.onClose(props.song); }}>
-                Close
+                Close and discard changes
             </PButton>
             <PButton
                 primary={true}
