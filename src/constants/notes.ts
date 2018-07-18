@@ -7,7 +7,7 @@ interface IRawNote {
 }
 
 const MIN_FREQ = 32;
-const MAX_FREQ = 2000;
+const MAX_FREQ = 1400;
 
 const allNotesMap: Map<string, INote> = new Map();
 

@@ -17,11 +17,14 @@ interface IChordEditorProps {
 
 const ChordEditor: React.SFC<IChordEditorProps> = (props: IChordEditorProps) => (
     <div className="chord-editor mt-sm">
-        <div className="line-center mb-ml">
-            <input
-                value={props.chord.name}
-                className="p-input grow-full-width"
-                onChange={(e) => { props.onChordNameChanged(props.chord, e.target.value); } } />
+        <div className="line-bottom mb-ml">
+            <div>
+                <div className="p-label">Chord name</div>
+                <input
+                    value={props.chord.name}
+                    className="p-input grow-full-width"
+                    onChange={(e) => { props.onChordNameChanged(props.chord, e.target.value); } } />
+            </div>
             <div className="grow-full-width"></div>
             {
                 props.canBeDeleted &&

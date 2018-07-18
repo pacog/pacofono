@@ -31,7 +31,7 @@
     &.song-parts-selector-part-selected {
         background: $blue-4;
 
-        &:before, &:after {
+        &:after {
             display: block;
         }
     }

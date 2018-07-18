@@ -6,28 +6,28 @@
     align-items: stretch;
 }
 
-$note-selector-note-height: 64px;
-$note-selector-note-width: 16px;
-$note-selector-sharp-note-height: 48px;
+$note-selector-note-height: 70px;
+$note-selector-note-width: 22px;
+$note-selector-sharp-note-height: 49px;
 $note-selector-sharp-note-width: 14px;
 
     .note-selector-note {
         height: $note-selector-note-height;
         width: $note-selector-note-width;
         background-color: $white;
-        border-radius: 0 0 4px 4px;
-        border: 1px solid $purple-3;
+        border-radius: $g-xs;
+        border: 1px solid $grey-3;
         cursor: pointer;
 
         &:hover {
-            background-color: $purple-1;
+            background-color: $grey-1;
         }
 
         &.note-selector-note-selected {
-            background-color: $blue-2;
+            background-color: $highlight-3;
 
             &:hover {
-                background-color: $blue-4;
+                background-color: $highlight-2;
             }
         }
     }
@@ -40,26 +40,26 @@ $note-selector-sharp-note-width: 14px;
         &:before {
             content: "";
             display: block;
-            background: black;
+            background: $grey-5;
             position: absolute;
             top: 0;
             left: -($note-selector-sharp-note-width / 2);
             width: $note-selector-sharp-note-width;
             height: $note-selector-sharp-note-height;
-            border-radius: 0 0 4px 4px;
-            border: 1px solid $purple-3;
+            border-radius: $g-xs;
+            border: 1px solid $grey-3;
         }
 
         &:hover:before {
-            background-color: $purple-2;
+            background-color: $grey-4;
         }
 
         &.note-selector-note-selected:before {
-            background-color: $blue-3;
+            background-color: $highlight-3;
         }
 
         &:hover.note-selector-note-selected:before {
-            background-color: $blue-4;
+            background-color: $highlight-2;
         }
 
     }

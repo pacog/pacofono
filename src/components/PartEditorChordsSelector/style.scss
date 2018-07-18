@@ -37,6 +37,25 @@
                 .chords-selector-chord-selected:hover & {
                     background-color: $transparent-dark-1;
                 }
+
+                &:after {
+                    content: '';
+                    display: none;
+                    bottom: -$g-m;
+                    left: 50%;
+                    margin-left: - $g-l / 2;
+                    position: absolute;
+                    border-left: $g-l / 2 solid transparent;
+                    border-right: $g-l / 2 solid transparent;
+                    border-top: $g-l / 2 solid $purple-3;
+                    transform: scaleY(0.75);
+                    transform-origin: center top;
+                    z-index: 1;
+                }
+
+                .chords-selector-chord-selected &:after {
+                    display: block;
+                }
             }
 
             .chords-selector-chord-bar {
