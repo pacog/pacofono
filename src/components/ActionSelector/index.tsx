@@ -28,6 +28,9 @@ interface IActionSelectorState {
 }
 
 export class ActionSelector extends React.Component<IActionSelectorProps, IActionSelectorState> {
+
+    private currentTimeout: number;
+
     constructor(props: IActionSelectorProps) {
         super(props);
 
@@ -59,10 +62,22 @@ export class ActionSelector extends React.Component<IActionSelectorProps, IActio
         </React.Fragment>);
     }
 
+    public componentWillUnmount() {
+        this.cancelCurrentTimeout();
+    }
+
     private onBlur(event: React.FocusEvent): void {
-        setTimeout(() => {
+        this.cancelCurrentTimeout();
+        this.currentTimeout = window.setTimeout(() => {
             this.setState({ isOpen: false });
         }, 300);
+    }
+
+    private cancelCurrentTimeout() {
+        if (this.currentTimeout) {
+            window.clearTimeout(this.currentTimeout);
+            this.currentTimeout = null;
+        }
     }
 
 }

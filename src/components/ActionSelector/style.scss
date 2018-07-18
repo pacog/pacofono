@@ -8,6 +8,7 @@ $action-selector-line-height: $g-m;
     @include reset-button;
     padding: 0 $g-m;
     border-radius: $action-selector-height / 2;
+    @include regular;
     font-size: 14px;
     line-height: 16px;
     height: $action-selector-height;
@@ -17,6 +18,7 @@ $action-selector-line-height: $g-m;
     background-color: $purple-2;
     display: block;
     width: 100%;
+    text-align: left;
 
     &:hover {
         background-color: darken($purple-2, 10);
@@ -35,6 +37,7 @@ $action-selector-line-height: $g-m;
         @include reset-button;
         padding: 0 $g-m;
         border-radius: $action-selector-height / 2;
+        @include regular;
         font-size: 14px;
         line-height: 16px;
         height: $action-selector-height;
