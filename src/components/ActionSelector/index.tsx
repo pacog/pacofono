@@ -41,21 +41,21 @@ export class ActionSelector extends React.Component<IActionSelectorProps, IActio
 
     public render() {
         return (<React.Fragment>
-            <div className="action-selector"
+            <div className={ classnames({
+                    "action-selector": true,
+                    "action-selector-open": this.state.isOpen,
+                }) }
                 onBlur={ this.onBlur.bind(this) }>
                 <button className="action-selector-button"
                     onClick={() => {
-                        this.setState({ isOpen: true });
+                        this.setState({ isOpen: !this.state.isOpen });
                     }}>
                     <span>{this.props.label}</span>
                     <Icon icon={arrowIcon} size="m" />
                 </button>
 
                 <div
-                    className={ classnames({
-                        "action-selector-menu": true,
-                        "action-selector-menu-open": this.state.isOpen,
-                    }) }>
+                    className="action-selector-menu">
                     { this.props.children }
                 </div>
             </div>

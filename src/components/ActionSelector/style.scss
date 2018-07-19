@@ -55,6 +55,10 @@ $action-selector-line-height: $g-m;
             background-color: darken($purple-2, 20);
         }
 
+        .action-selector-open & {
+            background-color: darken($purple-2, 20);
+        }
+
         .icon {
             margin-left: $g-s;
         }
@@ -70,7 +74,7 @@ $action-selector-line-height: $g-m;
         display: none;
         min-width: 100%;
 
-        &.action-selector-menu-open {
+        .action-selector-open & {
             display: block;
         }
     }
