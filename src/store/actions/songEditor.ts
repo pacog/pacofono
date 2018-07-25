@@ -276,3 +276,11 @@ ThunkAction<ISongPart, IRootState, {}, RootAction> => {
         return getPartById(getState(), newPart.id);
     };
 };
+
+export const cascadeSelectPartToEdit = (partId: string): ThunkAction<void, IRootState, {}, RootAction> => {
+    return (dispatch: ThunkDispatch<IRootState, {}, RootAction>, getState: () => IRootState): void => {
+        dispatch(actionCreators.selectSongPartToEdit(partId));
+        const part = getPartById(getState(), partId);
+        dispatch(actionCreators.selectChordToEdit(part.chords[0]));
+    };
+};

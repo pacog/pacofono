@@ -13,6 +13,7 @@ import {
     duplicateAndEditPart,
     duplicateAndEditChord,
     addAndEditPart,
+    cascadeSelectPartToEdit,
     actionCreators as songEditorActions,
 } from "store/actions/songEditor";
 import { actionCreators as songActions} from "store/actions/songs";
@@ -324,6 +325,21 @@ describe("songEditor store async actions", () => {
             const state = store.getState();
             expect(getPartBeingEdited(state)).toEqual(addedPart);
             expect(getChordBeingEdited(state)).toEqual(getChordById(state, addedPart.chords[0]));
+        });
+    });
+
+    describe("cascadeSelectPartToEdit", () => {
+        it("should be able to select a part cascading to also select its first chord", async () => {
+            expect.assertions(2);
+            const store = createEmptyStore(getMockStore());
+            await store.dispatch(openForExistingSong(mockData.SONG_1) as any);
+            const song = getSong(store.getState());
+            store.dispatch(cascadeSelectPartToEdit(song.parts[1]) as any);
+            const state = store.getState();
+            const expectedPart = getPartById(state, song.parts[1]);
+            const expectedChord = getChordById(state, expectedPart.chords[0]);
+            expect(getPartBeingEdited(state)).toEqual(expectedPart);
+            expect(getChordBeingEdited(state)).toEqual(expectedChord);
         });
     });
 
