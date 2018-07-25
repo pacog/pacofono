@@ -22,6 +22,7 @@ import {
     deleteSongBeingEdited,
     saveEditedSongAsCopy,
     addAndEditPart,
+    cascadeSelectPartToEdit,
 } from "store/actions/songEditor";
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
 
@@ -81,7 +82,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IRootState, {}, RootAction>)
             dispatch(deleteSongBeingEdited());
         },
         onSelectPart: (part: ISongPart) => {
-            dispatch(songEditorActions.selectSongPartToEdit(part.id));
+            dispatch(cascadeSelectPartToEdit(part.id));
         },
         onMovePart: (songId: string, partId: string, desiredIndex: number) => {
             dispatch(songsActions.changePartIndex(songId, partId, desiredIndex));
