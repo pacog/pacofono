@@ -10,6 +10,7 @@ import {
     deleteChordAndSelectOther,
     addChordToPartBeingEdited,
     saveEditedSongAsCopy,
+    duplicateAndEditPart,
     actionCreators as songEditorActions,
 } from "store/actions/songEditor";
 import { actionCreators as songActions} from "store/actions/songs";
@@ -261,6 +262,26 @@ describe("songEditor store async actions", () => {
             expect(getSongById(state, firstSongBeingEdited.id)).toBe(undefined);
             expect(getPartBeingEdited(state)).toEqual(getPartById(state, "uuid_60"));
             expect(getChordBeingEdited(state)).toEqual(getChordById(state, "uuid_61"));
+        });
+    });
+
+    describe("duplicateAndEditPart", () => {
+        it("should be able to duplicate a part", async () => {
+            expect.assertions(3);
+            const store = createEmptyStore(getMockStore());
+            await store.dispatch(openForExistingSong(mockData.SONG_1) as any);
+            const song = getSong(store.getState());
+            const partToCopy = getPartBeingEdited(store.getState());
+            const copiedPart = await store.dispatch(duplicateAndEditPart(partToCopy, song) as any);
+            const expectedPart = {
+                id: "uuid_69",
+                name: `${partToCopy.name} (copy)`,
+                chords: ["uuid_70"],
+            };
+            expect(copiedPart).toEqual(expectedPart);
+            const state = store.getState();
+            expect(getPartBeingEdited(state)).toEqual(copiedPart);
+            expect(getChordBeingEdited(state)).toEqual(getChordById(state, copiedPart.chords[0]));
         });
     });
 

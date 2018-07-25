@@ -19,7 +19,7 @@ import { getDefaultNewSongPart } from "constants/defaultNewSongPart";
 import { getDefaultNewChord } from "constants/defaultNewChord";
 import { actionCreators as modalsActions } from "store/actions/modals";
 import { actionCreators as songsActions } from "store/actions/songs";
-import { actionCreators as partsActions, cascadeDeletePart } from "store/actions/parts";
+import { actionCreators as partsActions, cascadeDeletePart, duplicatePart } from "store/actions/parts";
 import { actionCreators as chordsActions } from "store/actions/chords";
 
 export const START_EDITING_NEW_SONG = "START_EDITING_NEW_SONG";
@@ -233,6 +233,19 @@ export const saveEditedSongAsCopy = (): ThunkAction<Promise<ISong>, IRootState, 
                 return dispatch(cascadeDeleteSong(songToCopy));
             }).then(() => {
                 return copiedSongInstance;
+            });
+    };
+};
+
+export const duplicateAndEditPart = (part: ISongPart, song: ISong):
+ThunkAction<Promise<ISongPart>, IRootState, {}, RootAction> => {
+    return (dispatch: ThunkDispatch<IRootState, {}, RootAction>, getState: () => IRootState): Promise<ISongPart> => {
+        return dispatch(duplicatePart(part, song.id))
+            .then((newPart) => {
+                dispatch(actionCreators.selectSongPartToEdit(newPart.id));
+                dispatch(partsActions.changePartName(newPart, `${newPart.name} (copy)`));
+                dispatch(actionCreators.selectChordToEdit(newPart.chords[0]));
+                return getPartById(getState(), newPart.id);
             });
     };
 };

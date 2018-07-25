@@ -73,6 +73,8 @@ $action-selector-line-height: $g-m;
         padding: $g-xs;
         display: none;
         min-width: 100%;
+        z-index: 1;
+        box-shadow: 0 2px 6px rgba(black, 0.3);
 
         .action-selector-open & {
             display: block;

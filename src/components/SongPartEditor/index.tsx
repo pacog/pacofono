@@ -4,6 +4,7 @@ import { ISong, ISongPart, IChord, INote } from "types";
 import PButton from "components/PButton";
 import PartEditorChordsSelector from "components/PartEditorChordsSelector";
 import ChordEditor from "components/ChordEditor";
+import { ActionSelector, ActionItem } from "components/ActionSelector";
 import "./style.scss";
 import ConfirmDeletePart from "./confirmDeletePart";
 
@@ -15,6 +16,7 @@ interface ISongPartEditorProps {
     isShowingConfirmDeletePart: boolean;
     onPartNameChanged: (part: ISongPart, newValue: string) => void;
     onDeletePart: () => void;
+    onDuplicatePart: (part: ISongPart, song: ISong) => void;
     onCancelDeletePart: () => void;
     onConfirmDeletePart: (part: ISongPart, song: ISong) => void;
     onAddChord: () => void;
@@ -42,20 +44,32 @@ const SongPartEditor: React.SFC<ISongPartEditorProps> = (props: ISongPartEditorP
                 <div className="grow-full-width"></div>
 
                 <PButton
-                    className="ml-m"
+                    className="ml-m mr-sm"
                     secondary={true}
                     onClick={props.onAddChord }>
                         Add chord
                     </PButton>
-                {
-                    props.canBeDeleted &&
-                    <PButton
-                        className="ml-m"
-                        secondary={true}
-                        onClick={props.onDeletePart }>
-                            Delete part
-                        </PButton>
-                }
+
+                    <ActionSelector
+                        label="Part actions"
+                        >
+                        <ActionItem
+                            label="Duplicate part"
+                            onClick={ () => props.onDuplicatePart(props.part, props.song) }
+                            ></ActionItem>
+                        <ActionItem
+                            label="Create from scale (Future)"
+                            onClick={ () => { console.log("Create from scale"); } }
+                            ></ActionItem>
+                        {
+                            props.canBeDeleted &&
+                            <ActionItem
+                                label="Delete part"
+                                onClick={ props.onDeletePart }
+                                ></ActionItem>
+                        }
+                    </ActionSelector>
+
             </div>
         }
         {
