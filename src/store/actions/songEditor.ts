@@ -212,6 +212,7 @@ export const addChordToPartBeingEdited = (): ThunkAction<IChord, IRootState, {},
         const part = getPartBeingEdited(getState());
         const newChord = getDefaultNewChord();
         dispatch(chordsActions.addChord(newChord, part.id));
+        dispatch(actionCreators.selectChordToEdit(newChord.id));
         return newChord;
     };
 };

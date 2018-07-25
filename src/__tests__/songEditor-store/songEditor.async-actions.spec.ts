@@ -236,7 +236,7 @@ describe("songEditor store async actions", () => {
 
     describe("addChordToPartBeingEdited", () => {
         it("should be able to add a chord", async () => {
-            expect.assertions(3);
+            expect.assertions(4);
             const store = createEmptyStore(getMockStore());
             await store.dispatch(openForExistingSong(mockData.SONG_2) as any);
             const partBeingEdited = getPartBeingEdited(store.getState());
@@ -252,6 +252,7 @@ describe("songEditor store async actions", () => {
                 notes: ([] as string[]),
             };
             expect(getChordById(store.getState(), "uuid_48")).toEqual(expectedNewChord);
+            expect(getChordBeingEdited(store.getState())).toEqual(expectedNewChord);
         });
     });
 
