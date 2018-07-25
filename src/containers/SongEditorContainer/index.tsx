@@ -15,16 +15,15 @@ import {
 import { getSongParts } from "store/selectors/parts";
 import { actionCreators as modalsActions } from "store/actions/modals";
 import { actionCreators as songsActions, cascadeDeleteSong } from "store/actions/songs";
-import { actionCreators as partsActions } from "store/actions/parts";
 import {
     actionCreators as songEditorActions,
     saveSongBeingEdited,
     restoreDefaults,
     deleteSongBeingEdited,
     saveEditedSongAsCopy,
+    addAndEditPart,
 } from "store/actions/songEditor";
 import { actionCreators as currentSongActions } from "store/actions/currentSong";
-import { getDefaultNewSongPart } from "constants/defaultNewSongPart";
 
 const mapStateToProps = (state: IRootState) => {
     const song = getSong(state);
@@ -52,8 +51,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IRootState, {}, RootAction>)
         },
         onClose: (song: ISong) => {
             dispatch(modalsActions.closeSongEditor());
-            dispatch(cascadeDeleteSong(song));
-            dispatch(songEditorActions.stopEditing());
+            dispatch(cascadeDeleteSong(song)).then(() => {
+                dispatch(songEditorActions.stopEditing());
+            });
         },
         onSongNameChanged: (song: ISong, newName: string) => {
             dispatch(songsActions.changeSongName(song, newName));
@@ -69,7 +69,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IRootState, {}, RootAction>)
             dispatch(songEditorActions.showConfirmRestoreDefaults(false));
         },
         onAddPart: (toSong: ISong) => {
-            dispatch(partsActions.addPart(getDefaultNewSongPart(), toSong.id));
+            dispatch(addAndEditPart(toSong));
         },
         onDeleteSong: () => {
             dispatch(songEditorActions.showConfirmDeleteSong(true));

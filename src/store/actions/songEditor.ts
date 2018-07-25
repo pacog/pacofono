@@ -263,3 +263,16 @@ ThunkAction<IChord, IRootState, {}, RootAction> => {
         return chordCopy;
     };
 };
+
+export const addAndEditPart = (song: ISong):
+ThunkAction<ISongPart, IRootState, {}, RootAction> => {
+    return (dispatch: ThunkDispatch<IRootState, {}, RootAction>, getState: () => IRootState): ISongPart => {
+        const newPart = getDefaultNewSongPart();
+        dispatch(partsActions.addPart(newPart, song.id));
+        const newChord = getDefaultNewChord();
+        dispatch(chordsActions.addChord(newChord, newPart.id));
+        dispatch(actionCreators.selectSongPartToEdit(newPart.id));
+        dispatch(actionCreators.selectChordToEdit(newChord.id));
+        return getPartById(getState(), newPart.id);
+    };
+};
