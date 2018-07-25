@@ -143,16 +143,22 @@ describe("songEditor store async actions", () => {
 
     describe("restoreDefaults", () => {
         it("should be able to restore defaults", async () => {
-            expect.assertions(4);
+            expect.assertions(6);
             const store = createEmptyStore(getMockStore());
             const songBeingEdited = await store.dispatch(openForExistingSong(mockData.SONG_1) as any);
             expect(getSongById(store.getState(), songBeingEdited.id)).toEqual(songBeingEdited);
             store.dispatch(songActions.changeSongName(songBeingEdited, "new name"));
             expect(getSong(store.getState()).name).toBe("new name");
             await store.dispatch(restoreDefaults() as any);
-            const newSongBeingEdited = getSong(store.getState());
+
+            const state = store.getState();
+            const newSongBeingEdited = getSong(state);
             expect(newSongBeingEdited).not.toEqual(songBeingEdited);
             expect(newSongBeingEdited.name).not.toBe("new name");
+            const expectedSelectedPart = getPartById(state, newSongBeingEdited.parts[0]);
+            expect(getPartBeingEdited(state)).toEqual(expectedSelectedPart);
+            const expectedSelectedChord = getChordById(state, expectedSelectedPart.chords[0]);
+            expect(getChordBeingEdited(state)).toEqual(expectedSelectedChord);
         });
     });
 

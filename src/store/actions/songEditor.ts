@@ -9,7 +9,6 @@ import {
     getOriginalSong,
     isEditingSong,
     getPartBeingEdited,
-    getChordsFromPartBeingEdited,
 } from "store/selectors/songEditor";
 import { getPartById } from "store/selectors/parts";
 import { getSavedSongs, getSong as getSongFromStore } from "store/selectors/songs";
@@ -132,6 +131,7 @@ export const restoreDefaults = (): ThunkAction<Promise<void>, IRootState, {}, Ro
                 })
                 .then((duplicatedSong: ISong) => {
                     dispatch(actionCreators.startEditingExistingSong(duplicatedSong, originalSong));
+                    dispatch(cascadeSelectPartToEdit(duplicatedSong.parts[0]));
                 });
         }
     };
@@ -176,15 +176,12 @@ export const openForNewSong = (): ThunkAction<ISong, IRootState, {}, RootAction>
 };
 
 export const openForExistingSong = (song: ISong): ThunkAction<Promise<ISong>, IRootState, {}, RootAction> => {
-    return (dispatch: ThunkDispatch<IRootState, {}, RootAction>, getState: () => IRootState): Promise<ISong> => {
+    return (dispatch: ThunkDispatch<IRootState, {}, RootAction>): Promise<ISong> => {
         return dispatch(duplicateSong(song))
             .then((duplicatedSong: ISong) => {
                 dispatch(modalsActions.openSongEditor());
                 dispatch(actionCreators.startEditingExistingSong(duplicatedSong, song));
-                dispatch(actionCreators.selectSongPartToEdit(duplicatedSong.parts[0]));
-                const chordsInEditedPart = getChordsFromPartBeingEdited(getState());
-                // We assume we always have a part in the song to edit
-                dispatch(actionCreators.selectChordToEdit(chordsInEditedPart[0].id));
+                dispatch(cascadeSelectPartToEdit(duplicatedSong.parts[0]));
                 return duplicatedSong;
             });
     };
@@ -231,9 +228,7 @@ export const saveEditedSongAsCopy = (): ThunkAction<Promise<ISong>, IRootState, 
             }).then((copiedSong) => {
                 copiedSongInstance = copiedSong;
                 dispatch(actionCreators.startEditingExistingSong(copiedSong, newOriginalSongInstance));
-                dispatch(actionCreators.selectSongPartToEdit(copiedSong.parts[0]));
-                const partBeingEdited = getPartBeingEdited(getState());
-                dispatch(actionCreators.selectChordToEdit(partBeingEdited.chords[0]));
+                dispatch(cascadeSelectPartToEdit(copiedSong.parts[0]));
                 return dispatch(cascadeDeleteSong(songToCopy));
             }).then(() => {
                 return copiedSongInstance;
