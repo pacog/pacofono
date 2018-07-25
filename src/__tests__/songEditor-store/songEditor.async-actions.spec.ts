@@ -11,6 +11,7 @@ import {
     addChordToPartBeingEdited,
     saveEditedSongAsCopy,
     duplicateAndEditPart,
+    duplicateAndEditChord,
     actionCreators as songEditorActions,
 } from "store/actions/songEditor";
 import { actionCreators as songActions} from "store/actions/songs";
@@ -282,6 +283,25 @@ describe("songEditor store async actions", () => {
             const state = store.getState();
             expect(getPartBeingEdited(state)).toEqual(copiedPart);
             expect(getChordBeingEdited(state)).toEqual(getChordById(state, copiedPart.chords[0]));
+        });
+    });
+
+    describe("duplicateAndEditChord", () => {
+        it("should be able to duplicate a chord", async () => {
+            expect.assertions(2);
+            const store = createEmptyStore(getMockStore());
+            await store.dispatch(openForExistingSong(mockData.SONG_1) as any);
+            const part = getPartBeingEdited(store.getState());
+            const chordToCopy = getChordBeingEdited(store.getState());
+            const copiedChord = await store.dispatch(duplicateAndEditChord(chordToCopy, part) as any);
+            const expectedChord = {
+                id: "uuid_76",
+                name: `${chordToCopy.name}`,
+                notes: chordToCopy.notes.slice(),
+            };
+            expect(copiedChord).toEqual(expectedChord);
+            const state = store.getState();
+            expect(getChordBeingEdited(state)).toEqual(copiedChord);
         });
     });
 

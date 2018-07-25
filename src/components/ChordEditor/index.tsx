@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { ActionSelector, ActionItem } from "components/ActionSelector";
 import { IChord, ISongPart, INote } from "types";
 import PButton from "components/PButton";
 import NoteSelector from "components/NoteSelector";
@@ -11,6 +12,7 @@ interface IChordEditorProps {
     chord: IChord;
     onChordNameChanged: (chord: IChord, newValue: string) => void;
     onDeleteChord: (chord: IChord, partId: string) => void;
+    onDuplicateChord: (chord: IChord, part: ISongPart) => void;
     canBeDeleted: boolean;
     onToggleNote: (chord: IChord, note: INote) => void;
 }
@@ -29,10 +31,31 @@ const ChordEditor: React.SFC<IChordEditorProps> = (props: IChordEditorProps) => 
             {
                 props.canBeDeleted &&
                 <PButton
+                    className="mr-sm"
                     onClick={() => { props.onDeleteChord(props.chord, props.part.id); }}
                     secondary={true}
                     >Delete chord</PButton>
             }
+            <ActionSelector
+                label="Chord actions"
+                >
+                <ActionItem
+                    label="Duplicate chord"
+                    onClick={ () => { props.onDuplicateChord(props.chord, props.part); } }
+                    ></ActionItem>
+                <ActionItem
+                    label="Load from library (future)"
+                    onClick={ () => { console.log("Load from library (future)"); } }
+                    ></ActionItem>
+                <ActionItem
+                    label="Save in library (future)"
+                    onClick={ () => { console.log("Save in library (future)"); } }
+                    ></ActionItem>
+                <ActionItem
+                    label="Open in chord editor (future)"
+                    onClick={ () => { console.log("Open in chord editor (future)"); } }
+                    ></ActionItem>
+            </ActionSelector>
         </div>
         <div className="chord-editor-note-selector-container">
             <NoteSelector

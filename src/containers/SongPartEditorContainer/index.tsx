@@ -11,6 +11,7 @@ import {
     addChordToPartBeingEdited,
     deleteChordAndSelectOther,
     duplicateAndEditPart,
+    duplicateAndEditChord,
 } from "store/actions/songEditor";
 
 import {
@@ -71,6 +72,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IRootState, {}, RootAction>)
         },
         onDuplicatePart: (part: ISongPart, song: ISong) => {
             dispatch(duplicateAndEditPart(part, song));
+        },
+        onDuplicateChord: (chord: IChord, part: ISongPart) => {
+            dispatch(duplicateAndEditChord(chord, part));
         },
     };
 };

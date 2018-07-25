@@ -1,3 +1,4 @@
+import { v1 as uuid } from "uuid";
 import { Promise } from "es6-promise";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { IRootState } from "store/reducers/root";
@@ -247,5 +248,15 @@ ThunkAction<Promise<ISongPart>, IRootState, {}, RootAction> => {
                 dispatch(actionCreators.selectChordToEdit(newPart.chords[0]));
                 return getPartById(getState(), newPart.id);
             });
+    };
+};
+
+export const duplicateAndEditChord = (chord: IChord, part: ISongPart):
+ThunkAction<IChord, IRootState, {}, RootAction> => {
+    return (dispatch: ThunkDispatch<IRootState, {}, RootAction>): IChord => {
+        const chordCopy = {...chord, id: uuid(), notes: chord.notes.slice()};
+        dispatch(chordsActions.addChord(chordCopy, part.id));
+        dispatch(actionCreators.selectChordToEdit(chordCopy.id));
+        return chordCopy;
     };
 };

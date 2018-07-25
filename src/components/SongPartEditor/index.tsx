@@ -26,6 +26,7 @@ interface ISongPartEditorProps {
     onChordNameChanged: (chord: IChord, newValue: string) => void;
     onToggleNote: (chord: IChord, note: INote) => void;
     onDeleteChord: (chord: IChord) => void;
+    onDuplicateChord: (chord: IChord, part: ISongPart) => void;
     canSelectedChordBeDeleted: boolean;
 }
 
@@ -94,6 +95,7 @@ const SongPartEditor: React.SFC<ISongPartEditorProps> = (props: ISongPartEditorP
                 onChordNameChanged={ props.onChordNameChanged }
                 onToggleNote={ props.onToggleNote }
                 onDeleteChord={ props.onDeleteChord }
+                onDuplicateChord={ props.onDuplicateChord }
                 canBeDeleted={ props.canSelectedChordBeDeleted }
                 ></ChordEditor>
         }
