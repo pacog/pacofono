@@ -196,7 +196,7 @@ export const deletePartAndSelectOther =
         return dispatch(cascadeDeletePart(part, song.id))
             .then(() => {
                 const songWithoutPart = getSongFromStore(getState(), song.id);
-                dispatch(actionCreators.selectSongPartToEdit(songWithoutPart.parts[0]));
+                dispatch(cascadeSelectPartToEdit(songWithoutPart.parts[0]));
             });
     };
 };

@@ -184,23 +184,24 @@ describe("songEditor store async actions", () => {
 
     describe("deletePartAndSelectOther", () => {
         it("should delete a part and select other", async () => {
-            expect.assertions(5);
+            expect.assertions(6);
             const store = createEmptyStore(getMockStore());
             const songBeingEdited = await store.dispatch(openForExistingSong(mockData.SONG_1) as any);
             expect(getSongById(store.getState(), songBeingEdited.id).parts.length).toBe(2);
             expect(getPartBeingEdited(store.getState()))
                 .toEqual(getPartById(store.getState(), songBeingEdited.parts[0]));
 
-            const partToDelete = getPartById(store.getState(), songBeingEdited.parts[1]);
+            const partToDelete = getPartById(store.getState(), songBeingEdited.parts[0]);
             store.dispatch(songEditorActions.selectSongPartToEdit(partToDelete.id));
-            expect(getPartBeingEdited(store.getState()))
-                .toEqual(partToDelete);
-
+            expect(getPartBeingEdited(store.getState())).toEqual(partToDelete);
             await store.dispatch(deletePartAndSelectOther(partToDelete, songBeingEdited) as any);
-            const newSongBeingEdited = getSong(store.getState());
+            const state = store.getState();
+            const newSongBeingEdited = getSong(state);
             expect(newSongBeingEdited.parts.length).toBe(1);
-            expect(getPartBeingEdited(store.getState()))
-                .toEqual(getPartById(store.getState(), newSongBeingEdited.parts[0]));
+            const expectedSelectedPart = getPartById(state, newSongBeingEdited.parts[0]);
+            const expectedSelectedChord = getChordById(state, expectedSelectedPart.chords[0]);
+            expect(getPartBeingEdited(state)).toEqual(expectedSelectedPart);
+            expect(getChordBeingEdited(state)).toEqual(expectedSelectedChord);
         });
     });
 
