@@ -166,14 +166,16 @@ describe("songEditor store async actions", () => {
         });
 
         it("should delete the song if it is being edited", async () => {
-            expect.assertions(4);
+            expect.assertions(6);
             const store = createEmptyStore(getMockStore());
             const songBeingEdited = await store.dispatch(openForExistingSong(mockData.SONG_1) as any);
             expect(getSong(store.getState())).toEqual(songBeingEdited);
             expect(getSongById(store.getState(), songBeingEdited.id)).toEqual(songBeingEdited);
+            expect(getSongById(store.getState(), mockData.SONG_1.id)).toEqual(mockData.SONG_1);
             await store.dispatch(deleteSongBeingEdited() as any);
             expect(getSongById(store.getState(), songBeingEdited.id)).toBe(undefined);
-            expect(getSong(store.getState())).toBe(undefined);
+            expect(getSongById(store.getState(), mockData.SONG_1.id)).toBe(undefined);
+            expect(getSong(store.getState())).toBe(null);
         });
 
     });

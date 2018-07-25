@@ -79,9 +79,6 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IRootState, {}, RootAction>)
         },
         onDeleteSongConfirm: () => {
             dispatch(deleteSongBeingEdited());
-            dispatch(songEditorActions.showConfirmDeleteSong(false));
-            dispatch(modalsActions.closeSongEditor());
-            dispatch(songEditorActions.stopEditing());
         },
         onSelectPart: (part: ISongPart) => {
             dispatch(songEditorActions.selectSongPartToEdit(part.id));

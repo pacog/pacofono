@@ -147,6 +147,9 @@ export const deleteSongBeingEdited = (): ThunkAction<Promise<void>, IRootState, 
                     return dispatch(cascadeDeleteSong(originalSong));
                 })
                 .then(() => {
+                    dispatch(actionCreators.showConfirmDeleteSong(false));
+                    dispatch(modalsActions.closeSongEditor());
+                    dispatch(actionCreators.stopEditing());
                     const allSongs = getSavedSongs(getState());
                     const songToSetAsCurrent = allSongs.length ? allSongs[0] : null;
                     dispatch(currentSongActions.setCurrentSong(songToSetAsCurrent));
