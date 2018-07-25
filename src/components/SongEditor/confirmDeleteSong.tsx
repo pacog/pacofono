@@ -4,11 +4,9 @@ import PButton from "components/PButton";
 
 export default (props: ISongEditorProps) => {
     return (
-        <div>
+        <div className="song-editor-confirm-content">
             <div>Do you really want to delete this song?</div>
-            <div className="line-center mt-m">
-                <div className="grow-full-width"></div>
-
+            <div className="line-center mt-l">
                 <PButton
                     secondary={true}
                     onClick={ props.onCancelDeleteSong }>

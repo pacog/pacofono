@@ -4,11 +4,9 @@ import PButton from "components/PButton";
 
 export default (props: ISongEditorProps) => {
     return (
-        <div>
+        <div className="song-editor-confirm-content">
             <div>Are you sure you want to restore the defaults for this song?</div>
-            <div className="line-center mt-m">
-                <div className="grow-full-width"></div>
-
+            <div className="line-center mt-l">
                 <PButton
                     secondary={true}
                     onClick={ props.onCancelRestoreDefaults }>

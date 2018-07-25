@@ -7,6 +7,13 @@
     border-radius: $g-sm;
 }
 
+.song-editor-confirm-content {
+    padding: $g-l;
+    border-radius: $g-sm;
+    background-color: $transparent-dark-3;
+    text-align: center;
+}
+
 .song-editor-header {
     background-color: #504F61;
     padding: $g-sm;
