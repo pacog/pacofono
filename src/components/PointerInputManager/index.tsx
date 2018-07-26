@@ -5,6 +5,7 @@ import "./style.scss";
 interface IPointerInputManagerProps {
     chords: IChord[];
     onPointStart: (chord: IChord, where: IPointRatio) => void;
+    onPointerMove: (position: IPointRatio) => void;
     onPointEnd: () => void;
 }
 
@@ -22,6 +23,15 @@ const PointerInputManager: React.SFC<IPointerInputManagerProps> = (props: IPoint
                                 { x: event.clientX, y: event.clientY },
                             );
                             props.onPointStart(chord, where);
+                        }
+                    }
+                    onMouseMove={
+                        (event) => {
+                            const where = getRatioFromBoxAndCoordinates(
+                                event.currentTarget.getBoundingClientRect() as DOMRect,
+                                { x: event.clientX, y: event.clientY },
+                            );
+                            props.onPointerMove(where);
                         }
                     }
                     onMouseUp={
