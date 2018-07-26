@@ -7,6 +7,7 @@ let isPlaying = false;
 
 export const playChord = (chord: IChord, velocity: number): void => {
     isPlaying = true;
+    synth.set("volume", volumeToDecibels(velocity));
     synth.triggerAttack(chord.notes, undefined, velocity);
 };
 

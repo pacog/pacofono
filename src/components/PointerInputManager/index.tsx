@@ -1,5 +1,6 @@
 import * as React from "react";
 import { IChord, IPointRatio, IPoint } from "types";
+import supportsTouch from "utils/supportsTouch";
 import "./style.scss";
 
 interface IPointerInputManagerProps {
@@ -18,6 +19,9 @@ const PointerInputManager: React.SFC<IPointerInputManagerProps> = (props: IPoint
                     className="pointer-input-manager-chord"
                     onMouseDown={
                         (event) => {
+                            if (supportsTouch) {
+                                return;
+                            }
                             const where = getRatioFromBoxAndCoordinates(
                                 event.currentTarget.getBoundingClientRect() as DOMRect,
                                 { x: event.clientX, y: event.clientY },
@@ -27,6 +31,9 @@ const PointerInputManager: React.SFC<IPointerInputManagerProps> = (props: IPoint
                     }
                     onMouseMove={
                         (event) => {
+                            if (supportsTouch) {
+                                return;
+                            }
                             const where = getRatioFromBoxAndCoordinates(
                                 event.currentTarget.getBoundingClientRect() as DOMRect,
                                 { x: event.clientX, y: event.clientY },
@@ -35,8 +42,42 @@ const PointerInputManager: React.SFC<IPointerInputManagerProps> = (props: IPoint
                         }
                     }
                     onMouseUp={
-                        () => { props.onPointEnd(); }
-                    }>
+                        () => {
+                            if (supportsTouch) {
+                                return;
+                            }
+                            props.onPointEnd();
+                        }
+                    }
+                    onTouchStart={
+                        (event) => {
+                            const where = getRatioFromBoxAndCoordinates(
+                                event.currentTarget.getBoundingClientRect() as DOMRect,
+                                { x: event.touches[0].clientX, y: event.touches[0].clientY },
+                            );
+                            props.onPointStart(chord, where);
+                        }
+                    }
+                    onTouchMove={
+                        (event) => {
+                            const where = getRatioFromBoxAndCoordinates(
+                                event.currentTarget.getBoundingClientRect() as DOMRect,
+                                { x: event.touches[0].clientX, y: event.touches[0].clientY },
+                            );
+                            props.onPointerMove(where);
+                        }
+                    }
+                    onTouchEnd={
+                        () => {
+                            props.onPointEnd();
+                        }
+                    }
+                    onTouchCancel={
+                        () => {
+                            props.onPointEnd();
+                        }
+                    }
+                    >
 
                     <span className="pointer-input-manager-chord-name">{ chord.name }</span>
                 </div>
