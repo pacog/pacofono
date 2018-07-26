@@ -21,3 +21,13 @@ export interface ISong {
     id: string;
     parts: string[];
 }
+
+export interface IPoint {
+    x: number;
+    y: number;
+}
+
+export interface IPointRatio {
+    x: number;
+    y: number;
+}

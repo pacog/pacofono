@@ -1,10 +1,11 @@
 import * as React from "react";
-import { IChord } from "types";
+import { IChord, IPointRatio, IPoint } from "types";
 import "./style.scss";
 
 interface IPointerInputManagerProps {
     chords: IChord[];
-    onPointStart: (chord: IChord) => void;
+    onPointStart: (chord: IChord, where: IPointRatio) => void;
+    onPointEnd: () => void;
 }
 
 const PointerInputManager: React.SFC<IPointerInputManagerProps> = (props: IPointerInputManagerProps) => (
@@ -14,8 +15,17 @@ const PointerInputManager: React.SFC<IPointerInputManagerProps> = (props: IPoint
             props.chords.map( (chord) => (
                 <div key={chord.id}
                     className="pointer-input-manager-chord"
-                    onClick={
-                        () => { props.onPointStart(chord); }
+                    onMouseDown={
+                        (event) => {
+                            const where = getRatioFromBoxAndCoordinates(
+                                event.currentTarget.getBoundingClientRect() as DOMRect,
+                                { x: event.clientX, y: event.clientY },
+                            );
+                            props.onPointStart(chord, where);
+                        }
+                    }
+                    onMouseUp={
+                        () => { props.onPointEnd(); }
                     }>
 
                     <span className="pointer-input-manager-chord-name">{ chord.name }</span>
@@ -28,5 +38,12 @@ const PointerInputManager: React.SFC<IPointerInputManagerProps> = (props: IPoint
         }
     </div>
 );
+
+function getRatioFromBoxAndCoordinates(box: DOMRect, point: IPoint): IPointRatio {
+    return {
+        x: (point.x - box.x) / box.width,
+        y: 1 - (point.y - box.y) / box.height,
+    };
+}
 
 export default PointerInputManager;
