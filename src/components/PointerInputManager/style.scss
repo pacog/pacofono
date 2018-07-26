@@ -1,0 +1,55 @@
+@import "src/root-style/common";
+
+.pointer-input-manager {
+    position: absolute;
+    top: 0;
+    left: $g-xl;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+    .pointer-input-manager-chord {
+        flex: 1;
+        position: relative;
+        opacity: 0.3;
+        transition: opacity 0.2s ease-in;
+        user-select: none;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            z-index: 1;
+            left: 50%;
+            background: $highlight-4;
+            width: $g-l;
+            transform: translateX(-50%);
+        }
+    }
+
+        .pointer-input-manager-chord-name {
+            position: absolute;
+            height: $g-l;
+            line-height: $g-l;
+            font-size: 16px;
+            color: white;
+            border-radius: $g-l / 2;
+            background-color: $purple-4;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: $g-m;
+            z-index: 2;
+            white-space: nowrap;
+            padding: 0 $g-ml;
+            box-shadow: 0 2px 6px rgba(black, 0.3);
+        }

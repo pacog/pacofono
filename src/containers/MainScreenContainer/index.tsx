@@ -4,6 +4,7 @@ import AppLogo from "components/AppLogo";
 import Sidebar from "components/Sidebar";
 import MusicModeSelectorContainer from "containers/MusicModeSelectorContainer";
 import ModalManagerContainer from "containers/ModalManagerContainer";
+import PointerInputManagerContainer from "containers/PointerInputManagerContainer";
 
 import "./style.scss";
 
@@ -13,6 +14,7 @@ const MainScreenContainer: React.SFC<{}> = (props: {}) => (
         <Sidebar>
             <MusicModeSelectorContainer />
         </Sidebar>
+        <PointerInputManagerContainer />
         <ModalManagerContainer />
     </div>
 );
