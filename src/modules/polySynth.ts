@@ -6,7 +6,7 @@ interface IPFPolySynthOptions {
     voices: number;
 }
 
-class PFPolySynth {
+export class PFPolySynth {
 
     private options: IPFPolySynthOptions;
     private output: any;

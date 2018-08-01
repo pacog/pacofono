@@ -31,3 +31,5 @@ export interface IPointRatio {
     x: number;
     y: number;
 }
+
+export type ChordsWithWeights = Map<IChord, number>;
