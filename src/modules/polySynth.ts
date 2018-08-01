@@ -1,5 +1,6 @@
 import { IChord } from "types";
 import { Volume, FMSynth } from "tone";
+import { percentageToDecibels } from "utils/decibels";
 
 interface IPFPolySynthOptions {
     voices: number;
@@ -17,13 +18,32 @@ class PFPolySynth {
         this.createSynths();
     }
 
-    public playChord(chord: IChord): void {
+    public playChord(chord: IChord, velocity: number = 0.5): void {
         chord.notes.forEach((note, index) => {
             const synth = this.allSynths[index];
             if (synth) {
-                synth.triggerAttackRelease(note, "4n");
+                synth.triggerAttackRelease(note, "4n", undefined, velocity);
             }
         });
+    }
+
+    public startPlayingChord(chord: IChord, velocity: number = 0.5): void {
+        chord.notes.forEach((note, index) => {
+            const synth = this.allSynths[index];
+            if (synth) {
+                synth.triggerAttack(note, undefined, velocity);
+            }
+        });
+    }
+
+    public stopPlaying(): void {
+        this.allSynths.forEach((synth) => {
+            synth.triggerRelease();
+        });
+    }
+
+    public setVolume(percentage: number): void {
+        this.output.set("volume", percentageToDecibels(percentage));
     }
 
     public destroy() {
