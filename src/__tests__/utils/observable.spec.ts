@@ -60,4 +60,16 @@ describe("Observable", () => {
         expect(spy).not.toHaveBeenCalled();
     });
 
+    it("should be able to create a notifyOnSubscribe observable", () => {
+        const callback = { onValueChange: (input: number) => {
+            input = input + 5;
+        } };
+        const spy = jest.spyOn(callback, "onValueChange");
+        const obs = new Observable<number>({ notifyOnSubscribe: true });
+        obs.notify(9);
+        obs.subscribe(callback.onValueChange);
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledWith(9);
+    });
+
 });

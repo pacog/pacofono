@@ -1,12 +1,20 @@
+interface IObservableOptions {
+    notifyOnSubscribe?: boolean;
+}
+
 class Observable<T> {
 
     private subscribers: Array<(newValue: T) => void>;
+    private currentValue: T = null;
+    private options: IObservableOptions = {};
 
-    constructor() {
+    constructor(options: IObservableOptions = {}) {
+        this.options = options;
         this.subscribers = [];
     }
 
     public notify(newValue: T) {
+        this.currentValue = newValue;
         this.subscribers.forEach((subscriber) => subscriber(newValue));
     }
 
@@ -15,6 +23,9 @@ class Observable<T> {
             this.subscribers = this.subscribers.filter((subscriberCallback) => subscriberCallback !== callback);
         };
         this.subscribers.push(callback);
+        if (this.options.notifyOnSubscribe) {
+            callback(this.currentValue);
+        }
         return unsubscriber;
     }
 

@@ -5,6 +5,7 @@ import { throttle } from "lodash";
 import { IRootState, rootReducer } from "./reducers/root";
 import { RootAction } from "store/actions";
 import { loadState, saveState } from "./localStorage";
+import { init as initStoreChangesDetector } from "./storeChanges";
 
 function configureStore() {
   const persistedState = loadState();
@@ -24,5 +25,6 @@ const saveStateThrottled = throttle(() => {
 }, THROTTLE_TIME);
 
 store.subscribe(saveStateThrottled);
+initStoreChangesDetector(store);
 
 export default store;
