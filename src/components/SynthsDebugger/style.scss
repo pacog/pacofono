@@ -1,0 +1,12 @@
+@import "src/root-style/common";
+
+.synths-debugger {
+    background: $transparent-white-1;
+    border-radius: $g-sm;
+    z-index: 100;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 20px;
+    pointer-events: none;
+}

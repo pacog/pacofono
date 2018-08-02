@@ -1,6 +1,7 @@
-import { IChord, INoteWithWeight } from "types";
+import { INoteWithWeight } from "types";
 import { Volume, FMSynth } from "tone";
 import { percentageToDecibels } from "utils/decibels";
+import { currentSynths } from "modules/currentSynthInfo";
 
 interface IPFPolySynthOptions {
     voices: number;
@@ -19,26 +20,11 @@ export class PFPolySynth {
         this.createSynths();
     }
 
-    public playChord(chord: IChord, velocity: number = 0.5): void {
-        chord.notes.forEach((note, index) => {
-            const synth = this.allSynths[index];
-            if (synth) {
-                synth.triggerAttackRelease(note, "4n", undefined, velocity);
-            }
-        });
-    }
-
-    public startPlayingChord(chord: IChord, velocity: number = 0.5): void {
-        chord.notes.forEach((note, index) => {
-            const synth = this.allSynths[index];
-            if (synth) {
-                this.synthsPlaying[index] = true;
-                synth.triggerAttack(note, undefined, velocity);
-            }
-        });
-    }
-
     public startPlayingNotes(notes: INoteWithWeight[], velocity: number = 0.5): void {
+        currentSynths.notify({
+            numVoices: this.allSynths.length,
+            currentNotes: notes,
+        });
         notes.forEach((note, index) => {
             const synth = this.allSynths[index];
             if (synth && note.frequency) {
@@ -50,6 +36,10 @@ export class PFPolySynth {
     }
 
     public updateFrequenciesBeingPlayed(notes: INoteWithWeight[]): void {
+        currentSynths.notify({
+            numVoices: this.allSynths.length,
+            currentNotes: notes,
+        });
         notes.forEach((newNote, index) => {
             if (newNote.frequency) {
                 this.updateFrequencyForSynth(index, newNote);
@@ -60,6 +50,10 @@ export class PFPolySynth {
     }
 
     public stopPlaying(): void {
+        currentSynths.notify({
+            numVoices: this.allSynths.length,
+            currentNotes: [],
+        });
         this.allSynths.forEach((synth, index) => {
             synth.triggerRelease();
             this.synthsPlaying[index] = false;
