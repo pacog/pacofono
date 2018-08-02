@@ -77,25 +77,54 @@ function getNotesFromChordsInvolved(chordsInvolved: IChordsInvolved, notesMatrix
         if (chordsInvolved.chord2 !== null) {
             freqInChord2 = notesMatrix[chordsInvolved.chord2][index];
         }
-        return getNoteWithWeight(freqInChord1, freqInChord2, chordsInvolved.distance);
+        return getNoteWithWeight(freqInChord1, freqInChord2, chordsInvolved.distance, snapFactor);
     });
 }
 
-function getNoteWithWeight(freq1: number, freq2: number, distance: number): INoteWithWeight {
+function getNoteWithWeight(freq1: number, freq2: number, distance: number, snapFactor: number): INoteWithWeight {
     if (freq1 === null && freq2 === null) {
         return { frequency: null, weight: 0 };
     }
+    const snappedDistance = snapDistance(distance, snapFactor);
+    let freqToUse = null;
+    let weight = 0;
+
     // We fade out if one of the notes is not there
     if (freq1 === null) {
-        return { frequency: freq2, weight: distance };
-    }
-    if (freq2 === null) {
-        return { frequency: freq1, weight: 1 - distance };
+        freqToUse = freq2;
+        weight = snappedDistance;
+    } else if (freq2 === null) {
+        freqToUse = freq1;
+        weight = 1 - snappedDistance;
+    } else {
+        // Normal case, just return a freq in the middle, interpolating with distance
+        freqToUse = freq1 + ((freq2 - freq1) * snappedDistance);
+        weight = 1;
     }
 
-    // Normal case, just return a freq in the middle, interpolating with distance
+    if (weight === 0) {
+        freqToUse = null;
+    }
+
     return {
-        frequency: freq1 + ((freq2 - freq1) * distance),
-        weight: 1,
+        frequency: freqToUse,
+        weight,
     };
+}
+
+function snapDistance(distance: number, snapFactor: number): number {
+    if (snapFactor === 0) {
+        return distance;
+    }
+    const lowSnapLimit = snapFactor / 2;
+    const highSnapLimit = 1 - lowSnapLimit;
+    if (distance < lowSnapLimit) {
+        return 0;
+    }
+    if (distance >= highSnapLimit) {
+        return 1;
+    }
+
+    return (distance - lowSnapLimit) / (highSnapLimit - lowSnapLimit);
+    // not /0 since if they are the same it will have already return in the prev ifs
 }
