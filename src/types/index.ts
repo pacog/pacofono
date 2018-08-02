@@ -32,4 +32,7 @@ export interface IPointRatio {
     y: number;
 }
 
-export type ChordsWithWeights = Map<IChord, number>;
+export interface INoteWithWeight {
+    frequency: number;
+    weight: number;
+}

@@ -7,11 +7,9 @@ import { create as createSynth, PFPolySynth } from "modules/polySynth";
 import { getMaxNotesInChords } from "utils/chordUtils";
 
 // TODO translate current chord plus position to list of notes with intensity
-    // create IChordsWithWeights interface (array of tuples chord + weight)
-    // current chords + where = chordsWithWeights
+    // current chords + where + snapAmmount = chordsWithWeights
 // TODO create here the main output, that can be used to adjust volume, mute and show graphs
-// TODO create a Polysynth each time we change the song, so it takes as many voices as needed
-// TODO abstract that Polysynth to a "current instrument" that will conain synths, arpegiators and noise generators
+// TODO abstract that Polysynth to a "current instrument" that will contain synths, arpegiators and noise generators
 // TODO when the soundConfig changes, we will notify the current instrument, and it will change accordingly (if needed)
 
 
@@ -23,6 +21,7 @@ export const init = () => {
     pointerStartObservable.subscribe((where) => {
         isPointerActive = true;
         synth.setVolume(where.y);
+        // const chordsWithWeights
         synth.startPlayingChord(currentChords[0], 1);
     });
 
