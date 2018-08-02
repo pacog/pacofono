@@ -43,7 +43,7 @@ export class NoteInterpolator {
 
 function getFrequenciesOrdered(notes: string[], totalNotes: number): number[] {
     const frequencies = new Array(totalNotes).fill(null);
-    const freqsForNotes = notes.map((note) => allNotes.get(note).frequency).sort();
+    const freqsForNotes = notes.map((note) => allNotes.get(note).frequency).sort((a, b) => a - b);
     return frequencies.map((notFilledFreq, index) => freqsForNotes[index] || notFilledFreq);
 }
 
