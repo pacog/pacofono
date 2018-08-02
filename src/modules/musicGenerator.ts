@@ -5,6 +5,7 @@ import { pointerStartObservable, pointerMoveObservable, pointerEndObservable } f
 import { currentChordsChangeObservable } from "store/storeChanges";
 import { create as createSynth, PFPolySynth } from "modules/polySynth";
 import { getMaxNotesInChords } from "utils/chordUtils";
+import { NoteInterpolator } from "utils/noteInterpolator";
 
 // TODO translate current chord plus position to list of notes with intensity
     // current chords + where + snapAmmount = chordsWithWeights
@@ -12,8 +13,10 @@ import { getMaxNotesInChords } from "utils/chordUtils";
 // TODO abstract that Polysynth to a "current instrument" that will contain synths, arpegiators and noise generators
 // TODO when the soundConfig changes, we will notify the current instrument, and it will change accordingly (if needed)
 
+const SNAP_FACTOR = 0.8;
 
 export const init = () => {
+    const noteInterpolator = new NoteInterpolator({ snapFactor: SNAP_FACTOR });
     let isPointerActive = false;
     let currentChords: IChord[] = [];
     let synth: PFPolySynth = null;
@@ -21,13 +24,15 @@ export const init = () => {
     pointerStartObservable.subscribe((where) => {
         isPointerActive = true;
         synth.setVolume(where.y);
-        // const chordsWithWeights
-        synth.startPlayingChord(currentChords[0], 1);
+        const notes = noteInterpolator.getNotesWithWeigthsFromChordsAndPosition(currentChords, where.x);
+        synth.startPlayingNotes(notes, 1);
     });
 
     pointerMoveObservable.subscribe((where) => {
         if (isPointerActive) {
             synth.setVolume(where.y);
+            const notes = noteInterpolator.getNotesWithWeigthsFromChordsAndPosition(currentChords, where.x);
+            synth.updateFrequenciesBeingPlayed(notes);
         }
     });
 

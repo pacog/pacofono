@@ -1,4 +1,4 @@
-import { IChord } from "types";
+import { IChord, INoteWithWeight } from "types";
 import { Volume, FMSynth } from "tone";
 import { percentageToDecibels } from "utils/decibels";
 
@@ -11,6 +11,7 @@ export class PFPolySynth {
     private options: IPFPolySynthOptions;
     private output: any;
     private allSynths: any[];
+    private synthsPlaying: boolean[];
 
     constructor(options: IPFPolySynthOptions) {
         this.options = Object.assign({}, options);
@@ -31,14 +32,37 @@ export class PFPolySynth {
         chord.notes.forEach((note, index) => {
             const synth = this.allSynths[index];
             if (synth) {
+                this.synthsPlaying[index] = true;
                 synth.triggerAttack(note, undefined, velocity);
             }
         });
     }
 
+    public startPlayingNotes(notes: INoteWithWeight[], velocity: number = 0.5): void {
+        notes.forEach((note, index) => {
+            const synth = this.allSynths[index];
+            if (synth && note.frequency) {
+                this.synthsPlaying[index] = true;
+                synth.set("volume", percentageToDecibels(note.weight));
+                synth.triggerAttack(note.frequency, undefined, velocity);
+            }
+        });
+    }
+
+    public updateFrequenciesBeingPlayed(notes: INoteWithWeight[]): void {
+        notes.forEach((newNote, index) => {
+            if (newNote.frequency) {
+                this.updateFrequencyForSynth(index, newNote);
+            } else {
+                this.stopSynth(index);
+            }
+        });
+    }
+
     public stopPlaying(): void {
-        this.allSynths.forEach((synth) => {
+        this.allSynths.forEach((synth, index) => {
             synth.triggerRelease();
+            this.synthsPlaying[index] = false;
         });
     }
 
@@ -64,6 +88,27 @@ export class PFPolySynth {
             const newSynth = new FMSynth();
             newSynth.connect(this.output);
             this.allSynths.push(newSynth);
+        }
+        this.synthsPlaying = new Array(this.options.voices).fill(false);
+    }
+
+    private updateFrequencyForSynth(synthIndex: number, note: INoteWithWeight): void {
+        const synth = this.allSynths[synthIndex];
+        synth.set("volume", percentageToDecibels(note.weight));
+        if (!this.synthsPlaying[synthIndex]) {
+            synth.triggerAttack(note.frequency, undefined, 1);
+            this.synthsPlaying[synthIndex] = true;
+        } else {
+            synth.set("frequency", note.frequency);
+        }
+    }
+
+    private stopSynth(synthIndex: number): void {
+        if (this.synthsPlaying[synthIndex]) {
+            const synth = this.allSynths[synthIndex];
+            synth.set("volume", percentageToDecibels(0));
+            synth.triggerRelease();
+            this.synthsPlaying[synthIndex] = false;
         }
     }
 
