@@ -40,16 +40,16 @@ describe("NoteInterpolator", () => {
 
         const result3 = interpolator.getNotesWithWeigthsFromChordsAndPosition(chords, 0.5);
         expect(result3).toEqual([
-            { frequency: 350.815, weight: 1},
-            { frequency: 404.995, weight: 1},
-            { frequency: 733.665, weight: 1},
+            { frequency: 339.2892571243602, weight: 1},
+            { frequency: 403.47936750223084, weight: 1},
+            { frequency: 718.9230835075476, weight: 1},
         ]);
 
         const result4 = interpolator.getNotesWithWeigthsFromChordsAndPosition(chords, 0.375);
         expect(result4).toEqual([
-            { frequency: 306.22249999999997, weight: 1},
-            { frequency: 387.4925, weight: 1},
-            { frequency: 660.4975000000001, weight: 1},
+            { frequency: 297.9400079570489, weight: 1},
+            { frequency: 386.37201138559504, weight: 1},
+            { frequency: 649.8038893670059, weight: 1},
         ]);
     });
 
@@ -58,31 +58,31 @@ describe("NoteInterpolator", () => {
         const chords = [CHORD_1, CHORD_2];
         const result1 = interpolator.getNotesWithWeigthsFromChordsAndPosition(chords, 0.375);
         expect(result1).toEqual([
-            { frequency: 261.63, weight: 1},
+            { frequency: 261.63000000000005, weight: 1},
             { frequency: 369.99, weight: 1},
             { frequency: 587.33, weight: 1},
         ]);
         const result2 = interpolator.getNotesWithWeigthsFromChordsAndPosition(chords, 0.5);
         expect(result2).toEqual([
-            { frequency: 570.815, weight: 1},
+            { frequency: 479.8274689927624, weight: 1},
             { frequency: 369.99, weight: 0.5},
             { frequency: 587.33, weight: 0.5},
         ]);
         const result3 = interpolator.getNotesWithWeigthsFromChordsAndPosition(chords, 0.4);
         expect(result3).toEqual([
-            { frequency: 323.46700000000004, weight: 1},
+            { frequency: 295.3704565638323, weight: 1},
             { frequency: 369.99, weight: 0.8999999999999999},
             { frequency: 587.33, weight: 0.8999999999999999},
         ]);
         const result4 = interpolator.getNotesWithWeigthsFromChordsAndPosition(chords, 0.625);
         expect(result4).toEqual([
-            { frequency: 880, weight: 1},
+            { frequency: 880.0000000000002, weight: 1},
             { frequency: null, weight: 0},
             { frequency: null, weight: 0},
         ]);
         const result5 = interpolator.getNotesWithWeigthsFromChordsAndPosition(chords, 0.6);
         expect(result5).toEqual([
-            { frequency: 818.1629999999999, weight: 1},
+            { frequency: 779.4767380543501, weight: 1},
             { frequency: 369.99, weight: 0.10000000000000009},
             { frequency: 587.33, weight: 0.10000000000000009},
         ]);
@@ -93,14 +93,14 @@ describe("NoteInterpolator", () => {
         const chords = [CHORD_1, CHORD_2];
         const result1 = interpolator.getNotesWithWeigthsFromChordsAndPosition(chords, 0.499);
         expect(result1).toEqual([
-            { frequency: 261.63, weight: 1},
+            { frequency: 261.63000000000005, weight: 1},
             { frequency: 369.99, weight: 1},
             { frequency: 587.33, weight: 1},
         ]);
 
         const result2 = interpolator.getNotesWithWeigthsFromChordsAndPosition(chords, 0.500);
         expect(result2).toEqual([
-            { frequency: 880, weight: 1},
+            { frequency: 880.0000000000002, weight: 1},
             { frequency: null, weight: 0},
             { frequency: null, weight: 0},
         ]);
@@ -174,14 +174,14 @@ describe("NoteInterpolator", () => {
 
         const result3 = interpolator.getNotesWithWeigthsFromChordsAndPosition(chords, 0.5);
         expect(result3).toEqual([
-            { frequency: 570.815, weight: 1},
+            { frequency: 479.8274689927624, weight: 1},
             { frequency: 369.99, weight: 0.5},
             { frequency: 587.33, weight: 0.5},
         ]);
 
         const result4 = interpolator.getNotesWithWeigthsFromChordsAndPosition(chords, 0.375);
         expect(result4).toEqual([
-            { frequency: 416.22249999999997, weight: 1},
+            { frequency: 354.3123773064899, weight: 1},
             { frequency: 369.99, weight: 0.75},
             { frequency: 587.33, weight: 0.75},
         ]);
@@ -192,14 +192,14 @@ describe("NoteInterpolator", () => {
         const chords = [CHORD_1, CHORD_3];
         const result1 = interpolator.getNotesWithWeigthsFromChordsAndPosition(chords, 0.5);
         expect(result1).toEqual([
-            { frequency: 350.815, weight: 1},
-            { frequency: 404.995, weight: 1},
-            { frequency: 733.665, weight: 1},
+            { frequency: 339.2892571243602, weight: 1},
+            { frequency: 403.47936750223084, weight: 1},
+            { frequency: 718.9230835075476, weight: 1},
         ]);
         const chords2 = [CHORD_1, CHORD_2];
         const result2 = interpolator.getNotesWithWeigthsFromChordsAndPosition(chords2, 0.5);
         expect(result2).toEqual([
-            { frequency: 570.815, weight: 1},
+            { frequency: 479.8274689927624, weight: 1},
             { frequency: 369.99, weight: 0.5},
             { frequency: 587.33, weight: 0.5},
         ]);

@@ -2,6 +2,8 @@
 import { INoteWithWeight, IChord } from "types";
 import { getMaxNotesInChords } from "utils/chordUtils";
 import { allNotes } from "constants/notes";
+import { getNoteBetween } from "utils/noteCalculator";
+
 interface INoteInterpolatorOptions {
     snapFactor: number;
 }
@@ -98,7 +100,7 @@ function getNoteWithWeight(freq1: number, freq2: number, distance: number, snapF
         weight = 1 - snappedDistance;
     } else {
         // Normal case, just return a freq in the middle, interpolating with distance
-        freqToUse = freq1 + ((freq2 - freq1) * snappedDistance);
+        freqToUse = getNoteBetween(freq1, freq2, snappedDistance);
         weight = 1;
     }
 
