@@ -72,18 +72,29 @@ function getChordsInvolved(totalChords: number, xPosition: number): IChordsInvol
     return { chord1: lowerChord, chord2: upperChord, distance: positionBetweenChords };
 }
 
-function getNotesFromChordsInvolved(chordsInvolved: IChordsInvolved, notesMatrix: number[][], snapFactor: number)
-: INoteWithWeight[] {
-    return notesMatrix[chordsInvolved.chord1].map((freqInChord1, index) => {
+function getNotesFromChordsInvolved(
+    chordsInvolved: IChordsInvolved,
+    notesMatrix: number[][],
+    snapFactor: number,
+): INoteWithWeight[] {
+
+    const unnormalizedNotes = notesMatrix[chordsInvolved.chord1].map((freqInChord1, index) => {
         let freqInChord2 = null;
         if (chordsInvolved.chord2 !== null) {
             freqInChord2 = notesMatrix[chordsInvolved.chord2][index];
         }
         return getNoteWithWeight(freqInChord1, freqInChord2, chordsInvolved.distance, snapFactor);
     });
+
+    return normalizeWeights(unnormalizedNotes);
 }
 
-function getNoteWithWeight(freq1: number, freq2: number, distance: number, snapFactor: number): INoteWithWeight {
+function getNoteWithWeight(
+    freq1: number,
+    freq2: number,
+    distance: number,
+    snapFactor: number,
+): INoteWithWeight {
     if (freq1 === null && freq2 === null) {
         return { frequency: null, weight: 0 };
     }
@@ -112,6 +123,22 @@ function getNoteWithWeight(freq1: number, freq2: number, distance: number, snapF
         frequency: freqToUse,
         weight,
     };
+}
+
+function normalizeWeights(unnormalizedNotes: INoteWithWeight[]): INoteWithWeight[] {
+    const totalWeight = unnormalizedNotes.reduce((accumulator, currentValue): number => {
+        return accumulator + currentValue.weight;
+    }, 0);
+    if (totalWeight > 1) {
+        const weightMultiplier = 1 / totalWeight;
+        return unnormalizedNotes.map((note) => {
+            return {
+                ...note,
+                weight: note.weight * weightMultiplier,
+            };
+        });
+    }
+    return unnormalizedNotes;
 }
 
 function snapDistance(distance: number, snapFactor: number): number {
