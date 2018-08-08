@@ -6,7 +6,7 @@ import { currentChordsChangeObservable } from "store/storeChanges";
 import { create as createSynth, PFPolySynth } from "modules/polySynth";
 import { getMaxNotesInChords } from "utils/chordUtils";
 import { NoteInterpolator } from "utils/noteInterpolator";
-
+import { normalizeNoteWeights } from "utils/noteWeightNormalizer";
 // TODO create here the main output, that can be used to adjust volume, mute and show graphs
 // TODO abstract that Polysynth to a "current instrument" that will contain synths, arpegiators and noise generators
 // TODO when the soundConfig changes, we will notify the current instrument, and it will change accordingly (if needed)
@@ -23,14 +23,14 @@ export const init = () => {
         isPointerActive = true;
         synth.setVolume(where.y);
         const notes = noteInterpolator.getNotesWithWeigthsFromChordsAndPosition(currentChords, where.x);
-        synth.startPlayingNotes(notes, 1);
+        synth.startPlayingNotes(normalizeNoteWeights(notes), 1);
     });
 
     pointerMoveObservable.subscribe((where) => {
         if (isPointerActive) {
             synth.setVolume(where.y);
             const notes = noteInterpolator.getNotesWithWeigthsFromChordsAndPosition(currentChords, where.x);
-            synth.updateFrequenciesBeingPlayed(notes);
+            synth.updateFrequenciesBeingPlayed(normalizeNoteWeights(notes));
         }
     });
 
