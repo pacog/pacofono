@@ -1,6 +1,5 @@
 @import "src/root-style/common";
 
-
 @mixin icon-color($color: white) {
     use.icon-use {
         fill: $color;
