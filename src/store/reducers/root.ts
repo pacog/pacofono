@@ -9,6 +9,7 @@ import { ISongEditorState, songEditorReducer } from "./songEditor";
 import { ICurrentSongState, currentSongReducer } from "./currentSong";
 import { ICurrentSongPartState, currentSongPartReducer } from "./currentSongPart";
 import { ISongSelectorState, songSelectorReducer } from "./songSelector";
+import { IMainVolumeState, mainVolumeReducer } from "./mainVolume";
 
 export interface IRootState {
     readonly songs?: ISongsState;
@@ -20,6 +21,7 @@ export interface IRootState {
     readonly currentSong?: ICurrentSongState;
     readonly currentSongPart?: ICurrentSongPartState;
     readonly songSelector?: ISongSelectorState;
+    readonly mainVolume?: IMainVolumeState;
 }
 
 export const rootReducer = combineReducers<IRootState>({
@@ -32,4 +34,5 @@ export const rootReducer = combineReducers<IRootState>({
     currentSong: currentSongReducer,
     currentSongPart: currentSongPartReducer,
     songSelector: songSelectorReducer,
+    mainVolume: mainVolumeReducer,
 });
