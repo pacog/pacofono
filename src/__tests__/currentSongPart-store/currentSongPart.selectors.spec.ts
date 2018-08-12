@@ -42,4 +42,10 @@ describe("currentSongPart store selectors", () => {
         expect(isCurrentSongPart(newState6, part)).toBe(true);
         expect(getCurrentChords(newState6)).toEqual([chord2, chord1]);
     });
+
+    describe("getCurrentChords memoization", () => {
+        it("should memoize getCurrentChords", () => {
+            // TODO
+        });
+    });
 });
