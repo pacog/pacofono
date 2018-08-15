@@ -8,18 +8,3 @@
     background: $transparent-white-1;
     border-radius: $g-sm;
 }
-
-    $slider-height: 100px;
-    $slider-width: 10px;
-
-    .main-volume-slider-wrapper {
-        width: $slider-width;
-        height: $slider-height;
-    }
-
-    .main-volume-slider {
-        width: $slider-height;
-        height: $slider-width;
-        transform-origin: ($slider-height / 2) ($slider-height / 2);
-        transform: rotate(-90deg);
-    }

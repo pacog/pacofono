@@ -14,7 +14,6 @@ interface IVerticalSliderState {
     waitingForThrottle: boolean;
 }
 
-
 class VerticalSlider extends React.Component<IVerticalSliderProps, IVerticalSliderState> {
 
     public static getDerivedStateFromProps(nextProps: IVerticalSliderProps, prevState: IVerticalSliderState)
@@ -49,9 +48,9 @@ class VerticalSlider extends React.Component<IVerticalSliderProps, IVerticalSlid
 
     public render() {
         return (
-            <div className="main-volume-slider-wrapper">
+            <div className="vertical-slider-wrapper">
                 <input
-                    className="main-volume-slider"
+                    className="vertical-slider"
                     type="range"
                     min={0}
                     max={1}

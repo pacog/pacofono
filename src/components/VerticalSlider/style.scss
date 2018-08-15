@@ -1,0 +1,16 @@
+@import "src/root-style/common";
+
+$vertical-slider-height: 100px;
+$vertical-slider-width: 10px;
+
+.vertical-slider-wrapper {
+    width: $vertical-slider-width;
+    height: $vertical-slider-height;
+}
+
+.vertical-slider {
+    width: $vertical-slider-height;
+    height: $vertical-slider-width;
+    transform-origin: ($vertical-slider-height / 2) ($vertical-slider-height / 2);
+    transform: rotate(-90deg);
+}
