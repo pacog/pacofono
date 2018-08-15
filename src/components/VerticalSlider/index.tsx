@@ -6,6 +6,9 @@ import "./style.scss";
 interface IVerticalSliderProps {
     value: number;
     onChange: (newValue: number) => void;
+    min?: number;
+    max?: number;
+    step?: number;
 }
 
 interface IVerticalSliderState {
@@ -15,6 +18,12 @@ interface IVerticalSliderState {
 }
 
 class VerticalSlider extends React.Component<IVerticalSliderProps, IVerticalSliderState> {
+
+    public static defaultProps: Partial<IVerticalSliderProps> = {
+        min: 0,
+        max: 1,
+        step: 0.01,
+    };
 
     public static getDerivedStateFromProps(nextProps: IVerticalSliderProps, prevState: IVerticalSliderState)
     : IVerticalSliderState {
@@ -52,9 +61,9 @@ class VerticalSlider extends React.Component<IVerticalSliderProps, IVerticalSlid
                 <input
                     className="vertical-slider"
                     type="range"
-                    min={0}
-                    max={1}
-                    step={0.01}
+                    min={this.props.min}
+                    max={this.props.max}
+                    step={this.props.step}
                     value={this.state.currentValue}
                     onChange={(e) => {
                         const newValue = parseFloat(e.target.value);
