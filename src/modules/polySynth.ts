@@ -14,9 +14,9 @@ export class PFPolySynth {
     private allSynths: any[];
     private synthsPlaying: boolean[];
 
-    constructor(options: IPFPolySynthOptions) {
+    constructor(options: IPFPolySynthOptions, output: any) {
         this.options = Object.assign({}, options);
-        this.createOutput();
+        this.createOutput(output);
         this.createSynths();
     }
 
@@ -71,9 +71,9 @@ export class PFPolySynth {
         this.output = null;
     }
 
-    private createOutput(): void {
+    private createOutput(externalOutput: any): void {
         this.output = new Volume(-2);
-        this.output.toMaster();
+        this.output.connect(externalOutput);
     }
 
     private createSynths(): void {
@@ -108,6 +108,6 @@ export class PFPolySynth {
 
 }
 
-export const create = (options: IPFPolySynthOptions): PFPolySynth => {
-    return new PFPolySynth(options);
+export const create = (options: IPFPolySynthOptions, output: any): PFPolySynth => {
+    return new PFPolySynth(options, output);
 };

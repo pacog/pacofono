@@ -7,7 +7,7 @@ import { create as createSynth, PFPolySynth } from "modules/polySynth";
 import { getMaxNotesInChords } from "utils/chordUtils";
 import { NoteInterpolator } from "utils/noteInterpolator";
 import { normalizeNoteWeights } from "utils/noteWeightNormalizer";
-// TODO create here the main output, that can be used to adjust volume, mute and show graphs
+import masterOutput from "modules/masterOutput";
 // TODO abstract that Polysynth to a "current instrument" that will contain synths, arpegiators and noise generators
 // TODO when the soundConfig changes, we will notify the current instrument, and it will change accordingly (if needed)
 
@@ -44,7 +44,7 @@ export const init = () => {
         if (synth) {
             synth.destroy();
         }
-        synth = createSynth({ voices: getMaxNotesInChords(currentChords) });
+        synth = createSynth({ voices: getMaxNotesInChords(currentChords) }, masterOutput);
         log("currentChords changed", currentChords);
     });
 };
