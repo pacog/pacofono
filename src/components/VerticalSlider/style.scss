@@ -1,7 +1,8 @@
 @import "src/root-style/common";
 
 $vertical-slider-height: 100px;
-$vertical-slider-width: 10px;
+$vertical-slider-width: 4px;
+$vertical-slider-dot: $g-m;
 
 .vertical-slider-wrapper {
     width: $vertical-slider-width;
@@ -13,4 +14,37 @@ $vertical-slider-width: 10px;
     height: $vertical-slider-width;
     transform-origin: ($vertical-slider-height / 2) ($vertical-slider-height / 2);
     transform: rotate(-90deg);
+}
+
+input[type=range]{
+    -webkit-appearance: none;
+}
+input[type="range" i]::-webkit-slider-container, input[type="range" i]::-webkit-media-slider-container  {
+    background-color: $purple-4;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: $vertical-slider-height;
+    height: $vertical-slider-width;
+    background: $purple-3;
+    border: 0;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: $vertical-slider-dot;
+    width: $vertical-slider-dot;
+    border-radius: 50%;
+    background: $blue-3;
+    margin-top: -($vertical-slider-dot - $vertical-slider-width) / 2;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: $purple-4;
 }
