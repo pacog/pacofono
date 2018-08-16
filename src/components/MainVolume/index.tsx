@@ -1,6 +1,9 @@
 import * as React from "react";
 
 import VerticalSlider from "components/VerticalSlider";
+import Icon from "components/Icon";
+import muteIcon from "icons/mute.svg";
+import speakerIcon from "icons/speaker.svg";
 
 import "./style.scss";
 
@@ -13,16 +16,20 @@ interface IMainVolumeProps {
 
 const MainVolume: React.SFC<IMainVolumeProps> = (props: IMainVolumeProps) => (
     <div className="main-volume">
-        <div>Volume: {props.volume}</div>
+        <div className="line-center"
+            onClick={() => props.onMuteChanged(!props.mute) }>
+            { props.mute && <Icon icon={muteIcon} size="xl" /> }
+            { !props.mute && <Icon icon={speakerIcon} size="xl" /> }
+        </div>
+        { !props.mute &&
+            <div className="mb-m">
+                <VerticalSlider
+                    value={ props.volume }
+                    onChange={ props.onVolumeChanged }
+                    ></VerticalSlider>
+            </div>
+        }
 
-        <VerticalSlider
-            value={ props.volume }
-            onChange={ props.onVolumeChanged }
-            ></VerticalSlider>
-
-        <button onClick={() => this.props.onMuteChanged(!props.mute) }>
-            { props.mute ? "Muted" : "Not Muted" }
-        </button>
     </div>
 );
 export default MainVolume;
