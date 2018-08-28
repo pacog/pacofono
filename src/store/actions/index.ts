@@ -8,6 +8,7 @@ import { ICurrentSongActions } from "./currentSong";
 import { ICurrentSongPartActions } from "./currentSongPart";
 import { ISongSelectorActions } from "./songSelector";
 import { IMainVolumeActions } from "./mainVolume";
+import { IMainOptionsActions } from "./mainOptions";
 
 export type RootAction =
     | IMusicModeActions[keyof IMusicModeActions]
@@ -19,4 +20,5 @@ export type RootAction =
     | ICurrentSongActions[keyof ICurrentSongActions]
     | ICurrentSongPartActions[keyof ICurrentSongPartActions]
     | ISongSelectorActions[keyof ISongSelectorActions]
-    | IMainVolumeActions[keyof IMainVolumeActions];
+    | IMainVolumeActions[keyof IMainVolumeActions]
+    | IMainOptionsActions[keyof IMainOptionsActions];
