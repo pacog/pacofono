@@ -1,26 +1,20 @@
-import * as React from "react";
+import { connect } from "react-redux";
+// import { RootAction } from "store/actions";
+// import { ThunkDispatch } from "redux-thunk";
 
-import HeaderContainer from "containers/HeaderContainer";
-import Sidebar from "components/Sidebar";
-import MusicModeSelectorContainer from "containers/MusicModeSelectorContainer";
-import ModalManagerContainer from "containers/ModalManagerContainer";
-import PointerInputManagerContainer from "containers/PointerInputManagerContainer";
-import SynthsDebugger from "components/SynthsDebugger";
-import MainVolumeContainer from "containers/MainVolumeContainer";
+import { isSynthDebuggerShown } from "store/selectors/mainOptions";
+import { IRootState } from "store/reducers/root";
 
-import "./style.scss";
+import MainScreen from "components/MainScreen";
 
-const MainScreenContainer: React.SFC<{}> = (props: {}) => (
-    <div className="main-screen-container">
-        <HeaderContainer />
-        <Sidebar>
-            <MusicModeSelectorContainer />
-        </Sidebar>
-        <PointerInputManagerContainer />
-        <ModalManagerContainer />
-        <SynthsDebugger />
-        <MainVolumeContainer />
-    </div>
-);
+const mapStateToProps = (state: IRootState) => {
+    return {
+        showSynthsDebugger: isSynthDebuggerShown(state),
+    };
+};
 
-export default MainScreenContainer;
+const mapDispatchToProps = (/*dispatch: ThunkDispatch<IRootState, {}, RootAction>*/) => {
+    return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

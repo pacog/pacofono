@@ -10,6 +10,8 @@ interface ISynthsDebuggerState {
 
 class SynthsDebugger extends React.Component<{}, ISynthsDebuggerState> {
 
+    private unsubscriber: () => void;
+
     constructor(props: {}) {
         super(props);
         this.state = {
@@ -18,7 +20,7 @@ class SynthsDebugger extends React.Component<{}, ISynthsDebuggerState> {
     }
 
     public componentDidMount() {
-        currentSynths.subscribe((notes) => {
+        this.unsubscriber = currentSynths.subscribe((notes) => {
             this.setState({
                 notes,
             });
@@ -53,6 +55,13 @@ class SynthsDebugger extends React.Component<{}, ISynthsDebuggerState> {
                 }
             </div>
         );
+    }
+
+    public componentWillUnmount() {
+        if (this.unsubscriber) {
+            this.unsubscriber();
+            this.unsubscriber = null;
+        }
     }
 
     private areThereNotesToShow(): boolean {
