@@ -1,0 +1,39 @@
+@import "src/root-style/common";
+
+.header {
+    background-color: $purple-4;
+    padding: $g-s;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 0 0 $g-sm $g-sm;
+    z-index: 50;
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .header-menu {
+        display: none;
+        padding-top: $g-m;
+        width: 100%;
+    }
+
+    .header:hover .header-menu {
+        display: block;
+    }
+
+        .header-menu-item {
+            border-radius: $g-s;
+            color: $grey-1;
+            cursor: pointer;
+            text-align: center;
+            padding: $g-s;
+            font-size: 12px;
+
+            &:hover {
+                background-color: $purple-3;
+            }
+        }

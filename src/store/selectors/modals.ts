@@ -5,6 +5,10 @@ export const isSongEditorModalOpen = (state: IRootState): boolean => {
     return state.modals.songEditorOpen && !!getSong(state);
 };
 
+export const isMainOptionsModalOpen = (state: IRootState): boolean => {
+    return state.modals.mainOptionsOpen;
+};
+
 export const isAnyModalOpen = (state: IRootState): boolean => {
-    return isSongEditorModalOpen(state);
+    return isSongEditorModalOpen(state) || isMainOptionsModalOpen(state);
 };

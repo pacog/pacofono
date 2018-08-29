@@ -2,7 +2,11 @@ import { actionCreators } from "store/actions/modals";
 import { actionCreators as songEditorActions } from "store/actions/songEditor";
 import { actionCreators as songsActions } from "store/actions/songs";
 import { rootReducer } from "store/reducers/root";
-import { isSongEditorModalOpen, isAnyModalOpen } from "store/selectors/modals";
+import {
+    isSongEditorModalOpen,
+    isMainOptionsModalOpen,
+    isAnyModalOpen,
+} from "store/selectors/modals";
 
 describe("modals store selectors", () => {
     const newSong = {
@@ -20,6 +24,13 @@ describe("modals store selectors", () => {
         expect(isSongEditorModalOpen(newState3)).toBe(true);
     });
 
+    it("should be able to get info about main options modal", () => {
+        const state = rootReducer({}, { type: null });
+        expect(isMainOptionsModalOpen(state)).toBe(false);
+        const newState = rootReducer(state, actionCreators.openMainOptions());
+        expect(isMainOptionsModalOpen(newState)).toBe(true);
+    });
+
     it("should be able to get info about any open modal", () => {
         const state = rootReducer({}, { type: null });
         expect(isAnyModalOpen(state)).toBe(false);
@@ -30,5 +41,7 @@ describe("modals store selectors", () => {
         expect(isAnyModalOpen(newState3)).toBe(true);
         const newState4 = rootReducer(newState3, actionCreators.closeSongEditor());
         expect(isAnyModalOpen(newState4)).toBe(false);
+        const newState5 = rootReducer(newState4, actionCreators.openMainOptions());
+        expect(isAnyModalOpen(newState5)).toBe(true);
     });
 });
