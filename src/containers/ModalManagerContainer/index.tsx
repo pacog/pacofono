@@ -8,6 +8,7 @@ import { isAnyModalOpen, isSongEditorModalOpen, isMainOptionsModalOpen } from "s
 import { actionCreators as modalsActions } from "store/actions/modals";
 import Modal from "components/Modal";
 import SongEditorContainer from "containers/SongEditorContainer";
+import MainOptionsContainer from "containers/MainOptionsContainer";
 
 interface IModalManagerProps {
     isAnyModalOpen: boolean;
@@ -33,7 +34,7 @@ const ModalManager: React.SFC<IModalManagerProps> = (props: IModalManagerProps) 
                     props.isMainOptionsModalOpen &&
                     <Modal
                         onClose={props.closeMainOptions}>
-                        Main options!
+                        <MainOptionsContainer />
                     </Modal>
                 }
             </div>

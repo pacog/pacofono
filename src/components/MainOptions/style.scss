@@ -1,0 +1,23 @@
+@import "src/root-style/common";
+
+.main-options {
+    min-width: 400px;
+    max-width: 90vw;
+    box-shadow: 0 4px 16px $purple-4;
+    border-radius: $g-sm;
+}
+
+    .main-options-header {
+        background-color: #504F61;
+        padding: $g-sm;
+        padding-right: $g-m;
+        border-radius: $g-sm $g-sm 0 0;
+        position: relative;
+        z-index: 2;
+    }
+
+    .main-options-content {
+        background: $purple-3;
+        padding: $g-l;
+        border-radius: 0 0 $g-sm $g-sm;
+    }
