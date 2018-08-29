@@ -1,12 +1,51 @@
 @import "src/root-style/common";
 
 .synths-debugger {
-    background: $transparent-white-1;
+    background: $transparent-dark-3;
     border-radius: $g-sm;
     z-index: 100;
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 20px;
+    bottom: $g-m;
+    right: $g-m;
+    padding: $g-sm;
     pointer-events: none;
+    color: $white;
+    font-size: 12px;
 }
+
+    $synths-debugger-synth-width: 200px;
+
+    .synths-debugger-synth {
+        width: $synths-debugger-synth-width;
+        height: $g-ml;
+        background: $purple-4;
+        position: relative;
+        display: flex;
+        overflow: hidden;
+        margin-top: $g-xs;
+        border-radius: $g-xs;
+    }
+
+        .synths-debugger-synth-bar {
+            position: absolute;
+            top: 0;
+            left: -$synths-debugger-synth-width;
+            right: $synths-debugger-synth-width;
+            bottom: 0;
+            background: $purple-2;
+            z-index: 101;
+        }
+
+        .synths-debugger-synth-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: $white;
+            z-index: 102;
+        }

@@ -28,15 +28,35 @@ class SynthsDebugger extends React.Component<{}, ISynthsDebuggerState> {
     public render() {
         return (
             <div className="synths-debugger">
+                { this.areThereNotesToShow() &&
+                    <div>Synths playing:</div>
+                }
                 { this.state.notes && this.state.notes.currentNotes.map( (note, index) => (
-                    <div key={index} className="line-center">
-                        <div className="mr-m">{note.frequency ? note.frequency.toFixed(3) : "-"} Hz</div>
-                        <div className="mr-m">{note.weight ? note.weight.toFixed(3) : "0"}%</div>
-                        <div>{percentageToDecibels(note.weight).toFixed(3)}dB</div>
+                    <div key={index} className="synths-debugger-synth">
+                        <div
+                            className="synths-debugger-synth-content">
+                            <div className="mr-m">{note.frequency ? note.frequency.toFixed(3) : "-"} Hz</div>
+                            <div className="mr-m">{note.weight ? note.weight.toFixed(3) : "0"}%</div>
+                            <div>{percentageToDecibels(note.weight).toFixed(3)}dB</div>
+                        </div>
+                        <div
+                            className="synths-debugger-synth-bar"
+                            style={{
+                                transform: `translateX(${note.weight * 100}%)`,
+                            }}
+                            ></div>
                     </div>
                 ))}
+
+                { !this.areThereNotesToShow() &&
+                    <div>No synths playing</div>
+                }
             </div>
         );
+    }
+
+    private areThereNotesToShow(): boolean {
+        return this.state.notes && this.state.notes.currentNotes && (this.state.notes.currentNotes.length > 0);
     }
 }
 
