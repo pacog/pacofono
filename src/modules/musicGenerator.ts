@@ -7,7 +7,7 @@ import { create as createSynth, PFPolySynth } from "modules/polySynth";
 import { getMaxNotesInChords } from "utils/chordUtils";
 import { NoteInterpolator } from "utils/noteInterpolator";
 import { normalizeNoteWeights } from "utils/noteWeightNormalizer";
-import masterOutput from "modules/masterOutput";
+import { masterOutput } from "modules/masterOutput";
 // TODO abstract that Polysynth to a "current instrument" that will contain synths, arpegiators and noise generators
 // TODO when the soundConfig changes, we will notify the current instrument, and it will change accordingly (if needed)
 

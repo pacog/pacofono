@@ -5,6 +5,8 @@ import "./style.scss";
 interface IMainOptionsProps {
     isSynthDebuggerShown: boolean;
     setShowSynthDebugger: (show: boolean) => void;
+    isAudioOutputShown: boolean;
+    setShowAudioOutput: (show: boolean) => void;
 }
 
 const MainOptions: React.SFC<IMainOptionsProps> = (props: IMainOptionsProps) => (
@@ -14,10 +16,21 @@ const MainOptions: React.SFC<IMainOptionsProps> = (props: IMainOptionsProps) => 
         </div>
         <div className="main-options-content">
 
-            <label>
+            <label className="main-options-field">
                 <input
                     className="mr-s"
-                    name="isGoing"
+                    name="audioOutput"
+                    type="checkbox"
+                    checked={props.isAudioOutputShown}
+                    onChange={() => props.setShowAudioOutput(!props.isAudioOutputShown)} />
+
+                Show audio output
+            </label>
+
+            <label className="main-options-field">
+                <input
+                    className="mr-s"
+                    name="synthDebugger"
                     type="checkbox"
                     checked={props.isSynthDebuggerShown}
                     onChange={() => props.setShowSynthDebugger(!props.isSynthDebuggerShown)} />

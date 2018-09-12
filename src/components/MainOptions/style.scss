@@ -21,3 +21,13 @@
         padding: $g-l;
         border-radius: 0 0 $g-sm $g-sm;
     }
+
+        .main-options-field {
+            display: block;
+            text-align: left;
+            margin-bottom: $g-s;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }

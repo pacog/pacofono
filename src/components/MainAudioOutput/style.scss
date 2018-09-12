@@ -1,0 +1,35 @@
+@import "src/root-style/common";
+
+.main-audio-output {
+    background: $transparent-dark-3;
+    border-radius: $g-sm;
+    padding: $g-sm;
+    pointer-events: none;
+    color: $white;
+    font-size: 12px;
+    margin-top: $g-sm;
+}
+
+    .main-audio-bars {
+        width: 200px;
+        height: 100px;
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+        .main-audio-bar {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .main-audio-bar-inner {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: $purple-2;
+                transition: transform 0.1s linear;
+            }

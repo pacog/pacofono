@@ -4,6 +4,6 @@ export const isSynthDebuggerShown = (state: IRootState): boolean => {
     return state.mainOptions.showSynthDebugger;
 };
 
-export const isAudioOuputShown = (state: IRootState): boolean => {
+export const isAudioOutputShown = (state: IRootState): boolean => {
     return state.mainOptions.showAudioOuput;
 };

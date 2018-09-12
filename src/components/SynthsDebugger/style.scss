@@ -3,14 +3,11 @@
 .synths-debugger {
     background: $transparent-dark-3;
     border-radius: $g-sm;
-    z-index: 100;
-    position: fixed;
-    bottom: $g-m;
-    right: $g-m;
     padding: $g-sm;
     pointer-events: none;
     color: $white;
     font-size: 12px;
+    margin-top: $g-sm;
 }
 
     $synths-debugger-synth-width: 200px;

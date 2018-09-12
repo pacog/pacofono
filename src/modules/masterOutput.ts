@@ -1,8 +1,11 @@
-import { Volume } from "tone";
+import { Volume, Analyser } from "tone";
 import { mainVolumeChangeObservable, muteVolumeChangeObservable } from "store/storeChanges";
 import { percentageToDecibels } from "utils/decibels";
 
-const masterOutput = new Volume(0);
+export const masterOutput = new Volume(0);
+export const masterAnalyser = new Analyser("fft", 32);
+masterAnalyser.set("smoothing", 0.2);
+masterOutput.connect(masterAnalyser);
 masterOutput.toMaster();
 
 mainVolumeChangeObservable.subscribe((newVolume) => {
@@ -16,5 +19,3 @@ muteVolumeChangeObservable.subscribe((newMuted) => {
         masterOutput.set("mute", newMuted);
     }
 });
-
-export default masterOutput;

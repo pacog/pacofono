@@ -2,7 +2,7 @@ import { actionCreators } from "store/actions/mainOptions";
 import { rootReducer } from "store/reducers/root";
 import {
     isSynthDebuggerShown,
-    isAudioOuputShown,
+    isAudioOutputShown,
 } from "store/selectors/mainOptions";
 
 describe("mainOptions store selectors", () => {
@@ -14,11 +14,11 @@ describe("mainOptions store selectors", () => {
         expect(isSynthDebuggerShown(newState)).toBe(true);
     });
 
-    it("should be able to get isAudioOuputShown", () => {
+    it("should be able to get isAudioOutputShown", () => {
         const state = rootReducer({}, { type: null });
-        expect(isAudioOuputShown(state)).toBe(false);
+        expect(isAudioOutputShown(state)).toBe(false);
         const newState = rootReducer(state, actionCreators.setShowAudioOutput(true));
-        expect(isAudioOuputShown(newState)).toBe(true);
+        expect(isAudioOutputShown(newState)).toBe(true);
     });
 
 });

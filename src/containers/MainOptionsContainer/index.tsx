@@ -5,19 +5,27 @@ import { ThunkDispatch } from "redux-thunk";
 import { IRootState } from "store/reducers/root";
 
 import MainOptions from "components/MainOptions";
-import { isSynthDebuggerShown } from "store/selectors/mainOptions";
-import { actionCreators as modalActions } from "store/actions/mainOptions";
+import {
+    isSynthDebuggerShown,
+    isAudioOutputShown,
+} from "store/selectors/mainOptions";
+import { actionCreators as mainOptionsActions } from "store/actions/mainOptions";
 
 const mapStateToProps = (state: IRootState) => {
     return {
         isSynthDebuggerShown: isSynthDebuggerShown(state),
+        isAudioOutputShown: isAudioOutputShown(state),
     };
 };
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<IRootState, {}, RootAction>) => {
     return {
         setShowSynthDebugger: (show: boolean) => {
-            dispatch(modalActions.setShowSynthDebugger(show));
+            dispatch(mainOptionsActions.setShowSynthDebugger(show));
+        },
+
+        setShowAudioOutput: (show: boolean) => {
+            dispatch(mainOptionsActions.setShowAudioOutput(show));
         },
     };
 };

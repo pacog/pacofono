@@ -6,12 +6,14 @@ import MusicModeSelectorContainer from "containers/MusicModeSelectorContainer";
 import ModalManagerContainer from "containers/ModalManagerContainer";
 import PointerInputManagerContainer from "containers/PointerInputManagerContainer";
 import SynthsDebugger from "components/SynthsDebugger";
+import MainAudioOutput from "components/MainAudioOutput";
 import MainVolumeContainer from "containers/MainVolumeContainer";
 
 import "./style.scss";
 
 interface IMainScreenProps {
     showSynthsDebugger: boolean;
+    showAudioOutput: boolean;
 }
 
 const MainScreen: React.SFC<IMainScreenProps> = (props: IMainScreenProps) => (
@@ -22,7 +24,10 @@ const MainScreen: React.SFC<IMainScreenProps> = (props: IMainScreenProps) => (
         </Sidebar>
         <PointerInputManagerContainer />
         <ModalManagerContainer />
-        { props.showSynthsDebugger && <SynthsDebugger /> }
+        <div className="main-screen-tools">
+            { props.showSynthsDebugger && <SynthsDebugger /> }
+            { props.showAudioOutput && <MainAudioOutput /> }
+        </div>
         <MainVolumeContainer />
     </div>
 );

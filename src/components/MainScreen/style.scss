@@ -8,3 +8,10 @@
     bottom: 0;
     background: linear-gradient(135deg, #5A5372, #1C1C2A);
 }
+
+    .main-screen-tools {
+        z-index: 100;
+        position: fixed;
+        bottom: $g-m;
+        right: $g-m;
+    }
