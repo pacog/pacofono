@@ -2,11 +2,11 @@
 
 .main-volume {
     position: fixed;
-    top: $g-ml;
-    right: $g-ml;
+    bottom: $g-ml;
+    left: $g-xl + $g-ml;
     padding: $g-sm;
     background: $transparent-white-1;
-    border-radius: 36px;
+    border-radius: $g-ml;
     display: flex;
     align-items: center;
     justify-content: center;

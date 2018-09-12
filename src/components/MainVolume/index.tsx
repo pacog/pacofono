@@ -18,8 +18,8 @@ const MainVolume: React.SFC<IMainVolumeProps> = (props: IMainVolumeProps) => (
     <div className="main-volume">
         <div className="line-center"
             onClick={() => props.onMuteChanged(!props.mute) }>
-            { props.mute && <Icon icon={muteIcon} size="xl" /> }
-            { !props.mute && <Icon icon={speakerIcon} size="xl" /> }
+            { props.mute && <Icon icon={muteIcon} size="ml" /> }
+            { !props.mute && <Icon icon={speakerIcon} size="ml" /> }
         </div>
         { !props.mute &&
             <div className="mb-m">
