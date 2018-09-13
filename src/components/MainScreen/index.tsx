@@ -8,6 +8,7 @@ import PointerInputManagerContainer from "containers/PointerInputManagerContaine
 import SynthsDebugger from "components/SynthsDebugger";
 import MainAudioOutput from "components/MainAudioOutput";
 import MainVolumeContainer from "containers/MainVolumeContainer";
+import CurrentSoundHUDContainer from "containers/CurrentSoundHUDContainer";
 
 import "./style.scss";
 
@@ -29,6 +30,7 @@ const MainScreen: React.SFC<IMainScreenProps> = (props: IMainScreenProps) => (
             { props.showAudioOutput && <MainAudioOutput /> }
         </div>
         <MainVolumeContainer />
+        <CurrentSoundHUDContainer />
     </div>
 );
 

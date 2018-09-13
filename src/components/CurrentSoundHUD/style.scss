@@ -1,0 +1,22 @@
+@import "src/root-style/common";
+
+.current-sound-hud {
+    min-width: 200px;
+    max-width: 200px;
+    position: fixed;
+    margin-top: 2 * $g-xxl;
+    right: 0;
+    z-index: 105;
+}
+
+    .current-sound-hud-title {
+        color: white;
+        font-size: 24px;
+        padding: $g-m;
+        background-color: $transparent-white-1;
+    }
+
+    .current-sound-content {
+        padding: $g-m;
+        background-color: $transparent-dark-2;
+    }
