@@ -9,6 +9,12 @@ export const isMainOptionsModalOpen = (state: IRootState): boolean => {
     return state.modals.mainOptionsOpen;
 };
 
+export const isSoundEditorModalOpen = (state: IRootState): boolean => {
+    return state.modals.soundEditorOpen;
+};
+
 export const isAnyModalOpen = (state: IRootState): boolean => {
-    return isSongEditorModalOpen(state) || isMainOptionsModalOpen(state);
+    return isSongEditorModalOpen(state) ||
+        isMainOptionsModalOpen(state) ||
+        isSoundEditorModalOpen(state);
 };

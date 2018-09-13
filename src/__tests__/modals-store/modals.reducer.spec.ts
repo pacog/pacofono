@@ -8,6 +8,7 @@ describe("modals store reducer", () => {
         expect(state.modals).toEqual({
             songEditorOpen: false,
             mainOptionsOpen: false,
+            soundEditorOpen: false,
         });
     });
 
@@ -18,12 +19,14 @@ describe("modals store reducer", () => {
             .toEqual({
                 songEditorOpen: true,
                 mainOptionsOpen: false,
+                soundEditorOpen: false,
             });
         const stateAfterClosingAgain = modalsReducer(stateAfterOpening, actionCreators.closeSongEditor());
         expect(stateAfterClosingAgain)
             .toEqual({
                 songEditorOpen: false,
                 mainOptionsOpen: false,
+                soundEditorOpen: false,
             });
     });
 
@@ -34,12 +37,32 @@ describe("modals store reducer", () => {
             .toEqual({
                 songEditorOpen: false,
                 mainOptionsOpen: true,
+                soundEditorOpen: false,
             });
         const stateAfterClosingAgain = modalsReducer(stateAfterOpening, actionCreators.closeMainOptions());
         expect(stateAfterClosingAgain)
             .toEqual({
                 songEditorOpen: false,
                 mainOptionsOpen: false,
+                soundEditorOpen: false,
+            });
+    });
+
+    it("should process changing values for sound editor", () => {
+        const state = rootReducer({}, { type: null });
+        const stateAfterOpening = modalsReducer(state.modals, actionCreators.openSoundEditor());
+        expect(stateAfterOpening)
+            .toEqual({
+                songEditorOpen: false,
+                mainOptionsOpen: false,
+                soundEditorOpen: true,
+            });
+        const stateAfterClosingAgain = modalsReducer(stateAfterOpening, actionCreators.closeSoundEditor());
+        expect(stateAfterClosingAgain)
+            .toEqual({
+                songEditorOpen: false,
+                mainOptionsOpen: false,
+                soundEditorOpen: false,
             });
     });
 });

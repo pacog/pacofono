@@ -5,6 +5,7 @@ import { rootReducer } from "store/reducers/root";
 import {
     isSongEditorModalOpen,
     isMainOptionsModalOpen,
+    isSoundEditorModalOpen,
     isAnyModalOpen,
 } from "store/selectors/modals";
 
@@ -31,6 +32,13 @@ describe("modals store selectors", () => {
         expect(isMainOptionsModalOpen(newState)).toBe(true);
     });
 
+    it("should be able to get info about song editor modal", () => {
+        const state = rootReducer({}, { type: null });
+        expect(isSoundEditorModalOpen(state)).toBe(false);
+        const newState = rootReducer(state, actionCreators.openSoundEditor());
+        expect(isSoundEditorModalOpen(newState)).toBe(true);
+    });
+
     it("should be able to get info about any open modal", () => {
         const state = rootReducer({}, { type: null });
         expect(isAnyModalOpen(state)).toBe(false);
@@ -43,5 +51,9 @@ describe("modals store selectors", () => {
         expect(isAnyModalOpen(newState4)).toBe(false);
         const newState5 = rootReducer(newState4, actionCreators.openMainOptions());
         expect(isAnyModalOpen(newState5)).toBe(true);
+        const newState6 = rootReducer(newState5, actionCreators.closeMainOptions());
+        expect(isAnyModalOpen(newState6)).toBe(false);
+        const newState7 = rootReducer(newState6, actionCreators.openSoundEditor());
+        expect(isAnyModalOpen(newState7)).toBe(true);
     });
 });
