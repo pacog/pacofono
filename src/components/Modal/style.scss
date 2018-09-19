@@ -16,3 +16,12 @@
     border-radius: $g-s;
     color: $white;
 }
+
+.modal-header {
+    background-color: #504F61;
+    padding: $g-sm;
+    padding-right: $g-m;
+    border-radius: $g-sm $g-sm 0 0;
+    position: relative;
+    z-index: 2;
+}

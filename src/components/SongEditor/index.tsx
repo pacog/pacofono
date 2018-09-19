@@ -53,7 +53,7 @@ function showContentPart(props: ISongEditorProps) {
 
 function showHeaderPart(props: ISongEditorProps) {
     return (
-        <div className="song-editor-header line-center">
+        <div className="song-editor-header modal-header line-center">
             <input
                 value={props.song.name}
                 className="p-input-big"

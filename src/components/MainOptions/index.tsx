@@ -11,7 +11,7 @@ interface IMainOptionsProps {
 
 const MainOptions: React.SFC<IMainOptionsProps> = (props: IMainOptionsProps) => (
     <div className="main-options">
-        <div className="main-options-header">
+        <div className="main-options-header modal-header">
             Options
         </div>
         <div className="main-options-content">

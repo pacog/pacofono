@@ -1,0 +1,29 @@
+@import "src/root-style/common";
+
+.sound-editor {
+    min-width: 820px;
+    max-width: 90vw;
+    box-shadow: 0 4px 16px $purple-4;
+    border-radius: $g-sm;
+}
+
+    .sound-editor-header {
+
+    }
+
+    .sound-editor-content {
+        position: relative;
+        border-radius: 0 0 $g-sm $g-sm;
+        overflow: hidden;
+    }
+
+        .sound-editor-sound-elements-list {
+            background: $purple-3;
+            padding: $g-sm;
+            box-shadow: 0 2px 6px rgba(black, 0.3);
+        }
+
+        .sound-editor-sound-elements-editor {
+            background: $purple-4;
+            padding: $g-sm;
+        }
