@@ -38,10 +38,10 @@ export interface INoteWithWeight {
 }
 
 export enum SynthTypes {
-    Synth,
-    AmSynth,
-    FMSynth,
-    Monosynth,
+    Synth = "Synth",
+    AmSynth = "AmSynth",
+    FMSynth = "FMSynth",
+    Monosynth = "Monosynth",
 }
 
 export interface ISound {
