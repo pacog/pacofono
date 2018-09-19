@@ -36,3 +36,16 @@ export interface INoteWithWeight {
     frequency: number;
     weight: number;
 }
+
+export enum SynthTypes {
+    Synth,
+    AmSynth,
+    FMSynth,
+    Monosynth,
+}
+
+export interface ISound {
+    id: string;
+    name: string;
+    synthType: SynthTypes;
+}

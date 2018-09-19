@@ -3,11 +3,12 @@ import { RootAction } from "store/actions";
 import { ThunkDispatch } from "redux-thunk";
 
 import { IRootState } from "store/reducers/root";
-
+import synthTypes from "constants/synthTypes";
 import SoundEditor from "components/SoundEditor";
 
 const mapStateToProps = (state: IRootState) => {
     return {
+        synthTypes,
     };
 };
 
