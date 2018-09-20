@@ -1,4 +1,5 @@
 import { IMusicModeActions } from "./musicMode";
+import { ISoundsActions } from "./sounds";
 import { ISongsActions } from "./songs";
 import { IPartsActions } from "./parts";
 import { IChordsActions } from "./chords";
@@ -12,6 +13,7 @@ import { IMainOptionsActions } from "./mainOptions";
 
 export type RootAction =
     | IMusicModeActions[keyof IMusicModeActions]
+    | ISoundsActions[keyof ISoundsActions]
     | ISongsActions[keyof ISongsActions]
     | IPartsActions[keyof IPartsActions]
     | IChordsActions[keyof IChordsActions]

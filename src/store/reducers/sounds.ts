@@ -1,5 +1,5 @@
 import { RootAction } from "store/actions";
-
+import { CHANGE_SYNTH_TYPE } from "store/actions/sounds";
 import { ISound } from "types";
 import defaultSound from "constants/defaultSound";
 
@@ -13,6 +13,11 @@ const initialState: ISoundsState = {
 
 export const soundsReducer = (state: ISoundsState = initialState, action: RootAction) => {
     switch (action.type) {
+        case CHANGE_SYNTH_TYPE:
+            return {
+                ...state,
+                [action.sound.id]: {...action.sound, synthType: action.newType },
+            };
         default:
             return state;
     }

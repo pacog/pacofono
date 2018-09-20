@@ -4,9 +4,10 @@ import { ThunkDispatch } from "redux-thunk";
 
 import { IRootState } from "store/reducers/root";
 import { getCurrentSound } from "store/selectors/currentSound";
+import { actionCreators } from "store/actions/sounds";
 import synthTypes from "constants/synthTypes";
 import SoundEditor from "components/SoundEditor";
-import { SynthTypes } from "types";
+import { SynthTypes, ISound } from "types";
 
 const mapStateToProps = (state: IRootState) => {
     return {
@@ -17,9 +18,8 @@ const mapStateToProps = (state: IRootState) => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<IRootState, {}, RootAction>) => {
     return {
-        onSynthTypeSelected: (newSynthType: SynthTypes) => {
-            // dispatch(otherAction());
-            console.log("onSynthTypeSelected", newSynthType);
+        onSynthTypeSelected: (sound: ISound, newSynthType: SynthTypes) => {
+            dispatch(actionCreators.changeSynthType(sound, newSynthType));
         },
     };
 };

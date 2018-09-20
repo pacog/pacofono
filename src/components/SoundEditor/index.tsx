@@ -5,7 +5,7 @@ import "./style.scss";
 interface ISoundEditorProps {
     synthTypes: Map<SynthTypes, string>;
     sound: ISound;
-    onSynthTypeSelected: (newSynthType: SynthTypes) => void;
+    onSynthTypeSelected: (sound: ISound, newSynthType: SynthTypes) => void;
 }
 
 const SoundEditor: React.SFC<ISoundEditorProps> = (props: ISoundEditorProps) => (
@@ -20,7 +20,7 @@ const SoundEditor: React.SFC<ISoundEditorProps> = (props: ISoundEditorProps) => 
             <div className="sound-editor-sound-elements-editor">
                 <select
                     value={props.sound.synthType}
-                    onChange={(event) => props.onSynthTypeSelected(event.target.value as SynthTypes) }>
+                    onChange={(event) => props.onSynthTypeSelected(props.sound, event.target.value as SynthTypes) }>
                     {
                         createSynthOptions(props.synthTypes)
                     }
