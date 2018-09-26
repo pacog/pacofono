@@ -1,8 +1,9 @@
-import { Volume, Analyser } from "tone";
+import { Analyser } from "tone";
 import { mainVolumeChangeObservable, muteVolumeChangeObservable } from "store/storeChanges";
 import { percentageToDecibels } from "utils/decibels";
+import VolumeNode from "modules/soundNodes/volumeNode";
 
-export const masterOutput = new Volume(0);
+export const masterOutput = new VolumeNode();
 export const masterAnalyser = new Analyser("fft", 32);
 masterAnalyser.set("smoothing", 0.2);
 masterOutput.connect(masterAnalyser);

@@ -1,36 +1,65 @@
+import { SynthTypes } from "types";
 import { INoteWithWeight } from "types";
-import { create as createSynth, PFPolySynth } from "modules/polySynth";
-
-interface ISoundPlayerOptions {
-    voices: number;
-}
+// import { create as createSynth, PFPolySynth } from "modules/polySynth";
+import createSynth from "modules/polySynth/polySynthFactory";
+import GenericPolySynth from "modules/polySynth/genericPolySynth";
+import VolumeNode from "modules/soundNodes/volumeNode";
 
 export class SoundPlayer {
 
-    private polySynth: PFPolySynth;
+    private polySynth: GenericPolySynth;
+    private masterOut: VolumeNode;
+    private numberOfVoices: number;
 
-    constructor(options: ISoundPlayerOptions, output: any) {
-        this.polySynth = createSynth(options, output);
+    constructor(output: VolumeNode) {
+        this.masterOut = output;
     }
 
     public setVolume(volume: number): void {
-        this.polySynth.setVolume(volume);
+        if (this.polySynth) {
+            this.polySynth.setVolume(volume);
+        }
     }
 
     public startPlayingNotes(notes: INoteWithWeight[], velocity: number = 0.5): void {
-        this.polySynth.startPlayingNotes(notes, velocity);
+        if (this.polySynth) {
+            this.polySynth.startPlayingNotes(notes, velocity);
+        }
     }
 
     public updateFrequenciesBeingPlayed(notes: INoteWithWeight[]): void {
-        this.polySynth.updateFrequenciesBeingPlayed(notes);
+        if (this.polySynth) {
+            this.polySynth.updateFrequenciesBeingPlayed(notes);
+        }
     }
 
     public stopPlaying(): void {
-        this.polySynth.stopPlaying();
+        if (this.polySynth) {
+            this.polySynth.stopPlaying();
+        }
+    }
+
+    public changeSynthType(newType: SynthTypes) {
+        if (this.polySynth) {
+            this.polySynth.destroy();
+        }
+        this.polySynth = createSynth(newType, this.masterOut);
+        if (this.numberOfVoices) {
+            this.polySynth.setNumberOfVoices(this.numberOfVoices);
+        }
+    }
+
+    public setNumberOfVoices(numberOfVoices: number) {
+        this.numberOfVoices = numberOfVoices;
+        if (this.polySynth) {
+            this.polySynth.setNumberOfVoices(numberOfVoices);
+        }
     }
 
     public destroy(): void {
-        this.polySynth.destroy();
+        if (this.polySynth) {
+            this.polySynth.destroy();
+        }
     }
 
 }

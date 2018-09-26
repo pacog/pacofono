@@ -12,10 +12,10 @@ import { SoundPlayer } from "modules/soundPlayer";
 const SNAP_FACTOR = 0.1;
 
 export const init = () => {
+    const soundPlayer = new SoundPlayer(masterOutput);
     const noteInterpolator = new NoteInterpolator({ snapFactor: SNAP_FACTOR });
     let isPointerActive = false;
     let currentChords: IChord[] = [];
-    let soundPlayer: SoundPlayer = null;
 
     pointerStartObservable.subscribe((where) => {
         // TODO this should trigger a change in parameter, and parameters be connected to the sound, that will react
@@ -42,14 +42,11 @@ export const init = () => {
 
     currentChordsChangeObservable.subscribe((newChords) => {
         currentChords = newChords;
-        if (soundPlayer) {
-            soundPlayer.destroy();
-        }
-        soundPlayer = new SoundPlayer({ voices: getMaxNotesInChords(currentChords) }, masterOutput);
+        soundPlayer.setNumberOfVoices(getMaxNotesInChords(currentChords));
         log("currentChords changed", currentChords);
     });
 
     synthTypeChangeObservable.subscribe((newSynthType) => {
-        console.log(newSynthType);
+        soundPlayer.changeSynthType(newSynthType);
     });
 };
