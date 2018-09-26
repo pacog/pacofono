@@ -17,11 +17,11 @@ describe("Sounds store ", () => {
         const initialState = rootReducer({}, { type: null });
         const stateAfter = soundsReducer(
             initialState.sounds,
-            actionCreators.changeSynthType(defaultSound, SynthTypes.Monosynth),
+            actionCreators.changeSynthType(defaultSound, SynthTypes.MonoSynth),
         );
         expect(stateAfter[defaultSound.id]).toEqual(Object.assign({},
             defaultSound,
-            { synthType: SynthTypes.Monosynth },
+            { synthType: SynthTypes.MonoSynth },
         ));
     });
 

@@ -8,11 +8,11 @@ import {
 
 describe("sounds store actions", () => {
     it("should have a change synth type action", () => {
-        expect(actionCreators.changeSynthType(defaultSound, SynthTypes.Monosynth))
+        expect(actionCreators.changeSynthType(defaultSound, SynthTypes.MonoSynth))
             .toEqual({
                 type: CHANGE_SYNTH_TYPE,
                 sound: defaultSound,
-                newType: SynthTypes.Monosynth,
+                newType: SynthTypes.MonoSynth,
             });
     });
 });
