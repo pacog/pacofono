@@ -5,13 +5,11 @@ import { ThunkDispatch } from "redux-thunk";
 import { IRootState } from "store/reducers/root";
 import { getCurrentSound } from "store/selectors/currentSound";
 import { actionCreators } from "store/actions/sounds";
-import synthTypes from "constants/synthTypes";
 import SoundEditor from "components/SoundEditor";
 import { SynthTypes, ISound } from "types";
 
 const mapStateToProps = (state: IRootState) => {
     return {
-        synthTypes,
         sound: getCurrentSound(state),
     };
 };

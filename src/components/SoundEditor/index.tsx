@@ -1,9 +1,9 @@
 import * as React from "react";
 import { SynthTypes, ISound } from "types";
 import "./style.scss";
+import SynthEditor from "components/SynthEditor";
 
 interface ISoundEditorProps {
-    synthTypes: Map<SynthTypes, string>;
     sound: ISound;
     onSynthTypeSelected: (sound: ISound, newSynthType: SynthTypes) => void;
 }
@@ -18,24 +18,13 @@ const SoundEditor: React.SFC<ISoundEditorProps> = (props: ISoundEditorProps) => 
                 Here is the list of elements
             </div>
             <div className="sound-editor-sound-elements-editor">
-                <select
-                    value={props.sound.synthType}
-                    onChange={(event) => props.onSynthTypeSelected(props.sound, event.target.value as SynthTypes) }>
-                    {
-                        createSynthOptions(props.synthTypes)
-                    }
-                </select>
+                <SynthEditor
+                    sound={props.sound}
+                    onSynthTypeSelected={props.onSynthTypeSelected}
+                />
             </div>
         </div>
     </div>
 );
 
-
-function createSynthOptions(synthTypes: Map<SynthTypes, string>) {
-    return Array.from(synthTypes).map((synthType) => {
-        return (
-            <option key={synthType[0]} value={synthType[0]}>{synthType[1]}</option>
-        );
-    });
-}
 export default SoundEditor;
