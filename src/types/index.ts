@@ -57,3 +57,10 @@ export enum WaveTypes {
     Sine = "sine",
     Sawtooth = "sawtooth",
 }
+
+export interface IEnvelope {
+    attack: number;
+    decay: number;
+    sustain: number;
+    release: number;
+}

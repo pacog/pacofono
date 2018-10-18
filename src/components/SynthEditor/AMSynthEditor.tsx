@@ -3,6 +3,7 @@ import { ISound, WaveTypes } from "types";
 import FieldWithLabel from "components/FieldWithLabel";
 import WaveTypeSelector from "components/WaveTypeSelector";
 import SliderWithInput from "components/SliderWithInput";
+import EnvelopeEditor from "components/EnvelopeEditor";
 import "./am-synth-style.scss";
 
 interface IAMSynthEditorProps {
@@ -10,8 +11,8 @@ interface IAMSynthEditorProps {
 }
 
 const AMSynthEditor: React.SFC<IAMSynthEditorProps> = (props: IAMSynthEditorProps) => (
-    <div className="duo-synth-editor">
-        <div>
+    <div className="am-synth-editor">
+        <div className="grow-full-width">
             <FieldWithLabel label="Oscillator type">
                 <WaveTypeSelector
                     value={ WaveTypes.Sine }
@@ -19,10 +20,34 @@ const AMSynthEditor: React.SFC<IAMSynthEditorProps> = (props: IAMSynthEditorProp
                 />
             </FieldWithLabel>
 
-
+            <FieldWithLabel label="Envelope">
+                <EnvelopeEditor
+                    value={ {
+                        attack: 0.01 ,
+                        decay: 0.01 ,
+                        sustain: 1 ,
+                        release: 0.5,
+                    } }
+                    onChange={ (newVal) => console.log(newVal) }
+                />
+            </FieldWithLabel>
+        </div>
+        <div className="grow-full-width">
             <FieldWithLabel label="Modulation type">
                 <WaveTypeSelector
                     value={ WaveTypes.Square }
+                    onChange={ (newVal) => console.log(newVal) }
+                />
+            </FieldWithLabel>
+
+            <FieldWithLabel label="Modulation envelope">
+                <EnvelopeEditor
+                    value={ {
+                        attack: 0.01 ,
+                        decay: 0.01 ,
+                        sustain: 1 ,
+                        release: 0.5,
+                    } }
                     onChange={ (newVal) => console.log(newVal) }
                 />
             </FieldWithLabel>
