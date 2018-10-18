@@ -50,3 +50,10 @@ export interface ISound {
     name: string;
     synthType: SynthTypes;
 }
+
+export enum WaveTypes {
+    Triangle = "triangle",
+    Square = "square",
+    Sine = "sine",
+    Sawtooth = "sawtooth",
+}

@@ -1,15 +1,15 @@
 import * as React from "react";
 import { ISound } from "types";
-import "./am-synth-style.scss";
+import "./duo-synth-style.scss";
 
-interface IAMSynthEditorProps {
+interface IDuoSynthEditorProps {
     sound: ISound;
 }
 
-const AMSynthEditor: React.SFC<IAMSynthEditorProps> = (props: IAMSynthEditorProps) => (
-    <div className="am-synth-editor">
-        Duo synth ou yeah
+const DuoSynthEditor: React.SFC<IDuoSynthEditorProps> = (props: IDuoSynthEditorProps) => (
+    <div className="duo-synth-editor">
+        DUO
     </div>
 );
 
-export default AMSynthEditor;
+export default DuoSynthEditor;

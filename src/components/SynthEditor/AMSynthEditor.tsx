@@ -1,15 +1,27 @@
 import * as React from "react";
-import { ISound } from "types";
-import "./duo-synth-style.scss";
+import { ISound, WaveTypes } from "types";
+import WaveTypeSelector from "components/WaveTypeSelector";
+import "./am-synth-style.scss";
 
-interface IDuoSynthEditorProps {
+interface IAMSynthEditorProps {
     sound: ISound;
 }
 
-const DuoSynthEditor: React.SFC<IDuoSynthEditorProps> = (props: IDuoSynthEditorProps) => (
+const AMSynthEditor: React.SFC<IAMSynthEditorProps> = (props: IAMSynthEditorProps) => (
     <div className="duo-synth-editor">
-        Duo synth ou yeah
+        Am synth ou yeah
+        <div>
+            <WaveTypeSelector
+                value={ WaveTypes.Square }
+                onChange={ (newVal) => console.log(newVal) }
+            />
+            modulationType  : square
+        </div>
+        phase  : 0 ,
+
+harmonicity  : 1
+type
     </div>
 );
 
-export default DuoSynthEditor;
+export default AMSynthEditor;
