@@ -1,0 +1,10 @@
+@import "src/root-style/common";
+
+.field-with-label {
+    margin-top: $g-xs;
+    margin-bottom: $g-sm;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}

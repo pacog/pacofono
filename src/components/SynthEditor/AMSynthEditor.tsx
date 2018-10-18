@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ISound, WaveTypes } from "types";
+import FieldWithLabel from "components/FieldWithLabel";
 import WaveTypeSelector from "components/WaveTypeSelector";
 import "./am-synth-style.scss";
 
@@ -11,11 +12,20 @@ const AMSynthEditor: React.SFC<IAMSynthEditorProps> = (props: IAMSynthEditorProp
     <div className="duo-synth-editor">
         Am synth ou yeah
         <div>
-            <WaveTypeSelector
-                value={ WaveTypes.Square }
-                onChange={ (newVal) => console.log(newVal) }
-            />
-            modulationType  : square
+            <FieldWithLabel label="Oscillator type">
+                <WaveTypeSelector
+                    value={ WaveTypes.Sine }
+                    onChange={ (newVal) => console.log(newVal) }
+                />
+            </FieldWithLabel>
+
+
+            <FieldWithLabel label="Modulation type">
+                <WaveTypeSelector
+                    value={ WaveTypes.Square }
+                    onChange={ (newVal) => console.log(newVal) }
+                />
+            </FieldWithLabel>
         </div>
         phase  : 0 ,
 
