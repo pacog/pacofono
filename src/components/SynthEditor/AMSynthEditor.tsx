@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ISound, WaveTypes } from "types";
+import { ISound, IAMSynthParams } from "types";
 import FieldWithLabel from "components/FieldWithLabel";
 import WaveTypeSelector from "components/WaveTypeSelector";
 import SliderWithInput from "components/SliderWithInput";
@@ -10,64 +10,65 @@ interface IAMSynthEditorProps {
     sound: ISound;
 }
 
-const AMSynthEditor: React.SFC<IAMSynthEditorProps> = (props: IAMSynthEditorProps) => (
-    <div className="am-synth-editor">
-        <div className="grow-full-width">
-            <FieldWithLabel label="Oscillator type">
-                <WaveTypeSelector
-                    value={ WaveTypes.Sine }
-                    onChange={ (newVal) => console.log(newVal) }
-                />
-            </FieldWithLabel>
+export class AMSynthEditor extends React.Component<IAMSynthEditorProps, {}> {
 
-            <FieldWithLabel label="Envelope">
-                <EnvelopeEditor
-                    value={ {
-                        attack: 0.01 ,
-                        decay: 0.01 ,
-                        sustain: 1 ,
-                        release: 0.5,
-                    } }
-                    onChange={ (newVal) => console.log(newVal) }
-                />
-            </FieldWithLabel>
-        </div>
-        <div className="grow-full-width">
-            <FieldWithLabel label="Modulation type">
-                <WaveTypeSelector
-                    value={ WaveTypes.Square }
-                    onChange={ (newVal) => console.log(newVal) }
-                />
-            </FieldWithLabel>
+    public render() {
+        const params = this.props.sound.params as IAMSynthParams;
+        return (
+            <div className="am-synth-editor">
+                <div className="grow-full-width">
+                    <FieldWithLabel label="Oscillator type">
+                        <WaveTypeSelector
+                            value={ params.type }
+                            onChange={ (newVal) => console.log(newVal) }
+                        />
+                    </FieldWithLabel>
 
-            <FieldWithLabel label="Modulation envelope">
-                <EnvelopeEditor
-                    value={ {
-                        attack: 0.01 ,
-                        decay: 0.01 ,
-                        sustain: 1 ,
-                        release: 0.5,
-                    } }
-                    onChange={ (newVal) => console.log(newVal) }
-                />
-            </FieldWithLabel>
+                    <FieldWithLabel label="Envelope">
+                        <EnvelopeEditor
+                            value={ {
+                                attack: params.envelope.attack,
+                                decay: params.envelope.decay,
+                                sustain: params.envelope.sustain,
+                                release: params.envelope.release,
+                            } }
+                            onChange={ (newVal) => console.log(newVal) }
+                        />
+                    </FieldWithLabel>
+                </div>
+                <div className="grow-full-width">
+                    <FieldWithLabel label="Modulation type">
+                        <WaveTypeSelector
+                            value={ params.modulationType }
+                            onChange={ (newVal) => console.log(newVal) }
+                        />
+                    </FieldWithLabel>
 
-            <FieldWithLabel label="Phase">
-                <SliderWithInput
-                    value={ 0.1 }
-                    onChange={ (newVal) => console.log(newVal) }
-                />
-            </FieldWithLabel>
+                    <FieldWithLabel label="Modulation envelope">
+                        <EnvelopeEditor
+                            value={ {
+                                attack: params.modulationEnvelope.attack,
+                                decay: params.modulationEnvelope.decay,
+                                sustain: params.modulationEnvelope.sustain,
+                                release: params.modulationEnvelope.release,
+                            } }
+                            onChange={ (newVal) => console.log(newVal) }
+                        />
+                    </FieldWithLabel>
 
-            <FieldWithLabel label="Harmonicity">
-                <SliderWithInput
-                    value={ 0.1 }
-                    onChange={ (newVal) => console.log(newVal) }
-                />
-            </FieldWithLabel>
-        </div>
+                    <FieldWithLabel label="Harmonicity">
+                        <SliderWithInput
+                            value={ params.harmonicity }
+                            onChange={ (newVal) => console.log(newVal) }
+                            min={0}
+                            max={24}
+                        />
+                    </FieldWithLabel>
+                </div>
+            </div>
+        );
+    }
 
-    </div>
-);
+}
 
 export default AMSynthEditor;
