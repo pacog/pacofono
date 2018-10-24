@@ -6,7 +6,7 @@ import {
     ISimpleSynthParams,
     WaveTypes,
     FilterTypes,
-} from "types";
+} from "types/index";
 
 export const defaultAMSynth: IAMSynthParams = {
     harmonicity : 3,
