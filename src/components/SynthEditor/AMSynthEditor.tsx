@@ -8,6 +8,7 @@ import "./am-synth-style.scss";
 
 interface IAMSynthEditorProps {
     sound: ISound;
+    onParamChange: (paramName: string, newValue: any) => void;
 }
 
 export class AMSynthEditor extends React.Component<IAMSynthEditorProps, {}> {
@@ -20,7 +21,9 @@ export class AMSynthEditor extends React.Component<IAMSynthEditorProps, {}> {
                     <FieldWithLabel label="Oscillator type">
                         <WaveTypeSelector
                             value={ params.type }
-                            onChange={ (newVal) => console.log(newVal) }
+                            onChange={ (newVal) => {
+                                this.props.onParamChange("type", newVal);
+                            } }
                         />
                     </FieldWithLabel>
 
@@ -32,7 +35,9 @@ export class AMSynthEditor extends React.Component<IAMSynthEditorProps, {}> {
                                 sustain: params.envelope.sustain,
                                 release: params.envelope.release,
                             } }
-                            onChange={ (newVal) => console.log(newVal) }
+                            onChange={ (newVal) => {
+                                this.props.onParamChange("envelope", newVal);
+                            } }
                         />
                     </FieldWithLabel>
                 </div>
@@ -40,7 +45,9 @@ export class AMSynthEditor extends React.Component<IAMSynthEditorProps, {}> {
                     <FieldWithLabel label="Modulation type">
                         <WaveTypeSelector
                             value={ params.modulationType }
-                            onChange={ (newVal) => console.log(newVal) }
+                            onChange={ (newVal) => {
+                                this.props.onParamChange("modulationType", newVal);
+                            } }
                         />
                     </FieldWithLabel>
 
@@ -52,14 +59,18 @@ export class AMSynthEditor extends React.Component<IAMSynthEditorProps, {}> {
                                 sustain: params.modulationEnvelope.sustain,
                                 release: params.modulationEnvelope.release,
                             } }
-                            onChange={ (newVal) => console.log(newVal) }
+                            onChange={ (newVal) => {
+                                this.props.onParamChange("modulationEnvelope", newVal);
+                            } }
                         />
                     </FieldWithLabel>
 
                     <FieldWithLabel label="Harmonicity">
                         <SliderWithInput
                             value={ params.harmonicity }
-                            onChange={ (newVal) => console.log(newVal) }
+                            onChange={ (newVal) => {
+                                this.props.onParamChange("harmonicity", newVal);
+                            } }
                             min={0}
                             max={24}
                         />

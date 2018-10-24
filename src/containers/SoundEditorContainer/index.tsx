@@ -19,6 +19,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IRootState, {}, RootAction>)
         onSynthTypeSelected: (sound: ISound, newSynthType: SynthTypes) => {
             dispatch(actionCreators.changeSynthType(sound, newSynthType));
         },
+        onParamChange: (sound: ISound, paramName: string, newValue: any) => {
+            dispatch(actionCreators.changeSynthParam(sound, paramName, newValue));
+        },
     };
 };
 

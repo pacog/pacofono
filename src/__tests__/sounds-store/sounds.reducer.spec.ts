@@ -37,4 +37,26 @@ describe("Sounds store ", () => {
         });
     });
 
+    it("should be able to change synth params", () => {
+        const initialState = rootReducer({}, { type: null });
+        const prevParams = initialState.sounds[defaultSound.id].params;
+        const newEnvelope = {
+            attack: 0.15,
+            decay: 0.3,
+            sustain: 0.1,
+            release: 0,
+        };
+        const stateAfter = soundsReducer(
+            initialState.sounds,
+            actionCreators.changeSynthParam(defaultSound, "envelope", newEnvelope),
+        );
+        expect(stateAfter[defaultSound.id]).toEqual({
+            ...defaultSound,
+            params: {
+                ...prevParams,
+                envelope: newEnvelope,
+            },
+        });
+    });
+
 });

@@ -11,6 +11,7 @@ import "./style.scss";
 interface ISynthEditorProps {
     sound: ISound;
     onSynthTypeSelected: (sound: ISound, newSynthType: SynthTypes) => void;
+    onParamChange: (sound: ISound, paramName: string, newValue: any) => void;
 }
 
 const SynthEditor: React.SFC<ISynthEditorProps> = (props: ISynthEditorProps) => (
@@ -19,31 +20,36 @@ const SynthEditor: React.SFC<ISynthEditorProps> = (props: ISynthEditorProps) => 
             value={props.sound.synthType}
             onChange={(newSynthType) => props.onSynthTypeSelected(props.sound, newSynthType) }
         />
-        { getSpecificSynthEditor(props.sound) }
+        { getSpecificSynthEditor(props) }
     </React.Fragment>
 );
 
-function getSpecificSynthEditor(sound: ISound) {
-    switch (sound.synthType) {
+function getSpecificSynthEditor(props: ISynthEditorProps) {
+    switch (props.sound.synthType) {
         case SynthTypes.AMSynth:
             return (
-                <AMSynthEditor sound={sound}/>
+                <AMSynthEditor
+                    sound={props.sound}
+                    onParamChange={ (paramName: string, newValue: any ) => {
+                        props.onParamChange(props.sound, paramName, newValue);
+                    } }
+                />
             );
         case SynthTypes.FMSynth:
             return (
-                <FMSynthEditor sound={sound}/>
+                <FMSynthEditor sound={props.sound}/>
             );
     case SynthTypes.MonoSynth:
         return (
-            <MonoSynthEditor sound={sound}/>
+            <MonoSynthEditor sound={props.sound}/>
         );
         case SynthTypes.Synth:
             return (
-                <SimpleSynthEditor sound={sound}/>
+                <SimpleSynthEditor sound={props.sound}/>
             );
         case SynthTypes.DuoSynth:
             return (
-                <DuoSynthEditor sound={sound}/>
+                <DuoSynthEditor sound={props.sound}/>
             );
         default:
             return (

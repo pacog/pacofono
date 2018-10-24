@@ -1,5 +1,5 @@
 import { RootAction } from "store/actions";
-import { CHANGE_SYNTH_TYPE } from "store/actions/sounds";
+import { CHANGE_SYNTH_TYPE, CHANGE_SYNTH_PARAM } from "store/actions/sounds";
 import { ISound, SynthTypes, SynthParams } from "types/index";
 import defaultSound from "constants/defaultSound";
 import {
@@ -24,9 +24,25 @@ export const soundsReducer = (state: ISoundsState = initialState, action: RootAc
             return {
                 ...state,
                 [action.sound.id]: {
-                    ...action.sound,
+                    ...state[action.sound.id],
                     synthType: action.newType,
                     params: getDefaultParamsForSynthType(action.newType),
+                },
+            };
+        case CHANGE_SYNTH_PARAM:
+            const prevSound = state[action.sound.id];
+            let newValue = action.newValue;
+            if (typeof action.newValue === "object") {
+                newValue = { ...action.newValue };
+            }
+            return {
+                ...state,
+                [action.sound.id]: {
+                    ...prevSound,
+                    params: {
+                        ...prevSound.params,
+                        [action.paramName]: newValue,
+                    },
                 },
             };
         default:

@@ -6,6 +6,7 @@ import SynthEditor from "components/SynthEditor";
 interface ISoundEditorProps {
     sound: ISound;
     onSynthTypeSelected: (sound: ISound, newSynthType: SynthTypes) => void;
+    onParamChange: (sound: ISound, paramName: string, newValue: any) => void;
 }
 
 const SoundEditor: React.SFC<ISoundEditorProps> = (props: ISoundEditorProps) => (
@@ -21,6 +22,7 @@ const SoundEditor: React.SFC<ISoundEditorProps> = (props: ISoundEditorProps) => 
                 <SynthEditor
                     sound={props.sound}
                     onSynthTypeSelected={props.onSynthTypeSelected}
+                    onParamChange={props.onParamChange}
                 />
             </div>
         </div>
