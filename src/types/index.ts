@@ -45,12 +45,6 @@ export enum SynthTypes {
     DuoSynth = "DuoSynth",
 }
 
-export interface ISound {
-    id: string;
-    name: string;
-    synthType: SynthTypes;
-}
-
 export enum WaveTypes {
     Triangle = "triangle",
     Square = "square",
@@ -70,7 +64,6 @@ export interface IAMSynthParams {
     type: WaveTypes;
     modulationType: WaveTypes;
     modulationEnvelope: IEnvelope;
-    phase: number;
     harmonicity: number;
 }
 
@@ -92,14 +85,14 @@ export interface ISynthVoiceParams {
 }
 
 export interface IDuoSynthParams {
-    vibratoAmmount: number;
+    vibratoAmount: number;
     vibratoRate: number;
     harmonicity: number;
     voice0: ISynthVoiceParams;
     voice1: ISynthVoiceParams;
 }
 
-export enum FilterType {
+export enum FilterTypes {
     Lowpass = "lowpass",
     Highpass = "highpass",
     Bandpass = "bandpass",
@@ -112,7 +105,7 @@ export enum FilterType {
 
 export interface IFilter {
     Q: number;
-    type: FilterType;
+    type: FilterTypes;
     rolloff: number;
 }
 
@@ -139,3 +132,10 @@ export interface ISimpleSynthParams {
 }
 
 export type SynthParams = IAMSynthParams | IFMSynthParams | IDuoSynthParams | IMonoSynthParams | ISimpleSynthParams;
+
+export interface ISound {
+    id: string;
+    name: string;
+    synthType: SynthTypes;
+    params: SynthParams;
+}
