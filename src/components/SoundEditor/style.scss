@@ -14,7 +14,7 @@
     .sound-editor-content {
         position: relative;
         border-radius: 0 0 $g-sm $g-sm;
-        overflow: hidden;
+        max-height: 90vh;
     }
 
         .sound-editor-sound-elements-list {

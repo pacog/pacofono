@@ -11,7 +11,7 @@ interface IAMSynthEditorProps {
     onParamChange: (paramName: string, newValue: any) => void;
 }
 
-export class AMSynthEditor extends React.Component<IAMSynthEditorProps, {}> {
+class AMSynthEditor extends React.Component<IAMSynthEditorProps, {}> {
 
     public render() {
         return (

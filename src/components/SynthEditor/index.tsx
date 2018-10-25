@@ -37,7 +37,12 @@ function getSpecificSynthEditor(props: ISynthEditorProps) {
             );
         case SynthTypes.FMSynth:
             return (
-                <FMSynthEditor sound={props.sound}/>
+                <FMSynthEditor
+                    sound={props.sound}
+                    onParamChange={ (paramName: string, newValue: any ) => {
+                        props.onParamChange(props.sound, paramName, newValue);
+                    } }
+                />
             );
     case SynthTypes.MonoSynth:
         return (
@@ -45,11 +50,21 @@ function getSpecificSynthEditor(props: ISynthEditorProps) {
         );
         case SynthTypes.Synth:
             return (
-                <SimpleSynthEditor sound={props.sound}/>
+                <SimpleSynthEditor
+                    sound={props.sound}
+                    onParamChange={ (paramName: string, newValue: any ) => {
+                        props.onParamChange(props.sound, paramName, newValue);
+                    } }
+                />
             );
         case SynthTypes.DuoSynth:
             return (
-                <DuoSynthEditor sound={props.sound}/>
+                <DuoSynthEditor
+                    sound={props.sound}
+                    onParamChange={ (paramName: string, newValue: any ) => {
+                        props.onParamChange(props.sound, paramName, newValue);
+                    } }
+                />
             );
         default:
             return (

@@ -4,7 +4,6 @@ import FieldWithLabel from "components/FieldWithLabel";
 import SliderWithInput from "components/SliderWithInput";
 import "./style.scss";
 
-
 interface IEnvelopeEditorProps {
     value: IEnvelope;
     onChange: (newEnvelope: IEnvelope) => void;
