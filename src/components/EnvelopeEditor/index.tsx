@@ -10,41 +10,47 @@ interface IEnvelopeEditorProps {
     onChange: (newEnvelope: IEnvelope) => void;
 }
 
-const EnvelopeEditor: React.SFC<IEnvelopeEditorProps> = (props: IEnvelopeEditorProps) => (
-    <div className="envelope-editor">
-        <FieldWithLabel label="Attack">
-            <SliderWithInput
-                value={ props.value.attack }
-                onChange={ (newVal) => {
-                    props.onChange({... props.value, attack: newVal });
-                } }
-            />
-        </FieldWithLabel>
-        <FieldWithLabel label="Decay">
-            <SliderWithInput
-                value={ props.value.decay }
-                onChange={ (newVal) => {
-                    props.onChange({... props.value, decay: newVal });
-                } }
-            />
-        </FieldWithLabel>
-        <FieldWithLabel label="Sustain">
-            <SliderWithInput
-                value={ props.value.sustain }
-                onChange={ (newVal) => {
-                    props.onChange({... props.value, sustain: newVal });
-                } }
-            />
-        </FieldWithLabel>
-        <FieldWithLabel label="Release">
-            <SliderWithInput
-                value={ props.value.release }
-                onChange={ (newVal) => {
-                    props.onChange({... props.value, release: newVal });
-                } }
-            />
-        </FieldWithLabel>
-    </div>
-);
+export class EnvelopeEditor extends React.Component<IEnvelopeEditorProps, {}> {
+
+    public render() {
+        return (
+            <div className="envelope-editor">
+                <FieldWithLabel label="Attack">
+                    <SliderWithInput
+                        value={ this.props.value.attack }
+                        onChange={ (newVal) => {
+                            this.props.onChange({... this.props.value, attack: newVal });
+                        } }
+                    />
+                </FieldWithLabel>
+                <FieldWithLabel label="Decay">
+                    <SliderWithInput
+                        value={ this.props.value.decay }
+                        onChange={ (newVal) => {
+                            this.props.onChange({... this.props.value, decay: newVal });
+                        } }
+                    />
+                </FieldWithLabel>
+                <FieldWithLabel label="Sustain">
+                    <SliderWithInput
+                        value={ this.props.value.sustain }
+                        onChange={ (newVal) => {
+                            this.props.onChange({... this.props.value, sustain: newVal });
+                        } }
+                    />
+                </FieldWithLabel>
+                <FieldWithLabel label="Release">
+                    <SliderWithInput
+                        value={ this.props.value.release }
+                        onChange={ (newVal) => {
+                            this.props.onChange({... this.props.value, release: newVal });
+                        } }
+                    />
+                </FieldWithLabel>
+            </div>
+        );
+    }
+
+}
 
 export default EnvelopeEditor;

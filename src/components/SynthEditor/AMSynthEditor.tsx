@@ -14,13 +14,12 @@ interface IAMSynthEditorProps {
 export class AMSynthEditor extends React.Component<IAMSynthEditorProps, {}> {
 
     public render() {
-        const params = this.props.sound.params as IAMSynthParams;
         return (
             <div className="am-synth-editor">
                 <div className="grow-full-width">
                     <FieldWithLabel label="Oscillator type">
                         <WaveTypeSelector
-                            value={ params.type }
+                            value={ this.getParams().type }
                             onChange={ (newVal) => {
                                 this.props.onParamChange("type", newVal);
                             } }
@@ -29,12 +28,7 @@ export class AMSynthEditor extends React.Component<IAMSynthEditorProps, {}> {
 
                     <FieldWithLabel label="Envelope">
                         <EnvelopeEditor
-                            value={ {
-                                attack: params.envelope.attack,
-                                decay: params.envelope.decay,
-                                sustain: params.envelope.sustain,
-                                release: params.envelope.release,
-                            } }
+                            value={ this.getParams().envelope }
                             onChange={ (newVal) => {
                                 this.props.onParamChange("envelope", newVal);
                             } }
@@ -44,7 +38,7 @@ export class AMSynthEditor extends React.Component<IAMSynthEditorProps, {}> {
                 <div className="grow-full-width">
                     <FieldWithLabel label="Modulation type">
                         <WaveTypeSelector
-                            value={ params.modulationType }
+                            value={ this.getParams().modulationType }
                             onChange={ (newVal) => {
                                 this.props.onParamChange("modulationType", newVal);
                             } }
@@ -53,12 +47,7 @@ export class AMSynthEditor extends React.Component<IAMSynthEditorProps, {}> {
 
                     <FieldWithLabel label="Modulation envelope">
                         <EnvelopeEditor
-                            value={ {
-                                attack: params.modulationEnvelope.attack,
-                                decay: params.modulationEnvelope.decay,
-                                sustain: params.modulationEnvelope.sustain,
-                                release: params.modulationEnvelope.release,
-                            } }
+                            value={ this.getParams().modulationEnvelope }
                             onChange={ (newVal) => {
                                 this.props.onParamChange("modulationEnvelope", newVal);
                             } }
@@ -67,7 +56,7 @@ export class AMSynthEditor extends React.Component<IAMSynthEditorProps, {}> {
 
                     <FieldWithLabel label="Harmonicity">
                         <SliderWithInput
-                            value={ params.harmonicity }
+                            value={ this.getParams().harmonicity }
                             onChange={ (newVal) => {
                                 this.props.onParamChange("harmonicity", newVal);
                             } }
@@ -78,6 +67,10 @@ export class AMSynthEditor extends React.Component<IAMSynthEditorProps, {}> {
                 </div>
             </div>
         );
+    }
+
+    private getParams(): IAMSynthParams {
+        return this.props.sound.params as IAMSynthParams;
     }
 
 }
