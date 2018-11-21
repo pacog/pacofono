@@ -2,8 +2,8 @@ import * as React from "react";
 import { ISound, IMonoSynthParams } from "types";
 import FieldWithLabel from "components/FieldWithLabel";
 import WaveTypeSelector from "components/WaveTypeSelector";
-// import SliderWithInput from "components/SliderWithInput";
 import EnvelopeEditor from "components/EnvelopeEditor";
+import FilterEnvelopeEditor from "components/FilterEnvelopeEditor";
 import FilterEditor from "components/FilterEditor";
 import "./mono-synth-style.scss";
 
@@ -37,14 +37,24 @@ class MonoSynthEditor extends React.Component<IMonoSynthEditorProps, {}> {
                     </FieldWithLabel>
                 </div>
                 <div className="grow-full-width">
-                <FieldWithLabel label="Filter">
-                    <FilterEditor
-                        value={ this.getParams().filter }
-                        onChange={ (newVal) => {
-                            this.props.onParamChange("filter", newVal);
-                        } }
-                    />
-                </FieldWithLabel>
+                    <FieldWithLabel label="Filter">
+                        <FilterEditor
+                            value={ this.getParams().filter }
+                            onChange={ (newVal) => {
+                                this.props.onParamChange("filter", newVal);
+                            } }
+                        />
+                    </FieldWithLabel>
+                </div>
+                <div className="grow-full-width">
+                    <FieldWithLabel label="Filter envelope">
+                        <FilterEnvelopeEditor
+                            value={ this.getParams().filterEnvelope }
+                            onChange={ (newVal) => {
+                                this.props.onParamChange("filterEnvelope", newVal);
+                            } }
+                        />
+                    </FieldWithLabel>
                 </div>
             </div>
         );
