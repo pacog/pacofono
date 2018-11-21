@@ -1,15 +1,58 @@
 import * as React from "react";
-import { ISound } from "types";
+import { ISound, IMonoSynthParams } from "types";
+import FieldWithLabel from "components/FieldWithLabel";
+import WaveTypeSelector from "components/WaveTypeSelector";
+// import SliderWithInput from "components/SliderWithInput";
+import EnvelopeEditor from "components/EnvelopeEditor";
+import FilterEditor from "components/FilterEditor";
 import "./mono-synth-style.scss";
 
 interface IMonoSynthEditorProps {
     sound: ISound;
+    onParamChange: (paramName: string, newValue: any) => void;
 }
 
-const MonoSynthEditor: React.SFC<IMonoSynthEditorProps> = (props: IMonoSynthEditorProps) => (
-    <div className="mono-synth-editor">
-        Mono synth ou yeah
-    </div>
-);
+class MonoSynthEditor extends React.Component<IMonoSynthEditorProps, {}> {
+
+    public render() {
+        return (
+            <div className="mono-synth-editor">
+                <div className="grow-full-width">
+                    <FieldWithLabel label="Oscillator type">
+                        <WaveTypeSelector
+                            value={ this.getParams().type }
+                            onChange={ (newVal) => {
+                                this.props.onParamChange("type", newVal);
+                            } }
+                        />
+                    </FieldWithLabel>
+
+                    <FieldWithLabel label="Envelope">
+                        <EnvelopeEditor
+                            value={ this.getParams().envelope }
+                            onChange={ (newVal) => {
+                                this.props.onParamChange("envelope", newVal);
+                            } }
+                        />
+                    </FieldWithLabel>
+                </div>
+                <div className="grow-full-width">
+                <FieldWithLabel label="Filter">
+                    <FilterEditor
+                        value={ this.getParams().filter }
+                        onChange={ (newVal) => {
+                            this.props.onParamChange("filter", newVal);
+                        } }
+                    />
+                </FieldWithLabel>
+                </div>
+            </div>
+        );
+    }
+
+    private getParams(): IMonoSynthParams {
+        return this.props.sound.params as IMonoSynthParams;
+    }
+}
 
 export default MonoSynthEditor;

@@ -89,6 +89,8 @@ export const defaultMonoSynth: IMonoSynthParams = {
     type:  WaveTypes.Square,
     filter: {
         Q: 6,
+        frequency: 350,
+        gain: 0,
         type: FilterTypes.Lowpass,
         rolloff: -24,
     },

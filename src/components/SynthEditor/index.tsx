@@ -46,7 +46,12 @@ function getSpecificSynthEditor(props: ISynthEditorProps) {
             );
     case SynthTypes.MonoSynth:
         return (
-            <MonoSynthEditor sound={props.sound}/>
+            <MonoSynthEditor
+                sound={props.sound}
+                onParamChange={ (paramName: string, newValue: any ) => {
+                    props.onParamChange(props.sound, paramName, newValue);
+                } }
+            />
         );
         case SynthTypes.Synth:
             return (

@@ -107,6 +107,8 @@ export interface IFilter {
     Q: number;
     type: FilterTypes;
     rolloff: number;
+    gain: number;
+    frequency: number;
 }
 
 export interface IFilterEnvelope {
