@@ -1,11 +1,55 @@
 import GenericSynth from "./GenericSynth";
 import { DuoSynth as ToneDuoSynth} from "tone";
-import { IDuoSynthParams } from "types";
+import { IDuoSynthParams, ISynthVoiceParams } from "types";
 
 export default class DuoSynth extends GenericSynth {
 
-    protected init(params: IDuoSynthParams) {
-        this.tonejsSynth = new ToneDuoSynth(params);
+    public set(paramName: string, value: any): void {
+        switch (paramName) {
+            case "voice0":
+                setVoiceValues(this.tonejsSynth.voice0, value);
+                break;
+            case "voice1":
+                setVoiceValues(this.tonejsSynth.voice1, value);
+                break;
+            default:
+                super.set(paramName, value);
+        }
     }
 
+    protected init(params: IDuoSynthParams) {
+        this.tonejsSynth = new ToneDuoSynth(this.transformParams(params));
+    }
+
+    private transformParams(params: IDuoSynthParams): any {
+        const voice0 = transformVoice(params.voice0);
+        const voice1 = transformVoice(params.voice1);
+        const transformed = {
+            ...params,
+            voice0,
+            voice1,
+        };
+        return transformed;
+    }
+
+}
+
+function transformVoice(voiceParams: ISynthVoiceParams): any {
+    const transformed = {
+        ...voiceParams,
+        oscillator: {
+            type: voiceParams.type,
+        },
+    };
+    delete transformed.type;
+
+    return transformed;
+}
+
+function setVoiceValues(voice: any, values: any): void {
+    voice.oscillator.set("type", values.type);
+    voice.set("portamento", values.portamento);
+    voice.set("volume", values.volume);
+    voice.envelope.set(values.envelope);
+    voice.filterEnvelope.set(values.filterEnvelope);
 }

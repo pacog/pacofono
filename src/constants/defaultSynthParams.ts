@@ -22,7 +22,7 @@ export const defaultAMSynth: IAMSynthParams = {
         attack: 0.5,
         decay: 0,
         sustain: 1,
-        release: 0,
+        release: 0.5,
     },
 };
 

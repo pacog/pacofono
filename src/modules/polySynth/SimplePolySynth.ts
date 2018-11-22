@@ -9,8 +9,8 @@ export default class SimplePolySynth extends GenericPolySynth {
     }
 
     protected setSpecificParams() {
-        this.paramsThatTriggerRecreate = ["envelope", "type"];
-        this.paramsThatCanUpdate = [];
+        this.paramsThatTriggerRecreate = [];
+        this.paramsThatCanUpdate = ["type", "envelope"];
     }
 
 }

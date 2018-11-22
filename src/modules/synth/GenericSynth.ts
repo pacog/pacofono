@@ -8,8 +8,7 @@ export default abstract class GenericSynth {
         this.init(params);
     }
 
-    // TODO use a proper type
-    public connect(node: any) {
+    public connect(node: any) { // TODO use a proper type
         this.tonejsSynth.connect(node);
     }
 

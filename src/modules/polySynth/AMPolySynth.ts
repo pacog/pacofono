@@ -10,7 +10,7 @@ export default class AMPolySynth extends GenericPolySynth {
 
     protected setSpecificParams() {
         this.paramsThatTriggerRecreate = [];
-        this.paramsThatCanUpdate = [];
+        this.paramsThatCanUpdate = ["envelope", "harmonicity", "type", "modulationType", "modulationEnvelope"];
     }
 
 }
