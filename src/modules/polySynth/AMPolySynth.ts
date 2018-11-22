@@ -1,10 +1,10 @@
 import GenericPolySynth from "./genericPolySynth";
+import AMSynth from "../synth/AMSynth";
 import { IAMSynthParams } from "types";
-import { AMSynth } from "tone";
 
 export default class AMPolySynth extends GenericPolySynth {
 
-    protected getIndividualSynth(params: IAMSynthParams) {
+    protected getIndividualSynth(params: IAMSynthParams): AMSynth {
         return new AMSynth(params);
     }
 

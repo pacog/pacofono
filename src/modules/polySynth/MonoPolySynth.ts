@@ -1,5 +1,5 @@
 import GenericPolySynth from "./genericPolySynth";
-import { MonoSynth } from "tone";
+import MonoSynth from "../synth/MonoSynth";
 import { IMonoSynthParams } from "types";
 
 export default class MonoPolySynth extends GenericPolySynth {

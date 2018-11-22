@@ -3,13 +3,14 @@ import VolumeNode from "modules/soundNodes/volumeNode";
 import { INoteWithWeight, ISound, SynthParams } from "types";
 import { percentageToDecibels } from "utils/decibels";
 import isAttrEqual from "utils/isAttrEqual";
+import GenericSynth from "../synth/GenericSynth";
 
 // TODO: should probably inherit from GenericNode
 export default abstract class GenericPolySynth {
 
     protected numberOfVoices: number;
     protected output: any;
-    protected allSynths: any[];
+    protected allSynths: GenericSynth[];
     protected synthsPlaying: boolean[];
     protected config: ISound;
     protected paramsThatTriggerRecreate: string[] = [];
@@ -86,7 +87,7 @@ export default abstract class GenericPolySynth {
         this.config = newConfig;
     }
 
-    protected abstract getIndividualSynth(params: SynthParams): any;
+    protected abstract getIndividualSynth(params: SynthParams): GenericSynth;
     protected abstract setSpecificParams(): void;
 
     protected createSynths() {

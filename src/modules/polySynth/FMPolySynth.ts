@@ -1,5 +1,5 @@
 import GenericPolySynth from "./genericPolySynth";
-import { FMSynth } from "tone";
+import FMSynth from "../synth/FMSynth";
 import { IFMSynthParams } from "types";
 
 export default class FMPolySynth extends GenericPolySynth {
