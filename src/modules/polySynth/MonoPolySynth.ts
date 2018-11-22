@@ -10,7 +10,7 @@ export default class MonoPolySynth extends GenericPolySynth {
 
     protected setSpecificParams() {
         this.paramsThatTriggerRecreate = [];
-        this.paramsThatCanUpdate = [];
+        this.paramsThatCanUpdate = ["type", "filter", "filterEnvelope", "envelope"];
     }
 
 }
