@@ -1,5 +1,5 @@
 import { Store, AnyAction } from "redux";
-import { IChord, SynthTypes } from "types";
+import { IChord, ISound } from "types";
 import { IRootState } from "./reducers/root";
 import { getCurrentChords } from "store/selectors/currentSongPart";
 import { getVolume, isMuted } from "store/selectors/mainVolume";
@@ -9,7 +9,7 @@ import Observable from "utils/observable";
 export const currentChordsChangeObservable = new Observable<IChord[]>({ notifyOnSubscribe: true });
 export const mainVolumeChangeObservable = new Observable<number>({ notifyOnSubscribe: true });
 export const muteVolumeChangeObservable = new Observable<boolean>({ notifyOnSubscribe: true });
-export const synthTypeChangeObservable = new Observable<SynthTypes>({ notifyOnSubscribe: true });
+export const synthChangeObservable = new Observable<ISound>({ notifyOnSubscribe: true });
 
 export const init = (store: Store<IRootState, AnyAction>): void => {
 
@@ -54,14 +54,16 @@ function notifyMuteChangeIfNeeded(state: IRootState): void {
     }
 }
 
-let currentSynthType: SynthTypes;
+let lastSound: ISound;
 function notifySynthChangeIfNeeded(state: IRootState): void {
     const currentSound = getCurrentSound(state);
     if (!currentSound) {
         return;
     }
-    if (currentSound.synthType !== currentSynthType) {
-        currentSynthType = currentSound.synthType;
-        synthTypeChangeObservable.notify(currentSynthType);
+
+    if (lastSound !== currentSound) {
+        lastSound = currentSound;
+        synthChangeObservable.notify(currentSound);
     }
+
 }

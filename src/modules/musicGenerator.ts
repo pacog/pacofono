@@ -2,7 +2,7 @@
 import { IChord } from "types";
 import { log } from "utils/log";
 import { pointerStartObservable, pointerMoveObservable, pointerEndObservable } from "modules/inputManager";
-import { currentChordsChangeObservable, synthTypeChangeObservable } from "store/storeChanges";
+import { currentChordsChangeObservable, synthChangeObservable } from "store/storeChanges";
 import { getMaxNotesInChords } from "utils/chordUtils";
 import { NoteInterpolator } from "utils/noteInterpolator";
 import { normalizeNoteWeights } from "utils/noteWeightNormalizer";
@@ -46,7 +46,8 @@ export const init = () => {
         log("currentChords changed", currentChords);
     });
 
-    synthTypeChangeObservable.subscribe((newSynthType) => {
-        soundPlayer.changeSynthType(newSynthType);
+    synthChangeObservable.subscribe((newSynth) => {
+        log("newSynth", newSynth);
+        soundPlayer.updateSynth(newSynth);
     });
 };

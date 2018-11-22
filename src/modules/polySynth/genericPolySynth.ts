@@ -1,7 +1,8 @@
 import { Volume } from "tone";
 import VolumeNode from "modules/soundNodes/volumeNode";
-import { INoteWithWeight } from "types";
+import { INoteWithWeight, ISound, SynthParams } from "types";
 import { percentageToDecibels } from "utils/decibels";
+import isAttrEqual from "utils/isAttrEqual";
 
 // TODO: should probably inherit from GenericNode
 export default abstract class GenericPolySynth {
@@ -10,11 +11,16 @@ export default abstract class GenericPolySynth {
     protected output: any;
     protected allSynths: any[];
     protected synthsPlaying: boolean[];
+    protected config: ISound;
+    protected paramsThatTriggerRecreate: string[] = [];
+    protected paramsThatCanUpdate: string[] = [];
 
-    constructor(output: VolumeNode) {
+    constructor(output: VolumeNode, config: ISound) {
         this.createOutput(output);
         this.allSynths = [];
         this.synthsPlaying = [];
+        this.config = config;
+        this.setSpecificParams();
     }
 
     public setVolume(percentage: number): void {
@@ -57,18 +63,36 @@ export default abstract class GenericPolySynth {
         }
     }
 
+    public shouldRecreateSynths(newConfig: ISound): boolean {
+        if (this.config.synthType !== newConfig.synthType) {
+            return true;
+        }
+        return this.shouldRecreateSynthsBasedOnParams(this.config.params, newConfig.params);
+    }
+
     public destroy(): void {
         this.destroyCurrentSynths();
         this.output.dispose();
         this.output = null;
     }
 
-    protected abstract getIndividualSynth(): any;
+    public updateSynthsWithConfig(newConfig: ISound): void {
+        for (const paramName of this.paramsThatCanUpdate) {
+            if (!isAttrEqual(this.config.params, newConfig.params, paramName)) {
+                const paramValue = (newConfig.params as {[key: string]: any; })[paramName];
+                this.updateParamAndValueForAllSynths(paramName, paramValue);
+            }
+        }
+        this.config = newConfig;
+    }
+
+    protected abstract getIndividualSynth(params: SynthParams): any;
+    protected abstract setSpecificParams(): void;
 
     protected createSynths() {
         this.allSynths = [];
         for (let i = 0; i < this.numberOfVoices; i++) {
-            const newSynth = this.getIndividualSynth();
+            const newSynth = this.getIndividualSynth(this.config.params);
             newSynth.connect(this.output);
             this.allSynths.push(newSynth);
         }
@@ -104,6 +128,25 @@ export default abstract class GenericPolySynth {
             synth.triggerRelease();
             this.synthsPlaying[synthIndex] = false;
         }
+    }
+
+    private shouldRecreateSynthsBasedOnParams(oldParams: SynthParams, newParams: SynthParams): boolean {
+        for (const paramName of this.paramsThatTriggerRecreate) {
+            if (!isAttrEqual(oldParams, newParams, paramName)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private updateParamAndValueForAllSynths(paramName: string, paramValue: any): void {
+        if (!this.allSynths) {
+            return;
+        }
+        this.allSynths.forEach((synth) => {
+            synth.set(paramName, paramValue);
+        });
     }
 
 }

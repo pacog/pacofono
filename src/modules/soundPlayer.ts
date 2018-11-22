@@ -1,4 +1,4 @@
-import { SynthTypes } from "types";
+import { ISound } from "types";
 import { INoteWithWeight } from "types";
 // import { create as createSynth, PFPolySynth } from "modules/polySynth";
 import createSynth from "modules/polySynth/polySynthFactory";
@@ -39,13 +39,17 @@ export class SoundPlayer {
         }
     }
 
-    public changeSynthType(newType: SynthTypes) {
-        if (this.polySynth) {
-            this.polySynth.destroy();
+    public updateSynth(config: ISound) {
+        if (!config) {
+            if (this.polySynth) {
+                this.polySynth.destroy();
+            }
+            return;
         }
-        this.polySynth = createSynth(newType, this.masterOut);
-        if (this.numberOfVoices) {
-            this.polySynth.setNumberOfVoices(this.numberOfVoices);
+        if (!this.polySynth || this.polySynth.shouldRecreateSynths(config)) {
+            this.recreateSynth(config);
+        } else {
+            this.polySynth.updateSynthsWithConfig(config);
         }
     }
 
@@ -59,6 +63,16 @@ export class SoundPlayer {
     public destroy(): void {
         if (this.polySynth) {
             this.polySynth.destroy();
+        }
+    }
+
+    private recreateSynth(config: ISound) {
+        if (this.polySynth) {
+            this.polySynth.destroy();
+        }
+        this.polySynth = createSynth(config, this.masterOut);
+        if (this.numberOfVoices) {
+            this.polySynth.setNumberOfVoices(this.numberOfVoices);
         }
     }
 
