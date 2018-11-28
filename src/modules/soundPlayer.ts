@@ -1,6 +1,5 @@
 import { ISound } from "types";
 import { INoteWithWeight } from "types";
-// import { create as createSynth, PFPolySynth } from "modules/polySynth";
 import createSynth from "modules/polySynth/polySynthFactory";
 import GenericPolySynth from "modules/polySynth/genericPolySynth";
 import VolumeNode from "modules/soundNodes/volumeNode";
