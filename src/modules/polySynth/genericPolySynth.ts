@@ -5,6 +5,8 @@ import { percentageToDecibels } from "utils/decibels";
 import isAttrEqual from "utils/isAttrEqual";
 import GenericSynth from "../synth/GenericSynth";
 
+const RAMP_TIME_FOR_VOLUME = 0.02; // seconds
+
 // TODO: should probably inherit from GenericNode
 export default abstract class GenericPolySynth {
 
@@ -25,7 +27,7 @@ export default abstract class GenericPolySynth {
     }
 
     public setVolume(percentage: number): void {
-        this.output.set("volume", percentageToDecibels(percentage));
+        this.output.set("volume", percentageToDecibels(percentage), RAMP_TIME_FOR_VOLUME);
     }
 
     public startPlayingNotes(notes: INoteWithWeight[], velocity: number = 0.5): void {
