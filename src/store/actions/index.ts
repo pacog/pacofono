@@ -10,6 +10,7 @@ import { ICurrentSongPartActions } from "./currentSongPart";
 import { ISongSelectorActions } from "./songSelector";
 import { IMainVolumeActions } from "./mainVolume";
 import { IMainOptionsActions } from "./mainOptions";
+import { ILeapMotionStateActions } from "./leapMotionState";
 
 export type RootAction =
     | IMusicModeActions[keyof IMusicModeActions]
@@ -23,4 +24,5 @@ export type RootAction =
     | ICurrentSongPartActions[keyof ICurrentSongPartActions]
     | ISongSelectorActions[keyof ISongSelectorActions]
     | IMainVolumeActions[keyof IMainVolumeActions]
-    | IMainOptionsActions[keyof IMainOptionsActions];
+    | IMainOptionsActions[keyof IMainOptionsActions]
+    | ILeapMotionStateActions[keyof ILeapMotionStateActions];

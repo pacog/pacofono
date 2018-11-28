@@ -13,6 +13,7 @@ import { ICurrentSongPartState, currentSongPartReducer } from "./currentSongPart
 import { ISongSelectorState, songSelectorReducer } from "./songSelector";
 import { IMainVolumeState, mainVolumeReducer } from "./mainVolume";
 import { IMainOptionsState, mainOptionsReducer } from "./mainOptions";
+import { ILeapMotionState, leapMotionStateReducer } from "./leapMotionState";
 
 export interface IRootState {
     readonly sounds?: ISoundsState;
@@ -28,6 +29,7 @@ export interface IRootState {
     readonly songSelector?: ISongSelectorState;
     readonly mainVolume?: IMainVolumeState;
     readonly mainOptions?: IMainOptionsState;
+    readonly leapMotionState?: ILeapMotionState;
 }
 
 export const rootReducer = combineReducers<IRootState>({
@@ -44,4 +46,5 @@ export const rootReducer = combineReducers<IRootState>({
     songSelector: songSelectorReducer,
     mainVolume: mainVolumeReducer,
     mainOptions: mainOptionsReducer,
+    leapMotionState: leapMotionStateReducer,
 });

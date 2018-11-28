@@ -3,6 +3,7 @@ import Leap = require("leapjs");
 export const init = () => {
     const controller = new Leap.Controller();
     controller.connect();
+
     controller.on("blur", (event: any) => {
         console.log("blur", event);
     });
@@ -31,5 +32,11 @@ export const init = () => {
     controller.on("deviceStopped", (event: any) => {
         console.log("deviceStopped", event);
     });
+
+    controller.on("deviceStreaming", (event: any) => {
+        console.log("deviceStreaming", event);
+    });
+
+
 
 };
