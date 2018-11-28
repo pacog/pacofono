@@ -1,0 +1,40 @@
+@import "src/root-style/common";
+
+.leap-motion-status {
+    background-color: $transparent-dark-2;
+    padding: $g-s;
+    position: absolute;
+    top: $g-s;
+    left: $g-xl + $g-s;
+    border-radius: $g-sm;
+    z-index: 50;
+    color: $white;
+    font-size: 12px;
+}
+
+    .leap-motion-status-item {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: $g-s;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &:before {
+            content: '';
+            border-radius: 50%;
+            display: block;
+            height: $g-s;
+            width: $g-s;
+            margin-right: $g-xs;
+            background-color: $danger-3;
+        }
+    }
+
+    .leap-motion-status-connected {
+        &:before {
+            background-color: green;
+        }
+    }

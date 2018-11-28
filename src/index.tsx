@@ -11,7 +11,7 @@ import store from "./store";
 import MainScreenContainer from "containers/MainScreenContainer";
 
 initMusicGenerator();
-initLeapMotionManager();
+initLeapMotionManager(store);
 
 const render = () => {
     ReactDOM.render(

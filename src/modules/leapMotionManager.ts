@@ -1,42 +1,64 @@
 import Leap = require("leapjs");
+import { Store, AnyAction } from "redux";
+import { IRootState } from "store/reducers/root";
+import { actionCreators } from "store/actions/leapMotionState";
 
-export const init = () => {
-    const controller = new Leap.Controller();
-    controller.connect();
+export const init = (store: Store<IRootState, AnyAction>) => {
+    const leapController = new Leap.Controller();
+    startListening(leapController);
+    leapController.connect();
 
-    controller.on("blur", (event: any) => {
-        console.log("blur", event);
-    });
-    controller.on("connect", (event: any) => {
-        console.log("connect", event);
-    });
-    controller.on("deviceConnected", (event: any) => {
-        console.log("deviceConnected", event);
-    });
-    controller.on("deviceDisconnected", (event: any) => {
-        console.log("deviceDisconnected", event);
-    });
-    controller.on("disconnect", (event: any) => {
-        console.log("disconnect", event);
-    });
-    controller.on("focus", (event: any) => {
-        console.log("focus", event);
-    });
-    controller.on("frame", (event: any) => {
-        // console.log("frame", event);
-    });
-    controller.on("deviceRemoved", (event: any) => {
-        console.log("deviceRemoved", event);
-    });
+    let isConnected = false;
+    let isFocused = false;
 
-    controller.on("deviceStopped", (event: any) => {
-        console.log("deviceStopped", event);
-    });
+    function startListening(controller: any) {
+        controller.on("blur", () => {
+            notifyBlur();
+        });
+        controller.on("connect", () => {
+            notifyConnected();
+        });
+        controller.on("disconnect", () => {
+            notifyDisconnected();
+        });
+        controller.on("focus", () => {
+            notifyFocus();
+        });
+        controller.on("frame", (event: any) => {
+            // console.log("frame", event);
+        });
+    }
 
-    controller.on("deviceStreaming", (event: any) => {
-        console.log("deviceStreaming", event);
-    });
+    function notifyConnected() {
+        if (isConnected) {
+            return;
+        }
+        isConnected = true;
+        store.dispatch(actionCreators.setConnected(isConnected));
+    }
 
+    function notifyDisconnected() {
+        if (!isConnected) {
+            return;
+        }
+        isConnected = false;
+        store.dispatch(actionCreators.setConnected(isConnected));
+    }
 
+    function notifyFocus() {
+        if (isFocused) {
+            return;
+        }
+        isFocused = true;
+        store.dispatch(actionCreators.setFocused(isFocused));
+    }
+
+    function notifyBlur() {
+        if (!isFocused) {
+            return;
+        }
+        isFocused = false;
+        store.dispatch(actionCreators.setFocused(isFocused));
+    }
 
 };
