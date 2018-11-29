@@ -2,8 +2,10 @@ import Leap = require("leapjs");
 import { Store, AnyAction } from "redux";
 import { IRootState } from "store/reducers/root";
 import { actionCreators } from "store/actions/leapMotionState";
+import { notifyFrame as throttleNotifyFrame } from "./leapMotionFrameThrottle";
+import { parseFrame } from "./leapMotionFrameParser";
 
-export const init = (store: Store<IRootState, AnyAction>) => {
+export const init = (store: Store<IRootState, AnyAction>): void => {
     const leapController = new Leap.Controller();
     startListening(leapController);
     leapController.connect();
@@ -11,7 +13,7 @@ export const init = (store: Store<IRootState, AnyAction>) => {
     let isConnected = false;
     let isFocused = false;
 
-    function startListening(controller: any) {
+    function startListening(controller: any): void {
         controller.on("blur", () => {
             notifyBlur();
         });
@@ -24,12 +26,12 @@ export const init = (store: Store<IRootState, AnyAction>) => {
         controller.on("focus", () => {
             notifyFocus();
         });
-        controller.on("frame", (event: any) => {
-            // console.log("frame", event);
+        controller.on("frame", (frameInfo: any) => {
+            throttleNotifyFrame(frameInfo, notifyFrame);
         });
     }
 
-    function notifyConnected() {
+    function notifyConnected(): void {
         if (isConnected) {
             return;
         }
@@ -37,7 +39,7 @@ export const init = (store: Store<IRootState, AnyAction>) => {
         store.dispatch(actionCreators.setConnected(isConnected));
     }
 
-    function notifyDisconnected() {
+    function notifyDisconnected(): void {
         if (!isConnected) {
             return;
         }
@@ -45,7 +47,7 @@ export const init = (store: Store<IRootState, AnyAction>) => {
         store.dispatch(actionCreators.setConnected(isConnected));
     }
 
-    function notifyFocus() {
+    function notifyFocus(): void {
         if (isFocused) {
             return;
         }
@@ -53,12 +55,17 @@ export const init = (store: Store<IRootState, AnyAction>) => {
         store.dispatch(actionCreators.setFocused(isFocused));
     }
 
-    function notifyBlur() {
+    function notifyBlur(): void {
         if (!isFocused) {
             return;
         }
         isFocused = false;
         store.dispatch(actionCreators.setFocused(isFocused));
+    }
+
+    function notifyFrame(frameInfo: any): void {
+        console.log(parseFrame(frameInfo));
+        // console.log("notifyFrame", frameInfo);
     }
 
 };
