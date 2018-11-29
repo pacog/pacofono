@@ -1,0 +1,11 @@
+@import "src/root-style/common";
+
+.controller-params-display {
+    background: $transparent-dark-3;
+    border-radius: $g-sm;
+    padding: $g-sm;
+    pointer-events: none;
+    color: $white;
+    font-size: 12px;
+    margin-top: $g-sm;
+}

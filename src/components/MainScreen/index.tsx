@@ -10,6 +10,7 @@ import MainAudioOutput from "components/MainAudioOutput";
 import MainVolumeContainer from "containers/MainVolumeContainer";
 import CurrentSoundHUDContainer from "containers/CurrentSoundHUDContainer";
 import LeapMotionStatusContainer from "containers/LeapMotionStatusContainer";
+import ControllerParamsDisplayContainer from "containers/ControllerParamsDisplayContainer";
 
 import "./style.scss";
 
@@ -30,6 +31,7 @@ const MainScreen: React.SFC<IMainScreenProps> = (props: IMainScreenProps) => (
         <div className="main-screen-tools">
             { props.showSynthsDebugger && <SynthsDebugger /> }
             { props.showAudioOutput && <MainAudioOutput /> }
+            <ControllerParamsDisplayContainer />
         </div>
         <MainVolumeContainer />
         <CurrentSoundHUDContainer />
