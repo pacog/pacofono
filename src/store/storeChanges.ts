@@ -4,12 +4,14 @@ import { IRootState } from "./reducers/root";
 import { getCurrentChords } from "store/selectors/currentSongPart";
 import { getVolume, isMuted } from "store/selectors/mainVolume";
 import { getCurrentSound } from "store/selectors/currentSound";
+import { isConnected as isLeapConnected } from "store/selectors/leapMotionState";
 import Observable from "utils/observable";
 
 export const currentChordsChangeObservable = new Observable<IChord[]>({ notifyOnSubscribe: true });
 export const mainVolumeChangeObservable = new Observable<number>({ notifyOnSubscribe: true });
 export const muteVolumeChangeObservable = new Observable<boolean>({ notifyOnSubscribe: true });
 export const synthChangeObservable = new Observable<ISound>({ notifyOnSubscribe: true });
+export const leapMotionActiveObservable = new Observable<boolean>({ notifyOnSubscribe: true });
 
 export const init = (store: Store<IRootState, AnyAction>): void => {
 
@@ -25,6 +27,7 @@ function notifyAllIfNeeded(state: IRootState) {
     notifyVolumeChangeIfNeeded(state);
     notifyMuteChangeIfNeeded(state);
     notifySynthChangeIfNeeded(state);
+    notifyLeapMotionActiveIfNeeded(state);
 }
 
 let currentChords: IChord[];
@@ -65,5 +68,13 @@ function notifySynthChangeIfNeeded(state: IRootState): void {
         lastSound = currentSound;
         synthChangeObservable.notify(currentSound);
     }
+}
 
+let lastLeapActive: boolean;
+function notifyLeapMotionActiveIfNeeded(state: IRootState): void {
+    const newLeapActive = isLeapConnected(state);
+    if (newLeapActive !== lastLeapActive) {
+        lastLeapActive = newLeapActive;
+        leapMotionActiveObservable.notify(newLeapActive);
+    }
 }

@@ -1,7 +1,7 @@
 // Generates the music taking into account user input
 import { IChord } from "types";
 import { log } from "utils/log";
-import { pointerStartObservable, pointerMoveObservable, pointerEndObservable } from "modules/inputManager";
+import { inputActiveObservable, inputChangeObservable } from "modules/input/currentInput";
 import { currentChordsChangeObservable, synthChangeObservable } from "store/storeChanges";
 import { getMaxNotesInChords } from "utils/chordUtils";
 import { NoteInterpolator } from "utils/noteInterpolator";
@@ -14,30 +14,29 @@ const SNAP_FACTOR = 0.1;
 export const init = () => {
     const soundPlayer = new SoundPlayer(masterOutput);
     const noteInterpolator = new NoteInterpolator({ snapFactor: SNAP_FACTOR });
-    let isPointerActive = false;
     let currentChords: IChord[] = [];
+    let isPlaying = false;
 
-    pointerStartObservable.subscribe((where) => {
-        // TODO this should trigger a change in parameter, and parameters be connected to the sound, that will react
-        // or maybe use a class that connects all the inputs, listens to changes in sound config and notifies when a
-        // parameter is updated
-        isPointerActive = true;
-        soundPlayer.setVolume(where.y);
-        const notes = noteInterpolator.getNotesWithWeigthsFromChordsAndPosition(currentChords, where.x);
-        soundPlayer.startPlayingNotes(normalizeNoteWeights(notes), 1);
-    });
-
-    pointerMoveObservable.subscribe((where) => {
-        if (isPointerActive) {
-            soundPlayer.setVolume(where.y);
-            const notes = noteInterpolator.getNotesWithWeigthsFromChordsAndPosition(currentChords, where.x);
-            soundPlayer.updateFrequenciesBeingPlayed(normalizeNoteWeights(notes));
+    console.log(inputActiveObservable);
+    inputActiveObservable.subscribe((isActive) => {
+        if (!isActive && isPlaying) {
+            soundPlayer.stopPlaying();
+            isPlaying = false;
         }
     });
 
-    pointerEndObservable.subscribe(() => {
-        isPointerActive = false;
-        soundPlayer.stopPlaying();
+    inputChangeObservable.subscribe((frame) => {
+        if (!frame.isPlaying) {
+            return;
+        }
+        isPlaying = true;
+        soundPlayer.setVolume(frame.yRatio);
+        const notes = noteInterpolator.getNotesWithWeigthsFromChordsAndPosition(currentChords, frame.xRatio);
+        if (isPlaying) {
+            soundPlayer.updateFrequenciesBeingPlayed(normalizeNoteWeights(notes));
+        } else {
+            soundPlayer.startPlayingNotes(normalizeNoteWeights(notes), 1);
+        }
     });
 
     currentChordsChangeObservable.subscribe((newChords) => {

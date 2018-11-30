@@ -1,0 +1,52 @@
+import { IControllerFrame } from "types";
+import Observable from "utils/observable";
+import { onFrame as onLeapMotionFrame } from "modules/leapMotion/leapMotionFrameNotifier";
+import { leapMotionActiveObservable} from "store/storeChanges";
+
+export const inputActiveObservable = new Observable<boolean>();
+export const inputChangeObservable = new Observable<IControllerFrame>();
+
+leapMotionActiveObservable.subscribe(onLeapMotionChange);
+
+let onFrameUnsubscriber: () => void = null;
+let inputIsActive = false;
+
+function onLeapMotionChange(isActive: boolean) {
+    destroyCurrentInputManager();
+    if (isActive) {
+        createLeapMotionInputManager();
+    } else {
+        createPointerInputManager();
+    }
+}
+
+function destroyCurrentInputManager() {
+    if (onFrameUnsubscriber) {
+        onFrameUnsubscriber();
+        onFrameUnsubscriber = null;
+    }
+    if (inputIsActive) {
+        inputIsActive = false;
+        inputActiveObservable.notify(false);
+    }
+}
+
+function createLeapMotionInputManager() {
+    onFrameUnsubscriber = onLeapMotionFrame.subscribe(handleFrame);
+}
+
+function createPointerInputManager() {
+    // TODO
+}
+
+function handleFrame(newFrame: IControllerFrame): void {
+    updateInputActive(newFrame);
+    inputChangeObservable.notify(newFrame);
+}
+
+function updateInputActive(frame: IControllerFrame): void {
+    if (frame.isPlaying !== inputIsActive) {
+        inputIsActive = frame.isPlaying;
+        inputActiveObservable.notify(inputIsActive);
+    }
+}
