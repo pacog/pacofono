@@ -5,9 +5,8 @@ import "./style.scss";
 export interface IRealTimeValueGraphProps {
     width?: number;
     height?: number;
+    values: number[];
 }
-
-const VALUES = [0.1, 0.2, 1, 0.9, 0.8];
 
 class RealTimeValueGraph extends React.Component<IRealTimeValueGraphProps, {}> {
 
@@ -27,7 +26,7 @@ class RealTimeValueGraph extends React.Component<IRealTimeValueGraphProps, {}> {
                     className="real-time-value-graph-svg"
                     viewBox={ `0 0 ${this.props.width} ${this.props.height}`}>
                     <path
-                        d={ getPathFromValues(VALUES, this.props.width, this.props.height) }
+                        d={ getPathFromValues(this.props.values, this.props.width, this.props.height) }
                         stroke="green"
                         strokeWidth="1" />
                 </svg>

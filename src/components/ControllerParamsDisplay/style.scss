@@ -9,3 +9,19 @@
     font-size: 12px;
     margin-top: $g-sm;
 }
+
+    .controller-params-display-param {
+        margin-bottom: $g-s;
+        display: flex;
+        align-items: center;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+        .controller-params-display-param-name {
+            margin-right: $g-s;
+            min-width: $g-l;
+            text-align: right;
+        }

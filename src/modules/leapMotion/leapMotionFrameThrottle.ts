@@ -1,4 +1,4 @@
-const FPS = 1; // f/s
+const FPS = 24; // f/s
 const microsecondsInterval = 1000000 * (1 / FPS);
 
 let lastProcessedFrameMicroseconds: number = null;

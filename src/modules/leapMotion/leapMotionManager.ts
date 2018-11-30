@@ -4,6 +4,7 @@ import { IRootState } from "store/reducers/root";
 import { actionCreators } from "store/actions/leapMotionState";
 import { notifyFrame as throttleNotifyFrame } from "./leapMotionFrameThrottle";
 import { parseFrame } from "./leapMotionFrameParser";
+import { onFrame } from "./leapMotionFrameNotifier";
 
 export const init = (store: Store<IRootState, AnyAction>): void => {
     const leapController = new Leap.Controller();
@@ -64,8 +65,7 @@ export const init = (store: Store<IRootState, AnyAction>): void => {
     }
 
     function notifyFrame(frameInfo: any): void {
-        console.log(parseFrame(frameInfo));
-        // console.log("notifyFrame", frameInfo);
+        onFrame.notify(parseFrame(frameInfo));
     }
 
 };

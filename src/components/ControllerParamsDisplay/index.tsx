@@ -3,19 +3,35 @@ import * as React from "react";
 import "./style.scss";
 import RealTimeValueGraph from "components/RealTimeValueGraph";
 
-// interface IControllerParamsDisplayProps {
-//
-// }
+export interface IControllerParams {
+    id: string;
+    name: string;
+    values: number[];
+}
 
-const ControllerParamsDisplay: React.SFC<{}> = (props: {}) => (
+export interface IParamObject {
+    [paramKey: string]: IControllerParams;
+}
+
+interface IControllerParamsDisplayProps {
+    params: IParamObject;
+}
+
+export const ControllerParamsDisplay
+: React.SFC<IControllerParamsDisplayProps> = (props: IControllerParamsDisplayProps) => (
     <div className="controller-params-display">
-        Controller Params:
+        <div className="controller-params-display-title mb-sm">Leap Params:</div>
 
-        <div className="line-center">
-            <div>X: </div>
-            <RealTimeValueGraph />
-        </div>
+        { Object.keys(props.params)
+            .map((key) => props.params[key])
+            .map((param) => (
+                <div
+                    key={param.id}
+                    className="controller-params-display-param">
+                    <div className="controller-params-display-param-name">{param.name}:</div>
+                    <RealTimeValueGraph values={param.values}/>
+                </div>
+        ))}
+
     </div>
 );
-
-export default ControllerParamsDisplay;
