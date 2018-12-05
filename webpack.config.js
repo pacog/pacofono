@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+    mode: 'development',
     entry: "./src/index.tsx",
     output: {
         filename: "bundle.js",
@@ -87,5 +88,9 @@ module.exports = {
             { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
         ],
     },
+
+    performance: {
+        hints: false
+    }
 
 };
