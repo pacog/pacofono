@@ -67,10 +67,13 @@ export const init = (store: Store<IRootState, AnyAction>): void => {
         }
         isFocused = false;
         store.dispatch(actionCreators.setFocused(isFocused));
+        onFrame.notify(parseFrame(null));
     }
 
     function notifyFrame(frameInfo: any): void {
-        onFrame.notify(parseFrame(frameInfo));
+        if (isFocused) {
+            onFrame.notify(parseFrame(frameInfo));
+        }
     }
 
 };

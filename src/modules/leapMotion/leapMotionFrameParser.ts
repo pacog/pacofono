@@ -13,12 +13,12 @@ let lastUsedHand: string = null;
 
 export const parseFrame = (frame: any): IControllerFrame => {
     let frameInfoWithHands = {};
-    if (frame.hands.length) {
+    if (frame && frame.hands.length) {
         frameInfoWithHands = getFrameInfoWithHands(frame);
     }
     return {
         ...EMPTY_FRAME,
-        timestamp: frame.timestamp,
+        timestamp: frame ? frame.timestamp : undefined,
         ...frameInfoWithHands,
     };
 };
