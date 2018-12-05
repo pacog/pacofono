@@ -17,7 +17,6 @@ export const init = () => {
     let currentChords: IChord[] = [];
     let isPlaying = false;
 
-    console.log(inputActiveObservable);
     inputActiveObservable.subscribe((isActive) => {
         if (!isActive && isPlaying) {
             soundPlayer.stopPlaying();
