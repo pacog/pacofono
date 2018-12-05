@@ -52,7 +52,7 @@ const throttleComponent = <P extends object, ChangeValueType>(
         }
 
         public render() {
-            const { ...props } = this.props as IThrottledProps;
+            const { ...props } = this.props as any;
             props[handlerName] = (value: ChangeValueType) => this.onValueChangeBeforeThrottle(value);
             props[valueName] = this.state.currentValue;
             return <Component {...props } />;
