@@ -4,12 +4,13 @@ import { onFrame as onLeapMotionFrame } from "modules/leapMotion/leapMotionFrame
 import { onFrame as onPointerFrame } from "modules/input/pointerInputManager";
 import { leapMotionActiveObservable} from "store/storeChanges";
 
+let onFrameUnsubscriber: () => void = null;
+
 export const inputActiveObservable = new Observable<boolean>();
 export const inputChangeObservable = new Observable<IControllerFrame>();
 
 leapMotionActiveObservable.subscribe(onLeapMotionChange);
 
-let onFrameUnsubscriber: () => void = null;
 let inputIsActive = false;
 
 function onLeapMotionChange(isActive: boolean) {
