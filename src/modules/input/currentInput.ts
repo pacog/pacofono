@@ -1,6 +1,7 @@
 import { IControllerFrame } from "types";
 import Observable from "utils/observable";
 import { onFrame as onLeapMotionFrame } from "modules/leapMotion/leapMotionFrameNotifier";
+import { onFrame as onPointerFrame } from "modules/input/pointerInputManager";
 import { leapMotionActiveObservable} from "store/storeChanges";
 
 export const inputActiveObservable = new Observable<boolean>();
@@ -36,7 +37,7 @@ function createLeapMotionInputManager() {
 }
 
 function createPointerInputManager() {
-    // TODO
+    onFrameUnsubscriber = onPointerFrame.subscribe(handleFrame);
 }
 
 function handleFrame(newFrame: IControllerFrame): void {

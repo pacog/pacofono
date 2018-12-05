@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 // import { ThunkDispatch } from "redux-thunk";
 import { IPointRatio } from "types";
 import { IRootState } from "store/reducers/root";
-import { pointerStartObservable, pointerMoveObservable, pointerEndObservable } from "modules/inputManager";
+import { pointerStartObservable, pointerMoveObservable, pointerEndObservable } from "modules/input/pointerInputManager";
 import { getCurrentChords } from "store/selectors/currentSongPart";
 import PointerInputManager from "components/PointerInputManager";
 
