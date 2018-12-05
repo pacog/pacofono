@@ -5,6 +5,7 @@ import { actionCreators } from "store/actions/leapMotionState";
 import { notifyFrame as throttleNotifyFrame } from "./leapMotionFrameThrottle";
 import { parseFrame } from "./leapMotionFrameParser";
 import { onFrame } from "./leapMotionFrameNotifier";
+import { log } from "utils/log";
 
 export const init = (store: Store<IRootState, AnyAction>): void => {
     const leapController = new Leap.Controller();
@@ -16,15 +17,19 @@ export const init = (store: Store<IRootState, AnyAction>): void => {
 
     function startListening(controller: any): void {
         controller.on("blur", () => {
+            log("leapMotionManager:blur");
             notifyBlur();
         });
-        controller.on("connect", () => {
+        controller.on("streamingStarted", () => {
+            log("leapMotionManager:streamingStarted");
             notifyConnected();
         });
-        controller.on("disconnect", () => {
+        controller.on("streamingStopped", () => {
+            log("leapMotionManager:streamingStopped");
             notifyDisconnected();
         });
         controller.on("focus", () => {
+            log("leapMotionManager:focus");
             notifyFocus();
         });
         controller.on("frame", (frameInfo: any) => {
