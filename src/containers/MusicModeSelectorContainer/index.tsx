@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { RootAction } from "store/actions";
 import { Dispatch } from "redux";
 import songIcon from "icons/song.svg";
-import MdLinearScale from "react-icons/md/linear-scale";
+// import MdLinearScale from "react-icons/md/linear-scale";
 
 import { SONG, SCALE } from "constants/musicModes";
 
@@ -56,7 +56,7 @@ const MusicModeSelector: React.SFC<IMusicModeSelectorProps> = ({
             <ToggleWithIcon selected={currentMusicMode === SCALE}
                             onSelect={() => changeMusicMode(SCALE)}
             >
-                <MdLinearScale />
+                {/* <MdLinearScale /> */}
             </ToggleWithIcon>
             {
                 (currentMusicMode === SCALE) &&
