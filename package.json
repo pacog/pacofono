@@ -22,6 +22,7 @@
   "homepage": "https://github.com/pacog/pacofono#readme",
   "dependencies": {
     "@types/react-dom": "^16.0.6",
+    "@types/three": "^0.93.11",
     "@types/uuid": "^3.4.3",
     "classnames": "^2.2.6",
     "leapjs": "^0.6.4",
@@ -35,6 +36,7 @@
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^3.0.1",
+    "three": "^0.99.0",
     "tone": "^0.12.80",
     "uuid": "^3.3.2"
   },
