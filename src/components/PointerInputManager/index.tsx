@@ -1,12 +1,12 @@
 import * as React from "react";
-import { IChord, IPointRatio, IPoint } from "types";
+import { IChord, IPoint2DRatio, IPoint2D } from "types";
 import supportsTouch from "utils/supportsTouch";
 import "./style.scss";
 
 interface IPointerInputManagerProps {
     chords: IChord[];
-    onPointStart: (where: IPointRatio) => void;
-    onPointerMove: (position: IPointRatio) => void;
+    onPointStart: (where: IPoint2DRatio) => void;
+    onPointerMove: (position: IPoint2DRatio) => void;
     onPointEnd: () => void;
 }
 
@@ -88,7 +88,7 @@ const PointerInputManager: React.SFC<IPointerInputManagerProps> = (props: IPoint
     </div>
 );
 
-function getRatioFromBoxAndCoordinates(box: DOMRect, point: IPoint): IPointRatio {
+function getRatioFromBoxAndCoordinates(box: DOMRect, point: IPoint2D): IPoint2DRatio {
     return {
         x: (point.x - box.x) / box.width,
         y: 1 - (point.y - box.y) / box.height,

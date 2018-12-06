@@ -30,6 +30,8 @@ export default class FMSynth extends GenericSynth {
     private transformParams(params: IFMSynthParams): any {
         const transformed = {
             ...params,
+            // TODO: we should have a list of params being controlled, and check that, use the calculated value
+            harmonicity: params.harmonicity.defaultValue,
             oscillator: {
                 type: params.type,
             },

@@ -6,7 +6,9 @@ import {
     ISimpleSynthParams,
     WaveTypes,
     FilterTypes,
+    ControllerParams,
 } from "types/index";
+import DEFAULT_CONTROL_POINTS from "./defaultInputTransformControlPoints";
 
 export const defaultAMSynth: IAMSynthParams = {
     harmonicity : 3,
@@ -27,7 +29,11 @@ export const defaultAMSynth: IAMSynthParams = {
 };
 
 export const defaultFMSynth: IFMSynthParams = {
-    harmonicity: 3,
+    harmonicity: {
+        defaultValue: 3,
+        controllerParam: ControllerParams.none,
+        inputTransformControlPoints: DEFAULT_CONTROL_POINTS,
+    },
     modulationIndex: 10,
     type: WaveTypes.Sine,
     envelope: {

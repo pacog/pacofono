@@ -3,6 +3,7 @@ import { ISound, IFMSynthParams } from "types";
 import FieldWithLabel from "components/FieldWithLabel";
 import WaveTypeSelector from "components/WaveTypeSelector";
 import SliderWithInput from "components/SliderWithInput";
+import ControllableParamEditor from "components/ControllableParamEditor";
 import EnvelopeEditor from "components/EnvelopeEditor";
 import "./fm-synth-style.scss";
 
@@ -66,13 +67,11 @@ class FMSynthEditor extends React.Component<IFMSynthEditorProps, {}> {
                     </FieldWithLabel>
 
                     <FieldWithLabel label="Harmonicity">
-                        <SliderWithInput
+                        <ControllableParamEditor
                             value={ this.getParams().harmonicity }
                             onChange={ (newVal) => {
                                 this.props.onParamChange("harmonicity", newVal);
                             } }
-                            min={0}
-                            max={24}
                         />
                     </FieldWithLabel>
                 </div>

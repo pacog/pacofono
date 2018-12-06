@@ -1,10 +1,10 @@
 // Receives all notifications of user input (mouse, touch, Leap) and lets other services subscribe to them
-import { IPointRatio } from "types";
+import { IPoint2DRatio } from "types";
 import Observable from "utils/observable";
 import { IControllerFrame } from "types";
 
-export const pointerStartObservable = new Observable<IPointRatio>();
-export const pointerMoveObservable = new Observable<IPointRatio>();
+export const pointerStartObservable = new Observable<IPoint2DRatio>();
+export const pointerMoveObservable = new Observable<IPoint2DRatio>();
 export const pointerEndObservable = new Observable<boolean>();
 
 export const onFrame = new Observable<IControllerFrame>({ notifyOnSubscribe: false });
@@ -18,12 +18,12 @@ const DEFAULT_EMPTY_FRAME: IControllerFrame = {
 };
 let isPlaying: boolean = false;
 
-pointerStartObservable.subscribe((point: IPointRatio) => {
+pointerStartObservable.subscribe((point: IPoint2DRatio) => {
     isPlaying = true;
     notifyFrame(point);
 });
 
-pointerMoveObservable.subscribe((point: IPointRatio) => {
+pointerMoveObservable.subscribe((point: IPoint2DRatio) => {
     notifyFrame(point);
 });
 
@@ -32,7 +32,7 @@ pointerEndObservable.subscribe(() => {
     notifyFrame(null);
 });
 
-function notifyFrame(point: IPointRatio): void {
+function notifyFrame(point: IPoint2DRatio): void {
     if (point) {
         onFrame.notify({
             timestamp: window.performance.now(),
