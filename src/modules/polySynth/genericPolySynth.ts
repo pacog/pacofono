@@ -22,6 +22,7 @@ export default abstract class GenericPolySynth {
         this.allSynths = [];
         this.synthsPlaying = [];
         this.params = params;
+        this.type = type;
         this.setSpecificParams();
     }
 
