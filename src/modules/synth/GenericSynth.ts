@@ -13,13 +13,7 @@ export default abstract class GenericSynth {
     }
 
     public set(paramName: string, value: any): void {
-        // TODO: we should have a list of params being controlled, and check that
-        const TYPES_THAT_CAN_BE_SET = ["number", "string"];
-        if (TYPES_THAT_CAN_BE_SET.indexOf(typeof value) !== -1) {
-            this.tonejsSynth.set(paramName, value);
-        } else {
-            console.log("setting other param");
-        }
+        this.tonejsSynth.set(paramName, value);
     }
 
     public triggerAttack(frequency: number, time: number, velocity: number = 1) {
