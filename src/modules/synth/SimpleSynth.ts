@@ -1,6 +1,6 @@
 import GenericSynth from "./GenericSynth";
 import { Synth } from "tone";
-import { ISimpleSynthParams } from "types";
+import { IRawSimpleSynthParams } from "types";
 
 export default class SimpleSynth extends GenericSynth {
 
@@ -17,11 +17,15 @@ export default class SimpleSynth extends GenericSynth {
         }
     }
 
-    protected init(params: ISimpleSynthParams) {
+    protected init(params: IRawSimpleSynthParams) {
         this.tonejsSynth = new Synth(this.transformParams(params));
     }
 
-    private transformParams(params: ISimpleSynthParams): any {
+    protected getControlledParamsNames(): string[] {
+        return [];
+    }
+
+    private transformParams(params: IRawSimpleSynthParams): any {
         return {
             oscillator: {
                 type: params.type,

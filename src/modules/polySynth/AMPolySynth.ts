@@ -1,15 +1,14 @@
 import GenericPolySynth from "./genericPolySynth";
 import AMSynth from "../synth/AMSynth";
-import { IAMSynthParams } from "types";
+import { IRawAMSynthParams } from "types";
 
 export default class AMPolySynth extends GenericPolySynth {
 
-    protected getIndividualSynth(params: IAMSynthParams): AMSynth {
+    protected getIndividualSynth(params: IRawAMSynthParams): AMSynth {
         return new AMSynth(params);
     }
 
     protected setSpecificParams() {
-        this.paramsThatTriggerRecreate = [];
         this.paramsThatCanUpdate = ["envelope", "harmonicity", "type", "modulationType", "modulationEnvelope"];
     }
 

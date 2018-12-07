@@ -1,6 +1,6 @@
+import { AMSynth as ToneAMSynth } from "tone";
+import { IRawAMSynthParams } from "types";
 import GenericSynth from "./GenericSynth";
-import { AMSynth as ToneAMSynth} from "tone";
-import { IAMSynthParams } from "types";
 
 export default class AMSynth extends GenericSynth {
 
@@ -23,11 +23,15 @@ export default class AMSynth extends GenericSynth {
         }
     }
 
-    protected init(params: IAMSynthParams) {
+    protected init(params: IRawAMSynthParams) {
         this.tonejsSynth = new ToneAMSynth(this.transformParams(params));
     }
 
-    private transformParams(params: IAMSynthParams): any {
+    protected getControlledParamsNames(): string[] {
+        return [];
+    }
+
+    private transformParams(params: IRawAMSynthParams): any {
         const transformed = {
             ...params,
             oscillator: {

@@ -1,6 +1,6 @@
 import GenericSynth from "./GenericSynth";
 import { DuoSynth as ToneDuoSynth} from "tone";
-import { IDuoSynthParams, ISynthVoiceParams } from "types";
+import { IRawDuoSynthParams, ISynthVoiceParams } from "types";
 
 export default class DuoSynth extends GenericSynth {
 
@@ -17,11 +17,15 @@ export default class DuoSynth extends GenericSynth {
         }
     }
 
-    protected init(params: IDuoSynthParams) {
+    protected init(params: IRawDuoSynthParams) {
         this.tonejsSynth = new ToneDuoSynth(this.transformParams(params));
     }
 
-    private transformParams(params: IDuoSynthParams): any {
+    protected getControlledParamsNames(): string[] {
+        return [];
+    }
+
+    private transformParams(params: IRawDuoSynthParams): any {
         const voice0 = transformVoice(params.voice0);
         const voice1 = transformVoice(params.voice1);
         const transformed = {

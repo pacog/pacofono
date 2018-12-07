@@ -30,6 +30,14 @@ export interface IAMSynthParams {
     harmonicity: number;
 }
 
+export interface IRawAMSynthParams {
+    envelope?: IEnvelope;
+    type?: WaveTypes;
+    modulationType?: WaveTypes;
+    modulationEnvelope?: IEnvelope;
+    harmonicity?: number;
+}
+
 export interface IFMSynthParams {
     envelope: IEnvelope;
     type: WaveTypes;
@@ -37,6 +45,15 @@ export interface IFMSynthParams {
     modulationEnvelope: IEnvelope;
     modulationIndex: number;
     harmonicity: IControllableParam;
+}
+
+export interface IRawFMSynthParams {
+    envelope?: IEnvelope;
+    type?: WaveTypes;
+    modulationType?: WaveTypes;
+    modulationEnvelope?: IEnvelope;
+    modulationIndex?: number;
+    harmonicity?: number;
 }
 
 export interface ISynthVoiceParams {
@@ -53,6 +70,14 @@ export interface IDuoSynthParams {
     harmonicity: number;
     voice0: ISynthVoiceParams;
     voice1: ISynthVoiceParams;
+}
+
+export interface IRawDuoSynthParams {
+    vibratoAmount?: number;
+    vibratoRate?: number;
+    harmonicity?: number;
+    voice0?: ISynthVoiceParams;
+    voice1?: ISynthVoiceParams;
 }
 
 export enum FilterTypes {
@@ -91,12 +116,26 @@ export interface IMonoSynthParams {
     envelope: IEnvelope;
 }
 
+export interface IRawMonoSynthParams {
+    type?: WaveTypes;
+    filter?: IFilter;
+    filterEnvelope?: IFilterEnvelope;
+    envelope?: IEnvelope;
+}
+
 export interface ISimpleSynthParams {
     type: WaveTypes;
     envelope: IEnvelope;
 }
 
+export interface IRawSimpleSynthParams {
+    type?: WaveTypes;
+    envelope?: IEnvelope;
+}
+
 export type SynthParams = IAMSynthParams | IFMSynthParams | IDuoSynthParams | IMonoSynthParams | ISimpleSynthParams;
+export type RawSynthParams = IRawAMSynthParams | IRawFMSynthParams | IRawDuoSynthParams |
+    IRawMonoSynthParams | IRawSimpleSynthParams;
 
 export interface ISound {
     id: string;
@@ -104,3 +143,5 @@ export interface ISound {
     synthType: SynthTypes;
     params: SynthParams;
 }
+
+

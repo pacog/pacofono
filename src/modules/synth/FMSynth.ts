@@ -1,6 +1,6 @@
 import GenericSynth from "./GenericSynth";
 import { FMSynth as ToneFMSynth} from "tone";
-import { IFMSynthParams } from "types";
+import { IRawFMSynthParams } from "types";
 
 export default class FMSynth extends GenericSynth {
 
@@ -23,15 +23,17 @@ export default class FMSynth extends GenericSynth {
         }
     }
 
-    protected init(params: IFMSynthParams) {
+    protected init(params: IRawFMSynthParams) {
         this.tonejsSynth = new ToneFMSynth(this.transformParams(params));
     }
 
-    private transformParams(params: IFMSynthParams): any {
+    protected getControlledParamsNames(): string[] {
+        return ["harmonicity"];
+    }
+
+    private transformParams(params: IRawFMSynthParams): any {
         const transformed = {
             ...params,
-            // TODO: we should have a list of params being controlled, and check that, use the calculated value
-            harmonicity: params.harmonicity.defaultValue,
             oscillator: {
                 type: params.type,
             },

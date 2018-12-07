@@ -1,11 +1,10 @@
-import { SynthParams } from "types";
+import { RawSynthParams } from "types";
 
 export default abstract class GenericSynth {
 
     protected tonejsSynth: any;
 
-    constructor(params: SynthParams) {
-        // Should store here the arams being controlled so we can update values
+    constructor(params: RawSynthParams) {
         this.init(params);
     }
 
@@ -35,6 +34,7 @@ export default abstract class GenericSynth {
         this.tonejsSynth.dispose();
     }
 
-    protected abstract init(params: SynthParams): void;
+    protected abstract init(params: RawSynthParams): void;
+    protected abstract getControlledParamsNames(): string[];
 
 }

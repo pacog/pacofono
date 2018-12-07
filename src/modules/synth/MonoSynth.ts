@@ -1,6 +1,6 @@
 import GenericSynth from "./GenericSynth";
 import { MonoSynth as ToneMonoSynth} from "tone";
-import { IMonoSynthParams } from "types";
+import { IRawMonoSynthParams } from "types";
 
 export default class MonoSynth extends GenericSynth {
 
@@ -23,11 +23,15 @@ export default class MonoSynth extends GenericSynth {
         }
     }
 
-    protected init(params: IMonoSynthParams) {
+    protected init(params: IRawMonoSynthParams) {
         this.tonejsSynth = new ToneMonoSynth(this.transformParams(params));
     }
 
-    private transformParams(params: IMonoSynthParams): any {
+    protected getControlledParamsNames(): string[] {
+        return [];
+    }
+
+    private transformParams(params: IRawMonoSynthParams): any {
         const transformed = {
             ...params,
             oscillator: {

@@ -3,6 +3,7 @@ import { INoteWithWeight } from "types";
 import createSynth from "modules/polySynth/polySynthFactory";
 import GenericPolySynth from "modules/polySynth/genericPolySynth";
 import VolumeNode from "modules/soundNodes/volumeNode";
+import { getRawParamsFromConfig } from "modules/synthParamsProcessor";
 
 export class SoundPlayer {
 
@@ -40,15 +41,18 @@ export class SoundPlayer {
 
     public updateSynth(config: ISound) {
         if (!config) {
-            if (this.polySynth) {
-                this.polySynth.destroy();
-            }
+            this.destroyCurrentSynth();
             return;
         }
-        if (!this.polySynth || this.polySynth.shouldRecreateSynths(config)) {
-            this.recreateSynth(config);
+
+        if (this.polySynth && (config.synthType !== this.polySynth.getType())) {
+            this.destroyCurrentSynth();
+        }
+
+        if (this.polySynth) {
+            this.polySynth.updateSynthsWithParams(getRawParamsFromConfig(config));
         } else {
-            this.polySynth.updateSynthsWithConfig(config);
+            this.createSynth(config);
         }
     }
 
@@ -60,18 +64,20 @@ export class SoundPlayer {
     }
 
     public destroy(): void {
-        if (this.polySynth) {
-            this.polySynth.destroy();
+        this.destroyCurrentSynth();
+    }
+
+    private createSynth(config: ISound) {
+        this.polySynth = createSynth(config.synthType, getRawParamsFromConfig(config), this.masterOut);
+        if (this.numberOfVoices) {
+            this.polySynth.setNumberOfVoices(this.numberOfVoices);
         }
     }
 
-    private recreateSynth(config: ISound) {
+    private destroyCurrentSynth(): void {
         if (this.polySynth) {
             this.polySynth.destroy();
-        }
-        this.polySynth = createSynth(config, this.masterOut);
-        if (this.numberOfVoices) {
-            this.polySynth.setNumberOfVoices(this.numberOfVoices);
+            this.polySynth = null;
         }
     }
 
