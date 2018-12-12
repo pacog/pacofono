@@ -1,4 +1,4 @@
-import GenericPolySynth from "./genericPolySynth";
+import GenericPolySynth from "./GenericPolySynth";
 import DuoSynth from "../synth/DuoSynth";
 import { IRawDuoSynthParams } from "types";
 

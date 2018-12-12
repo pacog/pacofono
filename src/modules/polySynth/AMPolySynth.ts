@@ -1,4 +1,4 @@
-import GenericPolySynth from "./genericPolySynth";
+import GenericPolySynth from "./GenericPolySynth";
 import AMSynth from "../synth/AMSynth";
 import { IRawAMSynthParams } from "types";
 

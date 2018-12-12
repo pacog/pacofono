@@ -3,7 +3,7 @@ import { SynthTypes, RawSynthParams } from "types";
 import AMPolySynth from "./AMPolySynth";
 import DuoPolySynth from "./DuoPolySynth";
 import FMPolySynth from "./FMPolySynth";
-import GenericPolySynth from "./genericPolySynth";
+import GenericPolySynth from "./GenericPolySynth";
 import MonoPolySynth from "./MonoPolySynth";
 import SimplePolySynth from "./SimplePolySynth";
 

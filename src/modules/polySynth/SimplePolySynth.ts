@@ -1,4 +1,4 @@
-import GenericPolySynth from "./genericPolySynth";
+import GenericPolySynth from "./GenericPolySynth";
 import SimpleSynth from "../synth/SimpleSynth";
 import { IRawSimpleSynthParams } from "types";
 

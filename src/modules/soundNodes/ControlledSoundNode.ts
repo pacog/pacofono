@@ -1,16 +1,24 @@
-import { ISound, INoteWithWeight, RawSynthParams } from "types";
+import {
+    ISound,
+    INoteWithWeight,
+    RawSynthParams,
+    IControllerFrame,
+    isControllableParam,
+    IControllableParam,
+} from "types";
 import GenericSoundNode from "./GenericSoundNode";
 import EmptySoundNode from "./EmptySoundNode";
+import getControllableParamValue from "modules/getControllableParamValue";
 
 export default class ControlledSoundNode extends GenericSoundNode {
 
     private node: GenericSoundNode;
-    // private config: ISound;
+    private config: ISound;
 
     constructor(node: GenericSoundNode, config: ISound) {
         super();
         this.node = node;
-        // this.config = config;
+        this.config = config;
 
         if (!this.node) {
             this.node = new EmptySoundNode();
@@ -43,6 +51,30 @@ export default class ControlledSoundNode extends GenericSoundNode {
 
     public updateWithParams(newParams: RawSynthParams): void {
         this.node.updateWithParams(newParams);
+    }
+
+    public notifyControllerFrame(frame: IControllerFrame): void {
+        interface IControllableParamWithName {
+            name: string;
+            param: IControllableParam;
+        }
+        const controllableParams: IControllableParamWithName[] = Object.keys(this.config.params)
+            .map((paramName) => {
+                const paramValue = (this.config.params as any)[paramName];
+                return {
+                    param: paramValue,
+                    name: paramName,
+                };
+            })
+            .filter((paramWithName) => isControllableParam(paramWithName.param));
+
+        const paramsToSet: RawSynthParams = controllableParams.reduce((accumulator, currentParam): RawSynthParams => {
+            return {
+                [currentParam.name]: getControllableParamValue(currentParam.param, frame),
+                ...accumulator,
+            };
+        }, {});
+        console.log("gettingFrame", paramsToSet);
     }
 
     public destroy(): void {

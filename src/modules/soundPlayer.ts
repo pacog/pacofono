@@ -43,6 +43,7 @@ export class SoundPlayer {
 
     public notifyControllerFrame(frame: IControllerFrame): void {
         this.setVolume(frame.yRatio);
+        this.soundSource.notifyControllerFrame(frame);
     }
 
     public setNumberOfVoices(numberOfVoices: number): void {
