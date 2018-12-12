@@ -54,23 +54,13 @@ export default class ControlledSoundNode extends GenericSoundNode {
     }
 
     public notifyControllerFrame(frame: IControllerFrame): void {
-        interface IControllableParamWithName {
-            name: string;
-            param: IControllableParam;
-        }
-        const controllableParams: IControllableParamWithName[] = Object.keys(this.config.params)
-            .map((paramName) => {
-                const paramValue = (this.config.params as any)[paramName];
-                return {
-                    param: paramValue,
-                    name: paramName,
-                };
-            })
-            .filter((paramWithName) => isControllableParam(paramWithName.param));
+        const controllableParams: IControllableParam[] = Object.keys(this.config.params)
+            .map((paramName) => (this.config.params as any)[paramName])
+            .filter((paramWithName) => isControllableParam(paramWithName));
 
         const paramsToSet: RawSynthParams = controllableParams.reduce((accumulator, currentParam): RawSynthParams => {
             return {
-                [currentParam.name]: getControllableParamValue(currentParam.param, frame),
+                [currentParam.name]: getControllableParamValue(currentParam, frame),
                 ...accumulator,
             };
         }, {});

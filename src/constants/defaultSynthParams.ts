@@ -30,6 +30,7 @@ export const defaultAMSynth: IAMSynthParams = {
 
 export const defaultFMSynth: IFMSynthParams = {
     harmonicity: {
+        name: "harmonicity",
         defaultValue: 3,
         controllerParam: ControllerParams.none,
         inputTransformControlPoints: DEFAULT_CONTROL_POINTS,

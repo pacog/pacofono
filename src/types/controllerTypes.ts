@@ -8,6 +8,7 @@ export enum ControllerParams {
 export type ControlPoints = number[];
 
 export interface IControllableParam {
+    name: string;
     defaultValue: number;
     controllerParam: ControllerParams;
     inputTransformControlPoints: ControlPoints;
