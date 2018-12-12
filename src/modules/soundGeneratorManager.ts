@@ -7,7 +7,7 @@ import { getMaxNotesInChords } from "utils/chordUtils";
 import { NoteInterpolator } from "utils/noteInterpolator";
 import { normalizeNoteWeights } from "utils/noteWeightNormalizer";
 import { masterOutput } from "modules/masterOutput";
-import { SoundPlayer } from "modules/soundPlayer";
+import { SoundPlayer } from "modules/SoundPlayer";
 
 const SNAP_FACTOR = 0.1;
 
@@ -28,14 +28,17 @@ export const init = () => {
         if (!frame.isPlaying) {
             return;
         }
-        isPlaying = true;
-        soundPlayer.setVolume(frame.yRatio);
+
+        // TODO: all this should be handled inside the sound player itself
+        soundPlayer.notifyControllerFrame(frame);
         const notes = noteInterpolator.getNotesWithWeigthsFromChordsAndPosition(currentChords, frame.xRatio);
         if (isPlaying) {
             soundPlayer.updateFrequenciesBeingPlayed(normalizeNoteWeights(notes));
         } else {
             soundPlayer.startPlayingNotes(normalizeNoteWeights(notes), 1);
         }
+
+        isPlaying = true;
     });
 
     currentChordsChangeObservable.subscribe((newChords) => {
@@ -46,6 +49,6 @@ export const init = () => {
 
     synthChangeObservable.subscribe((newSynth) => {
         log("newSynth", newSynth);
-        soundPlayer.updateSynth(newSynth);
+        soundPlayer.updateConfig(newSynth);
     });
 };

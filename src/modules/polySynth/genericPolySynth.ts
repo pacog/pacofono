@@ -1,13 +1,14 @@
 import { Volume } from "tone";
 import VolumeNode from "modules/soundNodes/volumeNode";
-import { INoteWithWeight, RawSynthParams, SynthTypes } from "types";
+import { INoteWithWeight, RawSynthParams, SynthTypes, ISound } from "types";
 import { percentageToDecibels } from "utils/decibels";
 import isAttrEqual from "utils/isAttrEqual";
+import GenericSoundNode from "../soundNodes/GenericSoundNode";
 import GenericSynth from "../synth/GenericSynth";
 
 const RAMP_TIME_FOR_VOLUME = 0.02; // seconds
 
-export default abstract class GenericPolySynth {
+export default abstract class GenericPolySynth extends GenericSoundNode {
 
     protected numberOfVoices: number;
     protected output: any;
@@ -18,6 +19,7 @@ export default abstract class GenericPolySynth {
     private type: SynthTypes = null;
 
     constructor(output: VolumeNode, type: SynthTypes, params: RawSynthParams) {
+        super();
         this.createOutput(output);
         this.allSynths = [];
         this.synthsPlaying = [];
@@ -76,7 +78,7 @@ export default abstract class GenericPolySynth {
         this.output = null;
     }
 
-    public updateSynthsWithParams(newParams: RawSynthParams): void {
+    public updateWithParams(newParams: RawSynthParams): void {
         for (const paramName of this.paramsThatCanUpdate) {
             if (!isAttrEqual(this.params, newParams, paramName)) {
                 const paramValue = (newParams as {[key: string]: any; })[paramName];
@@ -84,6 +86,13 @@ export default abstract class GenericPolySynth {
             }
         }
         this.params = newParams;
+    }
+
+    public shouldBeRecreatedToUseConfig(config: ISound): boolean {
+        if (!config) {
+            return true;
+        }
+        return config.synthType !== this.getType();
     }
 
     protected abstract getIndividualSynth(params: RawSynthParams): GenericSynth;
