@@ -15,7 +15,7 @@ const ControllableParamEditor: React.SFC<IControllableParamEditorProps> = (props
             value={ props.value.controllerParam }
             onChange={ (newControllerParam) => {
                 props.onChange({
-                    ...this.value,
+                    ...props.value,
                     controllerParam: newControllerParam,
                 });
             }}
