@@ -37,7 +37,7 @@ export class SoundPlayer {
         if (this.soundSourceNeedsToBeRecreated(this.soundSource, config)) {
             this.createSynth(config);
         } else {
-            this.soundSource.updateWithParams(getRawParamsFromConfig(config));
+            this.soundSource.updateConfig(config);
         }
     }
 

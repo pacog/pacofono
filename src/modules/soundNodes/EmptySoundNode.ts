@@ -29,6 +29,10 @@ export default class EmptySoundNode extends GenericSoundNode {
         return false;
     }
 
+    public updateConfig(config: ISound): void {
+        // no op
+    }
+
     public updateWithParams(newParams: RawSynthParams): void {
         // no op
     }

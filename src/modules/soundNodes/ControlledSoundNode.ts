@@ -9,6 +9,7 @@ import {
 import GenericSoundNode from "./GenericSoundNode";
 import EmptySoundNode from "./EmptySoundNode";
 import getControllableParamValue from "modules/getControllableParamValue";
+import { getRawParamsFromConfig } from "modules/synthParamsProcessor";
 
 export default class ControlledSoundNode extends GenericSoundNode {
 
@@ -47,6 +48,11 @@ export default class ControlledSoundNode extends GenericSoundNode {
 
     public shouldBeRecreatedToUseConfig(config: ISound): boolean {
         return this.node.shouldBeRecreatedToUseConfig(config);
+    }
+
+    public updateConfig(config: ISound): void {
+        this.config = config;
+        this.updateWithParams(getRawParamsFromConfig(config));
     }
 
     public updateWithParams(newParams: RawSynthParams): void {

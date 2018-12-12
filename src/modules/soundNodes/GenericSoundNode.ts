@@ -8,6 +8,7 @@ export default abstract class GenericSoundNode {
     public abstract stopPlaying(): void;
     public abstract setNumberOfVoices(numberOfVoices: number): void;
     public abstract shouldBeRecreatedToUseConfig(config: ISound): boolean;
+    public abstract updateConfig(config: ISound): void;
     public abstract updateWithParams(newParams: RawSynthParams): void;
     public abstract destroy(): void;
 }

@@ -78,6 +78,10 @@ export default abstract class GenericPolySynth extends GenericSoundNode {
         this.output = null;
     }
 
+    public updateConfig(config: ISound): void {
+        // No need to do anything, this will be handled by the ControlledSoundNode Object containing this one
+    }
+
     public updateWithParams(newParams: RawSynthParams): void {
         for (const paramName of this.paramsThatCanUpdate) {
             if (!isAttrEqual(this.params, newParams, paramName)) {
