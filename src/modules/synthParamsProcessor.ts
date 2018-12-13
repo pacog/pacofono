@@ -1,5 +1,5 @@
 import { RawSynthParams, ISound, isControllableParam } from "types";
-import getControllableParamValue from "modules/getControllableParamValue";
+import { getControllableParamValue } from "modules/getControllableParamValue";
 
 export const getRawParamsFromConfig = (soundConfig: ISound): RawSynthParams => {
     return getRawParamsFromObj(soundConfig.params);

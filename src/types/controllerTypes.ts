@@ -30,3 +30,9 @@ export interface IControllerFrame {
     [ControllerParams.yRatio]: number;
     [ControllerParams.zRatio]: number;
 }
+
+export interface IParamRestriction {
+    min: number;
+    max: number;
+    step?: number;
+}

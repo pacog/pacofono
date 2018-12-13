@@ -8,7 +8,7 @@ import {
 } from "types";
 import GenericSoundNode from "./GenericSoundNode";
 import EmptySoundNode from "./EmptySoundNode";
-import getControllableParamValue from "modules/getControllableParamValue";
+import { getControllableParamValue } from "modules/getControllableParamValue";
 import { getRawParamsFromConfig } from "modules/synthParamsProcessor";
 
 export default class ControlledSoundNode extends GenericSoundNode {
@@ -70,6 +70,7 @@ export default class ControlledSoundNode extends GenericSoundNode {
                 ...accumulator,
             };
         }, {});
+
         console.log("gettingFrame", paramsToSet);
     }
 
