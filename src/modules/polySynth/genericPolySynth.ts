@@ -83,13 +83,17 @@ export default abstract class GenericPolySynth extends GenericSoundNode {
     }
 
     public updateWithParams(newParams: RawSynthParams): void {
+        const paramsToSet = {
+            ...this.params,
+            ...newParams,
+        };
         for (const paramName of this.paramsThatCanUpdate) {
-            if (!isAttrEqual(this.params, newParams, paramName)) {
-                const paramValue = (newParams as {[key: string]: any; })[paramName];
+            if (!isAttrEqual(this.params, paramsToSet, paramName)) {
+                const paramValue = (paramsToSet as {[key: string]: any; })[paramName];
                 this.updateParamAndValueForAllSynths(paramName, paramValue);
             }
         }
-        this.params = newParams;
+        this.params = paramsToSet;
     }
 
     public shouldBeRecreatedToUseConfig(config: ISound): boolean {

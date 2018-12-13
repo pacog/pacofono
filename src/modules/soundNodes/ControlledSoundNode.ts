@@ -71,7 +71,7 @@ export default class ControlledSoundNode extends GenericSoundNode {
             };
         }, {});
 
-        console.log("gettingFrame", paramsToSet);
+        this.updateWithParams(paramsToSet);
     }
 
     public destroy(): void {
