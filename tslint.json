@@ -6,7 +6,7 @@
     "jsRules": {},
     "rules": {
         "no-consecutive-blank-lines": false,
-        "no-console": ["void"],
+        "no-console": false,
         "indent": [true, "spaces", 4],
         "ordered-imports": false,
         "object-literal-sort-keys": [false]

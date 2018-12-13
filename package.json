@@ -80,15 +80,7 @@
     "webpack-dev-server": "^3.1.10"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$",
+    "preset": "ts-jest",
     "moduleNameMapper": {
       "^components/(.*)": "<rootDir>/src/components/$1",
       "^constants/(.*)": "<rootDir>/src/constants/$1",
@@ -107,7 +99,8 @@
     ],
     "coveragePathIgnorePatterns": [
       "/constants/",
-      "/test-helpers/"
+      "/test-helpers/",
+      "/*.json/"
     ]
   }
 }
