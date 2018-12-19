@@ -11,45 +11,6 @@
     width: 100px;
 }
 
-$slider-with-input-slider-height: 100px;
-$slider-with-input-slider-width: 4px;
-$slider-with-input-slider-dot: $g-m;
-
 .slider-with-input-slider {
-    width: $slider-with-input-slider-height;
-    height: $slider-with-input-slider-width;
-}
-
-input[type=range].slider-with-input-slider {
-    -webkit-appearance: none;
-}
-
-input[type="range" i].slider-with-input-slider::-webkit-slider-container, input[type="range" i].slider-with-input-slider::-webkit-media-slider-container  {
-    background-color: $purple-4;
-}
-
-input[type=range].slider-with-input-slider::-webkit-slider-runnable-track {
-    width: $slider-with-input-slider-height;
-    height: $slider-with-input-slider-width;
-    background: $purple-3;
-    border: 0;
-    border-radius: 3px;
-}
-
-input[type=range].slider-with-input-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    border: none;
-    height: $slider-with-input-slider-dot;
-    width: $slider-with-input-slider-dot;
-    border-radius: 50%;
-    background: $blue-3;
-    margin-top: -($slider-with-input-slider-dot - $slider-with-input-slider-width) / 2;
-}
-
-input[type=range].slider-with-input-slider:focus {
-    outline: none;
-}
-
-input[type=range].slider-with-input-slider:focus::-webkit-slider-runnable-track {
-    background: $purple-2;
+    @include slider(100px, 4px);
 }

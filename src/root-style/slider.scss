@@ -1,0 +1,42 @@
+@mixin slider(
+    $width,
+    $height,
+    $thumb-size: $g-m,
+    $thumb-color: $blue-3,
+    $track-color: $purple-3,
+    $track-focus-color: $purple-2
+) {
+
+    width: $width;
+    height: $height;
+    -webkit-appearance: none;
+
+    &::-webkit-slider-container, &::-webkit-media-slider-container {
+        background-color: $purple-4;
+    }
+
+    &::-webkit-slider-runnable-track {
+        width: $width;
+        height: $height;
+        background: $track-color;
+        border: 0;
+        border-radius: 3px;
+    }
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: none;
+        height: $thumb-size;
+        width: $thumb-size;
+        border-radius: 50%;
+        background: $thumb-color;
+        margin-top: -($thumb-size - $height) / 2;
+    }
+
+    &:focus {
+        outline: none;
+        &::-webkit-slider-runnable-track {
+            background: $track-focus-color;
+        }
+    }
+}
