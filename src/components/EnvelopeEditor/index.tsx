@@ -1,6 +1,7 @@
 import * as React from "react";
 import { IEnvelope } from "types";
 import SliderWithValue from "components/SliderWithValue";
+import getParamRestrictions from "constants/paramRestrictions";
 import EnvelopeEditorGraph from "./EnvelopeEditorGraph";
 
 import "./style.scss";
@@ -26,6 +27,7 @@ export class EnvelopeEditor extends React.Component<IEnvelopeEditorProps, {}> {
                         onChange={(newVal) => {
                             this.props.onChange({ ... this.props.value, attack: newVal });
                         }}
+                        {...getParamRestrictions("envelopeAttack")}
                     />
                     <SliderWithValue
                         label="DE"
@@ -34,6 +36,7 @@ export class EnvelopeEditor extends React.Component<IEnvelopeEditorProps, {}> {
                         onChange={(newVal) => {
                             this.props.onChange({ ... this.props.value, decay: newVal });
                         }}
+                        {...getParamRestrictions("envelopeDecay")}
                     />
                     <SliderWithValue
                         label="SU"
@@ -42,6 +45,7 @@ export class EnvelopeEditor extends React.Component<IEnvelopeEditorProps, {}> {
                         onChange={(newVal) => {
                             this.props.onChange({ ... this.props.value, sustain: newVal });
                         }}
+                        {...getParamRestrictions("envelopeSustain")}
                     />
                     <SliderWithValue
                         label="RE"
@@ -50,6 +54,7 @@ export class EnvelopeEditor extends React.Component<IEnvelopeEditorProps, {}> {
                         onChange={(newVal) => {
                             this.props.onChange({ ... this.props.value, release: newVal });
                         }}
+                        {...getParamRestrictions("envelopeRelease")}
                     />
                 </div>
             </div>

@@ -7,6 +7,10 @@ const DEFAULT_PARAM_RESTRICTION: IParamRestriction = {
 };
 
 PARAM_RESTRICTIONS.set("harmonicity", { min: 0.1, max: 24, step: 0.1 });
+PARAM_RESTRICTIONS.set("envelopeAttack", { min: 0, max: 2 });
+PARAM_RESTRICTIONS.set("envelopeDecay", { min: 0, max: 2 });
+PARAM_RESTRICTIONS.set("envelopeSustain", { min: 0, max: 1 });
+PARAM_RESTRICTIONS.set("envelopeRelease", { min: 0.1, max: 2 });
 
 const getParamRestrictions = (paramName: string): IParamRestriction => {
     return PARAM_RESTRICTIONS.get(paramName) || DEFAULT_PARAM_RESTRICTION;
