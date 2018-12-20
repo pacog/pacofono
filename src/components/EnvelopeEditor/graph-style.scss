@@ -1,0 +1,14 @@
+@import "src/root-style/common";
+
+.envelope-editor-graph {
+    overflow: hidden;
+    padding: $g-s;
+    padding-top: $g-m;
+    border-radius: $g-s;
+    background: $purple-4;
+}
+    .envelope-editor-graph-svg-path {
+        stroke: $blue-3;
+        stroke-width: 1px;
+        fill: transparent;
+    }

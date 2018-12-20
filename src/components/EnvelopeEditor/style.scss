@@ -1,0 +1,21 @@
+@import "src/root-style/common";
+
+.envelope-editor {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+    .envelope-editor-sliders {
+        margin-left: $g-s;
+        max-width: 120px;
+
+        .slider-with-value {
+            margin-bottom: $g-s;
+
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+    }
+    

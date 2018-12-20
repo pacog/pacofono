@@ -1,0 +1,26 @@
+@import "src/root-style/common";
+
+.slider-with-value {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 10px;
+}
+
+    .slider-with-value-slider {
+        @include slider(100%, 4px, 8px);
+    }
+
+    .slider-with-value-label {
+        margin-right: $g-xs;
+    }
+
+    .slider-with-value-value {
+        margin-left: $g-xs;
+    }
+
+    .slider-with-value-unit {
+        margin-left: 2px;
+        font-size: 9px;
+        color: $grey-2;
+    }

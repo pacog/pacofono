@@ -1,7 +1,8 @@
 import * as React from "react";
 import { IEnvelope } from "types";
-import FieldWithLabel from "components/FieldWithLabel";
-import SliderWithInput from "components/SliderWithInput";
+import SliderWithValue from "components/SliderWithValue";
+import EnvelopeEditorGraph from "./EnvelopeEditorGraph";
+
 import "./style.scss";
 
 interface IEnvelopeEditorProps {
@@ -14,38 +15,43 @@ export class EnvelopeEditor extends React.Component<IEnvelopeEditorProps, {}> {
     public render() {
         return (
             <div className="envelope-editor">
-                <FieldWithLabel label="Attack">
-                    <SliderWithInput
-                        value={ this.props.value.attack }
-                        onChange={ (newVal) => {
-                            this.props.onChange({... this.props.value, attack: newVal });
-                        } }
+                <EnvelopeEditorGraph
+                    envelope={this.props.value}
+                ></EnvelopeEditorGraph>
+                <div className="envelope-editor-sliders">
+                    <SliderWithValue
+                        label="AT"
+                        value={this.props.value.attack}
+                        unit="s"
+                        onChange={(newVal) => {
+                            this.props.onChange({ ... this.props.value, attack: newVal });
+                        }}
                     />
-                </FieldWithLabel>
-                <FieldWithLabel label="Decay">
-                    <SliderWithInput
-                        value={ this.props.value.decay }
-                        onChange={ (newVal) => {
-                            this.props.onChange({... this.props.value, decay: newVal });
-                        } }
+                    <SliderWithValue
+                        label="DE"
+                        value={this.props.value.decay}
+                        unit="s"
+                        onChange={(newVal) => {
+                            this.props.onChange({ ... this.props.value, decay: newVal });
+                        }}
                     />
-                </FieldWithLabel>
-                <FieldWithLabel label="Sustain">
-                    <SliderWithInput
-                        value={ this.props.value.sustain }
-                        onChange={ (newVal) => {
-                            this.props.onChange({... this.props.value, sustain: newVal });
-                        } }
+                    <SliderWithValue
+                        label="SU"
+                        value={this.props.value.sustain}
+                        unit="/1"
+                        onChange={(newVal) => {
+                            this.props.onChange({ ... this.props.value, sustain: newVal });
+                        }}
                     />
-                </FieldWithLabel>
-                <FieldWithLabel label="Release">
-                    <SliderWithInput
-                        value={ this.props.value.release }
-                        onChange={ (newVal) => {
-                            this.props.onChange({... this.props.value, release: newVal });
-                        } }
+                    <SliderWithValue
+                        label="RE"
+                        value={this.props.value.release}
+                        unit="s"
+                        onChange={(newVal) => {
+                            this.props.onChange({ ... this.props.value, release: newVal });
+                        }}
                     />
-                </FieldWithLabel>
+                </div>
             </div>
         );
     }
