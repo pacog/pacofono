@@ -15,30 +15,36 @@ const ControllableParamEditor: React.SFC<IControllableParamEditorProps> = (props
     const restrictions = getParamRestrictions(props.value.name);
     return (
         <div className="controllable-param">
+            <div className="line-center">
+                <div className="small-label mr-s">Control with</div>
+                <div className="grow-full-width">
+                    <ControllerParamSelector
+                        value={props.value.controllerParam}
+                        onChange={(newControllerParam) => {
+                            props.onChange({
+                                ...props.value,
+                                controllerParam: newControllerParam,
+                            });
+                        }}
+                    />
+                </div>
+            </div>
+
             <div>
                 <div>Default value:</div>
                 <SliderWithInput
-                    value={ props.value.defaultValue }
-                    onChange={ (newDefaultValue) => {
+                    value={props.value.defaultValue}
+                    onChange={(newDefaultValue) => {
                         props.onChange({
                             ...props.value,
                             defaultValue: newDefaultValue,
                         });
                     }}
-                    min={ restrictions.min }
-                    max={ restrictions.max }
-                    step={ restrictions.step }
+                    min={restrictions.min}
+                    max={restrictions.max}
+                    step={restrictions.step}
                 />
             </div>
-            <ControllerParamSelector
-                value={ props.value.controllerParam }
-                onChange={ (newControllerParam) => {
-                    props.onChange({
-                        ...props.value,
-                        controllerParam: newControllerParam,
-                    });
-                }}
-            />
         </div>
     );
 };

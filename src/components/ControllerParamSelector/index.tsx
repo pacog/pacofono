@@ -11,6 +11,7 @@ interface IControllerParamSelectorProps {
 const ControllerParamSelector: React.SFC<IControllerParamSelectorProps> = (props: IControllerParamSelectorProps) => (
     <div className="controller-param-selector">
         <select
+            className="controller-param-selector-select"
             value={props.value}
             onChange={(event) => props.onChange(event.target.value as ControllerParams) }>
             {

@@ -1,0 +1,5 @@
+@import "src/root-style/common";
+
+.controller-param-selector {
+    @include select-parent();
+}

@@ -1,0 +1,64 @@
+$custom-select-height: $g-ml;
+
+@mixin select-parent() {
+    position: relative;
+    display: inline-block;
+    min-width: 100px;
+
+    select {
+        font-family: 'kanoregular';
+        display: block;
+        width: 100%;
+        height: $custom-select-height;
+        line-height: $custom-select-height;
+        cursor: pointer;
+        outline: 0;
+        border: 0;
+        border-radius: $custom-select-height/2;
+        background: $purple-3;
+        color: $white;
+        padding: 0 $g-sm;
+
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        &::-ms-expand {
+            display: none;
+        }
+
+        &:hover {
+            background: $purple-2;
+        }
+
+        &:focus {
+            background: $purple-2;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    }
+
+    &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: $g-sm;
+        pointer-events: none;
+        border-style: solid;
+        border-width: 8px 5px 0px 5px;
+        border-color: $purple-1 transparent transparent transparent;
+        transform: translateY(-50%);
+    }
+
+    &:hover:before,
+    &:focus:before {
+        border-top-color: $white;
+    }
+    &:disabled:before {
+        opacity: 0.5;
+    }
+}
