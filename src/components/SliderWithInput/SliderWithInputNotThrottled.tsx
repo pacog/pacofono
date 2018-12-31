@@ -8,6 +8,7 @@ export interface ISliderWithInputProps {
     min?: number;
     max?: number;
     step?: number;
+    unit?: string;
 }
 
 export class SliderWithInputNotThrottled extends React.Component<ISliderWithInputProps, {}> {
@@ -35,9 +36,12 @@ export class SliderWithInputNotThrottled extends React.Component<ISliderWithInpu
                 />
 
                 <input
-                    type="text"
-                    className="slider-with-input-input p-input"
+                    className="slider-with-input-input"
                     value={this.props.value}
+                    type="number"
+                    min={this.props.min}
+                    max={this.props.max}
+                    step={this.props.step}
                     onChange={(e) => {
                         const newValue = parseFloat(e.target.value);
                         if (!Number.isNaN(newValue)) {
@@ -45,6 +49,11 @@ export class SliderWithInputNotThrottled extends React.Component<ISliderWithInpu
                         }
                     } }
                 />
+
+                {
+                    this.props.unit &&
+                    <div className="slider-with-input-unit">{this.props.unit}</div>
+                }
             </div>
         );
     }
