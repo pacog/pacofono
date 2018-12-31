@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { IControllableParam } from "types";
+import { IControllableParam, ControllerParams } from "types";
 import getParamRestrictions from "constants/paramRestrictions";
 import "./style.scss";
 import ControllerParamSelector from "components/ControllerParamSelector";
@@ -29,22 +29,24 @@ const ControllableParamEditor: React.SFC<IControllableParamEditorProps> = (props
                     />
                 </div>
             </div>
-
-            <div>
-                <div>Default value:</div>
-                <SliderWithInput
-                    value={props.value.defaultValue}
-                    onChange={(newDefaultValue) => {
-                        props.onChange({
-                            ...props.value,
-                            defaultValue: newDefaultValue,
-                        });
-                    }}
-                    min={restrictions.min}
-                    max={restrictions.max}
-                    step={restrictions.step}
-                />
-            </div>
+            {
+                (props.value.controllerParam === ControllerParams.none) &&
+                <div>
+                    <div className="small-label mr-s">Default value</div>
+                    <SliderWithInput
+                        value={props.value.defaultValue}
+                        onChange={(newDefaultValue) => {
+                            props.onChange({
+                                ...props.value,
+                                defaultValue: newDefaultValue,
+                            });
+                        }}
+                        min={restrictions.min}
+                        max={restrictions.max}
+                        step={restrictions.step}
+                    />
+                </div>
+            }
         </div>
     );
 };
