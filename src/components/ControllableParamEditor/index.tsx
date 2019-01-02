@@ -22,6 +22,7 @@ export default class ControllableParamEditor extends React.Component<IControllab
         this.onDefaultValueChange = this.onDefaultValueChange.bind(this);
         this.onMaxChange = this.onMaxChange.bind(this);
         this.onMinChange = this.onMinChange.bind(this);
+        this.onStepChange = this.onStepChange.bind(this);
     }
 
     public render() {
@@ -69,6 +70,14 @@ export default class ControllableParamEditor extends React.Component<IControllab
                             min={getMinMaxCustomValue(restrictions, this.props.value)}
                             max={restrictions.max}
                         />
+
+                        <div className="small-label mr-s">Step</div>
+                        <SliderWithInput
+                            value={this.props.value.customStep}
+                            onChange={this.onStepChange}
+                            min={0}
+                            max={2}
+                        />
                     </div>
                 }
             </div>
@@ -100,6 +109,13 @@ export default class ControllableParamEditor extends React.Component<IControllab
         this.props.onChange({
             ...this.props.value,
             customMax: newMax,
+        });
+    }
+
+    private onStepChange(newStep: number) {
+        this.props.onChange({
+            ...this.props.value,
+            customStep: newStep,
         });
     }
 
