@@ -12,6 +12,9 @@ export interface IControllableParam {
     defaultValue: number;
     controllerParam: ControllerParams;
     inputTransformControlPoints: ControlPoints;
+    customMin?: number;
+    customMax?: number;
+    customStep?: number;
 }
 
 export const isControllableParam = (value: any): value is IControllableParam => {

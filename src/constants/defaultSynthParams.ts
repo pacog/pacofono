@@ -8,6 +8,7 @@ import {
     FilterTypes,
     ControllerParams,
 } from "types/index";
+import getParamRestrictions from "constants/paramRestrictions";
 import DEFAULT_CONTROL_POINTS from "./defaultInputTransformControlPoints";
 
 export const defaultAMSynth: IAMSynthParams = {
@@ -34,6 +35,9 @@ export const defaultFMSynth: IFMSynthParams = {
         defaultValue: 3,
         controllerParam: ControllerParams.none,
         inputTransformControlPoints: DEFAULT_CONTROL_POINTS,
+        customMin: getParamRestrictions("harmonicity").min,
+        customMax: getParamRestrictions("harmonicity").max,
+        customStep: getParamRestrictions("harmonicity").step || 0,
     },
     modulationIndex: 10,
     type: WaveTypes.Sine,
