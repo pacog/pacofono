@@ -57,6 +57,11 @@ export const getControllableParamValue = (param: IControllableParam, frame: ICon
 
     const frameValueForParam = frame[param.controllerParam];
     const transformedParam = transformWithControlPoints(frameValueForParam, param.inputTransformControlPoints);
-    const paramRestrictions = getParamRestrictions(param.name);
+    const paramRestrictions = {
+        ...getParamRestrictions(param.name),
+        min: param.customMin,
+        max: param.customMax,
+        ste: param.customStep,
+    };
     return applyParamRestrictions(transformedParam, paramRestrictions);
 };
