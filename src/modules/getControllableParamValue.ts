@@ -47,6 +47,8 @@ export const applyParamRestrictions = (ratio: number, paramRestrictions: IParamR
     });
 };
 
+// TODO: test
+
 export const getControllableParamValue = (param: IControllableParam, frame: IControllerFrame): number => {
     if (!frame) {
         return param.defaultValue;
@@ -61,7 +63,7 @@ export const getControllableParamValue = (param: IControllableParam, frame: ICon
         ...getParamRestrictions(param.name),
         min: param.customMin,
         max: param.customMax,
-        ste: param.customStep,
+        step: param.customStep,
     };
     return applyParamRestrictions(transformedParam, paramRestrictions);
 };
