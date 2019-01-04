@@ -1,0 +1,14 @@
+@import "src/root-style/common";
+
+.input-transform-editor-graph {
+    overflow: hidden;
+    padding: $g-s;
+    border-radius: $g-s;
+    background: $purple-3;
+    display: flex;
+}
+    .input-transform-editor-svg-path {
+        stroke: $blue-3;
+        stroke-width: 1px;
+        fill: transparent;
+    }

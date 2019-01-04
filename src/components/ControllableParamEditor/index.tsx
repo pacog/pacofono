@@ -4,6 +4,7 @@ import { IControllableParam, ControllerParams } from "types";
 import getParamRestrictions from "constants/paramRestrictions";
 import "./style.scss";
 import ControllerParamSelector from "components/ControllerParamSelector";
+import InputTransformEditor from "components/InputTransformEditor";
 import SliderWithInput from "components/SliderWithInput";
 import { getMaxMinCustomValue, getMinMaxCustomValue } from "utils/controllableParamUtils";
 
@@ -11,7 +12,6 @@ interface IControllableParamEditorProps {
     value: IControllableParam;
     onChange: (newParam: IControllableParam) => void;
 }
-
 
 export default class ControllableParamEditor extends React.Component<IControllableParamEditorProps, {}> {
 
@@ -23,6 +23,7 @@ export default class ControllableParamEditor extends React.Component<IControllab
         this.onMaxChange = this.onMaxChange.bind(this);
         this.onMinChange = this.onMinChange.bind(this);
         this.onStepChange = this.onStepChange.bind(this);
+        this.onInputTransformControlPointsChanged = this.onInputTransformControlPointsChanged.bind(this);
     }
 
     public render() {
@@ -78,6 +79,11 @@ export default class ControllableParamEditor extends React.Component<IControllab
                             min={0}
                             max={2}
                         />
+
+                        <InputTransformEditor
+                            value={this.props.value}
+                            onChange={this.onInputTransformControlPointsChanged}
+                        />
                     </div>
                 }
             </div>
@@ -116,6 +122,13 @@ export default class ControllableParamEditor extends React.Component<IControllab
         this.props.onChange({
             ...this.props.value,
             customStep: newStep,
+        });
+    }
+
+    private onInputTransformControlPointsChanged(newPoints: number[]) {
+        this.props.onChange({
+            ...this.props.value,
+            inputTransformControlPoints: newPoints,
         });
     }
 

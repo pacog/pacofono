@@ -1,0 +1,6 @@
+@import "src/root-style/common";
+
+.response-function-selector {
+    @include select-parent();
+    width: 100%;
+}
