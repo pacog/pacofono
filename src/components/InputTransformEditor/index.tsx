@@ -2,6 +2,7 @@ import * as React from "react";
 import { IControllableParam } from "types";
 import InputTransformEditorGraph from "./graph";
 import ResponseFunctionSelector from "components/ResponseFunctionSelector";
+import InputTransformRealTimeGraph from "./real-time-graph";
 
 import "./style.scss";
 
@@ -14,7 +15,7 @@ export default class InputTransformEditor extends React.Component<IInputTransfor
     public render() {
         return (
             <div className="input-transform-editor">
-                <div className="line-center">
+                <div className="line-center mb-xs">
                     <div className="small-label mr-s">Response function</div>
                     <div className="grow-full-width">
                         <ResponseFunctionSelector
@@ -23,9 +24,16 @@ export default class InputTransformEditor extends React.Component<IInputTransfor
                         />
                     </div>
                 </div>
-                <InputTransformEditorGraph
-                    points={this.props.value.inputTransformControlPoints}
-                />
+                <div className="line-center">
+                    <InputTransformEditorGraph
+                        points={this.props.value.inputTransformControlPoints}
+                    />
+                    <div className="grow-full-width ml-s">
+                        <InputTransformRealTimeGraph
+                            param={this.props.value}
+                        />
+                    </div>
+                </div>
             </div>
         );
     }

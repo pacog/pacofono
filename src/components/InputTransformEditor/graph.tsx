@@ -45,7 +45,7 @@ function getPathFromValues(points: number[], width: number, height: number): str
     }
     const pointsToPaint = pointsToUse.map((point, i) => {
         const xPos = width * (i / (pointsToUse.length - 1));
-        const yPos = height * point;
+        const yPos = height * (1 - point);
         return [xPos, yPos];
     });
     const valuesText = pointsToPaint
