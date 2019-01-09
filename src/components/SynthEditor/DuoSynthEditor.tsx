@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ISound, IDuoSynthParams } from "types";
 import FieldWithLabel from "components/FieldWithLabel";
-import SliderWithInput from "components/SliderWithInput";
+import ControllableParamEditor from "components/ControllableParamEditor";
 import SynthVoiceEditor from "components/SynthVoiceEditor";
 
 import "./duo-synth-style.scss";
@@ -38,33 +38,27 @@ export class DuoSynthEditor extends React.Component<IDuoSynthEditorProps, {}> {
                 </div>
                 <div className="grow-full-width">
                     <FieldWithLabel label="Vibrato amount">
-                        <SliderWithInput
-                            value={ this.getParams().vibratoAmount }
-                            onChange={ (newVal) => {
+                        <ControllableParamEditor
+                            value={this.getParams().vibratoAmount}
+                            onChange={(newVal) => {
                                 this.props.onParamChange("vibratoAmount", newVal);
-                            } }
-                            min={0}
-                            max={10}
+                            }}
                         />
                     </FieldWithLabel>
                     <FieldWithLabel label="Vibrato rate">
-                        <SliderWithInput
-                            value={ this.getParams().vibratoRate }
-                            onChange={ (newVal) => {
+                        <ControllableParamEditor
+                            value={this.getParams().vibratoRate}
+                            onChange={(newVal) => {
                                 this.props.onParamChange("vibratoRate", newVal);
-                            } }
-                            min={0}
-                            max={100}
+                            }}
                         />
                     </FieldWithLabel>
                     <FieldWithLabel label="Harmonicity">
-                        <SliderWithInput
-                            value={ this.getParams().harmonicity }
-                            onChange={ (newVal) => {
+                        <ControllableParamEditor
+                            value={this.getParams().harmonicity}
+                            onChange={(newVal) => {
                                 this.props.onParamChange("harmonicity", newVal);
-                            } }
-                            min={0}
-                            max={24}
+                            }}
                         />
                     </FieldWithLabel>
                 </div>

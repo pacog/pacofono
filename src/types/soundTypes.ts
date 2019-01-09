@@ -65,9 +65,9 @@ export interface ISynthVoiceParams {
 }
 
 export interface IDuoSynthParams {
-    vibratoAmount: number;
-    vibratoRate: number;
-    harmonicity: number;
+    vibratoAmount: IControllableParam;
+    vibratoRate: IControllableParam;
+    harmonicity: IControllableParam;
     voice0: ISynthVoiceParams;
     voice1: ISynthVoiceParams;
 }

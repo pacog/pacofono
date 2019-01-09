@@ -57,9 +57,33 @@ export const defaultFMSynth: IFMSynthParams = {
 };
 
 export const defaultDuoSynth: IDuoSynthParams = {
-    vibratoAmount: 0.5,
-    vibratoRate: 5,
-    harmonicity: 1.5,
+    vibratoAmount: {
+        name: "vibratoAmount",
+        defaultValue: 0.5,
+        controllerParam: ControllerParams.none,
+        inputTransformControlPoints: DEFAULT_CONTROL_POINTS,
+        customMin: getParamRestrictions("vibratoAmount").min,
+        customMax: getParamRestrictions("vibratoAmount").max,
+        customStep: getParamRestrictions("vibratoAmount").step || 0,
+    },
+    vibratoRate: {
+        name: "vibratoRate",
+        defaultValue: 5,
+        controllerParam: ControllerParams.none,
+        inputTransformControlPoints: DEFAULT_CONTROL_POINTS,
+        customMin: getParamRestrictions("vibratoRate").min,
+        customMax: getParamRestrictions("vibratoRate").max,
+        customStep: getParamRestrictions("vibratoRate").step || 0,
+    },
+    harmonicity: {
+        name: "harmonicity",
+        defaultValue: 1.5,
+        controllerParam: ControllerParams.none,
+        inputTransformControlPoints: DEFAULT_CONTROL_POINTS,
+        customMin: getParamRestrictions("harmonicity").min,
+        customMax: getParamRestrictions("harmonicity").max,
+        customStep: getParamRestrictions("harmonicity").step || 0,
+    },
     voice0: {
         volume: -10,
         portamento: 0,
