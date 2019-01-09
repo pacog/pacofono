@@ -57,7 +57,7 @@ export interface IRawFMSynthParams {
 }
 
 export interface ISynthVoiceParams {
-    volume: number;
+    volume: IControllableParam;
     portamento: number;
     type: WaveTypes;
     filterEnvelope: IEnvelope;

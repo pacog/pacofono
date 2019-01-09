@@ -12,6 +12,12 @@ export default class DuoSynth extends GenericSynth {
             case "voice1":
                 setVoiceValues(this.tonejsSynth.voice1, value);
                 break;
+            case "voice0.volume":
+                setVoiceVolume(this.tonejsSynth.voice0, value);
+                break;
+            case "voice1.volume":
+                setVoiceVolume(this.tonejsSynth.voice1, value);
+                break;
             default:
                 super.set(paramName, value);
         }
@@ -56,4 +62,8 @@ function setVoiceValues(voice: any, values: any): void {
     voice.set("volume", values.volume);
     voice.envelope.set(values.envelope);
     voice.filterEnvelope.set(values.filterEnvelope);
+}
+
+function setVoiceVolume(voice: any, value: any): void {
+    voice.set("volume", value);
 }

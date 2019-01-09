@@ -9,7 +9,15 @@ export default class DuoPolySynth extends GenericPolySynth {
     }
 
     protected setSpecificParams() {
-        this.paramsThatCanUpdate = ["harmonicity", "vibratoRate", "vibratoAmount", "voice0", "voice1"];
+        this.paramsThatCanUpdate = [
+            "harmonicity",
+            "vibratoRate",
+            "vibratoAmount",
+            "voice0",
+            "voice1",
+            "voice0.volume",
+            "voice1.volume",
+        ];
     }
 
 }

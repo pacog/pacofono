@@ -85,7 +85,15 @@ export const defaultDuoSynth: IDuoSynthParams = {
         customStep: getParamRestrictions("harmonicity").step || 0,
     },
     voice0: {
-        volume: -10,
+        volume: {
+            name: "voice0.volume",
+            defaultValue: -10,
+            controllerParam: ControllerParams.none,
+            inputTransformControlPoints: DEFAULT_CONTROL_POINTS,
+            customMin: getParamRestrictions("volume").min,
+            customMax: getParamRestrictions("volume").max,
+            customStep: getParamRestrictions("volume").step || 0,
+        },
         portamento: 0,
         type:  WaveTypes.Sine,
         filterEnvelope: {
@@ -102,7 +110,15 @@ export const defaultDuoSynth: IDuoSynthParams = {
         },
     },
     voice1: {
-        volume: -10,
+        volume: {
+            name: "voice1.volume",
+            defaultValue: -10,
+            controllerParam: ControllerParams.none,
+            inputTransformControlPoints: DEFAULT_CONTROL_POINTS,
+            customMin: getParamRestrictions("volume").min,
+            customMax: getParamRestrictions("volume").max,
+            customStep: getParamRestrictions("volume").step || 0,
+        },
         portamento: 0,
         type:  WaveTypes.Sine,
         filterEnvelope: {

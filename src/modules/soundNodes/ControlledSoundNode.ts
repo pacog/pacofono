@@ -4,7 +4,9 @@ import {
     RawSynthParams,
     IControllerFrame,
     isControllableParam,
+    isNormalParam,
     IControllableParam,
+    SynthParams,
 } from "types";
 import GenericSoundNode from "./GenericSoundNode";
 import EmptySoundNode from "./EmptySoundNode";
@@ -15,6 +17,7 @@ export default class ControlledSoundNode extends GenericSoundNode {
 
     private node: GenericSoundNode;
     private config: ISound;
+    private lastControllableParams: IControllableParam[];
 
     constructor(node: GenericSoundNode, config: ISound) {
         super();
@@ -52,6 +55,7 @@ export default class ControlledSoundNode extends GenericSoundNode {
 
     public updateConfig(config: ISound): void {
         this.config = config;
+        this.lastControllableParams = null;
         this.updateWithParams(getRawParamsFromConfig(config));
     }
 
@@ -60,16 +64,17 @@ export default class ControlledSoundNode extends GenericSoundNode {
     }
 
     public notifyControllerFrame(frame: IControllerFrame): void {
-        const controllableParams: IControllableParam[] = Object.keys(this.config.params)
-            .map((paramName) => (this.config.params as any)[paramName])
-            .filter((paramWithName) => isControllableParam(paramWithName));
+        if (!this.lastControllableParams) {
+            this.lastControllableParams = this.getControllableParams();
+        }
 
-        const paramsToSet: RawSynthParams = controllableParams.reduce((accumulator, currentParam): RawSynthParams => {
-            return {
-                [currentParam.name]: getControllableParamValue(currentParam, frame),
-                ...accumulator,
-            };
-        }, {});
+        const paramsToSet: RawSynthParams = this.lastControllableParams
+            .reduce((accumulator, currentParam): RawSynthParams => {
+                return {
+                    [currentParam.name]: getControllableParamValue(currentParam, frame),
+                    ...accumulator,
+                };
+            }, {});
 
         this.updateWithParams(paramsToSet);
     }
@@ -78,4 +83,21 @@ export default class ControlledSoundNode extends GenericSoundNode {
         this.node.destroy();
     }
 
+    private getControllableParams(): IControllableParam[] {
+        return getControllableParams(this.config.params);
+    }
+}
+
+function getControllableParams(params: SynthParams): IControllableParam[] {
+    return Object.keys(params)
+        .map((paramName) => (params as any)[paramName])
+        .reduce((accumulator, eachParam) => {
+            if (isControllableParam(eachParam)) {
+                return accumulator.concat([eachParam]);
+            }
+            if (isNormalParam(eachParam)) {
+                return accumulator;
+            }
+            return accumulator.concat(getControllableParams(eachParam));
+        }, []);
 }

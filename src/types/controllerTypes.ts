@@ -26,6 +26,13 @@ export const isControllableParam = (value: any): value is IControllableParam => 
         (value as IControllableParam).inputTransformControlPoints !== undefined;
 };
 
+export const isNormalParam = (value: any): value is string | number => {
+    if (typeof value === "string" || typeof value === "number") {
+        return true;
+    }
+    return false;
+};
+
 export interface IControllerFrame {
     timestamp: number;
     isPlaying: boolean;

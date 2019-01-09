@@ -4,7 +4,8 @@ import { ISynthVoiceParams } from "types";
 import WaveTypeSelector from "components/WaveTypeSelector";
 import EnvelopeEditor from "components/EnvelopeEditor";
 import FieldWithLabel from "components/FieldWithLabel";
-import SliderWithInput from "components/SliderWithInput";
+import ControllableParamEditor from "components/ControllableParamEditor";
+
 import "./style.scss";
 
 interface ISynthVoiceEditorProps {
@@ -18,23 +19,12 @@ export class SynthVoiceEditor extends React.Component<ISynthVoiceEditorProps, {}
         return (
             <div className="synth-voice-editor">
                 <FieldWithLabel label="Volume">
-                    <SliderWithInput
-                        value={ this.props.value.volume }
-                        min={-100}
-                        max={0}
-                        onChange={ (newVal) => {
-                            this.props.onChange({... this.props.value, volume: newVal });
-                        } }
-                    />
-                </FieldWithLabel>
-                <FieldWithLabel label="Portamento">
-                    <SliderWithInput
-                        value={ this.props.value.portamento }
-                        min={0}
-                        max={10}
-                        onChange={ (newVal) => {
-                            this.props.onChange({... this.props.value, portamento: newVal });
-                        } }
+                    <ControllableParamEditor
+                        value={this.props.value.volume}
+                        onChange={(newVal) => {
+                            // this.props.onParamChange("volume", newVal);
+                            this.props.onChange({ ... this.props.value, volume: newVal });
+                        }}
                     />
                 </FieldWithLabel>
                 <FieldWithLabel label="Type">
